@@ -5,8 +5,13 @@
 package com.shampan.db;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
+import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoDatabase;
+import com.shampan.db.codec.UserCodec;
 import com.shampan.util.PropertyProvider;
+import org.bson.codecs.configuration.CodecRegistries;
+import org.bson.codecs.configuration.CodecRegistry;
 
 /**
  *
@@ -16,7 +21,7 @@ public class DBConnection {
 
     private static DBConnection instance = null;
     private static MongoDatabase connection = null;
-    
+
     private String dbUserName;
     private String dbPassword;
     private String dbName;
@@ -39,11 +44,21 @@ public class DBConnection {
             setDbPassword(PropertyProvider.get("password"));
             setDbPort(Integer.parseInt(PropertyProvider.get("port")));
             setDbName(PropertyProvider.get("dbname"));
+
+            UserCodec userCodec = new UserCodec();
+
+            CodecRegistry codecRegistry = CodecRegistries.fromRegistries(
+                    MongoClient.getDefaultCodecRegistry(),
+                    CodecRegistries.fromCodecs(userCodec)
+            );
+
+            MongoClientOptions options = MongoClientOptions.builder().codecRegistry(codecRegistry).build();
+
+            ServerAddress serverAddress = new ServerAddress(dbHost, dbPort);
+            MongoClient mongoClient = new MongoClient(serverAddress, options);
             
-            
-            MongoClient mongoClient = new MongoClient(dbHost, dbPort);
             connection = mongoClient.getDatabase(dbName);
-            
+
         }
     }
 
@@ -54,10 +69,10 @@ public class DBConnection {
         return instance;
     }
 
-    public MongoDatabase getConnection(){
+    public MongoDatabase getConnection() {
         return connection;
     }
-    
+
     private void setDbUserName(String dbUserName) {
         this.dbUserName = dbUserName;
     }
@@ -77,5 +92,5 @@ public class DBConnection {
     private void setDbName(String dbName) {
         this.dbName = dbName;
     }
-    
+
 }

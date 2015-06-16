@@ -5,7 +5,6 @@
  */
 package com.muslimand.model;
 
-import com.google.gson.Gson;
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoCollection;
@@ -37,8 +36,6 @@ public class GeneralModel{
         while (cursor.hasNext()) {
             arrayList.add(cursor.next());
         }
-        Gson gson = new Gson();
-        String json = gson.toJson(arrayList);
-        return json;
+        return null;
     }
 }
