@@ -56,7 +56,7 @@ public class UserCodec implements CollectibleCodec<UserDAO> {
     public Class<UserDAO> getEncoderClass() {
         return UserDAO.class;
     }
-
+                        
     @Override
     public UserDAO generateIdIfAbsentFromDocument(UserDAO user) {
         if (!documentHasId(user)) {

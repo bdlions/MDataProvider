@@ -8,6 +8,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoDatabase;
+import com.shampan.db.codec.BasicProfileCodec;
 import com.shampan.db.codec.UserCodec;
 import com.shampan.util.PropertyProvider;
 import org.bson.codecs.configuration.CodecRegistries;
@@ -46,10 +47,11 @@ public class DBConnection {
             setDbName(PropertyProvider.get("dbname"));
 
             UserCodec userCodec = new UserCodec();
-
+            BasicProfileCodec basicProfileCodes = new BasicProfileCodec();
             CodecRegistry codecRegistry = CodecRegistries.fromRegistries(
                     MongoClient.getDefaultCodecRegistry(),
-                    CodecRegistries.fromCodecs(userCodec)
+//                    CodecRegistries.fromCodecs(userCodec)
+                    CodecRegistries.fromCodecs(basicProfileCodes)
             );
 
             MongoClientOptions options = MongoClientOptions.builder().codecRegistry(codecRegistry).build();

@@ -11,7 +11,8 @@ import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.conversions.Bson;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.shampan.db.collections.fragment.Name;
+import com.shampan.db.collections.fragment.Work;
+import java.util.List;
 
 /**
  *
@@ -21,8 +22,10 @@ import com.shampan.db.collections.fragment.Name;
 public class UserDAO implements Bson {
 
     private String _id;
-    private Name name;
-    private String surname;
+    private String first_name;
+    private String last_name;
+    private String username;
+    private List<Work> workList;
 
     @Override
     public String toString() {
@@ -36,10 +39,6 @@ public class UserDAO implements Bson {
         return json;
     }
 
-    public UserDAO() {
-
-    }
-
     public String get_id() {
         return _id;
     }
@@ -48,26 +47,31 @@ public class UserDAO implements Bson {
         this._id = _id;
     }
 
-    public UserDAO(Name name, String surname) {
-        this.name = name;
-        this.surname = surname;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public Name getName() {
-        return name;
+    public String getLast_name() {
+        return last_name;
     }
 
-    public void setName(Name name) {
-        this.name = name;
+    public String getUsername() {
+        return username;
     }
 
-    public String getSurname() {
-        return surname;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+   
 
     @Override
     public <C> BsonDocument toBsonDocument(final Class<C> documentClass, final CodecRegistry codecRegistry) {

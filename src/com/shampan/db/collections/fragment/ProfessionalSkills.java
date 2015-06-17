@@ -7,9 +7,19 @@ package com.shampan.db.collections.fragment;
 
 /**
  *
- * @author alamgir
+ * @author Sampan-IT
  */
-public class Name {
-    public String first;
-    public String last;
+public class ProfessionalSkills {
+    private String skill;
+
+    public String getSkill() {
+        return skill;
+    }
+
+    public void setSkill(String skill) {
+        this.skill = skill;
+    }
+    
+    
+    
 }

@@ -1,8 +1,0 @@
-Testsuite: com.shampan.db.DBConnecitonTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.389 sec
-------------- Standard Error -----------------
-Jun 13, 2015 8:44:09 AM com.mongodb.diagnostics.logging.JULLogger log
-INFO: Cluster created with settings {hosts=[127.0.0.1:27018], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
-------------- ---------------- ---------------
-
-Testcase: main took 0.33 sec
