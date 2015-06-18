@@ -4,16 +4,14 @@
  */
 package com.shampan.db;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import com.mongodb.QueryBuilder;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.FindOneAndReplaceOptions;
-import com.mongodb.client.model.ReturnDocument;
 import com.shampan.db.collections.BasicProfileDAO;
 import com.shampan.db.collections.builder.BasicProfileDAOBuilder;
-import com.shampan.db.collections.builder.UserDAOBuilder;
 import com.shampan.db.collections.fragment.BasicInfo;
-import com.shampan.db.collections.fragment.Work;
 import com.shampan.db.collections.fragment.WorkPlaces;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,24 +83,47 @@ public class DBConnecitonTest {
         workPlace2.setDescription("Going to be a mad");
         workPlace2.setCity("Dhaka");
         workPlaceList2.add(workPlace);
+        workPlaceList2.add(workPlace2);
+       
 
+        
+        
         BasicProfileDAO userProfileInfo = new BasicProfileDAOBuilder()
-                .setUserId("100157")
-//                .setWorkPlaces(workPlaceList)
+                .setUserId("100555")
                 .build();
         
-        BasicProfileDAO updateUserProfileInfo = new BasicProfileDAOBuilder()
-                .setUserId("100444")
-                .setWorkPlaces(workPlaceList2)
-                .build();
+        BasicProfileDAO selectedUsers = mongoCollection.find(userProfileInfo).first();
+        BasicProfileDAO updateUserProfileInfo = new BasicProfileDAOBuilder().build();
+        updateUserProfileInfo.setWorkPlaces(selectedUsers.getWorkPlaces());
+        updateUserProfileInfo.getWorkPlaces().add(workPlace);
+//        updateUserProfileInfo.setUserId("11111111");
+        QueryBuilder builder = new QueryBuilder();
+        
+        BasicProfileDAO projectedUserProfileInfo = new BasicProfileDAOBuilder().build();
+        System.out.println(new Document("userId","$all" ).toJson());
+        projectedUserProfileInfo.setUserId("$all");
+        Document projectinoDoc = new Document("workPlaces.company", "$all");
+//        projectedUserProfileInfo."$all");
+        System.out.println(projectedUserProfileInfo);
+//        updateUserProfileInfo.setUserId("11111111");
+//         System.out.println(new Document("$set", updateUserProfileInfo));
 
 //        System.out.println(userProfileInfo);
 //        System.out.println(updateUserProfileInfo);
         
 //         mongoCollection.insertOne(userProfileInfo);
 //        MongoCursor selectedUsers = mongoCollection.find(userProfileInfo).iterator();
-        BasicProfileDAO selectedUsers = mongoCollection.find(userProfileInfo).first();
-//        System.out.println(selectedUsers);
+//        BasicProfileDAO selectedUsers = mongoCollection.find(userProfileInfo).first();
+        mongoCollection.findOneAndUpdate(userProfileInfo, new Document("$set", updateUserProfileInfo));
+        
+        
+        
+        builder.elemMatch(new BasicDBObject("userId", 100444)).get();
+        
+        
+        mongoCollection.find().projection(updateUserProfileInfo);
+        
+        System.out.println(mongoCollection.find().projection(projectinoDoc).first());
 //        mongoCollection.updateOne(selectedUsers, updateUserProfileInfo);
 //         Document doc = new Document();
 //        while (selectedUsers.hasNext()) {
@@ -120,7 +141,7 @@ public class DBConnecitonTest {
 //        }
 //        updateUserProfileInfo.set_id(selectedUsers.get_id());
 //        System.out.println(updateUserProfileInfo);
-        mongoCollection.findOneAndReplace(selectedUsers, updateUserProfileInfo);
+//        mongoCollection.findOneAndReplace(selectedUsers, updateUserProfileInfo);
         
 //         System.out.println(doc);
 

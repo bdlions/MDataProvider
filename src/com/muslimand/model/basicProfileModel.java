@@ -5,23 +5,11 @@
  */
 package com.muslimand.model;
 
-import com.google.gson.Gson;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
-import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Projections;
-import com.mongodb.util.JSON;
 import com.shampan.db.DBConnection;
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import junit.framework.TestResult;
 import org.bson.Document;
-import org.json.JSONObject;
 
 /**
  *

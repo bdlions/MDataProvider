@@ -4,8 +4,6 @@
  */
 package com.muslimand.model;
 
-import com.google.gson.Gson;
-import com.mongodb.util.JSON;
 import org.bson.Document;
 import org.junit.After;
 import org.junit.AfterClass;
