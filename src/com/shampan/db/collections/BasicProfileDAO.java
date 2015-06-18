@@ -26,9 +26,27 @@ public class BasicProfileDAO implements Bson {
 
     private String _id;
     private String userId;
+    private String firstName;
+    private String lastName;
     private List<BasicInfo> basicInfo;
     private List<WorkPlaces> workPlaces;
     private List<ProfessionalSkills> pSkills;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     @Override
     public String toString() {
@@ -50,8 +68,6 @@ public class BasicProfileDAO implements Bson {
         this.userId = userId;
     }
 
-   
-
     public List<BasicInfo> getBasicInfo() {
         return basicInfo;
     }
@@ -72,7 +88,7 @@ public class BasicProfileDAO implements Bson {
         return pSkills;
     }
 
-     public String get_id() {
+    public String get_id() {
         return _id;
     }
 

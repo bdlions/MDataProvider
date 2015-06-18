@@ -27,7 +27,6 @@ import org.junit.Test;
  * @author alamgir
  */
 public class DBConnecitonTest {
-    private BasicInfo[] abc;
 
     public DBConnecitonTest() {
     }
@@ -84,46 +83,140 @@ public class DBConnecitonTest {
         workPlace2.setCity("Dhaka");
         workPlaceList2.add(workPlace);
         workPlaceList2.add(workPlace2);
-       
 
-        
-        
         BasicProfileDAO userProfileInfo = new BasicProfileDAOBuilder()
-                .setUserId("100555")
+                .setUserId("100157")
+                .setFirstName("Keya")
+                .setLatName("Moni")
+                //                .setBasicInfo(basicInfoList)
+                //                .setWorkPlaces(workPlaceList)
                 .build();
-        
-        BasicProfileDAO selectedUsers = mongoCollection.find(userProfileInfo).first();
-        BasicProfileDAO updateUserProfileInfo = new BasicProfileDAOBuilder().build();
-        updateUserProfileInfo.setWorkPlaces(selectedUsers.getWorkPlaces());
-        updateUserProfileInfo.getWorkPlaces().add(workPlace);
+        //.....find sql......
+////......select all document in a collection  .....
+//        List<BasicProfileDAO> usersProfileInfo = new ArrayList<BasicProfileDAO>();
+//        MongoCursor userProfiles = mongoCollection.find().iterator();
+//        while (userProfiles.hasNext()) {
+//            BasicProfileDAO userProfile = (BasicProfileDAO) userProfiles.next();
+//            usersProfileInfo.add(userProfile);
+////            System.out.println("BasicProfileDAO" + userProfile);
+//        }
+//        BasicProfileDAO usersPInfo = new BasicProfileDAO();
+////        System.out.println("BasicProfileDAO Array "+usersProfileInfo);
+////......need to conver BasicProfileDAO Array to BasicProfileDAO object
+//
+////......select all information  of a  document .........
+//        BasicProfileDAO userProfile = mongoCollection.find().first();
+////      System.out.println(userProfile);
+//
+////..... select all information  of a  document by where clause.........
+//        BasicProfileDAO selectQuary = new BasicProfileDAO();
+//        selectQuary.setUserId("100157");
+//        BasicProfileDAO selectUserProfileInfo = mongoCollection.find(selectQuary).first();
+////      System.out.println(selectUserProfileInfo);
+//
+////......Select some of the field of a selected document ............
+//        BasicProfileDAO selectQuary1 = new BasicProfileDAO();
+//        selectQuary1.setUserId("100157");
+//        Document projectionQuary = new Document();
+//        projectionQuary.put("userId", "$all");
+//        projectionQuary.put("workPlaces", "$all");
+//        BasicProfileDAO selectUserProfileInfo1 = mongoCollection.find(selectQuary1).projection(projectionQuary).first();
+////        System.out.println(selectUserProfileInfo1);
+//
+////......Select some filed that match with in a document.........
+////......this method  return the filter data with where clause
+//        Document projectionQuary1 = new Document();
+//        projectionQuary1.put("userId", "100157");
+//        projectionQuary1.put("fastName", "Keya");
+//        BasicProfileDAO selectUserProfileInfo2 = mongoCollection.find().projection(projectionQuary1).first();
+////        System.out.println(selectUserProfileInfo2);
+////......Select gaterthan where clause documents...........................
+//        Document gtQuery = new Document();
+//        gtQuery.put("userId", new Document("$gt", 10));
+//        BasicProfileDAO selectUserProfileInfo3 = mongoCollection.find(gtQuery).first();
+////        System.out.println(selectUserProfileInfo3);
+////......select not equel where cluse documents.........................
+//        Document neQuery = new Document();
+//        neQuery.put("userId", new Document("$ne", 57));
+//        BasicProfileDAO selectUserProfileInfo4 = mongoCollection.find(neQuery).first();
+////        System.out.println(selectUserProfileInfo4);
+//
+////....select and using $add cluse....
+//        Document andQuery = new Document();
+//        List<Document> obj = new ArrayList<Document>();
+//        obj.add(new Document("firstName", "Keya"));
+//        obj.add(new Document("lastName", "Moni"));
+//        andQuery.put("$and", obj);
+//        BasicProfileDAO selectUserProfileInfo5 = mongoCollection.find(andQuery).first();
+//        System.out.println(selectUserProfileInfo5);
+
+//......select and using $or cluse....
+//        Document orQuery = new Document();
+//        List<Document> obj1 = new ArrayList<Document>();
+//        obj1.add(new Document("lastName", "Moni"));
+//        obj1.add(new Document("userId", 10));
+//        orQuery.put("$or", obj1);
+//        MongoCursor selectUserProfileInfo6 = mongoCollection.find(orQuery).iterator();
+//        while (selectUserProfileInfo6.hasNext()) {
+////            System.out.println(selectUserProfileInfo6.next());
+//        }
+//......Select the document like sql...
+//        Document regexQuery = new Document();
+////        regexQuery.put("firstName", "Key");
+////                .append("$options", "i"));
+//        regexQuery.put("firstName",
+//                new Document("$regex", "key")
+//                .append("$options", "i"));
+//        System.out.println(regexQuery.toString());
+//.......update module........................................................
+//......update...selected field...............................................
+        BasicProfileDAO updateSQL = new BasicProfileDAOBuilder()
+                .setFirstName("Keya")
+                .setUserId("100105")
+                .build();
+//        mongoCollection.findOneAndReplace(updateSQL, userProfileInfo);
+//        mongoCollection.findOneAndUpdate(updateSQL, userProfileInfo);
+//        mongoCollection.updateOne(updateSQL, userProfileInfo);
+         
+
+//..........add to existing data...........................................................
+        BasicProfileDAO selectedUsers1 = mongoCollection.find(userProfileInfo).first();
+//        System.out.println(selectedUsers);
+        BasicProfileDAO updateUserProfileInfo1 = new BasicProfileDAOBuilder().build();
+        updateUserProfileInfo1.setWorkPlaces(selectedUsers1.getWorkPlaces());
+        updateUserProfileInfo1.getWorkPlaces().add(workPlace);
+        updateUserProfileInfo1.setUserId("100105");
+//        mongoCollection.findOneAndUpdate(updateSQL, new Document("$set", updateUserProfileInfo1));
+
+//        BasicProfileDAO selectedUsers = mongoCollection.find(userProfileInfo).first();
+//        BasicProfileDAO updateUserProfileInfo = new BasicProfileDAOBuilder().build();
+//        updateUserProfileInfo.setWorkPlaces(selectedUsers.getWorkPlaces());
+//        updateUserProfileInfo.getWorkPlaces().add(workPlace);
 //        updateUserProfileInfo.setUserId("11111111");
-        QueryBuilder builder = new QueryBuilder();
-        
-        BasicProfileDAO projectedUserProfileInfo = new BasicProfileDAOBuilder().build();
-        System.out.println(new Document("userId","$all" ).toJson());
-        projectedUserProfileInfo.setUserId("$all");
-        Document projectinoDoc = new Document("workPlaces.company", "$all");
+//        QueryBuilder builder = new QueryBuilder();
+//        BasicProfileDAO projectedUserProfileInfo = new BasicProfileDAOBuilder().build();
+//        System.out.println(new Document("userId","$all" ).toJson());
+//        projectedUserProfileInfo.setUserId("$all");
+//        Document projectinoDoc = new Document("workPlaces.company", "$all");
 //        projectedUserProfileInfo."$all");
-        System.out.println(projectedUserProfileInfo);
+//        System.out.println(projectedUserProfileInfo);
 //        updateUserProfileInfo.setUserId("11111111");
 //         System.out.println(new Document("$set", updateUserProfileInfo));
-
 //        System.out.println(userProfileInfo);
 //        System.out.println(updateUserProfileInfo);
-        
 //         mongoCollection.insertOne(userProfileInfo);
 //        MongoCursor selectedUsers = mongoCollection.find(userProfileInfo).iterator();
 //        BasicProfileDAO selectedUsers = mongoCollection.find(userProfileInfo).first();
-        mongoCollection.findOneAndUpdate(userProfileInfo, new Document("$set", updateUserProfileInfo));
-        
-        
-        
-        builder.elemMatch(new BasicDBObject("userId", 100444)).get();
-        
-        
-        mongoCollection.find().projection(updateUserProfileInfo);
-        
-        System.out.println(mongoCollection.find().projection(projectinoDoc).first());
+//        mongoCollection.findOneAndUpdate(userProfileInfo, new Document("$set", updateUserProfileInfo));
+//        
+//        
+//        
+//        builder.elemMatch(new BasicDBObject("userId", 100444)).get();
+//        
+//        
+//        mongoCollection.find().projection(updateUserProfileInfo);
+//        
+//        System.out.println(mongoCollection.find().projection(projectinoDoc).first());
 //        mongoCollection.updateOne(selectedUsers, updateUserProfileInfo);
 //         Document doc = new Document();
 //        while (selectedUsers.hasNext()) {
@@ -142,9 +235,7 @@ public class DBConnecitonTest {
 //        updateUserProfileInfo.set_id(selectedUsers.get_id());
 //        System.out.println(updateUserProfileInfo);
 //        mongoCollection.findOneAndReplace(selectedUsers, updateUserProfileInfo);
-        
 //         System.out.println(doc);
-
         //        Work w = new Work();
 //        w.setCompanyName("Shampan");
 //        w.setAddress("Niketon");

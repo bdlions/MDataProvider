@@ -27,9 +27,22 @@ public class BasicProfileDAOBuilder {
 
     private String _id;
     private String userId;
+    private String firstName;
+    private String latName;
     private List basicInfo;
     private List workPlaces;
     private List pSkills;
+
+  
+    public BasicProfileDAOBuilder setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public BasicProfileDAOBuilder setLatName(String latName) {
+        this.latName = latName;
+        return this;
+    }
 
     public BasicProfileDAOBuilder setId(String _id) {
         this._id = _id;
@@ -60,6 +73,8 @@ public class BasicProfileDAOBuilder {
     public BasicProfileDAO build() {
         basicProfile.set_id(_id);
         basicProfile.setUserId(userId);
+        basicProfile.setFirstName(firstName);
+        basicProfile.setLastName(latName);
         basicProfile.setBasicInfo(basicInfo);
         basicProfile.setWorkPlaces(workPlaces);
         basicProfile.setPSkills(pSkills);
