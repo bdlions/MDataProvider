@@ -83,25 +83,29 @@ public class DBConnecitonTest {
         workPlace2.setCity("Dhaka");
         workPlaceList2.add(workPlace);
         workPlaceList2.add(workPlace2);
+        
+        Document name = new Document();
+//        name.
 
         BasicProfileDAO userProfileInfo = new BasicProfileDAOBuilder()
                 .setUserId("100157")
                 .setFirstName("Keya")
                 .setLatName("Moni")
+                .setName(null)
                 //                .setBasicInfo(basicInfoList)
                 //                .setWorkPlaces(workPlaceList)
                 .build();
         //.....find sql......
 ////......select all document in a collection  .....
-//        List<BasicProfileDAO> usersProfileInfo = new ArrayList<BasicProfileDAO>();
-//        MongoCursor userProfiles = mongoCollection.find().iterator();
-//        while (userProfiles.hasNext()) {
-//            BasicProfileDAO userProfile = (BasicProfileDAO) userProfiles.next();
-//            usersProfileInfo.add(userProfile);
-////            System.out.println("BasicProfileDAO" + userProfile);
-//        }
-//        BasicProfileDAO usersPInfo = new BasicProfileDAO();
-////        System.out.println("BasicProfileDAO Array "+usersProfileInfo);
+        List<BasicProfileDAO> usersProfileInfo = new ArrayList<BasicProfileDAO>();
+        MongoCursor userProfiles = mongoCollection.find().iterator();
+        while (userProfiles.hasNext()) {
+            BasicProfileDAO userProfile = (BasicProfileDAO) userProfiles.next();
+            usersProfileInfo.add(userProfile);
+//            System.out.println("BasicProfileDAO" + userProfile);
+        }
+        BasicProfileDAO usersPInfo = new BasicProfileDAO();
+//        System.out.println("BasicProfileDAO Array "+usersProfileInfo);
 ////......need to conver BasicProfileDAO Array to BasicProfileDAO object
 //
 ////......select all information  of a  document .........
@@ -170,23 +174,24 @@ public class DBConnecitonTest {
 //        System.out.println(regexQuery.toString());
 //.......update module........................................................
 //......update...selected field...............................................
-        BasicProfileDAO updateSQL = new BasicProfileDAOBuilder()
-                .setFirstName("Keya")
-                .setUserId("100105")
-                .build();
+//        BasicProfileDAO updateSQL = new BasicProfileDAOBuilder()
+//                .setFirstName("Keya")
+//                .setUserId("100105")
+//                .build();
 //        mongoCollection.findOneAndReplace(updateSQL, userProfileInfo);
 //        mongoCollection.findOneAndUpdate(updateSQL, userProfileInfo);
 //        mongoCollection.updateOne(updateSQL, userProfileInfo);
          
 
 //..........add to existing data...........................................................
-        BasicProfileDAO selectedUsers1 = mongoCollection.find(userProfileInfo).first();
-//        System.out.println(selectedUsers);
-        BasicProfileDAO updateUserProfileInfo1 = new BasicProfileDAOBuilder().build();
-        updateUserProfileInfo1.setWorkPlaces(selectedUsers1.getWorkPlaces());
-        updateUserProfileInfo1.getWorkPlaces().add(workPlace);
-        updateUserProfileInfo1.setUserId("100105");
+//        BasicProfileDAO selectedUsers1 = mongoCollection.find(userProfileInfo).first();
+////        System.out.println(selectedUsers);
+//        BasicProfileDAO updateUserProfileInfo1 = new BasicProfileDAOBuilder().build();
+//        updateUserProfileInfo1.setWorkPlaces(selectedUsers1.getWorkPlaces());
+//        updateUserProfileInfo1.getWorkPlaces().add(workPlace);
+//        updateUserProfileInfo1.setUserId("100105");
 //        mongoCollection.findOneAndUpdate(updateSQL, new Document("$set", updateUserProfileInfo1));
+//        ...................test ...................................................................
 
 //        BasicProfileDAO selectedUsers = mongoCollection.find(userProfileInfo).first();
 //        BasicProfileDAO updateUserProfileInfo = new BasicProfileDAOBuilder().build();

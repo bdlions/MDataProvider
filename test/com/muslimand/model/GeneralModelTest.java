@@ -4,6 +4,7 @@
  */
 package com.muslimand.model;
 
+import com.shampan.model.basicProfileModel;
 import org.bson.Document;
 import org.junit.After;
 import org.junit.AfterClass;

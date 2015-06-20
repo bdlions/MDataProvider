@@ -8,6 +8,7 @@ package com.shampan.db.collections.builder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shampan.db.collections.BasicProfileDAO;
 import com.shampan.db.collections.fragment.BasicInfo;
+import com.shampan.db.collections.fragment.Name;
 import com.shampan.db.collections.fragment.ProfessionalSkills;
 import com.shampan.db.collections.fragment.Work;
 import com.shampan.db.collections.fragment.WorkPlaces;
@@ -32,6 +33,12 @@ public class BasicProfileDAOBuilder {
     private List basicInfo;
     private List workPlaces;
     private List pSkills;
+    private Name name ;
+
+    public BasicProfileDAOBuilder setName(Name name) {
+        this.name = name;
+        return this;
+    }
 
   
     public BasicProfileDAOBuilder setFirstName(String firstName) {
@@ -78,6 +85,7 @@ public class BasicProfileDAOBuilder {
         basicProfile.setBasicInfo(basicInfo);
         basicProfile.setWorkPlaces(workPlaces);
         basicProfile.setPSkills(pSkills);
+        basicProfile.setName(name);
         return basicProfile;
     }
 

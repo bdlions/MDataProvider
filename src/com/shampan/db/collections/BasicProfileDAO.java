@@ -12,6 +12,7 @@ import org.bson.conversions.Bson;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shampan.db.collections.fragment.BasicInfo;
+import com.shampan.db.collections.fragment.Name;
 import com.shampan.db.collections.fragment.ProfessionalSkills;
 import com.shampan.db.collections.fragment.Work;
 import com.shampan.db.collections.fragment.WorkPlaces;
@@ -31,6 +32,15 @@ public class BasicProfileDAO implements Bson {
     private List<BasicInfo> basicInfo;
     private List<WorkPlaces> workPlaces;
     private List<ProfessionalSkills> pSkills;
+    private Name name;
+
+    public Name getName() {
+        return name;
+    }
+
+    public void setName(Name name) {
+        this.name = name;
+    }
 
     public String getFirstName() {
         return firstName;
