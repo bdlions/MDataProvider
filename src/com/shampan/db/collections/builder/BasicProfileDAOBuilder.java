@@ -8,10 +8,8 @@ package com.shampan.db.collections.builder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shampan.db.collections.BasicProfileDAO;
 import com.shampan.db.collections.fragment.BasicInfo;
-import com.shampan.db.collections.fragment.Name;
-import com.shampan.db.collections.fragment.ProfessionalSkills;
-import com.shampan.db.collections.fragment.Work;
-import com.shampan.db.collections.fragment.WorkPlaces;
+import com.shampan.db.collections.fragment.PSkill;
+import com.shampan.db.collections.fragment.WorkPlace;
 import java.util.List;
 
 /**
@@ -30,17 +28,13 @@ public class BasicProfileDAOBuilder {
     private String userId;
     private String firstName;
     private String latName;
-    private List basicInfo;
+    private BasicInfo basicInfo;
     private List workPlaces;
     private List pSkills;
-    private Name name ;
+    private List universities;
+    private List colleges;
+    private List schools;
 
-    public BasicProfileDAOBuilder setName(Name name) {
-        this.name = name;
-        return this;
-    }
-
-  
     public BasicProfileDAOBuilder setFirstName(String firstName) {
         this.firstName = firstName;
         return this;
@@ -61,19 +55,34 @@ public class BasicProfileDAOBuilder {
         return this;
     }
 
-    public BasicProfileDAOBuilder setBasicInfo(List<BasicInfo> basicInfo) {
+    public BasicProfileDAOBuilder setBasicInfo(BasicInfo basicInfo) {
         this.basicInfo = basicInfo;
         return this;
     }
 
-    public BasicProfileDAOBuilder setWorkPlaces(List<WorkPlaces> workPlaces) {
+    public BasicProfileDAOBuilder setWorkPlaces(List<WorkPlace> workPlaces) {
         this.workPlaces = workPlaces;
         return this;
 
     }
 
-    public BasicProfileDAOBuilder setpSkills(List<ProfessionalSkills> pSkills) {
+    public BasicProfileDAOBuilder setpSkills(List<PSkill> pSkills) {
         this.pSkills = pSkills;
+        return this;
+    }
+
+    public BasicProfileDAOBuilder setUniversities(List universities) {
+        this.universities = universities;
+        return this;
+    }
+
+    public BasicProfileDAOBuilder setColleges(List colleges) {
+        this.colleges = colleges;
+        return this;
+    }
+
+    public BasicProfileDAOBuilder setSchools(List schools) {
+        this.schools = schools;
         return this;
     }
 
@@ -85,7 +94,9 @@ public class BasicProfileDAOBuilder {
         basicProfile.setBasicInfo(basicInfo);
         basicProfile.setWorkPlaces(workPlaces);
         basicProfile.setPSkills(pSkills);
-        basicProfile.setName(name);
+        basicProfile.setUniversities(universities);
+        basicProfile.setColleges(colleges);
+        basicProfile.setSchools(schools);
         return basicProfile;
     }
 

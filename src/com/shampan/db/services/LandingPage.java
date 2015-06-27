@@ -13,6 +13,7 @@ import org.json.JSONObject;
  * @author Sampan-IT
  */
 public class LandingPage {
+    
     public static String getCountryAndReligion(){
         GeneralModel model = new GeneralModel();
 

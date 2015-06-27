@@ -12,10 +12,11 @@ import org.bson.conversions.Bson;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shampan.db.collections.fragment.BasicInfo;
-import com.shampan.db.collections.fragment.Name;
-import com.shampan.db.collections.fragment.ProfessionalSkills;
-import com.shampan.db.collections.fragment.Work;
-import com.shampan.db.collections.fragment.WorkPlaces;
+import com.shampan.db.collections.fragment.College;
+import com.shampan.db.collections.fragment.PSkill;
+import com.shampan.db.collections.fragment.School;
+import com.shampan.db.collections.fragment.University;
+import com.shampan.db.collections.fragment.WorkPlace;
 import java.util.List;
 
 /**
@@ -29,17 +30,51 @@ public class BasicProfileDAO implements Bson {
     private String userId;
     private String firstName;
     private String lastName;
-    private List<BasicInfo> basicInfo;
-    private List<WorkPlaces> workPlaces;
-    private List<ProfessionalSkills> pSkills;
-    private Name name;
+    private BasicInfo basicInfo;
+    private List<WorkPlace> workPlaces;
+    private List<PSkill> pSkills;
+    private List<University> universities;
+    private List<College> colleges;
+    private List<School> schools;
 
-    public Name getName() {
-        return name;
+    public List<PSkill> getpSkills() {
+        return pSkills;
     }
 
-    public void setName(Name name) {
-        this.name = name;
+    public void setpSkills(List<PSkill> pSkills) {
+        this.pSkills = pSkills;
+    }
+
+    public List<University> getUniversities() {
+        return universities;
+    }
+
+    public void setUniversities(List<University> universities) {
+        this.universities = universities;
+    }
+
+    public List<College> getColleges() {
+        return colleges;
+    }
+
+    public void setColleges(List<College> colleges) {
+        this.colleges = colleges;
+    }
+
+    public List<School> getSchools() {
+        return schools;
+    }
+
+    public void setSchools(List<School> schools) {
+        this.schools = schools;
+    }
+
+    public BasicInfo getBasicInfo() {
+        return basicInfo;
+    }
+
+    public void setBasicInfo(BasicInfo basicInfo) {
+        this.basicInfo = basicInfo;
     }
 
     public String getFirstName() {
@@ -58,18 +93,6 @@ public class BasicProfileDAO implements Bson {
         this.lastName = lastName;
     }
 
-    @Override
-    public String toString() {
-        ObjectMapper mapper = new ObjectMapper();
-        String json = "";
-        try {
-            json = mapper.writeValueAsString(this);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return json;
-    }
-
     public String getUserId() {
         return userId;
     }
@@ -78,23 +101,15 @@ public class BasicProfileDAO implements Bson {
         this.userId = userId;
     }
 
-    public List<BasicInfo> getBasicInfo() {
-        return basicInfo;
-    }
-
-    public void setBasicInfo(List<BasicInfo> basicInfo) {
-        this.basicInfo = basicInfo;
-    }
-
-    public List<WorkPlaces> getWorkPlaces() {
+    public List<WorkPlace> getWorkPlaces() {
         return workPlaces;
     }
 
-    public void setWorkPlaces(List<WorkPlaces> workPlaces) {
+    public void setWorkPlaces(List<WorkPlace> workPlaces) {
         this.workPlaces = workPlaces;
     }
 
-    public List<ProfessionalSkills> getPSkills() {
+    public List<PSkill> getPSkills() {
         return pSkills;
     }
 
@@ -106,8 +121,20 @@ public class BasicProfileDAO implements Bson {
         this._id = _id;
     }
 
-    public void setPSkills(List<ProfessionalSkills> pSkills) {
+    public void setPSkills(List<PSkill> pSkills) {
         this.pSkills = pSkills;
+    }
+
+    @Override
+    public String toString() {
+        ObjectMapper mapper = new ObjectMapper();
+        String json = "";
+        try {
+            json = mapper.writeValueAsString(this);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return json;
     }
 
     @Override

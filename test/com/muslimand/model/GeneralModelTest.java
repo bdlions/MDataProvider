@@ -4,7 +4,7 @@
  */
 package com.muslimand.model;
 
-import com.shampan.model.basicProfileModel;
+//import com.shampan.model.basicProfileModel;
 import org.bson.Document;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -52,7 +52,7 @@ public class GeneralModelTest {
         
 //        System.out.println(gm.getAllReligions());
 //        Object_id=557d207230cada0554fb7b08
-        String userID = "556311458267404811000028";
+//        String userID = "556311458267404811000028";
         String DocumentID ="Shemin";
         String DocumentIndexID ="Female";
         Document document = new Document();
@@ -63,9 +63,9 @@ public class GeneralModelTest {
         document.put("gender", new Document("id", "1").append("title", "Female"));
         System.out.println(document);
         System.out.println(document.toJson());
-        basicProfileModel obj = new basicProfileModel();
+//        basicProfileModel obj = new basicProfileModel();
 //        obj.addBasicProfile(document);
-        obj.updateBasicProfile(userID, document);
+//        obj.updateBasicProfile(userID, document);
 //        String Result = obj.getBasicProfile(userID);
 //        String Result = obj.getBasicProfile(userID,DocumentID);
 //        String Result = obj.getBasicProfile(userID,DocumentID,DocumentIndexID);

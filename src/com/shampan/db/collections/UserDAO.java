@@ -11,7 +11,6 @@ import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.conversions.Bson;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.shampan.db.collections.fragment.Work;
 import java.util.List;
 
 /**
@@ -25,7 +24,6 @@ public class UserDAO implements Bson {
     private String first_name;
     private String last_name;
     private String username;
-    private List<Work> workList;
 
     @Override
     public String toString() {

@@ -7,6 +7,7 @@ package com.shampan.db.collections.fragment;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
 
 /**
  *
@@ -18,6 +19,60 @@ public class BasicInfo {
     private String birthDay;
     private String birthMonth;
     private String birthYear;
+    private Gender gender;
+    private List<MobilePhone> mobilePhones;
+    private List<OtherPhone> otherPhones;
+    private List<Email > emails ;
+    private List<Address > addresses ;
+    private List<Religion > religions ;
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public List<MobilePhone> getMobilePhones() {
+        return mobilePhones;
+    }
+
+    public void setMobilePhones(List<MobilePhone> mobilePhones) {
+        this.mobilePhones = mobilePhones;
+    }
+
+    public List<OtherPhone> getOtherPhones() {
+        return otherPhones;
+    }
+
+    public void setOtherPhones(List<OtherPhone> otherPhones) {
+        this.otherPhones = otherPhones;
+    }
+
+    public List<Email> getEmails() {
+        return emails;
+    }
+
+    public void setEmails(List<Email> emails) {
+        this.emails = emails;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
+
+    public List<Religion> getReligions() {
+        return religions;
+    }
+
+    public void setReligions(List<Religion> religions) {
+        this.religions = religions;
+    }
 
     public String getWebsite() {
         return website;
@@ -63,4 +118,5 @@ public class BasicInfo {
         }
         return json;
     }
+    
 }

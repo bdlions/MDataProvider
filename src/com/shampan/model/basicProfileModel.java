@@ -5,212 +5,329 @@
  */
 package com.shampan.model;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
+import com.mongodb.QueryBuilder;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.shampan.db.DBConnection;
+import com.shampan.db.collections.BasicProfileDAO;
+import com.shampan.db.collections.CountriesDAO;
+import com.shampan.db.collections.builder.BasicProfileDAOBuilder;
+import com.shampan.db.collections.fragment.College;
+import com.shampan.db.collections.fragment.PSkill;
+import com.shampan.db.collections.fragment.School;
+import com.shampan.db.collections.fragment.University;
+import com.shampan.db.collections.fragment.WorkPlace;
+import java.util.ArrayList;
+import java.util.List;
 import org.bson.Document;
+import org.json.JSONObject;
 
 /**
  *
  * @author Sampan-IT
  */
-public class basicProfileModel {
+public class BasicProfileModel {
 
-    public basicProfileModel() {
+    public BasicProfileModel() {
 
     }
 
+    public String getOverview(String userId) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        Document pQuery = new Document();
+        pQuery.put("workPlaces", "$all");
+        pQuery.put("pSkills", "$all");
+        pQuery.put("universities", "$all");
+        pQuery.put("colleges", "$all");
+        pQuery.put("schools", "$all");
+        pQuery.put("basicInfo", "$all");
+        BasicProfileDAO overviewCursor = mongoCollection.find(selectQuery).projection(pQuery).first();
+        int size = overviewCursor.getWorkPlaces().size();
+        int size1 = overviewCursor.getUniversities().size();
+        WorkPlace lastWork = overviewCursor.getWorkPlaces().get(size - 1);
+        University lastUniversity = overviewCursor.getUniversities().get(size1 - 1);
+        System.out.println(lastWork.toString());
+        System.out.println(lastUniversity.toString());
+        JSONObject json = new JSONObject();
+        json.put("workPlace", lastWork);
+        json.put("University", lastUniversity);
+        System.out.println(json.toString());
+        return json.toString();
+
+    }
+
+    public BasicProfileDAO getWorksAndEducation(String userId) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        Document pQuery = new Document();
+        pQuery.put("workPlaces", "$all");
+        pQuery.put("pSkills", "$all");
+        pQuery.put("universities", "$all");
+        pQuery.put("colleges", "$all");
+        pQuery.put("schools", "$all");
+        BasicProfileDAO workEducationCursor = mongoCollection.find(selectQuery).projection(pQuery).first();
+        return workEducationCursor;
+    }
+
+    public BasicProfileDAO getPlaces(String userId){
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        Document pQuery = new Document();
+        pQuery.put("basicInfo.mobilePhones", "$all");
+        BasicProfileDAO places = mongoCollection.find(selectQuery).projection(pQuery).first();
+        return places;
+    }
     
+    public String addWorkPlace(String userId, String additionalData) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        Document pQuery = new Document();
+        pQuery.put("workPlaces", "$all");
+        BasicProfileDAO workPlaceCursor = mongoCollection.find(selectQuery).projection(pQuery).first();
+        WorkPlace workPlace = WorkPlace.getWorkPlace(additionalData);
+        if (workPlace != null) {
+            workPlaceCursor.getWorkPlaces().add(workPlace);
+        }
+        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", workPlaceCursor));
+        String response = "successful";
+        return response;
+    }
     
+    public String addUniversity(String userId, String additionalData) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        Document pQuery = new Document();
+        pQuery.put("universities", "$all");
+        BasicProfileDAO universityCursor = mongoCollection.find(selectQuery).projection(pQuery).first();
+        University university = University.getUniversity(additionalData);
+        if (university != null) {
+            universityCursor.getUniversities().add(university);
+        }
+        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", universityCursor));
+        String response = "successful";
+        return response;
+    }
     
-    
+    public String addCollege(String userId, String additionalData) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        Document pQuery = new Document();
+        pQuery.put("colleges", "$all");
+        BasicProfileDAO collegeCursor = mongoCollection.find(selectQuery).projection(pQuery).first();
+        College college = College.getCollege(additionalData);
+        if (college != null) {
+            collegeCursor.getColleges().add(college);
+        }
+        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", collegeCursor));
+        String response = "successful";
+        return response;
+    }
+
+    public String addSchool(String userId, String additionalData) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        Document pQuery = new Document();
+        pQuery.put("schools", "$all");
+        BasicProfileDAO schoolCursor = mongoCollection.find(selectQuery).projection(pQuery).first();
+        School school = School.getSchool(additionalData);
+        if (school != null) {
+            schoolCursor.getSchools().add(school);
+        }
+        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", schoolCursor));
+        String response = "successful";
+        return response;
+    }
+    public String addPSkill(String userId, String additionalData) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        Document pQuery = new Document();
+        pQuery.put("pSkills", "$all");
+        BasicProfileDAO pSkillCoursor = mongoCollection.find(selectQuery).projection(pQuery).first();
+        PSkill pSkill = PSkill.getPSkill(additionalData);
+        if (pSkill != null) {
+            pSkillCoursor.getpSkills().add(pSkill);
+        }
+        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", pSkillCoursor));
+        String response = "successful";
+        return response;
+    }
+
     public void addBasicProfile(Document AdditionalData) {
-//        System.out.println(userID);
-//        System.out.println(AdditionalData);
         MongoDatabase db = DBConnection.getInstance().getConnection();
         MongoCollection table = db.getCollection("users");
-        
-         table.insertOne(AdditionalData);
-        
-//        Document searchQuery = new Document();
-//        searchQuery.put("user_id", userID);
-//        MongoCursor cursor = table.find(searchQuery).iterator();
-//        Document doc = new Document();
-//
-//        while (cursor.hasNext()) {
-//            doc = (Document) cursor.next();
-////             System.out.println(doc);
-//        }
-//        System.out.println(doc);
-//        Document updateObj = new Document();
-//        updateObj.put("$set", AdditionalData);
-//
-//        System.out.println(updateObj);
-
-       
-
+        table.insertOne(AdditionalData);
     }
 
     public void updateBasicProfile(String userId, Document additionalData) {
-//        System.out.println(userID);
-//        System.out.println(AdditionalData);
+
         MongoDatabase db = DBConnection.getInstance().getConnection();
         MongoCollection table = db.getCollection("users");
         Document searchQuery = new Document();
         searchQuery.put("user_id", userId);
         MongoCursor cursor = table.find(searchQuery).iterator();
         Document doc = new Document();
-
         while (cursor.hasNext()) {
             doc = (Document) cursor.next();
-//             System.out.println(doc);
         }
-        System.out.println(doc.toJson());
         Document updateObj = new Document();
-        updateObj.put("$set", additionalData.toJson());
-
-        System.out.println(updateObj);
-
+        updateObj.put("$set", additionalData);
         table.updateOne(doc, updateObj);
+    }
+
+    public BasicProfileDAO getWorkPlaces(String userId) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject searchQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        Document selectQuery = new Document();
+        selectQuery.put("workPlaces", "$all");
+        BasicProfileDAO workPlaceCursor = mongoCollection.find(searchQuery).projection(selectQuery).first();
+        return workPlaceCursor;
 
     }
 
-    public String getBasicProfile(String userId) {
+    public BasicProfileDAO getSchools(String userId) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject searchQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        Document selectQuery = new Document();
+        selectQuery.put("schools", "$all");
+        BasicProfileDAO schoolsCursor = mongoCollection.find(searchQuery).projection(selectQuery).first();
+        return schoolsCursor;
+
+    }
+
+    public BasicProfileDAO getColleges(String userId) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject searchQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        Document selectQuery = new Document();
+        selectQuery.put("colleges", "$all");
+        BasicProfileDAO collegesCursor = mongoCollection.find(searchQuery).projection(selectQuery).first();
+        return collegesCursor;
+
+    }
+
+    public BasicProfileDAO getUniversities(String userId) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject searchQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        Document selectQuery = new Document();
+        selectQuery.put("universities", "$all");
+        BasicProfileDAO universitiesCursor = mongoCollection.find(searchQuery).projection(selectQuery).first();
+        return universitiesCursor;
+
+    }
+
+    public BasicProfileDAO getProfessionalSkills(String userId) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject searchQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        Document selectQuery = new Document();
+        selectQuery.put("pSkills", "$all");
+        BasicProfileDAO pskillCursor = mongoCollection.find(searchQuery).projection(selectQuery).first();
+        return pskillCursor;
+
+    }
+
+    public BasicProfileDAO getBasicInfo(String userId) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject searchQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        Document selectQuery = new Document();
+        selectQuery.put("basicInfo", "$all");
+        BasicProfileDAO basicInfoCursor = mongoCollection.find(searchQuery).projection(selectQuery).first();
+        return basicInfoCursor;
+
+    }
+
+    public MongoCursor getSecurityQuestion(String userId) {
         MongoDatabase db = DBConnection.getInstance().getConnection();
         MongoCollection table = db.getCollection("users");
         Document searchQuery = new Document();
         searchQuery.put("user_id", userId);
-        MongoCursor cursor = table.find(searchQuery).iterator();
-        while (cursor.hasNext()) {
-//        System.out.println(cursor.next());
-            return cursor.next().toString();
-        }
-
-        return null;
-
-    }
-
-    public MongoCursor getBasicProfile(String userId, String columnName) {
-        MongoDatabase db = DBConnection.getInstance().getConnection();
-        MongoCollection table = db.getCollection("users");
-        Document searchQuery = new Document();
-        searchQuery.put("username", userId);
-        searchQuery.put("first_name", columnName);
-        
-        Document filterQuery = new Document();
-        filterQuery.put("username", "$all");
-        filterQuery.put("first_name", "$all");
-        
-        MongoCursor cursor = table.find().projection(filterQuery).iterator();
-
-//        while(cursor.hasNext()){
-//        System.out.println(cursor.next());
-////            return cursor.next().toString();
-//        }
+        Document selectQuery = new Document();
+        selectQuery.put("s_questions", "$all");
+        MongoCursor cursor = table.find(searchQuery).projection(selectQuery).iterator();
         return cursor;
-
     }
 
-    class XYZ {
-
-        public String user_id;
-    }
-
-    public String getBasicProfile(String UserId, String DocumentID, String DocumentIndexID) {
-        MongoDatabase db = DBConnection.getInstance().getConnection();
-        MongoCollection table = db.getCollection("users");
-        Document searchQuery = new Document();
-        searchQuery.put("user_id", UserId);
-        searchQuery.put("first_name", DocumentID);
-        searchQuery.append("gender.title", DocumentIndexID);
-        Document fields = new Document();
-        fields.put("first_name", DocumentID);
-        MongoCursor cursor = table.find(searchQuery).iterator();
-        cursor = table.find(searchQuery, XYZ.class).iterator();
-//        MongoCursor cursor = table.find({},{first_name:DocumentID});
-        while (cursor.hasNext()) {
-            System.out.println(cursor.next());
-//            return cursor.next().toString();
-
-        }
-
-        return null;
-
-    }
-
-//    public static void main(String[] args) {
-//        String userID = "4fccdd805e151c3e84f52578";
-//        String DocumentID = "Admin";
-////        String DocumentIndexID = "Female";
-//        basicProfileModel bpm = new basicProfileModel();
-//        MongoCursor profileCursor = bpm.getBasicProfile(userID, DocumentID);
-//        MongoCursor profileCursor1 = bpm.getBasicProfile(userID, DocumentID);
-//        while (profileCursor.hasNext()) {
-//            System.out.println(profileCursor.next());
-////            JSONObject myjson = new JSONObject(profileCursor.next());
-////            System.out.println(myjson);
-//
-//            
-//        }
-//        
-//        Document d = new Document();
-//        d.put("Greeting", "Hi");
-//        d.put("Curse", "Son of a bitch");
-//        
-//        System.out.println("Document to json: "+d.toJson());
-//        
-//
-//        BasicDBObject document = (BasicDBObject)JSON.parse("{\"name\": \"kabir\", \"age\":50}");
-//       
-//        System.out.println("Name : " + document.get("name") + " Age: " + document.getInt("age") );
-//        document.get("name");
-//       
-//        System.out.println(JSON.serialize(d));
-//        
-//        String firstName = "";
-//        String lastName = "";
-//
-////        if(profileCursor.hasNext()){
-////            Document profile = (Document)profileCursor.next();
-////            firstName = profile.getString("first_name");
-////        }
-////        
-////        if(profileCursor1.hasNext()){
-////            Document profile = (Document)profileCursor1.next();
-////            lastName = profile.getString("last_name");
-////        }
-////        
-////        System.out.println("Name is : " + firstName + " " + lastName);
-        
-        
+//    public MongoCursor getPlaces(String userId) {
 //        MongoDatabase db = DBConnection.getInstance().getConnection();
 //        MongoCollection table = db.getCollection("users");
 //        Document searchQuery = new Document();
-//        searchQuery.put("username", "admin");
-////        searchQuery.put("email", "admin@admin.com");
-//        
-//        Document filterQuery = new Document();
-//        filterQuery.put("username", "$all");
-//        filterQuery.put("first_name", "$all");
-//        MongoCursor cursor = table.find().projection(filterQuery).iterator();
-//        
+//        searchQuery.put("user_id", userId);
+//        Document selectQuery = new Document();
+//        selectQuery.put("places", "$all");
+//        MongoCursor cursor = table.find(searchQuery).projection(selectQuery).iterator();
+//        return cursor;
 //
-//        while(cursor.hasNext()){
-//        System.out.println(cursor.next());
-////            return cursor.next().toString();
-//        }
-//        MongoCursor cursor2 = bpm.getBasicProfile(userID, DocumentID);
-//        if(cursor2.hasNext()){
-//            Document doc = (Document)cursor2.next();
-//            
-//            System.out.println(doc.toJson());
-//        }
-//        
-//        
-//        Document dm = new Document();
-//        
 //    }
-    
+
+    public static void main(String[] args) {
+
+//        Document document = new Document();
+        String userId = "100105";
+        Document workPlace = new Document();
+        workPlace.append("company", "NASA");
+        workPlace.append("position", "Software Engineer");
+        workPlace.append("city", "Gazipur");
+        workPlace.append("description", "I want to fly");
+//        workPlace.append("time_period", "20-01-15");
+
+//        document.put("work_place", workPlace);
+        BasicProfileModel ob = new BasicProfileModel();
+//        ob.getOverview(userId);
+        System.out.println(ob.getPlaces(userId));
+//        String workEducation = ob.addPSkill(userId, workPlace.toJson());
+//        System.out.println(workEducation);
+//        System.out.println(workEducation.toString());
+//        ob.updateBasicProfile(userId, document);
+//        MongoCursor workPlaces = ob.getWorkPlaces(userId);
+//        Document doc = new Document();
+//        while (workPlaces.hasNext()) {
+//            doc = (Document) workPlaces.next();
+//
+//        }
+
+//        System.out.println(doc.toJson());
+//        String work1 = doc.get("work_place");
+//        String work2 = document.toJson();
+//        String work = work1 + work2 ;
+//        System.out.println(work);
+//        System.out.println(work);
+//        Document final22 = new Document();
+//        final22.put("11", document.toJson());
+//        final22.put("12", work2);
+//        System.out.println(final22.toJson());
+//        Document d1 = new Document();
+//        Document companyList = new Document();
+//        ArrayList companyList = new ArrayList<>();
+//        companyList.add(document.get("work_place"));
+//        companyList.add(doc.get("work_place"));
+//        
+//        d1.put("companyList", companyList);
+//        System.out.println(d1.toJson());
+//        
+//        
+//        
+//        System.out.println(doc.get("work_place"));
+//        ArrayList<Document> workPlaceList = new ArrayList<>();
+//        workPlaceList.add(doc);
+//        workPlaceList.add(document);
+//         System.out.println(workPlaceList);
+    }
 
 }

@@ -7,7 +7,6 @@ package com.shampan.db.collections.builder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shampan.db.collections.UserDAO;
-import com.shampan.db.collections.fragment.Work;
 import java.util.List;
 
 /**
@@ -48,11 +47,7 @@ public class UserDAOBuilder {
         return this;
     }
     
-    public UserDAOBuilder setWorkList(List<Work> workList){
-        this.workList = workList;
-        return this;
-    }
-    
+ 
     
     public UserDAO build(){
         user.setFirst_name(firstName);

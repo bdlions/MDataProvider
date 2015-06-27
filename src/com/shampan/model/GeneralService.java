@@ -34,6 +34,9 @@ public class GeneralService {
         GeneralModel model = new GeneralModel();
 
         JSONObject json = new JSONObject();
+//        System.out.println(model.getAllCountries());
+//        System.out.println(model.getAllReligions());
+        
         json.put("countryList", model.getAllCountries());
         json.put("religionList", model.getAllReligions());
         System.out.println(json.toString());
