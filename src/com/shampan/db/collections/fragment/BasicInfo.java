@@ -15,16 +15,35 @@ import java.util.List;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BasicInfo {
+
     private String website;
     private String birthDay;
     private String birthMonth;
     private String birthYear;
     private Gender gender;
+    private City city;
+    private Town town;
     private List<MobilePhone> mobilePhones;
     private List<OtherPhone> otherPhones;
-    private List<Email > emails ;
-    private List<Address > addresses ;
-    private List<Religion > religions ;
+    private List<Email> emails;
+    private List<Address> addresses;
+    private List<Religion> religions;
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public Town getTown() {
+        return town;
+    }
+
+    public void setTown(Town town) {
+        this.town = town;
+    }
 
     public Gender getGender() {
         return gender;
@@ -105,8 +124,7 @@ public class BasicInfo {
     public void setBirthYear(String birthYear) {
         this.birthYear = birthYear;
     }
-    
-    
+
     @Override
     public String toString() {
         ObjectMapper mapper = new ObjectMapper();
@@ -118,5 +136,5 @@ public class BasicInfo {
         }
         return json;
     }
-    
+
 }

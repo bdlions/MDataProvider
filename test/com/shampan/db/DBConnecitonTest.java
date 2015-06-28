@@ -10,6 +10,7 @@ import com.mongodb.QueryBuilder;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.shampan.db.collections.BasicProfileDAO;
+import com.shampan.db.collections.CountriesDAO;
 import com.shampan.db.collections.builder.BasicProfileDAOBuilder;
 import com.shampan.db.collections.fragment.BasicInfo;
 import com.shampan.db.collections.fragment.College;
@@ -19,6 +20,8 @@ import com.shampan.db.collections.fragment.School;
 import com.shampan.db.collections.fragment.University;
 import com.shampan.db.collections.fragment.WorkPlace;
 import com.shampan.db.collections.fragment.Gender;
+import com.shampan.db.collections.fragment.City;
+import com.shampan.db.collections.fragment.Town;
 import com.shampan.db.collections.fragment.MobilePhone;
 import java.util.ArrayList;
 import java.util.List;
@@ -74,9 +77,22 @@ public class DBConnecitonTest {
 //        workPlace2.setCity("Dhaka");
 //        workPlaceList2.add(workPlace);
 //        workPlaceList2.add(workPlace2);
+        CountriesDAO country =new CountriesDAO();
+        country.setCode("012");
+        country.setTitle("Australia");
+        
         Gender gender = new Gender();
         gender.setId("1");
         gender.setTitle("Female");
+        
+        City currentCity = new City();
+        currentCity.setCityName("Sydney");
+        currentCity.setCountry(country);
+        
+        Town homeTown = new Town();
+        homeTown.setTownName("Dhaka");
+        homeTown.setCountry(country);
+        
         List<MobilePhone> mPhoneList = new ArrayList<MobilePhone>();
         MobilePhone mPhone = new MobilePhone();
         mPhone.setPhone("01723598606");
@@ -91,14 +107,16 @@ public class DBConnecitonTest {
         emailList.add(email);
         
         BasicInfo basicInfo = new BasicInfo();
-        basicInfo.setBirthDay("19");
-        basicInfo.setBirthMonth("6");
-        basicInfo.setBirthYear("1991");
-        basicInfo.setWebsite("Sampan-it");
-        basicInfo.setGender(gender);
-        basicInfo.setMobilePhones(mPhoneList);
-        basicInfo.setEmails(emailList);
-
+//        basicInfo.setBirthDay("19");
+//        basicInfo.setBirthMonth("6");
+//        basicInfo.setBirthYear("1991");
+//        basicInfo.setWebsite("Sampan-it");
+//        basicInfo.setGender(gender);
+//        basicInfo.setMobilePhones(mPhoneList);
+//        basicInfo.setEmails(emailList);
+        basicInfo.setCity(currentCity);
+        basicInfo.setTown(homeTown);
+//       System.out.println(basicInfo);
         List<WorkPlace> workPlaceList = new ArrayList<WorkPlace>();
         WorkPlace workPlace = new WorkPlace();
         workPlace.setCompany("NASA");
@@ -137,21 +155,21 @@ public class DBConnecitonTest {
         schoolList.add(school);
         
         BasicProfileDAO userProfileInfo = new BasicProfileDAOBuilder()
-                .setUserId("100105")
-                .setFirstName("Shemin")
-                .setLatName("Haque")
+//                .setUserId("100147")
+//                .setFirstName("Shemin")
+//                .setLatName("Haque")
                 .setBasicInfo(basicInfo)
-                .setWorkPlaces(workPlaceList)
-                .setpSkills(pSkillList)
-                .setUniversities(universityList)
-                .setColleges(collegeList)
-                .setSchools(schoolList)
+//                .setWorkPlaces(workPlaceList)
+//                .setpSkills(pSkillList)
+//                .setUniversities(universityList)
+//                .setColleges(collegeList)
+//                .setSchools(schoolList)
                 .build();
 
         System.out.print(userProfileInfo);
 
 //.......insert basic profile info............................................
-        mongoCollection.insertOne(userProfileInfo);
+//        mongoCollection.insertOne(userProfileInfo);
 
         //.....find sql......
 ////......select all document in a collection  .....
@@ -241,6 +259,13 @@ public class DBConnecitonTest {
 //        mongoCollection.findOneAndReplace(updateSQL, userProfileInfo);
 //        mongoCollection.findOneAndUpdate(updateSQL, userProfileInfo);
 //        mongoCollection.updateOne(updateSQL, userProfileInfo);
+//           System.out.println(bp);
+////        QueryBuilder.start("basicInfo.city").is(currentCity);
+//        BasicInfo ob = new BasicInfo();
+//        ob.setCity(currentCity);
+//
+//        System.out.println(currentCity);
+//        System.out.println(QueryBuilder.start("basicInfo.city").is(currentCity).get());
 //..........add to existing data...........................................................
 //        BasicProfileDAO selectedUsers1 = mongoCollection.find(userProfileInfo).first();
 ////        System.out.println(selectedUsers);

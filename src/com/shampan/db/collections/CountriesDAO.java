@@ -17,9 +17,12 @@ import org.bson.conversions.Bson;
  * @author Sampan-IT
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CountriesDAO implements Bson{
+public class CountriesDAO implements Bson {
 
     private String _id;
+    private String code;
+    private String title;
+    private String order;
 
     public String get_id() {
         return _id;
@@ -28,11 +31,7 @@ public class CountriesDAO implements Bson{
     public void set_id(String _id) {
         this._id = _id;
     }
-    private String code;
-    private String title;
-    private String order;
-    
-    
+
     @Override
     public String toString() {
         ObjectMapper mapper = new ObjectMapper();
@@ -44,6 +43,7 @@ public class CountriesDAO implements Bson{
         }
         return json;
     }
+
     public String getCode() {
         return code;
     }
@@ -55,7 +55,7 @@ public class CountriesDAO implements Bson{
     public String getTitle() {
         return title;
     }
-    
+
     public void setTitle(String title) {
         this.title = title;
     }

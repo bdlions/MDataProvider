@@ -12,13 +12,17 @@ import com.mongodb.QueryBuilder;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.FindOneAndUpdateOptions;
 import com.shampan.db.DBConnection;
 import com.shampan.db.collections.BasicProfileDAO;
 import com.shampan.db.collections.CountriesDAO;
 import com.shampan.db.collections.builder.BasicProfileDAOBuilder;
+import com.shampan.db.collections.fragment.BasicInfo;
+import com.shampan.db.collections.fragment.City;
 import com.shampan.db.collections.fragment.College;
 import com.shampan.db.collections.fragment.PSkill;
 import com.shampan.db.collections.fragment.School;
+import com.shampan.db.collections.fragment.Town;
 import com.shampan.db.collections.fragment.University;
 import com.shampan.db.collections.fragment.WorkPlace;
 import java.util.ArrayList;
@@ -35,7 +39,6 @@ public class BasicProfileModel {
     public BasicProfileModel() {
 
     }
-    
 
     public String getOverview(String userId) {
         MongoCollection<BasicProfileDAO> mongoCollection
@@ -77,7 +80,7 @@ public class BasicProfileModel {
         return workEducationCursor;
     }
 
-    public BasicProfileDAO getPlaces(String userId){
+    public BasicProfileDAO getPlaces(String userId) {
         MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
@@ -86,7 +89,18 @@ public class BasicProfileModel {
         BasicProfileDAO places = mongoCollection.find(selectQuery).projection(pQuery).first();
         return places;
     }
-    
+
+    public BasicProfileDAO getCityTown(String userId) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        Document pQuery = new Document();
+        pQuery.put("basicInfo.city", "$all");
+        pQuery.put("basicInfo.town", "$all");
+        BasicProfileDAO cityTown = mongoCollection.find(selectQuery).projection(pQuery).first();
+        return cityTown;
+    }
+
     public String addWorkPlace(String userId, String additionalData) {
         MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
@@ -95,14 +109,16 @@ public class BasicProfileModel {
         pQuery.put("workPlaces", "$all");
         BasicProfileDAO workPlaceCursor = mongoCollection.find(selectQuery).projection(pQuery).first();
         WorkPlace workPlace = WorkPlace.getWorkPlace(additionalData);
+        System.out.println(workPlace);
         if (workPlace != null) {
             workPlaceCursor.getWorkPlaces().add(workPlace);
         }
-        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", workPlaceCursor));
+
+        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", workPlace));
         String response = "successful";
         return response;
     }
-    
+
     public String addUniversity(String userId, String additionalData) {
         MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
@@ -118,7 +134,7 @@ public class BasicProfileModel {
         String response = "successful";
         return response;
     }
-    
+
     public String addCollege(String userId, String additionalData) {
         MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
@@ -150,6 +166,7 @@ public class BasicProfileModel {
         String response = "successful";
         return response;
     }
+
     public String addPSkill(String userId, String additionalData) {
         MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
@@ -162,6 +179,34 @@ public class BasicProfileModel {
             pSkillCoursor.getpSkills().add(pSkill);
         }
         BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", pSkillCoursor));
+        String response = "successful";
+        return response;
+    }
+
+    public String addCurrentCity(String userId, String additionalData) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        Document pQuery = new Document();
+        pQuery.put("basicInfo", "$all");
+        City currentCity = City.getCurrentCity(additionalData);
+        BasicProfileDAO basicInfo = mongoCollection.find(selectQuery).projection(pQuery).first();
+        basicInfo.getBasicInfo().setCity(currentCity);
+        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", basicInfo));
+        String response = "successful";
+        return response;
+    }
+
+    public String addHomeTown(String userId, String additionalData) {
+      MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        Town homeTown = Town.getHomeTown(additionalData);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        Document pQuery = new Document();
+        pQuery.put("basicInfo", "$all");
+        BasicProfileDAO basicInfo = mongoCollection.find(selectQuery).projection(pQuery).first();
+        basicInfo.getBasicInfo().setTown(homeTown);
+        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", basicInfo));
         String response = "successful";
         return response;
     }
@@ -276,24 +321,35 @@ public class BasicProfileModel {
 //        return cursor;
 //
 //    }
-
     public static void main(String[] args) {
 
 //        Document document = new Document();
-        String userId = "100105";
+        String userId = "100147";
         Document workPlace = new Document();
         workPlace.append("company", "NASA");
         workPlace.append("position", "Software Engineer");
         workPlace.append("city", "Gazipur");
         workPlace.append("description", "I want to fly");
-//        workPlace.append("time_period", "20-01-15");
+        CountriesDAO country = new CountriesDAO();
+        country.setCode("012");
+        country.setTitle("Australia");
+        City currentCity = new City();
+        currentCity.setCityName("ffffff");
+        currentCity.setCountry(country);
+        Town homeTown = new Town();
+        homeTown.setTownName("Dhaka");
+        homeTown.setCountry(country);
 
+//        workPlace.append("time_period", "20-01-15");
 //        document.put("work_place", workPlace);
         BasicProfileModel ob = new BasicProfileModel();
 //        ob.getOverview(userId);
-        System.out.println(ob.getPlaces(userId));
-//        String workEducation = ob.addPSkill(userId, workPlace.toJson());
-//        System.out.println(workEducation);
+//        System.out.println(ob.getCityTown(userId));
+//        String homeTown1 = ob.addHomeTown(userId, homeTown.toString());
+        String workEducation = ob.addCurrentCity(userId, currentCity.toString());
+
+//        String workEducation1 = ob.addWorkPlace(userId, workPlace.toString());
+//        System.out.println(workEducation1);
 //        System.out.println(workEducation.toString());
 //        ob.updateBasicProfile(userId, document);
 //        MongoCursor workPlaces = ob.getWorkPlaces(userId);
@@ -302,7 +358,6 @@ public class BasicProfileModel {
 //            doc = (Document) workPlaces.next();
 //
 //        }
-
 //        System.out.println(doc.toJson());
 //        String work1 = doc.get("work_place");
 //        String work2 = document.toJson();
@@ -329,6 +384,22 @@ public class BasicProfileModel {
 //        workPlaceList.add(doc);
 //        workPlaceList.add(document);
 //         System.out.println(workPlaceList);
+        
+//         public String addHomeTown(String userId, String additionalData) {
+//        MongoCollection<BasicProfileDAO> mongoCollection
+//                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+//        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+//        Town homeTown = Town.getHomeTown(additionalData);
+//        System.out.println(homeTown);
+//        BasicProfileDAO bp = new BasicProfileDAO();
+//        bp.setBasicInfo(new BasicInfo());
+//        bp.getBasicInfo().setTown(homeTown);
+//        System.out.println(bp);
+////        BasicProfileDAO result1 = mongoCollection.f;
+//        BasicProfileDAO result2 = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", bp));
+//        String response = "successful";
+//        return response;
+//    }
     }
 
 }
