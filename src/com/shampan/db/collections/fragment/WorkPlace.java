@@ -80,7 +80,9 @@ public class WorkPlace {
             ex.printStackTrace();
         }
         return json;
-    }public static WorkPlace getWorkPlace(String jsonContent){
+    }
+
+    public static WorkPlace getWorkPlace(String jsonContent) {
         WorkPlace workPlaces = null;
         try {
             ObjectMapper mapper = new ObjectMapper();

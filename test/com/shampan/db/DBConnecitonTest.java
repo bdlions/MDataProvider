@@ -23,6 +23,7 @@ import com.shampan.db.collections.fragment.Gender;
 import com.shampan.db.collections.fragment.City;
 import com.shampan.db.collections.fragment.Town;
 import com.shampan.db.collections.fragment.MobilePhone;
+import com.shampan.db.collections.fragment.FamilyMember;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
@@ -92,11 +93,15 @@ public class DBConnecitonTest {
         Town homeTown = new Town();
         homeTown.setTownName("Dhaka");
         homeTown.setCountry(country);
+        FamilyMember fMember = new FamilyMember();
+        fMember.setMemebrName("Keya");
+        fMember.setRelation("Best Friend");
+        List<FamilyMember> fMemberList = new ArrayList<FamilyMember>();
+        fMemberList.add(fMember);
         
         List<MobilePhone> mPhoneList = new ArrayList<MobilePhone>();
         MobilePhone mPhone = new MobilePhone();
         mPhone.setPhone("01723598606");
-        
         MobilePhone mPhone1 = new MobilePhone();
         mPhone1.setPhone("01723598606");
         mPhoneList.add(mPhone);
@@ -107,16 +112,18 @@ public class DBConnecitonTest {
         emailList.add(email);
         
         BasicInfo basicInfo = new BasicInfo();
-//        basicInfo.setBirthDay("19");
-//        basicInfo.setBirthMonth("6");
-//        basicInfo.setBirthYear("1991");
-//        basicInfo.setWebsite("Sampan-it");
-//        basicInfo.setGender(gender);
-//        basicInfo.setMobilePhones(mPhoneList);
-//        basicInfo.setEmails(emailList);
+        basicInfo.setBirthDay("19");
+        basicInfo.setBirthMonth("6");
+        basicInfo.setBirthYear("1991");
+        basicInfo.setWebsite("Sampan-it");
+        basicInfo.setRelationshipStatus("Single");
+        basicInfo.setGender(gender);
+        basicInfo.setMobilePhones(mPhoneList);
+        basicInfo.setEmails(emailList);
         basicInfo.setCity(currentCity);
         basicInfo.setTown(homeTown);
-//       System.out.println(basicInfo);
+        basicInfo.setFamilyMember(fMemberList);
+
         List<WorkPlace> workPlaceList = new ArrayList<WorkPlace>();
         WorkPlace workPlace = new WorkPlace();
         workPlace.setCompany("NASA");
@@ -155,21 +162,21 @@ public class DBConnecitonTest {
         schoolList.add(school);
         
         BasicProfileDAO userProfileInfo = new BasicProfileDAOBuilder()
-//                .setUserId("100147")
-//                .setFirstName("Shemin")
-//                .setLatName("Haque")
+                .setUserId("100157")
+                .setFirstName("Shemin")
+                .setLatName("Haque")
                 .setBasicInfo(basicInfo)
-//                .setWorkPlaces(workPlaceList)
-//                .setpSkills(pSkillList)
-//                .setUniversities(universityList)
-//                .setColleges(collegeList)
-//                .setSchools(schoolList)
+                .setWorkPlaces(workPlaceList)
+                .setpSkills(pSkillList)
+                .setUniversities(universityList)
+                .setColleges(collegeList)
+                .setSchools(schoolList)
                 .build();
 
         System.out.print(userProfileInfo);
 
 //.......insert basic profile info............................................
-//        mongoCollection.insertOne(userProfileInfo);
+        mongoCollection.insertOne(userProfileInfo);
 
         //.....find sql......
 ////......select all document in a collection  .....

@@ -5,12 +5,23 @@
  */
 package com.shampan.db.collections.fragment;
 
+import com.shampan.db.collections.CountriesDAO;
+
 /**
  *
  * @author Sampan-IT
  */
 public class MobilePhone {
     private String phone;
+    private CountriesDAO country;
+
+    public CountriesDAO getCountry() {
+        return country;
+    }
+
+    public void setCountry(CountriesDAO country) {
+        this.country = country;
+    }
 
     public String getPhone() {
         return phone;

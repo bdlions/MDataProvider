@@ -13,6 +13,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.FindOneAndUpdateOptions;
+import com.mongodb.util.JSON;
 import com.shampan.db.DBConnection;
 import com.shampan.db.collections.BasicProfileDAO;
 import com.shampan.db.collections.CountriesDAO;
@@ -80,16 +81,6 @@ public class BasicProfileModel {
         return workEducationCursor;
     }
 
-    public BasicProfileDAO getPlaces(String userId) {
-        MongoCollection<BasicProfileDAO> mongoCollection
-                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
-        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
-        Document pQuery = new Document();
-        pQuery.put("basicInfo.mobilePhones", "$all");
-        BasicProfileDAO places = mongoCollection.find(selectQuery).projection(pQuery).first();
-        return places;
-    }
-
     public BasicProfileDAO getCityTown(String userId) {
         MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
@@ -99,6 +90,35 @@ public class BasicProfileModel {
         pQuery.put("basicInfo.town", "$all");
         BasicProfileDAO cityTown = mongoCollection.find(selectQuery).projection(pQuery).first();
         return cityTown;
+    }
+    public BasicProfileDAO getFamilyRelation(String userId) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        Document pQuery = new Document();
+        pQuery.put("basicInfo.familyMember", "$all");
+        pQuery.put("basicInfo.relationshipStatus", "$all");
+        BasicProfileDAO familyRelations = mongoCollection.find(selectQuery).projection(pQuery).first();
+        return familyRelations;
+    }
+    public BasicProfileDAO getContactBasicInfo(String userId) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        Document pQuery = new Document();
+        pQuery.put("basicInfo", "$all");
+        BasicProfileDAO familyRelations = mongoCollection.find(selectQuery).projection(pQuery).first();
+        return familyRelations;
+    }
+    
+    public BasicProfileDAO getPlaces(String userId) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        Document pQuery = new Document();
+        pQuery.put("basicInfo.mobilePhones", "$all");
+        BasicProfileDAO places = mongoCollection.find(selectQuery).projection(pQuery).first();
+        return places;
     }
 
     public String addWorkPlace(String userId, String additionalData) {
@@ -198,15 +218,26 @@ public class BasicProfileModel {
     }
 
     public String addHomeTown(String userId, String additionalData) {
-      MongoCollection<BasicProfileDAO> mongoCollection
+        MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
         Town homeTown = Town.getHomeTown(additionalData);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("basicInfo.town",JSON.parse(homeTown.toString()))));
+        String response = "successful";
+        return response;
+    }
+    public String addRelationshipStatus(String userId, String additionalData) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        BasicInfo relation =  BasicInfo.getBasicInfo(additionalData);
         Document pQuery = new Document();
         pQuery.put("basicInfo", "$all");
         BasicProfileDAO basicInfo = mongoCollection.find(selectQuery).projection(pQuery).first();
-        basicInfo.getBasicInfo().setTown(homeTown);
+        basicInfo.getBasicInfo().setRelationshipStatus(additionalData);
+        System.out.println(basicInfo);
         BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", basicInfo));
+//        BasicProfileDAO result1 = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("basicInfo.relationshipStatus",JSON.parse(relation.toString()))));
         String response = "successful";
         return response;
     }
@@ -324,7 +355,7 @@ public class BasicProfileModel {
     public static void main(String[] args) {
 
 //        Document document = new Document();
-        String userId = "100147";
+        String userId = "100157";
         Document workPlace = new Document();
         workPlace.append("company", "NASA");
         workPlace.append("position", "Software Engineer");
@@ -337,16 +368,18 @@ public class BasicProfileModel {
         currentCity.setCityName("ffffff");
         currentCity.setCountry(country);
         Town homeTown = new Town();
-        homeTown.setTownName("Dhaka");
-        homeTown.setCountry(country);
+        homeTown.setTownName("Gazipur");
+        BasicInfo relation = new BasicInfo();
+        relation.setRelationshipStatus("Married");
+//        homeTown.setCountry(country);
 
 //        workPlace.append("time_period", "20-01-15");
 //        document.put("work_place", workPlace);
         BasicProfileModel ob = new BasicProfileModel();
 //        ob.getOverview(userId);
-//        System.out.println(ob.getCityTown(userId));
-//        String homeTown1 = ob.addHomeTown(userId, homeTown.toString());
-        String workEducation = ob.addCurrentCity(userId, currentCity.toString());
+//        System.out.println(ob.getFamilyRelation(userId));
+        String homeTown1 = ob.addRelationshipStatus(userId, relation.toString());
+//        String workEducation = ob.addHomeTown(userId, homeTown.toString());
 
 //        String workEducation1 = ob.addWorkPlace(userId, workPlace.toString());
 //        System.out.println(workEducation1);
@@ -384,7 +417,6 @@ public class BasicProfileModel {
 //        workPlaceList.add(doc);
 //        workPlaceList.add(document);
 //         System.out.println(workPlaceList);
-        
 //         public String addHomeTown(String userId, String additionalData) {
 //        MongoCollection<BasicProfileDAO> mongoCollection
 //                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);

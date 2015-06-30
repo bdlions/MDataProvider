@@ -23,11 +23,31 @@ public class BasicInfo {
     private Gender gender;
     private City city;
     private Town town;
+    private String relationshipStatus;
     private List<MobilePhone> mobilePhones;
     private List<OtherPhone> otherPhones;
     private List<Email> emails;
     private List<Address> addresses;
     private List<Religion> religions;
+    private List<FamilyMember> familyMember;
+
+    public List<FamilyMember> getFamilyMember() {
+        return familyMember;
+    }
+
+    public void setFamilyMember(List<FamilyMember> familyMember) {
+        this.familyMember = familyMember;
+    }
+
+  
+
+    public String getRelationshipStatus() {
+        return relationshipStatus;
+    }
+
+    public void setRelationshipStatus(String relationshipStatus) {
+        this.relationshipStatus = relationshipStatus;
+    }
 
     public City getCity() {
         return city;
@@ -135,6 +155,16 @@ public class BasicInfo {
             ex.printStackTrace();
         }
         return json;
+    }
+     public static BasicInfo getBasicInfo(String jsonContent) {
+        BasicInfo basicInfo = null;
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            basicInfo = mapper.readValue(jsonContent, BasicInfo.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return basicInfo;
     }
 
 }

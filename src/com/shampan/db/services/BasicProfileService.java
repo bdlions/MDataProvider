@@ -26,6 +26,15 @@ public class BasicProfileService {
         return cityTown.toString();
     }
 
+    public static String getFamilyRelation(String userId) {
+        BasicProfileDAO familyRelations = obj.getFamilyRelation(userId);
+        return familyRelations.toString();
+    }
+    public static String getContactBasicInfo(String userId) {
+        BasicProfileDAO BasicInfo = obj.getContactBasicInfo(userId);
+        return BasicInfo.toString();
+    }
+
     public static String addWorkPlace(String userId, String additionalData) {
         String workPlace = obj.addWorkPlace(userId, additionalData);
         return workPlace;
@@ -51,12 +60,18 @@ public class BasicProfileService {
         String response = obj.addSchool(userId, additionalData);
         return response;
     }
+
     public static String addCurrentCity(String userId, String additionalData) {
         String response = obj.addCurrentCity(userId, additionalData);
         return response;
     }
+
     public static String addHomeTown(String userId, String additionalData) {
         String response = obj.addHomeTown(userId, additionalData);
+        return response;
+    }
+    public static String addRelationshipStatus(String userId, String additionalData) {
+        String response = obj.addRelationshipStatus(userId, additionalData);
         return response;
     }
 
