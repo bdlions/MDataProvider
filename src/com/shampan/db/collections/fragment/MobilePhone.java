@@ -5,6 +5,7 @@
  */
 package com.shampan.db.collections.fragment;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shampan.db.collections.CountriesDAO;
 
 /**
@@ -29,6 +30,28 @@ public class MobilePhone {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+    @Override
+    public String toString() {
+        ObjectMapper mapper = new ObjectMapper();
+        String json = "";
+        try {
+            json = mapper.writeValueAsString(this);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return json;
+    }
+
+    public static MobilePhone getMobilePhone(String jsonContent) {
+        MobilePhone mobilePhone = null;
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            mobilePhone = mapper.readValue(jsonContent, MobilePhone.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return mobilePhone;
     }
     
 }

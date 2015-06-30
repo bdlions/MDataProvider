@@ -24,6 +24,8 @@ import com.shampan.db.collections.fragment.City;
 import com.shampan.db.collections.fragment.Town;
 import com.shampan.db.collections.fragment.MobilePhone;
 import com.shampan.db.collections.fragment.FamilyMember;
+import com.shampan.db.collections.fragment.Language;
+import com.shampan.db.collections.fragment.Religion;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
@@ -89,6 +91,13 @@ public class DBConnecitonTest {
         City currentCity = new City();
         currentCity.setCityName("Sydney");
         currentCity.setCountry(country);
+        Religion religion = new Religion();
+        religion.setId("012");
+        religion.setTilte("muslim");
+        Language language = new Language();
+        language.setLanguage("Bangla");
+        List<Language> languageList = new ArrayList<Language>();
+        languageList.add(language);
         
         Town homeTown = new Town();
         homeTown.setTownName("Dhaka");
@@ -123,6 +132,8 @@ public class DBConnecitonTest {
         basicInfo.setCity(currentCity);
         basicInfo.setTown(homeTown);
         basicInfo.setFamilyMember(fMemberList);
+        basicInfo.setReligions(religion);
+        basicInfo.setLanguage(languageList);
 
         List<WorkPlace> workPlaceList = new ArrayList<WorkPlace>();
         WorkPlace workPlace = new WorkPlace();
@@ -163,8 +174,6 @@ public class DBConnecitonTest {
         
         BasicProfileDAO userProfileInfo = new BasicProfileDAOBuilder()
                 .setUserId("100157")
-                .setFirstName("Shemin")
-                .setLatName("Haque")
                 .setBasicInfo(basicInfo)
                 .setWorkPlaces(workPlaceList)
                 .setpSkills(pSkillList)

@@ -28,11 +28,29 @@ public class BasicInfo {
     private List<OtherPhone> otherPhones;
     private List<Email> emails;
     private List<Address> addresses;
-    private List<Religion> religions;
+    private Religion religions;
     private List<FamilyMember> familyMember;
+    private List<Language> language;
+
+    public List<Language> getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(List<Language> language) {
+        this.language = language;
+    }
+
 
     public List<FamilyMember> getFamilyMember() {
         return familyMember;
+    }
+
+    public Religion getReligions() {
+        return religions;
+    }
+
+    public void setReligions(Religion religions) {
+        this.religions = religions;
     }
 
     public void setFamilyMember(List<FamilyMember> familyMember) {
@@ -105,14 +123,7 @@ public class BasicInfo {
         this.addresses = addresses;
     }
 
-    public List<Religion> getReligions() {
-        return religions;
-    }
-
-    public void setReligions(List<Religion> religions) {
-        this.religions = religions;
-    }
-
+ 
     public String getWebsite() {
         return website;
     }

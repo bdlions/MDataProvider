@@ -74,6 +74,22 @@ public class BasicProfileService {
         String response = obj.addRelationshipStatus(userId, additionalData);
         return response;
     }
+    public static String addMobilePhone(String userId, String additionalData) {
+        String response = obj.addMobilePhone(userId, additionalData);
+        return response;
+    }
+    public static String addAddress(String userId, String additionalData) {
+        String response = obj.addAddress(userId, additionalData);
+        return response;
+    }
+    public static String addWebsite(String userId, String additionalData) {
+        String response = obj.addWebsite(userId, additionalData);
+        return response;
+    }
+    public static String addEmail(String userId, String additionalData) {
+        String response = obj.addEmail(userId, additionalData);
+        return response;
+    }
 
     public static String getOverview(String userId) {
         String overViewPage = obj.getOverview(userId);

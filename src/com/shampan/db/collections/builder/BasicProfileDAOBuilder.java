@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shampan.db.collections.BasicProfileDAO;
 import com.shampan.db.collections.fragment.BasicInfo;
 import com.shampan.db.collections.fragment.PSkill;
+import com.shampan.db.collections.fragment.School;
 import com.shampan.db.collections.fragment.WorkPlace;
 import java.util.List;
 
@@ -26,24 +27,13 @@ public class BasicProfileDAOBuilder {
 
     private String _id;
     private String userId;
-    private String firstName;
-    private String latName;
     private BasicInfo basicInfo;
     private List workPlaces;
     private List pSkills;
     private List universities;
     private List colleges;
-    private List schools;
+    private List<School> schools;
 
-    public BasicProfileDAOBuilder setFirstName(String firstName) {
-        this.firstName = firstName;
-        return this;
-    }
-
-    public BasicProfileDAOBuilder setLatName(String latName) {
-        this.latName = latName;
-        return this;
-    }
 
     public BasicProfileDAOBuilder setId(String _id) {
         this._id = _id;
@@ -89,8 +79,6 @@ public class BasicProfileDAOBuilder {
     public BasicProfileDAO build() {
         basicProfile.set_id(_id);
         basicProfile.setUserId(userId);
-        basicProfile.setFirstName(firstName);
-        basicProfile.setLastName(latName);
         basicProfile.setBasicInfo(basicInfo);
         basicProfile.setWorkPlaces(workPlaces);
         basicProfile.setPSkills(pSkills);
