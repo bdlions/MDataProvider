@@ -11,10 +11,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  * @author Sampan-IT
  */
-class Address {
+public class Address {
+
     private String address;
     private String city;
-    private String state;
+    private String zip;
     private String postCode;
 
     public String getAddress() {
@@ -33,12 +34,12 @@ class Address {
         this.city = city;
     }
 
-    public String getState() {
-        return state;
+    public String getZip() {
+        return zip;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setZip(String zip) {
+        this.zip = zip;
     }
 
     public String getPostCode() {
@@ -48,7 +49,8 @@ class Address {
     public void setPostCode(String postCode) {
         this.postCode = postCode;
     }
-     @Override
+
+    @Override
     public String toString() {
         ObjectMapper mapper = new ObjectMapper();
         String json = "";
@@ -59,4 +61,16 @@ class Address {
         }
         return json;
     }
+
+    public static Address getAddress(String jsonContent) {
+        Address address = null;
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            address = mapper.readValue(jsonContent, Address.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return address;
+    }
+
 }

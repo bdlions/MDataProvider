@@ -18,14 +18,17 @@ import com.shampan.db.DBConnection;
 import com.shampan.db.collections.BasicProfileDAO;
 import com.shampan.db.collections.CountriesDAO;
 import com.shampan.db.collections.builder.BasicProfileDAOBuilder;
+import com.shampan.db.collections.fragment.Address;
 import com.shampan.db.collections.fragment.BasicInfo;
 import com.shampan.db.collections.fragment.City;
 import com.shampan.db.collections.fragment.College;
+import com.shampan.db.collections.fragment.Email;
 import com.shampan.db.collections.fragment.MobilePhone;
 import com.shampan.db.collections.fragment.PSkill;
 import com.shampan.db.collections.fragment.School;
 import com.shampan.db.collections.fragment.Town;
 import com.shampan.db.collections.fragment.University;
+import com.shampan.db.collections.fragment.Website;
 import com.shampan.db.collections.fragment.WorkPlace;
 import java.util.ArrayList;
 import java.util.List;
@@ -110,8 +113,8 @@ public class BasicProfileModel {
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
         Document pQuery = new Document();
         pQuery.put("basicInfo", "$all");
-        BasicProfileDAO familyRelations = mongoCollection.find(selectQuery).projection(pQuery).first();
-        return familyRelations;
+        BasicProfileDAO basicInfo = mongoCollection.find(selectQuery).projection(pQuery).first();
+        return basicInfo;
     }
 
     public BasicProfileDAO getPlaces(String userId) {
@@ -226,51 +229,53 @@ public class BasicProfileModel {
         return response;
     }
 
-    public String addMobilePhone(String userId, String additionalData) {
+    public String addMobilePhone(String userId, String mobilePhoneInfo) {
         MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
-        Document pQuery = new Document();
-        pQuery.put("basicInfo", "$all");
-        BasicProfileDAO mobilePhoneCursor = mongoCollection.find(selectQuery).projection(pQuery).first();
-        MobilePhone mobilePhone = MobilePhone.getMobilePhone(additionalData);
-        System.out.println(mobilePhone);
-        if (mobilePhone != null) {
-            mobilePhoneCursor.getBasicInfo().getMobilePhones().add(mobilePhone);
-        }
-        System.out.println(mobilePhoneCursor.toString());
-        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", mobilePhoneCursor));
+        MobilePhone mobilePhone = MobilePhone.getMobilePhone(mobilePhoneInfo);
+        BasicProfileDAO result1 = mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("basicInfo.mobilePhones", JSON.parse(mobilePhone.toString()))));
         String response = "successful";
         return response;
     }
 
-    public String addAddress(String userId, String additionalData) {
-
-        return null;
+    public String addAddress(String userId, String addressInfo) {
+         MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        Address address = Address.getAddress(addressInfo);
+        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("basicInfo.addresses", JSON.parse(address.toString()))));
+        String response = "successful";
+        return response;
     }
 
-    public String addWebsite(String userId, String additionalData) {
-
-        return null;
+    public String addWebsite(String userId, String websiteInfo) {
+         MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        Website website = Website.getWebsite(websiteInfo);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("basicInfo.website", JSON.parse(website.toString()))));
+        String response = "successful";
+        return response;
     }
 
     public String addEmail(String userId, String additionalData) {
-
-        return null;
-    }
-
-    public String addRelationshipStatus(String userId, String additionalData) {
         MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
-        BasicInfo relation = BasicInfo.getBasicInfo(additionalData);
-        Document pQuery = new Document();
-        pQuery.put("basicInfo", "$all");
-        BasicProfileDAO basicInfo = mongoCollection.find(selectQuery).projection(pQuery).first();
-        basicInfo.getBasicInfo().setRelationshipStatus(additionalData);
-        System.out.println(basicInfo);
-        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", basicInfo));
-//        BasicProfileDAO result1 = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("basicInfo.relationshipStatus",JSON.parse(relation.toString()))));
+        Email email = Email.getEmail(additionalData);
+        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("basicInfo.emails", JSON.parse(email.toString()))));
+        String response = "successful";
+        return response;
+    }
+
+    public String addRelationshipStatus(String userId, String relationshipStatus) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+//        String status = BasicInfo.getBasicInfo(relationShipStatus).getRelationshipStatus();
+
+        BasicProfileDAO basicProflieDAO = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("basicInfo.relationshipStatus", relationshipStatus)));
         String response = "successful";
         return response;
     }
@@ -402,10 +407,14 @@ public class BasicProfileModel {
         currentCity.setCountry(country);
         Town homeTown = new Town();
         homeTown.setTownName("Gazipur");
-        BasicInfo relation = new BasicInfo();
-        relation.setRelationshipStatus("Married");
         MobilePhone mPhone = new MobilePhone();
-        mPhone.setPhone("01723598606");
+        mPhone.setPhone("01720270651");
+        Email email = new Email();
+        email.setEmail("rashida57pust@gmail.com");
+         Website website = new Website();
+        website.setWebsite("sampan-it.com");
+//        System.out.println(relation.getRelationshipStatus());
+//        System.out.println(relation.toString());
 //        homeTown.setCountry(country);
 
 //        workPlace.append("time_period", "20-01-15");
@@ -413,11 +422,14 @@ public class BasicProfileModel {
         BasicProfileModel ob = new BasicProfileModel();
 //        ob.getOverview(userId);
 //        System.out.println(ob.getFamilyRelation(userId));
-//        String homeTown1 = ob.addRelationshipStatus(userId, relation.toString());
-        String mphone1 = ob.addMobilePhone(userId, mPhone.toString());
+//        String homeTown1 = ob.addRelationshipStatus(userId, relation.getRelationshipStatus());
+//        String mphone1 = ob.addMobilePhone(userId, mPhone.toString());
 //        String workEducation = ob.addHomeTown(userId, homeTown.toString());
-
+//        String email1 = ob.addEmail(userId, email.toString());
+//        BasicProfileDAO basicInfo = ob.getContactBasicInfo(userId);
+//         System.out.println(basicInfo.toString());
 //        String workEducation1 = ob.addWorkPlace(userId, workPlace.toString());
+        String website1 = ob.addWebsite(userId, website.toString());
 //        System.out.println(workEducation1);
 //        System.out.println(workEducation.toString());
 //        ob.updateBasicProfile(userId, document);

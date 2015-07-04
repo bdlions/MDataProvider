@@ -10,7 +10,9 @@ import com.shampan.db.DBConnection;
 import com.shampan.db.collections.BasicProfileDAO;
 import com.shampan.db.collections.CountriesDAO;
 import com.shampan.db.collections.builder.BasicProfileDAOBuilder;
+import com.shampan.db.collections.fragment.Address;
 import com.shampan.db.collections.fragment.BasicInfo;
+import com.shampan.db.collections.fragment.BirthDate;
 import com.shampan.db.collections.fragment.City;
 import com.shampan.db.collections.fragment.College;
 import com.shampan.db.collections.fragment.Email;
@@ -23,6 +25,7 @@ import com.shampan.db.collections.fragment.Religion;
 import com.shampan.db.collections.fragment.School;
 import com.shampan.db.collections.fragment.Town;
 import com.shampan.db.collections.fragment.University;
+import com.shampan.db.collections.fragment.Website;
 import com.shampan.db.collections.fragment.WorkPlace;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,11 +72,25 @@ public class BasicProfileServiceTest {
          DBConnection.getInstance().getConnection();
         MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
-        
-          CountriesDAO country =new CountriesDAO();
+          
+        Website website = new Website();
+        website.setWebsite("sampan-it");
+        CountriesDAO country =new CountriesDAO();
         country.setCode("012");
         country.setTitle("Australia");
         
+        Address address = new Address();
+        address.setAddress("Kapasia,Ranigong");
+        address.setCity("Dhaka");
+        address.setPostCode("025");
+        address.setZip("Niketon");
+        List<Address> addressList = new ArrayList<Address>();
+        addressList.add(address);
+        
+        BirthDate birthDate = new BirthDate();
+        birthDate.setBirthDay("04");
+        birthDate.setBirthMonth("11");
+        birthDate.setBirthYear("1991");
         Gender gender = new Gender();
         gender.setId("1");
         gender.setTitle("Female");
@@ -110,12 +127,8 @@ public class BasicProfileServiceTest {
         email.setEmail("rashida57pust@gmail.com");
         emailList.add(email);
         
+        
         BasicInfo basicInfo = new BasicInfo();
-        basicInfo.setBirthDay("19");
-        basicInfo.setBirthMonth("6");
-        basicInfo.setBirthYear("1991");
-        basicInfo.setWebsite("Sampan-it");
-        basicInfo.setRelationshipStatus("Single");
         basicInfo.setGender(gender);
         basicInfo.setMobilePhones(mPhoneList);
         basicInfo.setEmails(emailList);
@@ -124,6 +137,7 @@ public class BasicProfileServiceTest {
         basicInfo.setFamilyMember(fMemberList);
         basicInfo.setReligions(religion);
         basicInfo.setLanguage(languageList);
+        basicInfo.setAddresses(addressList);
 
         List<WorkPlace> workPlaceList = new ArrayList<WorkPlace>();
         WorkPlace workPlace = new WorkPlace();
@@ -173,5 +187,9 @@ public class BasicProfileServiceTest {
                 .build();
 
         System.out.print(userProfileInfo);
+
+//.......insert basic profile info............................................
+        mongoCollection.insertOne(userProfileInfo);
+
     }
 }

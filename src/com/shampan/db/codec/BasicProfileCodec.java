@@ -32,6 +32,7 @@ public class BasicProfileCodec implements CollectibleCodec<BasicProfileDAO> {
     public BasicProfileDAO decode(BsonReader reader, DecoderContext decoderContext) {
         Document document = documentCodec.decode(reader, decoderContext);
         ObjectMapper mapper = new ObjectMapper();
+//        mapper.configure(Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
         BasicProfileDAO basicProfile = new BasicProfileDAO();
         try {
             basicProfile = mapper.readValue(document.toJson().toString(), BasicProfileDAO.class);

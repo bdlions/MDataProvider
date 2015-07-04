@@ -16,14 +16,12 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BasicInfo {
 
-    private String website;
-    private String birthDay;
-    private String birthMonth;
-    private String birthYear;
+    private Website website;
+    private BirthDate birthDate;
     private Gender gender;
     private City city;
     private Town town;
-    private String relationshipStatus;
+    private RelationStatus relationshipStatus;
     private List<MobilePhone> mobilePhones;
     private List<OtherPhone> otherPhones;
     private List<Email> emails;
@@ -32,14 +30,37 @@ public class BasicInfo {
     private List<FamilyMember> familyMember;
     private List<Language> language;
 
+    public RelationStatus getRelationshipStatus() {
+        return relationshipStatus;
+    }
+
+    public void setRelationshipStatus(RelationStatus relationshipStatus) {
+        this.relationshipStatus = relationshipStatus;
+    }
+
+    public BirthDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(BirthDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
     public List<Language> getLanguage() {
         return language;
+    }
+
+    public Website getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(Website website) {
+        this.website = website;
     }
 
     public void setLanguage(List<Language> language) {
         this.language = language;
     }
-
 
     public List<FamilyMember> getFamilyMember() {
         return familyMember;
@@ -55,16 +76,6 @@ public class BasicInfo {
 
     public void setFamilyMember(List<FamilyMember> familyMember) {
         this.familyMember = familyMember;
-    }
-
-  
-
-    public String getRelationshipStatus() {
-        return relationshipStatus;
-    }
-
-    public void setRelationshipStatus(String relationshipStatus) {
-        this.relationshipStatus = relationshipStatus;
     }
 
     public City getCity() {
@@ -123,39 +134,6 @@ public class BasicInfo {
         this.addresses = addresses;
     }
 
- 
-    public String getWebsite() {
-        return website;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
-    public String getBirthDay() {
-        return birthDay;
-    }
-
-    public void setBirthDay(String birthDay) {
-        this.birthDay = birthDay;
-    }
-
-    public String getBirthMonth() {
-        return birthMonth;
-    }
-
-    public void setBirthMonth(String birthMonth) {
-        this.birthMonth = birthMonth;
-    }
-
-    public String getBirthYear() {
-        return birthYear;
-    }
-
-    public void setBirthYear(String birthYear) {
-        this.birthYear = birthYear;
-    }
-
     @Override
     public String toString() {
         ObjectMapper mapper = new ObjectMapper();
@@ -167,7 +145,8 @@ public class BasicInfo {
         }
         return json;
     }
-     public static BasicInfo getBasicInfo(String jsonContent) {
+
+    public static BasicInfo getBasicInfo(String jsonContent) {
         BasicInfo basicInfo = null;
         try {
             ObjectMapper mapper = new ObjectMapper();

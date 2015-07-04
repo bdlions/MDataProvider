@@ -12,7 +12,9 @@ import com.mongodb.client.MongoCursor;
 import com.shampan.db.collections.BasicProfileDAO;
 import com.shampan.db.collections.CountriesDAO;
 import com.shampan.db.collections.builder.BasicProfileDAOBuilder;
+import com.shampan.db.collections.fragment.Address;
 import com.shampan.db.collections.fragment.BasicInfo;
+import com.shampan.db.collections.fragment.BirthDate;
 import com.shampan.db.collections.fragment.College;
 import com.shampan.db.collections.fragment.Email;
 import com.shampan.db.collections.fragment.PSkill;
@@ -25,7 +27,12 @@ import com.shampan.db.collections.fragment.Town;
 import com.shampan.db.collections.fragment.MobilePhone;
 import com.shampan.db.collections.fragment.FamilyMember;
 import com.shampan.db.collections.fragment.Language;
+import com.shampan.db.collections.fragment.RelationStatus;
 import com.shampan.db.collections.fragment.Religion;
+import com.shampan.db.collections.fragment.Website;
+
+
+
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
@@ -80,9 +87,26 @@ public class DBConnecitonTest {
 //        workPlace2.setCity("Dhaka");
 //        workPlaceList2.add(workPlace);
 //        workPlaceList2.add(workPlace2);
+        
+        
+        BirthDate birthDate = new BirthDate();
+        birthDate.setBirthDay("04");
+        birthDate.setBirthMonth("11");
+        birthDate.setBirthYear("1991");
+        
+        Website website = new Website();
+        website.setWebsite("sampan-it");
         CountriesDAO country =new CountriesDAO();
         country.setCode("012");
         country.setTitle("Australia");
+        
+        Address address = new Address();
+        address.setAddress("Kapasia,Ranigong");
+        address.setCity("Dhaka");
+        address.setPostCode("025");
+        address.setZip("Niketon");
+        List<Address> addressList = new ArrayList<Address>();
+        addressList.add(address);
         
         Gender gender = new Gender();
         gender.setId("1");
@@ -119,13 +143,12 @@ public class DBConnecitonTest {
         Email email = new Email();
         email.setEmail("rashida57pust@gmail.com");
         emailList.add(email);
+        RelationStatus relationStatus = new RelationStatus();
+        relationStatus.setRelationshipStatus("Single");
+        
         
         BasicInfo basicInfo = new BasicInfo();
-        basicInfo.setBirthDay("19");
-        basicInfo.setBirthMonth("6");
-        basicInfo.setBirthYear("1991");
-        basicInfo.setWebsite("Sampan-it");
-        basicInfo.setRelationshipStatus("Single");
+        basicInfo.setWebsite(website);
         basicInfo.setGender(gender);
         basicInfo.setMobilePhones(mPhoneList);
         basicInfo.setEmails(emailList);
@@ -134,6 +157,9 @@ public class DBConnecitonTest {
         basicInfo.setFamilyMember(fMemberList);
         basicInfo.setReligions(religion);
         basicInfo.setLanguage(languageList);
+        basicInfo.setAddresses(addressList);
+        basicInfo.setBirthDate(birthDate);
+        basicInfo.setRelationshipStatus(relationStatus);
 
         List<WorkPlace> workPlaceList = new ArrayList<WorkPlace>();
         WorkPlace workPlace = new WorkPlace();

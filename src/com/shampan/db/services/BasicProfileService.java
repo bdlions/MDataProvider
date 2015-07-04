@@ -70,24 +70,24 @@ public class BasicProfileService {
         String response = obj.addHomeTown(userId, additionalData);
         return response;
     }
-    public static String addRelationshipStatus(String userId, String additionalData) {
-        String response = obj.addRelationshipStatus(userId, additionalData);
+    public static String addRelationshipStatus(String userId, String relationshipStatus) {
+        String response = obj.addRelationshipStatus(userId, relationshipStatus);
         return response;
     }
-    public static String addMobilePhone(String userId, String additionalData) {
-        String response = obj.addMobilePhone(userId, additionalData);
+    public static String addMobilePhone(String userId, String mobilePhoneInfo) {
+        String response = obj.addMobilePhone(userId, mobilePhoneInfo);
         return response;
     }
-    public static String addAddress(String userId, String additionalData) {
-        String response = obj.addAddress(userId, additionalData);
+    public static String addAddress(String userId, String addressInfo) {
+        String response = obj.addAddress(userId, addressInfo);
         return response;
     }
-    public static String addWebsite(String userId, String additionalData) {
-        String response = obj.addWebsite(userId, additionalData);
+    public static String addWebsite(String userId, String websiteInfo) {
+        String response = obj.addWebsite(userId, websiteInfo);
         return response;
     }
-    public static String addEmail(String userId, String additionalData) {
-        String response = obj.addEmail(userId, additionalData);
+    public static String addEmail(String userId, String emailInfo) {
+        String response = obj.addEmail(userId, emailInfo);
         return response;
     }
 
