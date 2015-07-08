@@ -21,6 +21,7 @@ import com.shampan.db.collections.fragment.Gender;
 import com.shampan.db.collections.fragment.Language;
 import com.shampan.db.collections.fragment.MobilePhone;
 import com.shampan.db.collections.fragment.PSkill;
+import com.shampan.db.collections.fragment.RelationStatus;
 import com.shampan.db.collections.fragment.Religion;
 import com.shampan.db.collections.fragment.School;
 import com.shampan.db.collections.fragment.Town;
@@ -41,22 +42,22 @@ import static org.junit.Assert.*;
  * @author Sampan-IT
  */
 public class BasicProfileServiceTest {
-    
+
     public BasicProfileServiceTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -66,35 +67,33 @@ public class BasicProfileServiceTest {
     //
     // @Test
     // public void hello() {}
-    
     @Test
-    public void main(){
-         DBConnection.getInstance().getConnection();
+    public void main() {
+        DBConnection.getInstance().getConnection();
         MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
-          
+
+        BirthDate birthDate = new BirthDate();
+        birthDate.setBirthDay("04");
+        birthDate.setBirthMonth("11");
+        birthDate.setBirthYear("1991");
+
         Website website = new Website();
         website.setWebsite("sampan-it");
-        CountriesDAO country =new CountriesDAO();
+        CountriesDAO country = new CountriesDAO();
         country.setCode("012");
         country.setTitle("Australia");
-        
+
         Address address = new Address();
         address.setAddress("Kapasia,Ranigong");
         address.setCity("Dhaka");
         address.setPostCode("025");
         address.setZip("Niketon");
-        List<Address> addressList = new ArrayList<Address>();
-        addressList.add(address);
-        
-        BirthDate birthDate = new BirthDate();
-        birthDate.setBirthDay("04");
-        birthDate.setBirthMonth("11");
-        birthDate.setBirthYear("1991");
+
         Gender gender = new Gender();
         gender.setId("1");
         gender.setTitle("Female");
-        
+
         City currentCity = new City();
         currentCity.setCityName("Sydney");
         currentCity.setCountry(country);
@@ -105,7 +104,7 @@ public class BasicProfileServiceTest {
         language.setLanguage("Bangla");
         List<Language> languageList = new ArrayList<Language>();
         languageList.add(language);
-        
+
         Town homeTown = new Town();
         homeTown.setTownName("Dhaka");
         homeTown.setCountry(country);
@@ -114,7 +113,7 @@ public class BasicProfileServiceTest {
         fMember.setRelation("Best Friend");
         List<FamilyMember> fMemberList = new ArrayList<FamilyMember>();
         fMemberList.add(fMember);
-        
+
         List<MobilePhone> mPhoneList = new ArrayList<MobilePhone>();
         MobilePhone mPhone = new MobilePhone();
         mPhone.setPhone("01723598606");
@@ -126,9 +125,11 @@ public class BasicProfileServiceTest {
         Email email = new Email();
         email.setEmail("rashida57pust@gmail.com");
         emailList.add(email);
-        
-        
+        RelationStatus relationStatus = new RelationStatus();
+        relationStatus.setRelationshipStatus("Single");
+
         BasicInfo basicInfo = new BasicInfo();
+        basicInfo.setWebsite(website);
         basicInfo.setGender(gender);
         basicInfo.setMobilePhones(mPhoneList);
         basicInfo.setEmails(emailList);
@@ -137,7 +138,9 @@ public class BasicProfileServiceTest {
         basicInfo.setFamilyMember(fMemberList);
         basicInfo.setReligions(religion);
         basicInfo.setLanguage(languageList);
-        basicInfo.setAddresses(addressList);
+        basicInfo.setAddresses(address);
+        basicInfo.setBirthDate(birthDate);
+        basicInfo.setRelationshipStatus(relationStatus);
 
         List<WorkPlace> workPlaceList = new ArrayList<WorkPlace>();
         WorkPlace workPlace = new WorkPlace();
@@ -146,12 +149,12 @@ public class BasicProfileServiceTest {
         workPlace.setDescription("Nothing to say");
         workPlace.setCity("Dhaka");
         workPlaceList.add(workPlace);
-        
-        List<PSkill>pSkillList = new ArrayList<PSkill>();
+
+        List<PSkill> pSkillList = new ArrayList<PSkill>();
         PSkill pSkill = new PSkill();
         pSkill.setpSkill("Software Engineer at NASA");
         pSkillList.add(pSkill);
-        
+
         List<University> universityList = new ArrayList<University>();
         University university = new University();
         university.setUniversity("Sydney University");
@@ -159,23 +162,23 @@ public class BasicProfileServiceTest {
         university.setStartDate("04-11-15");
         university.setEndDate("04-11-19");
         universityList.add(university);
-        
-        List<College>collegeList = new ArrayList<College>();
+
+        List<College> collegeList = new ArrayList<College>();
         College college = new College();
         college.setCollege("Cambridge College");
         college.setDescription("I was very Shy in my college Life");
         college.setStartDate("04-11-07");
         college.setEndDate("04-11-09");
         collegeList.add(college);
-        
-        List<School>schoolList = new ArrayList<School>();
+
+        List<School> schoolList = new ArrayList<School>();
         School school = new School();
         school.setSchool("Ranigong high School");
         school.setDescription("got some best friends");
         school.setStartDate("04-11-2002");
         school.setEndDate("04-11-2007");
         schoolList.add(school);
-        
+
         BasicProfileDAO userProfileInfo = new BasicProfileDAOBuilder()
                 .setUserId("100157")
                 .setBasicInfo(basicInfo)
