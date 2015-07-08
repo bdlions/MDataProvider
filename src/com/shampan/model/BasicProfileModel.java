@@ -20,6 +20,7 @@ import com.shampan.db.collections.CountriesDAO;
 import com.shampan.db.collections.builder.BasicProfileDAOBuilder;
 import com.shampan.db.collections.fragment.Address;
 import com.shampan.db.collections.fragment.BasicInfo;
+import com.shampan.db.collections.fragment.BirthDate;
 import com.shampan.db.collections.fragment.City;
 import com.shampan.db.collections.fragment.College;
 import com.shampan.db.collections.fragment.Email;
@@ -30,6 +31,7 @@ import com.shampan.db.collections.fragment.Town;
 import com.shampan.db.collections.fragment.University;
 import com.shampan.db.collections.fragment.Website;
 import com.shampan.db.collections.fragment.WorkPlace;
+import com.shampan.util.LogWriter;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
@@ -51,23 +53,57 @@ public class BasicProfileModel {
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
         Document pQuery = new Document();
         pQuery.put("workPlaces", "$all");
-        pQuery.put("pSkills", "$all");
         pQuery.put("universities", "$all");
-        pQuery.put("colleges", "$all");
-        pQuery.put("schools", "$all");
-        pQuery.put("basicInfo", "$all");
-        BasicProfileDAO overviewCursor = mongoCollection.find(selectQuery).projection(pQuery).first();
-        int size = overviewCursor.getWorkPlaces().size();
-        int size1 = overviewCursor.getUniversities().size();
-        WorkPlace lastWork = overviewCursor.getWorkPlaces().get(size - 1);
-        University lastUniversity = overviewCursor.getUniversities().get(size1 - 1);
-        System.out.println(lastWork.toString());
-        System.out.println(lastUniversity.toString());
-        JSONObject json = new JSONObject();
-        json.put("workPlace", lastWork);
-        json.put("University", lastUniversity);
-        //System.out.println(json.toString());
-        return json.toString();
+        pQuery.put("basicInfo.mobilePhones", "$all");
+        pQuery.put("basicInfo.emails", "$all");
+        pQuery.put("basicInfo.city", "$all");
+        pQuery.put("basicInfo.addresses", "$all");
+        pQuery.put("basicInfo.birthDate", "$all");
+        pQuery.put("basicInfo.website", "$all");
+        BasicProfileDAO overview = mongoCollection.find(selectQuery).projection(pQuery).first();
+        JSONObject overviewJson = new JSONObject();
+        try {
+            if (overview.getWorkPlaces() != null) {
+                int workPlaceSize = overview.getWorkPlaces().size();
+                WorkPlace lastWork = overview.getWorkPlaces().get(workPlaceSize - 1);
+                overviewJson.put("workPlace", lastWork);
+            }
+            if (overview.getBasicInfo().getMobilePhones() != null) {
+                int mobilePhoneSize = overview.getBasicInfo().getMobilePhones().size();
+                MobilePhone lastMobilePhone = overview.getBasicInfo().getMobilePhones().get(mobilePhoneSize - 1);
+                overviewJson.put("mobilePhone", lastMobilePhone);
+            }
+            if (overview.getUniversities() != null) {
+                int universitySize = overview.getUniversities().size();
+                University lastUniversity = overview.getUniversities().get(universitySize - 1);
+                overviewJson.put("university", lastUniversity);
+            }
+            if (overview.getBasicInfo().getEmails() != null) {
+                int emailSize = overview.getBasicInfo().getEmails().size();
+                Email lastEmail = overview.getBasicInfo().getEmails().get(emailSize - 1);
+                overviewJson.put("email", lastEmail);
+            }
+            if (overview.getBasicInfo().getBirthDate() != null) {
+                BirthDate birthday = overview.getBasicInfo().getBirthDate();
+                overviewJson.put("birthDate", birthday);
+            }
+            if (overview.getBasicInfo().getCity() != null) {
+                City city = overview.getBasicInfo().getCity();
+                overviewJson.put("city", city);
+            }
+            if (overview.getBasicInfo().getWebsite() != null) {
+                Website website = overview.getBasicInfo().getWebsite();
+                overviewJson.put("website", website);
+            }
+            if (overview.getBasicInfo().getAddresses() != null) {
+                Address address = overview.getBasicInfo().getAddresses();
+                overviewJson.put("address", address);
+            }
+        } catch (NullPointerException npe) {
+            LogWriter.getErrorLog().error(npe);
+        }
+
+        return overviewJson.toString();
 
     }
 
@@ -133,14 +169,17 @@ public class BasicProfileModel {
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
         Document pQuery = new Document();
         pQuery.put("workPlaces", "$all");
-        BasicProfileDAO workPlaceCursor = mongoCollection.find(selectQuery).projection(pQuery).first();
+        BasicProfileDAO workPlaces = mongoCollection.find(selectQuery).projection(pQuery).first();
         WorkPlace workPlace = WorkPlace.getWorkPlace(additionalData);
-        System.out.println(workPlace);
-        if (workPlace != null) {
-            workPlaceCursor.getWorkPlaces().add(workPlace);
+        try {
+            if (workPlace != null) {
+                workPlaces.getWorkPlaces().add(workPlace);
+            }
+        } catch (NullPointerException npe) {
+            LogWriter.getErrorLog().error(npe);
         }
-
-        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", workPlace));
+        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", workPlaces));
+        System.out.println(result);
         String response = "successful";
         return response;
     }
@@ -240,17 +279,17 @@ public class BasicProfileModel {
     }
 
     public String addAddress(String userId, String addressInfo) {
-         MongoCollection<BasicProfileDAO> mongoCollection
+        MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
         Address address = Address.getAddress(addressInfo);
-        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("basicInfo.addresses", JSON.parse(address.toString()))));
+        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("basicInfo.addresses", JSON.parse(address.toString()))));
         String response = "successful";
         return response;
     }
 
     public String addWebsite(String userId, String websiteInfo) {
-         MongoCollection<BasicProfileDAO> mongoCollection
+        MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
         Website website = Website.getWebsite(websiteInfo);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
@@ -273,8 +312,6 @@ public class BasicProfileModel {
         MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
-//        String status = BasicInfo.getBasicInfo(relationShipStatus).getRelationshipStatus();
-
         BasicProfileDAO basicProflieDAO = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("basicInfo.relationshipStatus", relationshipStatus)));
         String response = "successful";
         return response;
@@ -411,8 +448,13 @@ public class BasicProfileModel {
         mPhone.setPhone("01720270651");
         Email email = new Email();
         email.setEmail("rashida57pust@gmail.com");
-         Website website = new Website();
-        website.setWebsite("sampan-it.com");
+        Website website = new Website();
+        website.setWebsite("sampit.com");
+        Address address = new Address();
+        address.setAddress("Niketon ");
+        address.setCity("Dhaka");
+        address.setPostCode("025");
+        address.setZip("Niketon");
 //        System.out.println(relation.getRelationshipStatus());
 //        System.out.println(relation.toString());
 //        homeTown.setCountry(country);
@@ -422,13 +464,15 @@ public class BasicProfileModel {
         BasicProfileModel ob = new BasicProfileModel();
 //        ob.getOverview(userId);
 //        System.out.println(ob.getFamilyRelation(userId));
+//        System.out.println(ob.getOverview(userId));
 //        String homeTown1 = ob.addRelationshipStatus(userId, relation.getRelationshipStatus());
 //        String mphone1 = ob.addMobilePhone(userId, mPhone.toString());
+//        String address1 = ob.addAddress(userId, address.toString());
 //        String workEducation = ob.addHomeTown(userId, homeTown.toString());
 //        String email1 = ob.addEmail(userId, email.toString());
 //        BasicProfileDAO basicInfo = ob.getContactBasicInfo(userId);
 //         System.out.println(basicInfo.toString());
-//        String workEducation1 = ob.addWorkPlace(userId, workPlace.toString());
+//        String workEducation1 = ob.addWorkPlace(userId, workPlace.toJson());
         String website1 = ob.addWebsite(userId, website.toString());
 //        System.out.println(workEducation1);
 //        System.out.println(workEducation.toString());

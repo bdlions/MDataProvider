@@ -17,6 +17,7 @@ import com.shampan.db.collections.fragment.PSkill;
 import com.shampan.db.collections.fragment.School;
 import com.shampan.db.collections.fragment.University;
 import com.shampan.db.collections.fragment.WorkPlace;
+import java.util.ArrayList;
 import java.util.List;
 
 /**

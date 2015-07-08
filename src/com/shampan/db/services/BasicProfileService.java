@@ -15,7 +15,11 @@ import com.shampan.model.BasicProfileModel;
 public class BasicProfileService {
 
     private static BasicProfileModel obj = new BasicProfileModel();
-
+    
+    public static String getOverview(String userId) {
+        String overview = obj.getOverview(userId);
+        return overview;
+    }
     public static String getWorksEducation(String userId) {
         BasicProfileDAO worksEducation = obj.getWorksAndEducation(userId);
         return worksEducation.toString();
@@ -51,7 +55,6 @@ public class BasicProfileService {
     }
 
     public static String addCollege(String userId, String additionalData) {
-        BasicProfileModel obj = new BasicProfileModel();
         String response = obj.addCollege(userId, additionalData);
         return response;
     }
@@ -89,13 +92,6 @@ public class BasicProfileService {
     public static String addEmail(String userId, String emailInfo) {
         String response = obj.addEmail(userId, emailInfo);
         return response;
-    }
-
-    public static String getOverview(String userId) {
-        String overViewPage = obj.getOverview(userId);
-        BasicProfileDAO workPlaces = obj.getWorkPlaces(userId);
-        BasicProfileDAO universities = obj.getWorkPlaces(userId);
-        return overViewPage;
     }
 
 }
