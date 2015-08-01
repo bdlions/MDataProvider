@@ -35,7 +35,12 @@ public class BasicProfileDAO implements Bson {
     private List<University> universities;
     private List<College> colleges;
     private List<School> schools;
-
+    public BasicProfileDAO()
+    {
+        _id = "";
+        userId = "";
+        workPlaces = new ArrayList<>();
+    }
     public List<PSkill> getpSkills() {
         return pSkills;
     }

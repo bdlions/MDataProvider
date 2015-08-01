@@ -11,20 +11,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  * @author Sampan-IT
  */
-public class Website {
+public class About {
+    private String about;
 
-    private String website;
-
-    public String getWebsite() {
-        return website;
+    public String getAbout() {
+        return about;
     }
 
-    public void setWebsite(String website) {
-        this.website = website;
+    public void setAbout(String about) {
+        this.about = about;
     }
-
-    @Override
-    public String toString() {
+    
+     public String toString() {
         ObjectMapper mapper = new ObjectMapper();
         String json = "";
         try {
@@ -35,15 +33,14 @@ public class Website {
         return json;
     }
 
-    public static Website getWebsite(String jsonContent) {
-        Website websites = null;
+    public static About getAbout(String jsonContent) {
+        About about = null;
         try {
             ObjectMapper mapper = new ObjectMapper();
-            websites = mapper.readValue(jsonContent, Website.class);
+            about = mapper.readValue(jsonContent, About.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return websites;
+        return about;
     }
-
 }

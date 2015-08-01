@@ -12,6 +12,7 @@ import com.mongodb.client.MongoCursor;
 import com.shampan.db.collections.BasicProfileDAO;
 import com.shampan.db.collections.CountriesDAO;
 import com.shampan.db.collections.builder.BasicProfileDAOBuilder;
+import com.shampan.db.collections.fragment.About;
 import com.shampan.db.collections.fragment.Address;
 import com.shampan.db.collections.fragment.BasicInfo;
 import com.shampan.db.collections.fragment.BirthDate;
@@ -26,6 +27,7 @@ import com.shampan.db.collections.fragment.City;
 import com.shampan.db.collections.fragment.Town;
 import com.shampan.db.collections.fragment.MobilePhone;
 import com.shampan.db.collections.fragment.FamilyMember;
+import com.shampan.db.collections.fragment.FavouriteQuote;
 import com.shampan.db.collections.fragment.Language;
 import com.shampan.db.collections.fragment.RelationStatus;
 import com.shampan.db.collections.fragment.Religion;
@@ -86,9 +88,16 @@ public class DBConnecitonTest {
 //        workPlace2.setDescription("Going to be a mad");
 //        workPlace2.setCity("Dhaka");
 //        workPlaceList2.add(workPlace);
-//        workPlaceList2.add(workPlace2);
+//        workPlaceList2.add(workPlace2);\
         
         
+        
+        
+        
+        About about = new About();
+        about.setAbout(" honest,very simple,very careful about dearest persons ");
+        FavouriteQuote fQuote = new FavouriteQuote();
+        fQuote.setfQuote("khachar fake fake...porose mukhe mukhe...nirobe chokhe chokhe chae..");
         BirthDate birthDate = new BirthDate();
         birthDate.setBirthDay("04");
         birthDate.setBirthMonth("11");
@@ -104,9 +113,7 @@ public class DBConnecitonTest {
         address.setAddress("Kapasia,Ranigong");
         address.setCity("Dhaka");
         address.setPostCode("025");
-        address.setZip("Niketon");
-        List<Address> addressList = new ArrayList<Address>();
-        addressList.add(address);
+        address.setZip("Ranigong");
         
         Gender gender = new Gender();
         gender.setId("1");
@@ -157,9 +164,11 @@ public class DBConnecitonTest {
         basicInfo.setFamilyMember(fMemberList);
         basicInfo.setReligions(religion);
         basicInfo.setLanguage(languageList);
-        basicInfo.setAddresses(addressList);
+        basicInfo.setAddresses(address);
         basicInfo.setBirthDate(birthDate);
         basicInfo.setRelationshipStatus(relationStatus);
+        basicInfo.setAbout(about);
+        basicInfo.setfQuote(fQuote);
 
         List<WorkPlace> workPlaceList = new ArrayList<WorkPlace>();
         WorkPlace workPlace = new WorkPlace();

@@ -18,12 +18,14 @@ import com.shampan.db.DBConnection;
 import com.shampan.db.collections.BasicProfileDAO;
 import com.shampan.db.collections.CountriesDAO;
 import com.shampan.db.collections.builder.BasicProfileDAOBuilder;
+import com.shampan.db.collections.fragment.About;
 import com.shampan.db.collections.fragment.Address;
 import com.shampan.db.collections.fragment.BasicInfo;
 import com.shampan.db.collections.fragment.BirthDate;
 import com.shampan.db.collections.fragment.City;
 import com.shampan.db.collections.fragment.College;
 import com.shampan.db.collections.fragment.Email;
+import com.shampan.db.collections.fragment.FavouriteQuote;
 import com.shampan.db.collections.fragment.MobilePhone;
 import com.shampan.db.collections.fragment.PSkill;
 import com.shampan.db.collections.fragment.School;
@@ -179,7 +181,6 @@ public class BasicProfileModel {
             LogWriter.getErrorLog().error(npe);
         }
         BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", workPlaces));
-        System.out.println(result);
         String response = "successful";
         return response;
     }
@@ -291,9 +292,15 @@ public class BasicProfileModel {
     public String addWebsite(String userId, String websiteInfo) {
         MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
-        Website website = Website.getWebsite(websiteInfo);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
-        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("basicInfo.website", JSON.parse(website.toString()))));
+        try {
+            if (websiteInfo != null) {
+                Website website = Website.getWebsite(websiteInfo);
+                BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("basicInfo.website", JSON.parse(website.toString()))));
+            }
+        } catch (NullPointerException npe) {
+            LogWriter.getErrorLog().error("null value exception");
+        }
         String response = "successful";
         return response;
     }
@@ -313,6 +320,37 @@ public class BasicProfileModel {
                 = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
         BasicProfileDAO basicProflieDAO = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("basicInfo.relationshipStatus", relationshipStatus)));
+        String response = "successful";
+        return response;
+    }
+
+    public String addFabouriteQuote(String userId, String favouriteQuoteInfo) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        try {
+            if (favouriteQuoteInfo != null) {
+                FavouriteQuote fQuote = FavouriteQuote.getFavouriteQuote(favouriteQuoteInfo);
+                BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("basicInfo.fQuote", JSON.parse(fQuote.toString()))));
+            }
+        } catch (NullPointerException npe) {
+            LogWriter.getErrorLog().error("null value exception");
+        }
+        String response = "successful";
+        return response;
+    }
+    public String addAbout(String userId, String aboutInfo) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        try {
+            if (aboutInfo != null) {
+                About about = About.getAbout(aboutInfo);
+                BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("basicInfo.about", JSON.parse(about.toString()))));
+            }
+        } catch (NullPointerException npe) {
+            LogWriter.getErrorLog().error("null value exception");
+        }
         String response = "successful";
         return response;
     }
@@ -455,6 +493,10 @@ public class BasicProfileModel {
         address.setCity("Dhaka");
         address.setPostCode("025");
         address.setZip("Niketon");
+        About about = new About();
+        about.setAbout(" honest,very simple,very careful about dearest persons,always cool ");
+        FavouriteQuote fQuote = new FavouriteQuote();
+        fQuote.setfQuote("khachar fake fake...porose mukhe mukhe...nirobe chokhe chokhe chae");
 //        System.out.println(relation.getRelationshipStatus());
 //        System.out.println(relation.toString());
 //        homeTown.setCountry(country);
@@ -472,8 +514,10 @@ public class BasicProfileModel {
 //        String email1 = ob.addEmail(userId, email.toString());
 //        BasicProfileDAO basicInfo = ob.getContactBasicInfo(userId);
 //         System.out.println(basicInfo.toString());
+//        System.out.println(ob.addFabouriteQuote(userId, fQuote.toString()));
+//        System.out.println(ob.addAbout(userId, about.toString()));
 //        String workEducation1 = ob.addWorkPlace(userId, workPlace.toJson());
-        String website1 = ob.addWebsite(userId, website.toString());
+//        String website1 = ob.addWebsite(userId, website.toString());
 //        System.out.println(workEducation1);
 //        System.out.println(workEducation.toString());
 //        ob.updateBasicProfile(userId, document);

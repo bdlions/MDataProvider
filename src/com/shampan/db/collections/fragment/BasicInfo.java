@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package com.shampan.db.collections.fragment;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
@@ -21,15 +20,31 @@ public class BasicInfo {
     private Gender gender;
     private City city;
     private Town town;
+    private Address addresses;
     private RelationStatus relationshipStatus;
     private List<MobilePhone> mobilePhones;
     private List<OtherPhone> otherPhones;
     private List<Email> emails;
-    private List<Address> addresses;
+    private About about;
+    private FavouriteQuote fQuote;
     private Religion religions;
     private List<FamilyMember> familyMember;
     private List<Language> language;
+    public About getAbout() {
+        return about;
+    }
 
+    public void setAbout(About about) {
+        this.about = about;
+    }
+
+    public FavouriteQuote getfQuote() {
+        return fQuote;
+    }
+
+    public void setfQuote(FavouriteQuote fQuote) {
+        this.fQuote = fQuote;
+    }
     public RelationStatus getRelationshipStatus() {
         return relationshipStatus;
     }
@@ -126,11 +141,11 @@ public class BasicInfo {
         this.emails = emails;
     }
 
-    public List<Address> getAddresses() {
+    public Address getAddresses() {
         return addresses;
     }
 
-    public void setAddresses(List<Address> addresses) {
+    public void setAddresses(Address addresses) {
         this.addresses = addresses;
     }
 
