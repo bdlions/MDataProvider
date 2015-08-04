@@ -7,7 +7,8 @@ package com.shampan.db;
 public enum Collections {
     USERS("users"), 
     BASICPROFILE("basic_profiles"), 
-    RELATIONS("relations");
+    RELATIONS("relations"),
+    STATUSES("statuses");
 
     private String name;
 
