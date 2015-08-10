@@ -8,6 +8,7 @@ package com.shampan.db.collections;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shampan.db.collections.fragment.status.Comment;
+import com.shampan.db.collections.fragment.status.Image;
 import com.shampan.db.collections.fragment.status.Like;
 import com.shampan.db.collections.fragment.status.Privacy;
 import com.shampan.db.collections.fragment.status.ReferenceInfo;
@@ -29,11 +30,11 @@ public class StatusDAO implements Bson {
 
     private String _id;
     private String statusId;
-
     private String userId;
     private String mappingId;
     private String statusTypeId;
     private String description;
+    private List<Image> image;
     private String createdOn;
     private String modifiedOn;
     private UserInfo userInfo;
@@ -50,6 +51,14 @@ public class StatusDAO implements Bson {
 
     public void set_id(String _id) {
         this._id = _id;
+    }
+
+    public List<Image> getImage() {
+        return image;
+    }
+
+    public void setImage(List<Image> image) {
+        this.image = image;
     }
 
     public String getStatusId() {

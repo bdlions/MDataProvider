@@ -3,6 +3,7 @@ package com.shampan.model;
 import com.mongodb.BasicDBObject;
 import com.mongodb.QueryBuilder;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.util.JSON;
 import com.shampan.db.Collections;
 import com.shampan.db.DBConnection;
@@ -74,8 +75,6 @@ public class FriendModel {
 
         if (formRelationInfoCursor != null) {
             formRelationInfoCursor.getFriendList().add(toRelation);
-            System.out.println(toRelation);
-            System.out.println(formRelationInfoCursor);
             RelationsDAO result = mongoCollection.findOneAndUpdate(fromSelectQuery, new Document("$set", formRelationInfoCursor));
         } else {
             List<RelationInfo> toRelationsList = new ArrayList<RelationInfo>();
@@ -176,12 +175,15 @@ public class FriendModel {
     public String getFriendList(String userId) {
         MongoCollection<RelationsDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.RELATIONS.toString(), RelationsDAO.class);
-        BasicDBObject SelectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
         Document pQuery = new Document();
         pQuery.put("friendList", "$all");
-        
-//        RelationsDAO result1 = mongoCollection.find(SelectQuery, new Document("$slice", new Document("friendList", [offset,limit])));
-        RelationsDAO friendList = mongoCollection.find(SelectQuery).projection(pQuery).first();
+          RelationsDAO friendList = mongoCollection.find(selectQuery).projection(pQuery).first();
+//        MongoCursor<ReligionsDAO> CursorReligionList = mongoCollection.find().iterator();
+//         MongoCursor<ReligionsDAO> result1 = mongoCollection.find(SelectQuery, new Document("$slice", new Document("friendList", [offset,limit])));
+//         MongoCursor<RelationsDAO> friendList =  (MongoCursor<RelationsDAO>) mongoCollection.find(SelectQuery).projection(pQuery).limit(limit);
+//        System.out.println(friendList);
+                
         return friendList.toString() ;
 
     }
@@ -212,11 +214,15 @@ public class FriendModel {
 
 //        RelationInfo formRelation = new RelationInfo();
 //        formRelation.setUserId("100157");
-//        formRelation.setIsInitiated("0");
+//        formRelation.setFristName("Nazneen");
+//        formRelation.setLastName("Sultana");
+//        formRelation.setIsInitiated("1");
 //        
 //        RelationInfo toRelation = new RelationInfo();
 //        toRelation.setUserId("100105");
-//        toRelation.setIsInitiated("1");
+//        toRelation.setIsInitiated("0");
+//        toRelation.setFristName("Alamgir");
+//        toRelation.setLastName("Kabir");
 //
 //        List<RelationInfo> formRelationsList = new ArrayList<RelationInfo>();
 //        formRelationsList.add(formRelation);
@@ -234,15 +240,15 @@ public class FriendModel {
 //                .setUserId("100105")
 //                .setFriendList(formRelationsList)
 //                .build();
-//
+
 //        System.out.print(formRelationInfo);
 //        System.out.print(toRelationInfo);
-        String userId = "100155";
+        String userId = "100157";
         String friendId = "100106";
         int limit = 3;
         int offset = 0;
         FriendModel ob = new FriendModel();
-        System.out.println(ob.getFriendList(userId));
+//        System.out.println(ob.getFriendList(userId));
         
 //        String friendInfo = ob.addFriend(userId, friendId);
 

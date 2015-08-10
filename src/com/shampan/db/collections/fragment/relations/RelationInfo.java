@@ -7,12 +7,31 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author nazmul hasan
  */
 public class RelationInfo {
+
     private String userId;
+    private String fristName;
+    private String lastName;
     private String isInitiated;
     private String createdOn;
-    public RelationInfo()
-    {
-    
+
+    public RelationInfo() {
+
+    }
+
+    public String getFristName() {
+        return fristName;
+    }
+
+    public void setFristName(String fristName) {
+        this.fristName = fristName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getUserId() {
@@ -38,7 +57,7 @@ public class RelationInfo {
     public void setCreatedOn(String createdOn) {
         this.createdOn = createdOn;
     }
-    
+
     @Override
     public String toString() {
         ObjectMapper mapper = new ObjectMapper();

@@ -5,10 +5,55 @@
  */
 package com.shampan.db.collections.fragment.status;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
+
 /**
  *
  * @author Sampan-IT
  */
 public class Like {
-    
+
+    private int LikeCounter;
+    private UserInfo userInfo;
+
+    public int getLikeCounter() {
+        return LikeCounter;
+    }
+
+    public void setLikeCounter(int LikeCounter) {
+        this.LikeCounter = LikeCounter;
+    }
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
+
+    @Override
+    public String toString() {
+        ObjectMapper mapper = new ObjectMapper();
+        String json = "";
+        try {
+            json = mapper.writeValueAsString(this);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return json;
+    }
+
+    public static Like getStatusLike(String jsonContent) {
+        Like likeInfo = null;
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            likeInfo = mapper.readValue(jsonContent, Like.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return likeInfo;
+    }
+
 }

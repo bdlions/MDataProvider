@@ -6,10 +6,12 @@
 package com.shampan.db.services;
 
 import com.mongodb.client.MongoCollection;
+import com.shampan.db.Collections;
 import com.shampan.db.DBConnection;
 import com.shampan.db.collections.RelationsDAO;
 import com.shampan.db.collections.builder.RelationsDAOBuilder;
 import com.shampan.db.collections.fragment.relations.RelationInfo;
+import com.shampan.model.FriendModel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,21 +22,50 @@ import java.util.List;
 public class RelationServiceTest {
    
     public void main() {
-        DBConnection.getInstance().getConnection();
         MongoCollection<RelationsDAO> mongoCollection
-                = DBConnection.getInstance().getConnection().getCollection("user_profiles", RelationsDAO.class);
+                = DBConnection.getInstance().getConnection().getCollection(Collections.RELATIONS.toString(), RelationsDAO.class);
+                RelationInfo formRelation = new RelationInfo();
+        formRelation.setUserId("100157");
+        formRelation.setFristName("Nazneen");
+        formRelation.setLastName("Sultana");
+        formRelation.setIsInitiated("1");
         
-        RelationInfo relationList = new RelationInfo();
-        relationList.setUserId("100157");
-        relationList.setIsInitiated("1");
-        List<RelationInfo>relationsList = new ArrayList<RelationInfo>();
-        relationsList.add(relationList);
-        RelationsDAO relationInfo = new RelationsDAOBuilder()
+        RelationInfo toRelation = new RelationInfo();
+        toRelation.setUserId("100105");
+        toRelation.setIsInitiated("0");
+        toRelation.setFristName("Alamgir");
+        toRelation.setLastName("Kabir");
+
+        List<RelationInfo> formRelationsList = new ArrayList<RelationInfo>();
+        formRelationsList.add(formRelation);
+        
+        List<RelationInfo> toRelationsList = new ArrayList<RelationInfo>();
+        toRelationsList.add(toRelation);
+
+
+        RelationsDAO formRelationInfo = new RelationsDAOBuilder()
                 .setUserId("100157")
-                .setFriendList(relationsList)
+                .setFriendList(toRelationsList)
                 .build();
 
-        System.out.print(relationInfo);
+        RelationsDAO toRelationInfo = new RelationsDAOBuilder()
+                .setUserId("100105")
+                .setFriendList(formRelationsList)
+                .build();
+
+        System.out.print(formRelationInfo);
+        System.out.print(toRelationInfo);
+        String userId = "100157";
+        String friendId = "100106";
+        int limit = 3;
+        int offset = 0;
+        FriendModel ob = new FriendModel();
+        String friendInfo = ob.addFriend(userId, friendId);
+        System.out.println(ob.getFriendList(userId));
+        
+
+        
+
 
 
     }

@@ -11,28 +11,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  * @author Sampan-IT
  */
-public class Comment {
+public class Image {
+    private String image;
 
-    private String description;
-    private UserInfo userInfo;
-
-    public String getDescription() {
-        return description;
+    public String getImage() {
+        return image;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setImage(String image) {
+        this.image = image;
     }
-
-    public UserInfo getUserInfo() {
-        return userInfo;
-    }
-
-    public void setUserInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
-    }
-
-    @Override
+    
+      @Override
     public String toString() {
         ObjectMapper mapper = new ObjectMapper();
         String json = "";
@@ -44,14 +34,15 @@ public class Comment {
         return json;
     }
 
-    public static Comment getStatusComment(String jsonContent) {
-        Comment commentInfo = null;
+    public static Image getImage(String jsonContent) {
+        Image imageInfo = null;
         try {
             ObjectMapper mapper = new ObjectMapper();
-            commentInfo = mapper.readValue(jsonContent, Comment.class);
+            imageInfo = mapper.readValue(jsonContent, Image.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return commentInfo;
+        return imageInfo;
     }
+
 }
