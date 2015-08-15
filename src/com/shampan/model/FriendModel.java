@@ -178,13 +178,13 @@ public class FriendModel {
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
         Document pQuery = new Document();
         pQuery.put("friendList", "$all");
-          RelationsDAO friendList = mongoCollection.find(selectQuery).projection(pQuery).first();
+        RelationsDAO friendList = mongoCollection.find(selectQuery).projection(pQuery).first();
 //        MongoCursor<ReligionsDAO> CursorReligionList = mongoCollection.find().iterator();
 //         MongoCursor<ReligionsDAO> result1 = mongoCollection.find(SelectQuery, new Document("$slice", new Document("friendList", [offset,limit])));
 //         MongoCursor<RelationsDAO> friendList =  (MongoCursor<RelationsDAO>) mongoCollection.find(SelectQuery).projection(pQuery).limit(limit);
 //        System.out.println(friendList);
-                
-        return friendList.toString() ;
+
+        return friendList.toString();
 
     }
 
@@ -208,6 +208,14 @@ public class FriendModel {
      */
     public void getPendingFriendList(String userId, int offset, int limit) {
 
+    }
+
+    public String shearchFriend() {
+        MongoCollection<RelationsDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.RELATIONS.toString(), RelationsDAO.class);
+
+//        MongoCursor<RelationsDAO> CursorReligionList = mongoCollection.find({"name": /.*m.*/}).iterator();
+        return "success";
     }
 
     public static void main(String[] args) {
@@ -240,7 +248,6 @@ public class FriendModel {
 //                .setUserId("100105")
 //                .setFriendList(formRelationsList)
 //                .build();
-
 //        System.out.print(formRelationInfo);
 //        System.out.print(toRelationInfo);
         String userId = "100157";
@@ -249,8 +256,7 @@ public class FriendModel {
         int offset = 0;
         FriendModel ob = new FriendModel();
 //        System.out.println(ob.getFriendList(userId));
-        
-//        String friendInfo = ob.addFriend(userId, friendId);
 
+//        String friendInfo = ob.addFriend(userId, friendId);
     }
 }

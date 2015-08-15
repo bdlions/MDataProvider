@@ -25,7 +25,6 @@ public class UserDAOBuilder {
     private String firstName;
     private String lastName;
     private String userName;
-    private List workList;
 
     public UserDAOBuilder setFirstName(String firstName) {
         this.firstName = firstName;
@@ -50,10 +49,10 @@ public class UserDAOBuilder {
  
     
     public UserDAO build(){
-        user.setFirst_name(firstName);
-        user.setLast_name(lastName);
         user.set_id(id);
-        user.setUsername(userName);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setUserName(userName);
         return user;
     }
     public UserDAO build(String daoContent){
@@ -65,5 +64,4 @@ public class UserDAOBuilder {
         }
         return user;
     }
-    
 }

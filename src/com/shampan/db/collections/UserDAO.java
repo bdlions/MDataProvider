@@ -21,9 +21,41 @@ import java.util.List;
 public class UserDAO implements Bson {
 
     private String _id;
-    private String first_name;
-    private String last_name;
-    private String username;
+    private String firstName;
+    private String lastName;
+    private String userName;
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     @Override
     public String toString() {
@@ -37,42 +69,9 @@ public class UserDAO implements Bson {
         return json;
     }
 
-    public String get_id() {
-        return _id;
-    }
-
-    public void set_id(String _id) {
-        this._id = _id;
-    }
-
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-   
-
     @Override
     public <C> BsonDocument toBsonDocument(final Class<C> documentClass, final CodecRegistry codecRegistry) {
         return new BsonDocumentWrapper<UserDAO>(this, codecRegistry.get(UserDAO.class));
     }
+
 }

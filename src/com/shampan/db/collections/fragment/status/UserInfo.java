@@ -5,6 +5,9 @@
  */
 package com.shampan.db.collections.fragment.status;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.shampan.db.collections.fragment.WorkPlace;
+
 /**
  *
  * @author Sampan-IT
@@ -38,5 +41,27 @@ public class UserInfo {
         this.lastName = lastName;
     }
     
+     @Override
+    public String toString() {
+        ObjectMapper mapper = new ObjectMapper();
+        String json = "";
+        try {
+            json = mapper.writeValueAsString(this);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return json;
+    }
+
+    public static UserInfo getuserInfo(String jsonContent) {
+        UserInfo userInfo = null;
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            userInfo = mapper.readValue(jsonContent, UserInfo.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return userInfo;
+    }
     
 }
