@@ -157,7 +157,7 @@ public class StatusModel {
 
 //        System.out.println(ob.addStatus(satusInfo.toString()));
 //        System.out.println(ob.deleteStatus(statusId));
-        System.out.println(ob.getStatuses(userId));
+//        System.out.println(ob.getStatuses(userId));
 //        System.out.println(ob.updatesatus(statusId, "The dream comes True to Night"));
 //        ob.addStatus(satusInfo.toString());
 //        System.out.println(ob.updateStatusLike(statusId, statusLikeInfo.toString()));

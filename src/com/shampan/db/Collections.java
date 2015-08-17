@@ -5,10 +5,14 @@ package com.shampan.db;
  * @author nazmul hasan
  */
 public enum Collections {
-    USERS("users"), 
-    BASICPROFILE("basic_profiles"), 
+
+    USERS("users"),
+    BASICPROFILE("basic_profiles"),
     RELATIONS("relations"),
-    STATUSES("statuses");
+    STATUSES("statuses"),
+    USERALBUMS("user_albums"),
+    ALBUMPHOTOS("album_photos"),
+    PHOTOCATEGORIES("photo_categories");
 
     private String name;
 
@@ -17,7 +21,7 @@ public enum Collections {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return name;
     }
 }

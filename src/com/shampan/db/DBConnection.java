@@ -8,8 +8,11 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoDatabase;
+import com.shampan.db.codec.AlbumCodec;
 import com.shampan.db.codec.BasicProfileCodec;
 import com.shampan.db.codec.CountriesCodec;
+import com.shampan.db.codec.PhotoCategoryCodec;
+import com.shampan.db.codec.PhotoCodec;
 import com.shampan.db.codec.RelationsCodec;
 import com.shampan.db.codec.ReligionsCodec;
 import com.shampan.db.codec.StatusCodec;
@@ -20,7 +23,7 @@ import org.bson.codecs.configuration.CodecRegistry;
 
 /**
  *
- * @author alamgir
+ * @author Alamgir Kabir
  */
 public class DBConnection {
 
@@ -55,23 +58,28 @@ public class DBConnection {
             CountriesCodec countriesCodec = new CountriesCodec();
             ReligionsCodec religionCodec = new ReligionsCodec();
             RelationsCodec relationsCodec = new RelationsCodec();
+            AlbumCodec albumCodec = new AlbumCodec();
+            PhotoCodec photoCodec = new PhotoCodec();
             StatusCodec statusCodec = new StatusCodec();
+            PhotoCategoryCodec photoCategoryCodec = new PhotoCategoryCodec();
             CodecRegistry codecRegistry = CodecRegistries.fromRegistries(
-                MongoClient.getDefaultCodecRegistry(),
-                CodecRegistries.fromCodecs(userCodec),
-                CodecRegistries.fromCodecs(basicProfileCodec),
-                CodecRegistries.fromCodecs(countriesCodec),
-                CodecRegistries.fromCodecs(religionCodec),
-                CodecRegistries.fromCodecs(relationsCodec),
-                CodecRegistries.fromCodecs(statusCodec)
-                
+                    MongoClient.getDefaultCodecRegistry(),
+                    CodecRegistries.fromCodecs(userCodec),
+                    CodecRegistries.fromCodecs(basicProfileCodec),
+                    CodecRegistries.fromCodecs(countriesCodec),
+                    CodecRegistries.fromCodecs(religionCodec),
+                    CodecRegistries.fromCodecs(relationsCodec),
+                    CodecRegistries.fromCodecs(statusCodec),
+                    CodecRegistries.fromCodecs(albumCodec),
+                    CodecRegistries.fromCodecs(photoCodec),
+                    CodecRegistries.fromCodecs(photoCategoryCodec)
             );
 
             MongoClientOptions options = MongoClientOptions.builder().codecRegistry(codecRegistry).build();
 
             ServerAddress serverAddress = new ServerAddress(dbHost, dbPort);
             MongoClient mongoClient = new MongoClient(serverAddress, options);
-            
+
             connection = mongoClient.getDatabase(dbName);
 
         }

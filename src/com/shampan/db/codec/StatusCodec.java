@@ -29,7 +29,6 @@ public class StatusCodec implements CollectibleCodec<StatusDAO>{
     public StatusDAO decode(BsonReader reader, DecoderContext decoderContext) {
         Document document = documentCodec.decode(reader, decoderContext);
         ObjectMapper mapper = new ObjectMapper();
-//        mapper.configure(Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
         StatusDAO status = new StatusDAO();
         try {
             status = mapper.readValue(document.toJson().toString(), StatusDAO.class);
@@ -49,8 +48,6 @@ public class StatusCodec implements CollectibleCodec<StatusDAO>{
             ex.printStackTrace();
         }
         Document doc = new Document();
-//        doc.put("_id", status.get_id());
-//        doc.put("userId", status.getUserId());
         documentCodec.encode(writer, Document.parse(json), encoderContext);
     }
 

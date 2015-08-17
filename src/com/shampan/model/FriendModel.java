@@ -55,15 +55,17 @@ public class FriendModel {
     public String addFriend(String userId, String friendId) {
         MongoCollection<RelationsDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.RELATIONS.toString(), RelationsDAO.class);
-
         RelationInfo formRelation = new RelationInfo();
         formRelation.setUserId(userId);
         formRelation.setIsInitiated("1");
+        formRelation.setFristName("Rashida");
+        formRelation.setLastName("Sultana");
 
         RelationInfo toRelation = new RelationInfo();
         toRelation.setUserId(friendId);
         toRelation.setIsInitiated("0");
-
+        toRelation.setFristName("Nazmul");
+        toRelation.setLastName("Hasan");
         BasicDBObject fromSelectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
         BasicDBObject toSelectQuery = (BasicDBObject) QueryBuilder.start("userId").is(friendId).get();
         Document fromPQuery = new Document();
@@ -251,12 +253,12 @@ public class FriendModel {
 //        System.out.print(formRelationInfo);
 //        System.out.print(toRelationInfo);
         String userId = "100157";
-        String friendId = "100106";
+        String friendId = "1002";
         int limit = 3;
         int offset = 0;
         FriendModel ob = new FriendModel();
 //        System.out.println(ob.getFriendList(userId));
 
-//        String friendInfo = ob.addFriend(userId, friendId);
+        String friendInfo = ob.addFriend(userId, friendId);
     }
 }
