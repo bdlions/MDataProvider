@@ -12,7 +12,6 @@ import com.shampan.db.collections.fragment.common.Like;
 import com.shampan.db.collections.fragment.common.Privacy;
 import com.shampan.db.collections.fragment.common.Share;
 import com.shampan.db.collections.fragment.common.UserInfo;
-import com.shampan.db.collections.fragment.photo.Image;
 import java.util.List;
 
 /**
@@ -25,7 +24,6 @@ public class AlbumDAOBuilder {
 
     public AlbumDAOBuilder() {
         userAlbum = new AlbumDAO();
-
     }
     private String _id;
     private String albumId;

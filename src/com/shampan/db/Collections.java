@@ -12,7 +12,9 @@ public enum Collections {
     STATUSES("statuses"),
     USERALBUMS("user_albums"),
     ALBUMPHOTOS("album_photos"),
-    PHOTOCATEGORIES("photo_categories");
+    PHOTOCATEGORIES("photo_categories"),
+    VIDEOCATEGORIES("video_categories"),
+    VIDEOS("videos");
 
     private String name;
 

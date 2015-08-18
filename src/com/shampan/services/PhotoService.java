@@ -24,6 +24,13 @@ public class PhotoService {
         return categories.toString();
     }
 
+    public static String getCategoriesAndAlbums(String userId) {
+        JSONObject list = new JSONObject();
+        list.put("categoryList", photoObject.getCategories());
+        list.put("albumList", photoObject.getAlbums(userId));
+        return list.toString();
+    }
+
     public static String createAlbum(String albumInfo) {
         String response = photoObject.createAlbum(albumInfo);
         return response;

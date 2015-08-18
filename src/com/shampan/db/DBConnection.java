@@ -17,6 +17,8 @@ import com.shampan.db.codec.RelationsCodec;
 import com.shampan.db.codec.ReligionsCodec;
 import com.shampan.db.codec.StatusCodec;
 import com.shampan.db.codec.UserCodec;
+import com.shampan.db.codec.VideoCategoryCodec;
+import com.shampan.db.codec.VideoCodec;
 import com.shampan.util.PropertyProvider;
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
@@ -61,6 +63,8 @@ public class DBConnection {
             AlbumCodec albumCodec = new AlbumCodec();
             PhotoCodec photoCodec = new PhotoCodec();
             StatusCodec statusCodec = new StatusCodec();
+            VideoCategoryCodec videoCategoryCodec = new VideoCategoryCodec();
+            VideoCodec videoCodec = new VideoCodec();
             PhotoCategoryCodec photoCategoryCodec = new PhotoCategoryCodec();
             CodecRegistry codecRegistry = CodecRegistries.fromRegistries(
                     MongoClient.getDefaultCodecRegistry(),
@@ -72,7 +76,9 @@ public class DBConnection {
                     CodecRegistries.fromCodecs(statusCodec),
                     CodecRegistries.fromCodecs(albumCodec),
                     CodecRegistries.fromCodecs(photoCodec),
-                    CodecRegistries.fromCodecs(photoCategoryCodec)
+                    CodecRegistries.fromCodecs(photoCategoryCodec),
+                    CodecRegistries.fromCodecs(videoCategoryCodec),
+                    CodecRegistries.fromCodecs(videoCodec)
             );
 
             MongoClientOptions options = MongoClientOptions.builder().codecRegistry(codecRegistry).build();
