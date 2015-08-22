@@ -17,7 +17,7 @@ import org.apache.commons.collections4.IteratorUtils;
 
 /**
  *
- * @author nazmul
+ * @author nazmul hasan
  */
 public class GeneralModel {
 

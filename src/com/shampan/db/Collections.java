@@ -6,6 +6,8 @@ package com.shampan.db;
  */
 public enum Collections {
 
+    RELIGIONS("religions"),
+    COUNTRIES("countries"),
     USERS("users"),
     BASICPROFILE("basic_profiles"),
     RELATIONS("relations"),

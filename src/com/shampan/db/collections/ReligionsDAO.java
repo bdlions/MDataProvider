@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.shampan.db.collections;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -14,14 +9,13 @@ import org.bson.conversions.Bson;
 
 /**
  *
- * @author Sampan-IT
+ * @author nazmul hasan
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ReligionsDAO implements Bson {
 
     private String _id;
-    private int id;
-    
+    private String religionId;    
     private String title;
     private String order;
 
@@ -31,18 +25,6 @@ public class ReligionsDAO implements Bson {
 
     public void set_id(String _id) {
         this._id = _id;
-    }
-
-    @Override
-    public String toString() {
-        ObjectMapper mapper = new ObjectMapper();
-        String json = "";
-        try {
-            json = mapper.writeValueAsString(this);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return json;
     }
 
     public String getTitle() {
@@ -68,9 +50,26 @@ public class ReligionsDAO implements Bson {
     public void setId(String _id) {
         this._id = _id;
     }
+
+    public String getReligionId() {
+        return religionId;
+    }
+
+    public void setReligionId(String religionId) {
+        this.religionId = religionId;
+    }
     
-    
-    
+    @Override
+    public String toString() {
+        ObjectMapper mapper = new ObjectMapper();
+        String json = "";
+        try {
+            json = mapper.writeValueAsString(this);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return json;
+    }
 
     @Override
     public <C> BsonDocument toBsonDocument(final Class<C> documentClass, final CodecRegistry codecRegistry) {

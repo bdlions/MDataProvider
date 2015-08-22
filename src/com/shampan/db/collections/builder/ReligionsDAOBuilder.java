@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.shampan.db.collections.builder;
-
-import com.shampan.db.collections.CountriesDAO;
 import com.shampan.db.collections.ReligionsDAO;
 
 /**
  *
- * @author Sampan-IT
+ * @author nazmul hasan
  */
 public class ReligionsDAOBuilder {
 
@@ -20,6 +13,7 @@ public class ReligionsDAOBuilder {
         religion = new ReligionsDAO();
     }
     private String _id;
+    private String religionId;
     private String title;
     private String order;
 
@@ -28,7 +22,11 @@ public class ReligionsDAOBuilder {
         return this;
     }
 
-
+    public ReligionsDAOBuilder setReligionId(String religionId) {
+        this.religionId = religionId;
+        return this;
+    }
+    
     public ReligionsDAOBuilder setTitle(String title) {
         this.title = title;
         return this;
@@ -41,6 +39,7 @@ public class ReligionsDAOBuilder {
 
     public ReligionsDAO build() {
         religion.set_id(_id);
+        religion.setReligionId(religionId);
         religion.setTitle(title);
         religion.setOrder(order);
         return religion;
