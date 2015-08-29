@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.shampan.db.collections;
 
 import org.bson.BsonDocument;
@@ -10,13 +5,14 @@ import org.bson.BsonDocumentWrapper;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.conversions.Bson;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.shampan.db.collections.fragment.BasicInfo;
-import com.shampan.db.collections.fragment.College;
-import com.shampan.db.collections.fragment.PSkill;
-import com.shampan.db.collections.fragment.School;
-import com.shampan.db.collections.fragment.University;
-import com.shampan.db.collections.fragment.WorkPlace;
+import com.shampan.db.collections.fragment.profile.BasicInfo;
+import com.shampan.db.collections.fragment.profile.College;
+import com.shampan.db.collections.fragment.profile.PSkill;
+import com.shampan.db.collections.fragment.profile.School;
+import com.shampan.db.collections.fragment.profile.University;
+import com.shampan.db.collections.fragment.profile.WorkPlace;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,21 +24,20 @@ import java.util.List;
 public class BasicProfileDAO implements Bson {
 
     private String _id;
+    @JsonProperty("uId")
     private String userId;
+    @JsonProperty("bInfo")
     private BasicInfo basicInfo;
+    @JsonProperty("wp")
     private List<WorkPlace> workPlaces;
+    @JsonProperty("pSkills")
     private List<PSkill> pSkills;
+    @JsonProperty("uni")
     private List<University> universities;
+    @JsonProperty("clg")
     private List<College> colleges;
+    @JsonProperty("sch")
     private List<School> schools;
-  
-    public List<PSkill> getpSkills() {
-        return pSkills;
-    }
-
-    public void setpSkills(List<PSkill> pSkills) {
-        this.pSkills = pSkills;
-    }
 
     public List<University> getUniversities() {
         return universities;
@@ -92,21 +87,21 @@ public class BasicProfileDAO implements Bson {
         this.workPlaces = workPlaces;
     }
 
-    public List<PSkill> getPSkills() {
+    public List<PSkill> getpSkills() {
         return pSkills;
     }
 
+    public void setpSkills(List<PSkill> pSkills) {
+        this.pSkills = pSkills;
+    }
+    
     public String get_id() {
         return _id;
     }
 
     public void set_id(String _id) {
         this._id = _id;
-    }
-
-    public void setPSkills(List<PSkill> pSkills) {
-        this.pSkills = pSkills;
-    }
+    }    
 
     @Override
     public String toString() {

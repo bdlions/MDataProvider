@@ -3,27 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.shampan.db.collections.fragment;
+package com.shampan.db.collections.fragment.profile;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  *
  * @author Sampan-IT
  */
-public class School {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class University {
 
-    private String school;
+    public static University g;
+
+    private String university;
     private String description;
     private String startDate;
     private String endDate;
 
-    public String getSchool() {
-        return school;
+    public String getUniversity() {
+        return university;
     }
 
-    public void setSchool(String school) {
-        this.school = school;
+    public void setUniversity(String university) {
+        this.university = university;
     }
 
     public String getDescription() {
@@ -62,14 +66,15 @@ public class School {
         return json;
     }
 
-    public static School getSchool(String jsonContent) {
-        School school = null;
+    public static University getUniversity(String jsonContent) {
+        University university = null;
         try {
             ObjectMapper mapper = new ObjectMapper();
-            school = mapper.readValue(jsonContent, School.class);
+            university = mapper.readValue(jsonContent, University.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return school;
+        return university;
     }
+
 }

@@ -10,7 +10,7 @@ import com.shampan.db.Collections;
 import com.shampan.db.DBConnection;
 import com.shampan.db.collections.RelationsDAO;
 import com.shampan.db.collections.builder.RelationsDAOBuilder;
-import com.shampan.db.collections.fragment.relations.RelationInfo;
+import com.shampan.db.collections.fragment.relation.RelationInfo;
 import com.shampan.model.FriendModel;
 import java.util.ArrayList;
 import java.util.List;

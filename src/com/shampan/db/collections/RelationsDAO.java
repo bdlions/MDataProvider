@@ -2,7 +2,7 @@ package com.shampan.db.collections;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.shampan.db.collections.fragment.relations.RelationInfo;
+import com.shampan.db.collections.fragment.relation.RelationInfo;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.BsonDocument;

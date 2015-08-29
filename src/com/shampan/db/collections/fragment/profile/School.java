@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.shampan.db.collections.fragment;
+package com.shampan.db.collections.fragment.profile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -11,31 +11,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  * @author Sampan-IT
  */
-public class College {
+public class School {
 
-    private String college;
+    private String school;
     private String description;
     private String startDate;
     private String endDate;
 
-    @Override
-    public String toString() {
-        ObjectMapper mapper = new ObjectMapper();
-        String json = "";
-        try {
-            json = mapper.writeValueAsString(this);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return json;
+    public String getSchool() {
+        return school;
     }
 
-    public String getCollege() {
-        return college;
-    }
-
-    public void setCollege(String college) {
-        this.college = college;
+    public void setSchool(String school) {
+        this.school = school;
     }
 
     public String getDescription() {
@@ -62,15 +50,26 @@ public class College {
         this.endDate = endDate;
     }
 
-    public static College getCollege(String jsonContent) {
-        College college = null;
+    @Override
+    public String toString() {
+        ObjectMapper mapper = new ObjectMapper();
+        String json = "";
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            college = mapper.readValue(jsonContent, College.class);
+            json = mapper.writeValueAsString(this);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return college;
+        return json;
     }
 
+    public static School getSchool(String jsonContent) {
+        School school = null;
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            school = mapper.readValue(jsonContent, School.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return school;
+    }
 }

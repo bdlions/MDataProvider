@@ -3,26 +3,36 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.shampan.db.collections.fragment;
+package com.shampan.db.collections.fragment.profile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.shampan.db.collections.CountriesDAO;
 
 /**
  *
  * @author Sampan-IT
  */
-public class RelationStatus {
-        private String relationshipStatus;
+public class Town {
 
-    public String getRelationshipStatus() {
-        return relationshipStatus;
+    private String townName;
+    private CountriesDAO country;
+
+    public String getTownName() {
+        return townName;
     }
 
-    public void setRelationshipStatus(String relationshipStatus) {
-        this.relationshipStatus = relationshipStatus;
+    public void setTownName(String townName) {
+        this.townName = townName;
     }
-    
-     @Override
+
+    public CountriesDAO getCountry() {
+        return country;
+    }
+
+    public void setCountry(CountriesDAO country) {
+        this.country = country;
+    }
+
     public String toString() {
         ObjectMapper mapper = new ObjectMapper();
         String json = "";
@@ -34,15 +44,15 @@ public class RelationStatus {
         return json;
     }
 
-    public static RelationStatus getRStatus(String jsonContent) {
-        RelationStatus rStatus = null;
+    public static Town getHomeTown(String jsonContent) {
+        Town town = null;
         try {
             ObjectMapper mapper = new ObjectMapper();
-            rStatus = mapper.readValue(jsonContent, RelationStatus.class);
+            town = mapper.readValue(jsonContent, Town.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return rStatus;
+        return town;
     }
-    
+
 }

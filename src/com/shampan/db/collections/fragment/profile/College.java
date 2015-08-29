@@ -3,31 +3,39 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.shampan.db.collections.fragment;
+package com.shampan.db.collections.fragment.profile;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  *
  * @author Sampan-IT
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class University {
+public class College {
 
-    public static University g;
-
-    private String university;
+    private String college;
     private String description;
     private String startDate;
     private String endDate;
 
-    public String getUniversity() {
-        return university;
+    @Override
+    public String toString() {
+        ObjectMapper mapper = new ObjectMapper();
+        String json = "";
+        try {
+            json = mapper.writeValueAsString(this);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return json;
     }
 
-    public void setUniversity(String university) {
-        this.university = university;
+    public String getCollege() {
+        return college;
+    }
+
+    public void setCollege(String college) {
+        this.college = college;
     }
 
     public String getDescription() {
@@ -54,27 +62,15 @@ public class University {
         this.endDate = endDate;
     }
 
-    @Override
-    public String toString() {
-        ObjectMapper mapper = new ObjectMapper();
-        String json = "";
-        try {
-            json = mapper.writeValueAsString(this);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return json;
-    }
-
-    public static University getUniversity(String jsonContent) {
-        University university = null;
+    public static College getCollege(String jsonContent) {
+        College college = null;
         try {
             ObjectMapper mapper = new ObjectMapper();
-            university = mapper.readValue(jsonContent, University.class);
+            college = mapper.readValue(jsonContent, College.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return university;
+        return college;
     }
 
 }

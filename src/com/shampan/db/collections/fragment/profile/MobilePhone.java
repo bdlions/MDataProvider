@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.shampan.db.collections.fragment;
+package com.shampan.db.collections.fragment.profile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shampan.db.collections.CountriesDAO;
@@ -12,18 +12,9 @@ import com.shampan.db.collections.CountriesDAO;
  *
  * @author Sampan-IT
  */
-public class Town {
-
-    private String townName;
+public class MobilePhone {
+    private String phone;
     private CountriesDAO country;
-
-    public String getTownName() {
-        return townName;
-    }
-
-    public void setTownName(String townName) {
-        this.townName = townName;
-    }
 
     public CountriesDAO getCountry() {
         return country;
@@ -33,6 +24,14 @@ public class Town {
         this.country = country;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+    @Override
     public String toString() {
         ObjectMapper mapper = new ObjectMapper();
         String json = "";
@@ -44,15 +43,15 @@ public class Town {
         return json;
     }
 
-    public static Town getHomeTown(String jsonContent) {
-        Town town = null;
+    public static MobilePhone getMobilePhone(String jsonContent) {
+        MobilePhone mobilePhone = null;
         try {
             ObjectMapper mapper = new ObjectMapper();
-            town = mapper.readValue(jsonContent, Town.class);
+            mobilePhone = mapper.readValue(jsonContent, MobilePhone.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return town;
+        return mobilePhone;
     }
-
+    
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.shampan.db.collections.builder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,10 +17,16 @@ public class UserDAOBuilder {
     }
     
     private String id;
+    private String userId;
     private String firstName;
     private String lastName;
     private String userName;
 
+    public UserDAOBuilder setUserId(String userId) {
+        this.userId = userId;
+        return this;
+    }
+    
     public UserDAOBuilder setFirstName(String firstName) {
         this.firstName = firstName;
         return this;
@@ -50,6 +51,7 @@ public class UserDAOBuilder {
     
     public UserDAO build(){
         user.set_id(id);
+        user.setUserId(userId);
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setUserName(userName);

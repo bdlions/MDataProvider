@@ -6,7 +6,7 @@
 package com.shampan.db.collections.fragment.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.shampan.db.collections.fragment.WorkPlace;
+import com.shampan.db.collections.fragment.profile.WorkPlace;
 
 /**
  *

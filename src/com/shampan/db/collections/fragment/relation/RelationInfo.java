@@ -1,4 +1,4 @@
-package com.shampan.db.collections.fragment.relations;
+package com.shampan.db.collections.fragment.relation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

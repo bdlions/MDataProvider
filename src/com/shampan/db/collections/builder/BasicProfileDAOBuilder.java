@@ -7,10 +7,10 @@ package com.shampan.db.collections.builder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shampan.db.collections.BasicProfileDAO;
-import com.shampan.db.collections.fragment.BasicInfo;
-import com.shampan.db.collections.fragment.PSkill;
-import com.shampan.db.collections.fragment.School;
-import com.shampan.db.collections.fragment.WorkPlace;
+import com.shampan.db.collections.fragment.profile.BasicInfo;
+import com.shampan.db.collections.fragment.profile.PSkill;
+import com.shampan.db.collections.fragment.profile.School;
+import com.shampan.db.collections.fragment.profile.WorkPlace;
 import java.util.List;
 
 /**
@@ -81,7 +81,7 @@ public class BasicProfileDAOBuilder {
         basicProfile.setUserId(userId);
         basicProfile.setBasicInfo(basicInfo);
         basicProfile.setWorkPlaces(workPlaces);
-        basicProfile.setPSkills(pSkills);
+        basicProfile.setpSkills(pSkills);
         basicProfile.setUniversities(universities);
         basicProfile.setColleges(colleges);
         basicProfile.setSchools(schools);

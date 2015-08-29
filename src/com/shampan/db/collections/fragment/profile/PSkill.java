@@ -1,18 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.shampan.db.collections.fragment;
+package com.shampan.db.collections.fragment.profile;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  *
- * @author Sampan-IT
+ * @author nazmul hasan
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PSkill {
-
+    @JsonProperty("ps")
     private String pSkill;
 
     public String getpSkill() {
@@ -22,7 +20,7 @@ public class PSkill {
     public void setpSkill(String pSkill) {
         this.pSkill = pSkill;
     }
-
+    
     @Override
     public String toString() {
         ObjectMapper mapper = new ObjectMapper();

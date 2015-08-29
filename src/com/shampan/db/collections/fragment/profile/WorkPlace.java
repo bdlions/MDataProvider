@@ -1,23 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.shampan.db.collections.fragment;
+package com.shampan.db.collections.fragment.profile;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  *
- * @author Sampan-IT
+ * @author nazmul hasan
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class WorkPlace {
 
+    @JsonProperty("cmp")
     private String company;
+    @JsonProperty("pos")
     private String position;
+    @JsonProperty("ct")
     private String city;
+    @JsonProperty("des")
     private String description;
+    @JsonProperty("sd")
     private String startDate;
+    @JsonProperty("ed")
     private String endDate;
 
     public String getCompany() {
@@ -67,7 +71,8 @@ public class WorkPlace {
     public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
-  @Override
+    
+    @Override
     public String toString() {
         ObjectMapper mapper = new ObjectMapper();
         String json = "";
@@ -79,6 +84,10 @@ public class WorkPlace {
         return json;
     }
 
+    /**
+     * This method will return object from string
+     * @param jsonContent, json format of the object
+     */
     public static WorkPlace getWorkPlace(String jsonContent) {
         WorkPlace workPlace = null;
         try {

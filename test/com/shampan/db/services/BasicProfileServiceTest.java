@@ -10,26 +10,27 @@ import com.shampan.db.DBConnection;
 import com.shampan.db.collections.BasicProfileDAO;
 import com.shampan.db.collections.CountriesDAO;
 import com.shampan.db.collections.builder.BasicProfileDAOBuilder;
-import com.shampan.db.collections.fragment.About;
-import com.shampan.db.collections.fragment.Address;
-import com.shampan.db.collections.fragment.BasicInfo;
-import com.shampan.db.collections.fragment.BirthDate;
-import com.shampan.db.collections.fragment.City;
-import com.shampan.db.collections.fragment.College;
-import com.shampan.db.collections.fragment.Email;
-import com.shampan.db.collections.fragment.FamilyMember;
-import com.shampan.db.collections.fragment.FavouriteQuote;
-import com.shampan.db.collections.fragment.Gender;
-import com.shampan.db.collections.fragment.Language;
-import com.shampan.db.collections.fragment.MobilePhone;
-import com.shampan.db.collections.fragment.PSkill;
-import com.shampan.db.collections.fragment.RelationStatus;
-import com.shampan.db.collections.fragment.Religion;
-import com.shampan.db.collections.fragment.School;
-import com.shampan.db.collections.fragment.Town;
-import com.shampan.db.collections.fragment.University;
-import com.shampan.db.collections.fragment.Website;
-import com.shampan.db.collections.fragment.WorkPlace;
+import com.shampan.db.collections.fragment.profile.About;
+import com.shampan.db.collections.fragment.profile.Address;
+import com.shampan.db.collections.fragment.profile.BasicInfo;
+import com.shampan.db.collections.fragment.profile.BirthDate;
+import com.shampan.db.collections.fragment.profile.City;
+import com.shampan.db.collections.fragment.profile.College;
+import com.shampan.db.collections.fragment.profile.Email;
+import com.shampan.db.collections.fragment.profile.FamilyMember;
+import com.shampan.db.collections.fragment.profile.FavouriteQuote;
+import com.shampan.db.collections.fragment.profile.Gender;
+import com.shampan.db.collections.fragment.profile.Language;
+import com.shampan.db.collections.fragment.profile.MobilePhone;
+import com.shampan.db.collections.fragment.profile.PSkill;
+import com.shampan.db.collections.fragment.profile.RelationStatus;
+import com.shampan.db.collections.fragment.profile.Religion;
+import com.shampan.db.collections.fragment.profile.School;
+import com.shampan.db.collections.fragment.profile.Town;
+import com.shampan.db.collections.fragment.profile.University;
+import com.shampan.db.collections.fragment.profile.Website;
+import com.shampan.db.collections.fragment.profile.WorkPlace;
+import com.shampan.model.BasicProfileModel;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
@@ -45,6 +46,7 @@ import static org.junit.Assert.*;
  */
 public class BasicProfileServiceTest {
 
+    BasicProfileModel basicProfileModel = new BasicProfileModel();
     public BasicProfileServiceTest() {
     }
 
@@ -69,7 +71,7 @@ public class BasicProfileServiceTest {
     //
     // @Test
     // public void hello() {}
-    @Test
+    //@Test
     public void main() {
         DBConnection.getInstance().getConnection();
         MongoCollection<BasicProfileDAO> mongoCollection
@@ -204,5 +206,32 @@ public class BasicProfileServiceTest {
 
 //.......insert basic profile info............................................
         mongoCollection.insertOne(userProfileInfo);
+    }
+    
+    //@Test
+    public void getOverviewTest() 
+    {
+        System.out.println(basicProfileModel.getOverview("Dq9y3wHnMC3Y8ag"));
+    }
+    
+    @Test
+    public void addWorkPlace()
+    {
+        WorkPlace workPlace = new WorkPlace();
+        workPlace.setCompany("NASA2");
+        workPlace.setPosition("Software Engineer2");
+        workPlace.setDescription("Nothing to say2");
+        workPlace.setCity("Dhaka2");        
+        String workPlaceString = workPlace.toString();        
+        basicProfileModel.addWorkPlace("Dq9y3wHnMC3Y8ag", workPlaceString);
+    }
+    
+    //@Test
+    public void addBasicProfile()
+    {
+        PSkill pSkill2 = new PSkill();
+        pSkill2.setpSkill("Software Engineer at NASA2");     
+        String professionalSkillString = pSkill2.toString();        
+        basicProfileModel.addPSkill("Dq9y3wHnMC3Y8ag", professionalSkillString);
     }
 }

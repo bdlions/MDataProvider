@@ -1,7 +1,7 @@
 package com.shampan.db.collections.builder;
 
 import com.shampan.db.collections.RelationsDAO;
-import com.shampan.db.collections.fragment.relations.RelationInfo;
+import com.shampan.db.collections.fragment.relation.RelationInfo;
 import java.util.ArrayList;
 import java.util.List;
 /**

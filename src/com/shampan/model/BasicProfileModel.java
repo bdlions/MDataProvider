@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.shampan.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,26 +9,27 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.FindOneAndUpdateOptions;
 import com.mongodb.util.JSON;
+import com.shampan.db.Collections;
 import com.shampan.db.DBConnection;
 import com.shampan.db.collections.BasicProfileDAO;
 import com.shampan.db.collections.CountriesDAO;
 import com.shampan.db.collections.builder.BasicProfileDAOBuilder;
-import com.shampan.db.collections.fragment.About;
-import com.shampan.db.collections.fragment.Address;
-import com.shampan.db.collections.fragment.BasicInfo;
-import com.shampan.db.collections.fragment.BirthDate;
-import com.shampan.db.collections.fragment.City;
-import com.shampan.db.collections.fragment.College;
-import com.shampan.db.collections.fragment.Email;
-import com.shampan.db.collections.fragment.FavouriteQuote;
-import com.shampan.db.collections.fragment.MobilePhone;
-import com.shampan.db.collections.fragment.PSkill;
-import com.shampan.db.collections.fragment.RelationStatus;
-import com.shampan.db.collections.fragment.School;
-import com.shampan.db.collections.fragment.Town;
-import com.shampan.db.collections.fragment.University;
-import com.shampan.db.collections.fragment.Website;
-import com.shampan.db.collections.fragment.WorkPlace;
+import com.shampan.db.collections.fragment.profile.About;
+import com.shampan.db.collections.fragment.profile.Address;
+import com.shampan.db.collections.fragment.profile.BasicInfo;
+import com.shampan.db.collections.fragment.profile.BirthDate;
+import com.shampan.db.collections.fragment.profile.City;
+import com.shampan.db.collections.fragment.profile.College;
+import com.shampan.db.collections.fragment.profile.Email;
+import com.shampan.db.collections.fragment.profile.FavouriteQuote;
+import com.shampan.db.collections.fragment.profile.MobilePhone;
+import com.shampan.db.collections.fragment.profile.PSkill;
+import com.shampan.db.collections.fragment.profile.RelationStatus;
+import com.shampan.db.collections.fragment.profile.School;
+import com.shampan.db.collections.fragment.profile.Town;
+import com.shampan.db.collections.fragment.profile.University;
+import com.shampan.db.collections.fragment.profile.Website;
+import com.shampan.db.collections.fragment.profile.WorkPlace;
 import com.shampan.util.LogWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,16 +51,16 @@ public class BasicProfileModel {
     public String getOverview(String userId) {
         MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
-        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("uId").is(userId).get();
         Document pQuery = new Document();
-        pQuery.put("workPlaces", "$all");
-        pQuery.put("universities", "$all");
-        pQuery.put("basicInfo.mobilePhones", "$all");
-        pQuery.put("basicInfo.emails", "$all");
-        pQuery.put("basicInfo.city", "$all");
-        pQuery.put("basicInfo.addresses", "$all");
-        pQuery.put("basicInfo.birthDate", "$all");
-        pQuery.put("basicInfo.website", "$all");
+        //pQuery.put("wp", "$all");
+        pQuery.put("uni", "$all");
+        pQuery.put("bInfo.mobilePhones", "$all");
+        pQuery.put("bInfo.emails", "$all");
+        pQuery.put("bInfo.city", "$all");
+        pQuery.put("bInfo.addresses", "$all");
+        pQuery.put("bInfo.bDate", "$all");
+        pQuery.put("bInfo.website", "$all");
         BasicProfileDAO overview = mongoCollection.find(selectQuery).projection(pQuery).first();
         JSONObject overviewJson = new JSONObject();
         try {
@@ -182,12 +178,18 @@ public class BasicProfileModel {
 
     }
 
+    /**
+     * This method will add workplace of a user
+     * @param userId, user id
+     * @param additionalData, workplace data to be added
+     * @author nazmul hasan on 29th august 2015
+     */
     public String addWorkPlace(String userId, String additionalData) {
         MongoCollection<BasicProfileDAO> mongoCollection
-                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
-        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+                = DBConnection.getInstance().getConnection().getCollection(Collections.BASICPROFILES.toString(), BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("uId").is(userId).get();
         Document pQuery = new Document();
-        pQuery.put("workPlaces", "$all");
+        pQuery.put("wp", "$all");
         BasicProfileDAO workPlaces = mongoCollection.find(selectQuery).projection(pQuery).first();
         WorkPlace workPlaceInfo = WorkPlace.getWorkPlace(additionalData);
         if (workPlaceInfo != null) {
@@ -197,17 +199,29 @@ public class BasicProfileModel {
         String response = "successful";
         return response;
     }
-
+    
+    /**
+     * This method will add professional skill of a user
+     * @param userId, user id
+     * @param additionalData, professional skill data to be added
+     * @author nazmul hasan on 29th august 2015
+     */
     public String addPSkill(String userId, String additionalData) {
         MongoCollection<BasicProfileDAO> mongoCollection
-                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
-        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+                = DBConnection.getInstance().getConnection().getCollection(Collections.BASICPROFILES.toString(), BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("uId").is(userId).get();
         Document pQuery = new Document();
         pQuery.put("pSkills", "$all");
         BasicProfileDAO pSkillCoursor = mongoCollection.find(selectQuery).projection(pQuery).first();
         PSkill pSkill = PSkill.getPSkill(additionalData);
         if (pSkill != null) {
+            if(pSkillCoursor == null)
+            {
+                pSkillCoursor = new BasicProfileDAO();
+                pSkillCoursor.setpSkills(new ArrayList<PSkill>());
+            }            
             pSkillCoursor.getpSkills().add(pSkill);
+            System.out.println(pSkillCoursor);
         }
         BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", pSkillCoursor));
         String response = "successful";
@@ -507,7 +521,7 @@ public class BasicProfileModel {
     public static void main(String[] args) {
 
 //        Document document = new Document();
-        String userId = "100157";
+        String userId = "Dq9y3wHnMC3Y8ag";
         Document workPlace = new Document();
         workPlace.append("company", "NASA");
         workPlace.append("position", "Software Engineer");
@@ -547,7 +561,7 @@ public class BasicProfileModel {
         BasicProfileModel ob = new BasicProfileModel();
         System.out.println(ob.addWorkPlace(userId, userId));
 //        System.out.println(ob.getAboutFQuote(userId));
-//        ob.getOverview(userId);
+        System.out.println(ob.getOverview(userId)); 
 //        System.out.println(ob.getFamilyRelation(userId));
 //        System.out.println(ob.getCityTown(userId));
 //        String homeTown1 = ob.addRelationshipStatus(userId, relation.getRelationshipStatus());

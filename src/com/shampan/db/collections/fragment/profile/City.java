@@ -3,36 +3,36 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.shampan.db.collections.fragment;
+package com.shampan.db.collections.fragment.profile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.shampan.db.collections.CountriesDAO;
 
 /**
  *
  * @author Sampan-IT
  */
-public class Gender {
+public class City {
 
-    private String id;
-    private String title;
+    private String cityName;
+    private CountriesDAO country;
 
-    public String getId() {
-        return id;
+    public String getCityName() {
+        return cityName;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
-    public String getTitle() {
-        return title;
+    public CountriesDAO getCountry() {
+        return country;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setCountry(CountriesDAO country) {
+        this.country = country;
     }
 
-    @Override
     public String toString() {
         ObjectMapper mapper = new ObjectMapper();
         String json = "";
@@ -43,17 +43,16 @@ public class Gender {
         }
         return json;
     }
-    
-    
-    public static Gender getGender(String jsonContent){
-        Gender gender = null;
+
+    public static City getCurrentCity(String jsonContent) {
+        City city = null;
         try {
             ObjectMapper mapper = new ObjectMapper();
-            gender = mapper.readValue(jsonContent, Gender.class);
+            city = mapper.readValue(jsonContent, City.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return gender;
+        return city;
     }
 
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.shampan.db.collections.fragment;
+package com.shampan.db.collections.fragment.profile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -11,19 +11,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  * @author Sampan-IT
  */
-public class FavouriteQuote {
-    private String fQuote;
+public class Email {
 
-    public String getfQuote() {
-        return fQuote;
+    private String email;
+
+    public String getEmail() {
+        return email;
     }
 
-    public void setfQuote(String fQuote) {
-        this.fQuote = fQuote;
+    public void setEmail(String email) {
+        this.email = email;
     }
-    
-    
-       public String toString() {
+
+    @Override
+    public String toString() {
         ObjectMapper mapper = new ObjectMapper();
         String json = "";
         try {
@@ -34,15 +35,14 @@ public class FavouriteQuote {
         return json;
     }
 
-    public static FavouriteQuote getFavouriteQuote(String jsonContent) {
-        FavouriteQuote fQuote = null;
+    public static Email getEmail(String jsonContent) {
+        Email email = null;
         try {
             ObjectMapper mapper = new ObjectMapper();
-            fQuote = mapper.readValue(jsonContent, FavouriteQuote.class);
+            email = mapper.readValue(jsonContent, Email.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return fQuote;
+        return email;
     }
-    
 }

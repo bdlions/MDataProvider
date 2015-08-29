@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.shampan.db.collections;
 
 import org.bson.BsonDocument;
@@ -10,6 +5,7 @@ import org.bson.BsonDocumentWrapper;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.conversions.Bson;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 
@@ -21,8 +17,13 @@ import java.util.List;
 public class UserDAO implements Bson {
 
     private String _id;
+    @JsonProperty("uId")
+    private String userId;
+    @JsonProperty("fn")
     private String firstName;
+    @JsonProperty("ln")
     private String lastName;
+    @JsonProperty("un")
     private String userName;
 
     public String get_id() {
@@ -33,6 +34,14 @@ public class UserDAO implements Bson {
         this._id = _id;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+    
     public String getFirstName() {
         return firstName;
     }
