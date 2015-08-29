@@ -5,14 +5,12 @@
  */
 package com.shampan.db.collections.fragment;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  *
  * @author Sampan-IT
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class WorkPlace {
 
     private String company;
@@ -50,6 +48,10 @@ public class WorkPlace {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getStartDate() {
         return startDate;
     }
@@ -65,12 +67,7 @@ public class WorkPlace {
     public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
+  @Override
     public String toString() {
         ObjectMapper mapper = new ObjectMapper();
         String json = "";
@@ -83,13 +80,13 @@ public class WorkPlace {
     }
 
     public static WorkPlace getWorkPlace(String jsonContent) {
-        WorkPlace workPlaces = null;
+        WorkPlace workPlace = null;
         try {
             ObjectMapper mapper = new ObjectMapper();
-            workPlaces = mapper.readValue(jsonContent, WorkPlace.class);
+            workPlace = mapper.readValue(jsonContent, WorkPlace.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return workPlaces;
+        return workPlace;
     }
 }

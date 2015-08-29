@@ -38,9 +38,21 @@ public class BasicProfileService {
         BasicProfileDAO BasicInfo = obj.getContactBasicInfo(userId);
         return BasicInfo.toString();
     }
+    public static String getAboutFQuote(String userId) {
+        BasicProfileDAO aboutFQuote = obj.getAboutFQuote(userId);
+        return aboutFQuote.toString();
+    }
 
     public static String addWorkPlace(String userId, String additionalData) {
         String workPlace = obj.addWorkPlace(userId, additionalData);
+        return workPlace;
+    }
+    public static String addAbout(String userId, String aboutInfo) {
+        String workPlace = obj.addAbout(userId, aboutInfo);
+        return workPlace;
+    }
+    public static String addFQuote(String userId, String fQuoteInfo) {
+        String workPlace = obj.addFQuote(userId, fQuoteInfo);
         return workPlace;
     }
 

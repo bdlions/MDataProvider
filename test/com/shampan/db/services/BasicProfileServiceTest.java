@@ -195,6 +195,7 @@ public class BasicProfileServiceTest {
                 .setWorkPlaces(workPlaceList)
                 .setpSkills(pSkillList)
                 .setUniversities(universityList)
+                .setBasicInfo(basicInfo)
                 .setColleges(collegeList)
                 .setSchools(schoolList)
                 .build();
