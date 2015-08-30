@@ -33,7 +33,7 @@ public class PSkill {
         return json;
     }
 
-    public static PSkill getPSkill(String jsonContent) {
+    public static PSkill getProfessionalSkill(String jsonContent) {
         PSkill pSkill = null;
         try {
             ObjectMapper mapper = new ObjectMapper();

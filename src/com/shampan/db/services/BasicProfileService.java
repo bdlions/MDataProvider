@@ -43,8 +43,8 @@ public class BasicProfileService {
         return aboutFQuote.toString();
     }
 
-    public static String addWorkPlace(String userId, String additionalData) {
-        String workPlace = obj.addWorkPlace(userId, additionalData);
+    public static String addWorkPlace(String userId, String workPlaceInfo) {
+        String workPlace = obj.addWorkPlace(userId, workPlaceInfo);
         return workPlace;
     }
     public static String addAbout(String userId, String aboutInfo) {
