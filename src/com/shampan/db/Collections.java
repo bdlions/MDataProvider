@@ -9,7 +9,7 @@ public enum Collections {
     RELIGIONS("religions"),
     COUNTRIES("countries"),
     USERS("users"),
-    BASICPROFILES("basic_profiles"),
+    USERPROFILES("user_profiles"),
     RELATIONS("relations"),
     STATUSES("statuses"),
     USERALBUMS("user_albums"),

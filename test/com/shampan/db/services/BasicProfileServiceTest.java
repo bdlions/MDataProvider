@@ -231,7 +231,7 @@ public class BasicProfileServiceTest {
         basicProfileModel.addPSkill("100157", pskillString);
     }
 
-    @Test
+    // @Test
     public void addUniversity() {
         University university = new University();
         university.setUniversity("Sydney University");
@@ -240,7 +240,8 @@ public class BasicProfileServiceTest {
         university.setEndDate("04-11-19");
         basicProfileModel.addUniversity("100157", university.toString());
     }
-    @Test
+//    @Test
+
     public void addCollege() {
         College college = new College();
         college.setCollege("Cambridge College");
@@ -248,6 +249,130 @@ public class BasicProfileServiceTest {
         college.setStartDate("04-11-07");
         college.setEndDate("04-11-09");
         basicProfileModel.addCollege("100157", college.toString());
+    }
+
+    // @Test
+    public void addSchool() {
+        School school = new School();
+        school.setSchool("Ranigong high School");
+        school.setDescription(" I had no friend");
+        school.setStartDate("04-11-2002");
+        school.setEndDate("04-11-2007");
+//        basicProfileModel.addSchool("100157", school.toString());
+        System.out.println(school.toString());
+
+        School decodedSchool = School.getSchool(school.toString());
+        System.out.println("Decoded: " + decodedSchool.toString());
+
+    }
+
+//    @Test
+    public void getWorksAndEducation() {
+        System.out.println(basicProfileModel.getWorksAndEducation("100157"));
+    }
+//    @Test
+
+    public void getWorkPlaces() {
+        System.out.println(basicProfileModel.getWorkPlaces("100157"));
+    }
+//    @Test
+
+    public void getProfessionalSkills() {
+        System.out.println(basicProfileModel.getProfessionalSkills("100157"));
+    }
+
+//    @Test
+    public void getUniversities() {
+        System.out.println(basicProfileModel.getUniversities("100157"));
+    }
+//    @Test
+
+    public void getColleges() {
+        System.out.println(basicProfileModel.getColleges("100157"));
+    }
+
+//    @Test
+    public void getSchools() {
+        System.out.println(basicProfileModel.getSchools("100157"));
+    }
+
+//    @Test
+    public void getCityTown() {
+        System.out.println(basicProfileModel.getCityTown("100157"));
+    }
+//    @Test
+
+    public void addCurrentCity() {
+        City currentCity = new City();
+        currentCity.setCityName("Sydney");
+        System.out.println(basicProfileModel.addCurrentCity("100157", currentCity.toString()));
+    }
+
+//    @Test
+    public void addHomeTown() {
+        Town homeTown = new Town();
+        homeTown.setTownName("Dhaka");
+        System.out.println(basicProfileModel.addHomeTown("100157", homeTown.toString()));
+    }
+
+//    @Test
+    public void getFamilyRelation() {
+        System.out.println(basicProfileModel.getFamilyRelation("100157"));
+    }
+//    @Test
+
+    public void addRelationshipStatus() {
+        RelationStatus relationStatus = new RelationStatus();
+        relationStatus.setRelationshipStatus("Single");
+        System.out.println(basicProfileModel.addRelationshipStatus("100157", relationStatus.toString()));
+    }
+
+    //  @Test
+    public void getContactBasicInfo() {
+        System.out.println(basicProfileModel.getContactBasicInfo("100157"));
+    }
+
+    //@Test
+    public void addMobilePhone() {
+        MobilePhone mPhone1 = new MobilePhone();
+        mPhone1.setPhone("01723598606");
+        System.out.println(basicProfileModel.addMobilePhone("100157", mPhone1.toString()));
+    }
+    //@Test
+
+    public void addAddress() {
+        Address address = new Address();
+        address.setAddress("Kapasia,Ranigong");
+        address.setCity("Dhaka");
+        address.setPostCode("025");
+        address.setZip("Ranigong");
+        System.out.println(basicProfileModel.addAddress("100157", address.toString()));
+    }
+
+//    @Test
+    public void addWebsite() {
+        Website website = new Website();
+        website.setWebsite("sampan-it");
+        System.out.println(basicProfileModel.addWebsite("100157", website.toString()));
+    }
+
+    //@Test
+    public void getAboutFQuote() {
+        System.out.println(basicProfileModel.getAboutFQuote("100157"));
+    }
+
+    //@Test
+    public void addFQuote() {
+        FavouriteQuote fQuote = new FavouriteQuote();
+        fQuote.setfQuote("khachar fake fake...porose mukhe mukhe...nirobe chokhe chokhe chae..");
+        System.out.println(basicProfileModel.addFQuote("100157", fQuote.toString()));
+    }
+    @Test
+
+    public void addAbout() {
+        About about = new About();
+        about.setAbout(" honest,very simple,very careful about dearest persons ");
+        System.out.println(basicProfileModel.addAbout("100157", about.toString()));
     }
 
     //@Test
