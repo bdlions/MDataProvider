@@ -28,15 +28,15 @@ public class BasicProfileDAO implements Bson {
     private String userId;
     @JsonProperty("bInfo")
     private BasicInfo basicInfo;
-    @JsonProperty("wp")
+    @JsonProperty("wps")
     private List<WorkPlace> workPlaces;
-    @JsonProperty("pSkills")
+    @JsonProperty("pss")
     private List<PSkill> pSkills;
-    @JsonProperty("uni")
+    @JsonProperty("unis")
     private List<University> universities;
-    @JsonProperty("clg")
+    @JsonProperty("clgs")
     private List<College> colleges;
-    @JsonProperty("sch")
+    @JsonProperty("schs")
     private List<School> schools;
 
     public List<University> getUniversities() {

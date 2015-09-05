@@ -10,9 +10,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PSkill {
+    @JsonProperty("id")
+    private String id;
     @JsonProperty("ps")
     private String pSkill;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    
     public String getpSkill() {
         return pSkill;
     }
