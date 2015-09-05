@@ -100,7 +100,7 @@ public class BasicProfileServiceTest {
         address.setZip("Ranigong");
 
         Gender gender = new Gender();
-        gender.setId("1");
+        gender.setGenderId("1");
         gender.setTitle("Female");
 
         City currentCity = new City();
@@ -212,7 +212,7 @@ public class BasicProfileServiceTest {
         System.out.println(basicProfileModel.getOverview("Dq9y3wHnMC3Y8ag"));
     }
 
-//    @Test
+    @Test
     public void addWorkPlace() {
         WorkPlace workPlace = new WorkPlace();
         workPlace.setCompany("NASA2");
@@ -220,18 +220,18 @@ public class BasicProfileServiceTest {
         workPlace.setDescription("Nothing to say2");
         workPlace.setCity("Dhaka2");
         String workplace1 = workPlace.toString();
-        System.out.println(basicProfileModel.addWorkPlace("100157", workplace1));
+        System.out.println(basicProfileModel.addWorkPlace("U6NjMyVfmZ7lMCf", workplace1));
     }
 
-//    @Test
+    //@Test
     public void addProSkill() {
         PSkill pSkill = new PSkill();
-        pSkill.setpSkill("Software Engineer at NASA");
+        pSkill.setpSkill("Software Engineer at NASA2");
         String pskillString = pSkill.toString();
-        basicProfileModel.addPSkill("100157", pskillString);
+        basicProfileModel.addPSkill("Dq9y3wHnMC3Y8ag", pskillString);
     }
 
-    @Test
+    //@Test
     public void addUniversity() {
         University university = new University();
         university.setUniversity("Sydney University");
@@ -240,7 +240,7 @@ public class BasicProfileServiceTest {
         university.setEndDate("04-11-19");
         basicProfileModel.addUniversity("100157", university.toString());
     }
-    @Test
+    //@Test
     public void addCollege() {
         College college = new College();
         college.setCollege("Cambridge College");

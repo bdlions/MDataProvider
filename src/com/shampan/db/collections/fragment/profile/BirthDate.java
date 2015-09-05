@@ -1,19 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.shampan.db.collections.fragment.profile;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  *
- * @author Sampan-IT
+ * @author nazmul hasan
  */
 public class BirthDate {
+    @JsonProperty("bd")
     private String birthDay;
+    @JsonProperty("bm")
     private String birthMonth;
+    @JsonProperty("by")
     private String birthYear;
 
     public String getBirthDay() {

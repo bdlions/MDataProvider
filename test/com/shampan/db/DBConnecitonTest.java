@@ -116,7 +116,7 @@ public class DBConnecitonTest {
         address.setZip("Ranigong");
         
         Gender gender = new Gender();
-        gender.setId("1");
+        gender.setGenderId("1");
         gender.setTitle("Female");
         
         City currentCity = new City();

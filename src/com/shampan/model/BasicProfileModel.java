@@ -188,7 +188,7 @@ public class BasicProfileModel {
      */
     public String addWorkPlace(String userId, String additionalData) {
         MongoCollection<BasicProfileDAO> mongoCollection
-                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("uId").is(userId).get();
         Document pQuery = new Document();
         pQuery.put("wp", "$all");
@@ -218,7 +218,7 @@ public class BasicProfileModel {
      */
     public String addPSkill(String userId, String additionalData) {
         MongoCollection<BasicProfileDAO> mongoCollection
-                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("uId").is(userId).get();
         Document pQuery = new Document();
         pQuery.put("pSkills", "$all");
