@@ -5,6 +5,7 @@
  */
 package com.shampan.db.collections.fragment.profile;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -13,9 +14,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class School {
 
+    @JsonProperty("scl")
     private String school;
+    @JsonProperty("dsc")
     private String description;
+    @JsonProperty("sdt")
     private String startDate;
+    @JsonProperty("edt")
     private String endDate;
 
     public String getSchool() {
