@@ -13,17 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class Share {
 
-    private String ShareCounter;
     private UserInfo userInfo;
-
-    public String getShareCounter() {
-        return ShareCounter;
-    }
-
-    public void setShareCounter(String ShareCounter) {
-        this.ShareCounter = ShareCounter;
-    }
-
     public UserInfo getUserInfo() {
         return userInfo;
     }

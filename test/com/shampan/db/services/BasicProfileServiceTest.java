@@ -348,8 +348,7 @@ public class BasicProfileServiceTest {
         System.out.println(basicProfileModel.getOverview("Dq9y3wHnMC3Y8ag"));
     }
 
-    
-//    @Test
+
 
     public void getWorkPlaces() {
         System.out.println(basicProfileModel.getWorkPlaces("100157"));
@@ -446,7 +445,7 @@ public class BasicProfileServiceTest {
         fQuote.setfQuote("khachar fake fake...porose mukhe mukhe...nirobe chokhe chokhe chae..");
         System.out.println(basicProfileModel.addFQuote("100157", fQuote.toString()));
     }
-    @Test
+  //  @Test
 
     public void addAbout() {
         About about = new About();

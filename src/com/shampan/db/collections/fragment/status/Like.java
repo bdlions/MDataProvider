@@ -14,16 +14,7 @@ import java.util.List;
  */
 public class Like {
 
-    private int LikeCounter;
     private UserInfo userInfo;
-
-    public int getLikeCounter() {
-        return LikeCounter;
-    }
-
-    public void setLikeCounter(int LikeCounter) {
-        this.LikeCounter = LikeCounter;
-    }
 
     public UserInfo getUserInfo() {
         return userInfo;

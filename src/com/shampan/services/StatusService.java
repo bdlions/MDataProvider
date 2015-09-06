@@ -37,8 +37,8 @@ public class StatusService {
         return response;
     }
 
-    public static String updateStatusLike(String statusId, String likeInfo) {
-        String response = obj.updateStatusLike(statusId, likeInfo);
+    public static String addStatusLike(String statusId, String likeInfo) {
+        String response = obj.addStatusLike(statusId, likeInfo);
         return response;
 
     }
@@ -47,8 +47,8 @@ public class StatusService {
         return response;
 
     }
-    public static String updateStatusShare(String statusId, String shareInfo) {
-        String response = obj.updateStatusShare(statusId, shareInfo);
+    public static String shareStatus(String statusId,String refUserInfo, String shareInfo) {
+        String response = obj.shareStatus(statusId, refUserInfo, shareInfo);
         return response;
 
     }

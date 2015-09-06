@@ -16,6 +16,7 @@ import com.shampan.db.collections.fragment.status.ReferenceInfo;
 import com.shampan.db.collections.fragment.status.ReferenceList;
 import com.shampan.db.collections.fragment.status.Share;
 import com.shampan.db.collections.fragment.status.UserInfo;
+import com.shampan.util.LogWriter;
 import java.util.ArrayList;
 import static java.util.Collections.list;
 import java.util.List;
@@ -32,11 +33,23 @@ public class StatusModel {
 
     }
 
+    /**
+     * *
+     *
+     * Add a status parameter Status Info
+     */
     public String addStatus(String statusInfo) {
         MongoCollection<StatusDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
         StatusDAO statusInfoObj = new StatusDAOBuilder().build(statusInfo);
-        mongoCollection.insertOne(statusInfoObj);
+        System.out.println(statusInfoObj);
+        try {
+            if (statusInfoObj != null) {
+                mongoCollection.insertOne(statusInfoObj);
+            }
+        } catch (NullPointerException npe) {
+            LogWriter.getErrorLog().error(npe);
+        }
         return "successful";
     }
 
@@ -50,6 +63,10 @@ public class StatusModel {
 
     }
 
+    /**
+     * Delete a status parameter StatusId status id
+     *
+     */
     public String deleteStatus(String statusId) {
         MongoCollection<StatusDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
@@ -59,6 +76,11 @@ public class StatusModel {
 
     }
 
+    /**
+     *
+     * Update status parameter statusId and Status Description
+     *
+     */
     public String updateStatus(String statusId, String statusInfo) {
         MongoCollection<StatusDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
@@ -67,30 +89,61 @@ public class StatusModel {
         return "successfull";
     }
 
-    public String updateStatusLike(String statusId, String likeInfo) {
+    /**
+     * add Status like parameter statusId and like Info
+     */
+    public String addStatusLike(String statusId, String likeInfo) {
         MongoCollection<StatusDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("statusId").is(statusId).get();
         Like statusLikeInfo = Like.getStatusLike(likeInfo);
-        mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("like", JSON.parse(statusLikeInfo.toString()))));
+        try {
+            if (statusLikeInfo != null) {
+                mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("like", JSON.parse(statusLikeInfo.toString()))));
+            }
+        } catch (NullPointerException npe) {
+            LogWriter.getErrorLog().error(npe);
+        }
         return "Succefull";
     }
 
+    /**
+     * Add Status Comment parameter statusId status Id ,commentInfo description
+     *
+     */
     public String addStatusComment(String statusId, String commentInfo) {
         MongoCollection<StatusDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("statusId").is(statusId).get();
         Comment statusCommentInfo = Comment.getStatusComment(commentInfo);
-        mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("comment", JSON.parse(statusCommentInfo.toString()))));
+        try {
+            if (statusCommentInfo != null) {
+                mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("comment", JSON.parse(statusCommentInfo.toString()))));
+            }
+        } catch (NullPointerException npe) {
+            LogWriter.getErrorLog().error(npe);
+        }
         return "Succefull";
     }
 
-    public String updateStatusShare(String statusId, String shareInfo) {
+    public String shareStatus(String statusId, String refUserInfo, String shareInfo) {
         MongoCollection<StatusDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("statusId").is(statusId).get();
-        Share statusShareInfo = Share.getStatusShare(shareInfo);
-        mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("share", JSON.parse(statusShareInfo.toString()))));
+        System.out.println(refUserInfo);
+        UserInfo statusRefInfo = UserInfo.getUserInfo(refUserInfo);
+        System.out.println(statusRefInfo);
+        try {
+            if (statusRefInfo != null) {
+                mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("ReferenceList", JSON.parse(statusRefInfo.toString()))));
+            }
+        } catch (NullPointerException npe) {
+            LogWriter.getErrorLog().error(npe);
+        }
+        if (shareInfo != null) {
+            StatusModel obj = new StatusModel();
+            obj.addStatus(shareInfo);
+        }
 
         return "Successful";
     }
@@ -149,20 +202,7 @@ public class StatusModel {
                 .setReferenceInfo(referenceInfo)
                 .setReferenceList(refStatusList)
                 .build();
-//        System.out.println("test" + satusInfo.toString());
-//        Document projectionQuary = new Document();
-//        projectionQuary.put("statusId", statusId);
-//        mongoCollection.findOneAndDelete(projectionQuary);
-        StatusModel ob = new StatusModel();
 
-//        System.out.println(ob.addStatus(satusInfo.toString()));
-//        System.out.println(ob.deleteStatus(statusId));
-//        System.out.println(ob.getStatuses(userId));
-//        System.out.println(ob.updatesatus(statusId, "The dream comes True to Night"));
-//        ob.addStatus(satusInfo.toString());
-//        System.out.println(ob.updateStatusLike(statusId, statusLikeInfo.toString()));
-//        System.out.println(ob.addStatusComment(statusId, statusCommentInfo.toString()));
-//        System.out.println(ob.updateStatusShare(statusId, shareShareInfo.toString()));
     }
 
 }
