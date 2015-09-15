@@ -68,16 +68,18 @@ public class BasicProfileServiceTest {
     public void tearDown() {
     }
     
-    //@Test
+//    @Test
     public void addWorkPlace() {
         WorkPlace workPlace = new WorkPlace();
+        workPlace.setId("1");
         workPlace.setCompany("NASA");
         workPlace.setPosition("Software Engineer");
         workPlace.setDescription("Nothing to say");
         workPlace.setCity("Dhaka");
         String workplace1 = workPlace.toString();
-        basicProfileModel.addWorkPlace(userId, workplace1);
+        basicProfileModel.addWorkPlace("100157", workplace1);
     }
+   
 
     //@Test
     public void addProSkill() {
@@ -156,10 +158,15 @@ public class BasicProfileServiceTest {
         System.out.println(basicProfileModel.getWorksEducation(userId));
     }
     
-    //@Test
-    public void editWorkPlace() 
-    {
-    
+   @Test
+    public void editWorkPlace() {
+        WorkPlace workPlace = new WorkPlace();
+        workPlace.setId("2");
+        workPlace.setCompany("Shampan It");
+        workPlace.setDescription("Nothing to say");
+        workPlace.setCity("Dhaka");
+        String workplace1 = workPlace.toString();
+        basicProfileModel.UpdateWorkPlace("100157", "2", workplace1.toString());
     }
     
     //@Test
@@ -183,6 +190,12 @@ public class BasicProfileServiceTest {
     //@Test
     public void editSchool() 
     {
+    
+    }
+//    @Test
+    public void testEditField() 
+    {
+       basicProfileModel.testEditField("100157","-it");  
     
     }
     

@@ -38,12 +38,13 @@ public class BasicProfileModel {
     public BasicProfileModel() {
 
     }
-    
+
     //--------------------------------- About -> Works and Education ------------------------------------//
     /**
-     * This method will return list of work places , professional skills, universities,
-     * colleges and schools of a user
-     * @param  userId, user id
+     * This method will return list of work places , professional skills,
+     * universities, colleges and schools of a user
+     *
+     * @param userId, user id
      * @author nazmul hasan on 5th September 2015
      */
     public BasicProfileDAO getWorksEducation(String userId) {
@@ -59,6 +60,7 @@ public class BasicProfileModel {
         BasicProfileDAO workEducationCursor = mongoCollection.find(selectQuery).projection(pQuery).first();
         return workEducationCursor;
     }
+
     /**
      * This method will add workplace of a user
      *
@@ -88,7 +90,7 @@ public class BasicProfileModel {
         String response = "successful";
         return response;
     }
-    
+
     /**
      * This method will add professional skill of a user
      *
@@ -121,6 +123,7 @@ public class BasicProfileModel {
         String response = "successful";
         return response;
     }
+
     /**
      * This method will add university of a user
      *
@@ -151,6 +154,7 @@ public class BasicProfileModel {
         String response = "successful";
         return response;
     }
+
     /**
      * This method will add college of a user
      *
@@ -180,6 +184,7 @@ public class BasicProfileModel {
         String response = "successful";
         return response;
     }
+
     /**
      * This method will add school of a user
      *
@@ -210,51 +215,67 @@ public class BasicProfileModel {
         String response = "successful";
         return response;
     }
-    
+
     /**
      * This method will edit work place of a user
+     *
      * @author nazmul hasan on 5th september 2015
      */
-    public String editWorkPlace() 
-    {
-        
-        return "";
+    public String UpdateWorkPlace(String userId, String workPlaceId, String workPlaceInfo) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
+        Document sQuery = new Document();
+        sQuery.put("uId", userId);
+        sQuery.put("wps.id", workPlaceId);
+        WorkPlace workPlace = WorkPlace.getWorkPlace(workPlaceInfo);
+        BasicProfileDAO schoolCursor = mongoCollection.find(sQuery).first();
+        System.out.println(schoolCursor);
+        if (workPlace != null) {
+            BasicProfileDAO result = mongoCollection.findOneAndUpdate(sQuery, new Document("$set", new Document("wps.$", JSON.parse(workPlace.toString()))));
+//            BasicProfileDAO result = mongoCollection.findOneAndUpdate(sQuery, new Document("$set", new Document("wps.$.desc","desccc")));
+//            BasicProfileDAO result = mongoCollection.findOneAndUpdate(sQuery, new Document("$set", new Document("wps.$.$pushAll","descrition")));
+        }
+        String response = "successful";
+        return response;
     }
-    
+
     /**
      * This method will edit professional skill of a user
+     *
      * @author nazmul hasan on 5th september 2015
      */
-    public String editProfessionalSkill() 
-    {
-        
+    public String editProfessionalSkill() {
+
         return "";
     }
+
     /**
      * This method will edit university of a user
+     *
      * @author nazmul hasan on 5th september 2015
      */
-    public String editUniversity() 
-    {
-        
+    public String editUniversity() {
+
         return "";
     }
+
     /**
      * This method will edit college of a user
+     *
      * @author nazmul hasan on 5th september 2015
      */
-    public String editCollege() 
-    {
-        
+    public String editCollege() {
+
         return "";
     }
+
     /**
      * This method will edit school of a user
+     *
      * @author nazmul hasan on 5th september 2015
      */
-    public String editSchool() 
-    {
-        
+    public String editSchool() {
+
         return "";
     }
 
@@ -319,8 +340,7 @@ public class BasicProfileModel {
         return overviewJson.toString();
 
     }
-    
-    
+
     public BasicProfileDAO getWorkPlaces(String userId) {
         MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
@@ -557,10 +577,11 @@ public class BasicProfileModel {
     }
 //.................. End of About  module.....................
 
-    public void addBasicProfile(Document AdditionalData) {
-        MongoDatabase db = DBConnection.getInstance().getConnection();
-        MongoCollection table = db.getCollection("users");
-        table.insertOne(AdditionalData);
+    public void testEditField(String userId, String website) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("uId").is(userId).get();
+        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("bInfo.website.website", website)));
     }
 
     public void updateBasicProfile(String userId, Document additionalData) {
