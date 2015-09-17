@@ -5,6 +5,7 @@
  */
 package com.shampan.db.collections.fragment.profile;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shampan.db.collections.CountriesDAO;
 
@@ -15,7 +16,9 @@ import com.shampan.db.collections.CountriesDAO;
 public class Town {
 
     private String id;
+    @JsonProperty("twn")
     private String townName;
+    @JsonProperty("cty")
     private CountriesDAO country;
 
     public String getId() {

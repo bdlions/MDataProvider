@@ -1,10 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.shampan.db.collections.fragment.profile;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -12,12 +7,24 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author Sampan-IT
  */
 public class Address {
-
+    private String id;
+    @JsonProperty("adrs")
     private String address;
+    @JsonProperty("ct")
     private String city;
+    @JsonProperty("zip")
     private String zip;
+    @JsonProperty("pc")
     private String postCode;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    
     public String getAddress() {
         return address;
     }
