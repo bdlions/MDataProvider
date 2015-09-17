@@ -46,7 +46,7 @@ import static org.junit.Assert.*;
  */
 public class BasicProfileServiceTest {
 
-    public String userId = "woOd1ruOyGfJ4IM";
+    public String userId = "eQeOwhE7hrUkCyP";
     BasicProfileModel basicProfileModel = new BasicProfileModel();
 
     public BasicProfileServiceTest() {
@@ -67,7 +67,7 @@ public class BasicProfileServiceTest {
     @After
     public void tearDown() {
     }
-    
+
 //    @Test
     public void addWorkPlace() {
         WorkPlace workPlace = new WorkPlace();
@@ -79,7 +79,6 @@ public class BasicProfileServiceTest {
         String workplace1 = workPlace.toString();
         basicProfileModel.addWorkPlace("100157", workplace1);
     }
-   
 
     //@Test
     public void addProSkill() {
@@ -88,7 +87,9 @@ public class BasicProfileServiceTest {
         String pskillString = pSkill.toString();
         basicProfileModel.addProfessionalSkill(userId, pskillString);
     }
+
     // @Test
+
     public void addUniversity() {
         University university = new University();
         university.setUniversity("Sydney University");
@@ -97,7 +98,9 @@ public class BasicProfileServiceTest {
         university.setEndDate("04-11-19");
         basicProfileModel.addUniversity(userId, university.toString());
     }
+
     // @Test
+
     public void addCollege() {
         College college = new College();
         college.setCollege("Cambridge College");
@@ -116,7 +119,9 @@ public class BasicProfileServiceTest {
         school.setEndDate("04-11-2007");
         basicProfileModel.addSchool(userId, school.toString());
     }
+
     //@Test
+
     public void addWorksAndEducation() {
         WorkPlace workPlace = new WorkPlace();
         workPlace.setCompany("NASA");
@@ -125,26 +130,26 @@ public class BasicProfileServiceTest {
         workPlace.setCity("Dhaka");
         String workplace1 = workPlace.toString();
         basicProfileModel.addWorkPlace(userId, workplace1);
-        
+
         PSkill pSkill = new PSkill();
         pSkill.setpSkill("Software Engineer at NASA");
         String pskillString = pSkill.toString();
         basicProfileModel.addProfessionalSkill(userId, pskillString);
-        
+
         University university = new University();
         university.setUniversity("Sydney University");
         university.setDescription("have nice memories");
         university.setStartDate("04-11-15");
         university.setEndDate("04-11-19");
         basicProfileModel.addUniversity(userId, university.toString());
-        
+
         College college = new College();
         college.setCollege("Cambridge College");
         college.setDescription("I was very Shy in my college Life");
         college.setStartDate("04-11-07");
         college.setEndDate("04-11-09");
         basicProfileModel.addCollege(userId, college.toString());
-        
+
         School school = new School();
         school.setSchool("Ranigong high School");
         school.setDescription(" I had no friend");
@@ -157,7 +162,7 @@ public class BasicProfileServiceTest {
     public void getWorksAndEducation() {
         System.out.println(basicProfileModel.getWorksEducation(userId));
     }
-    
+
 //   @Test
     public void editWorkPlace() {
         WorkPlace workPlace = new WorkPlace();
@@ -168,58 +173,58 @@ public class BasicProfileServiceTest {
         String workplace1 = workPlace.toString();
         basicProfileModel.editWorkPlace("100157", "2", workplace1.toString());
     }
-    
-    //@Test
-    public void editProfessionalSkill() 
-    {
-    
+
+//    @Test
+    public void editProfessionalSkill() {
+        PSkill pSkill = new PSkill();
+        pSkill.setpSkill("Software Engineer at NASA.....");
+        basicProfileModel.editProfessionalSkill(userId, "cPFVuGY0TVdlTHB", pSkill.toString());
+
     }
-    
-    //@Test
-    public void editUniversity() 
-    {
-    
+
+//    @Test
+    public void editUniversity() {
+        University university = new University();
+        university.setUniversity("Sydney University");
+        university.setDescription("have nice memories");
+        university.setStartDate("04-11-15");
+        university.setEndDate("04-11-19");
+        basicProfileModel.editUniversity(userId,"bFnjzXgEwcORE6o", university.toString());
+
     }
-    
-    //@Test
-    public void editCollege() 
-    {
-    
+
+//    @Test
+    public void editCollege() {
+         College college = new College();
+        college.setCollege("Cambridge College");
+        college.setDescription("I was very Shy in my college Life");
+        college.setStartDate("04-11-07");
+        college.setEndDate("04-11-09");
+        basicProfileModel.editCollege(userId,"U91om5Mv6tRb4TY", college.toString());
+
     }
-    
-    //@Test
-    public void editSchool() 
-    {
-    
+
+//    @Test
+    public void editSchool() {
+        School school = new School();
+        school.setSchool("Ranigong high School");
+        school.setDescription(" I had no friend");
+        school.setStartDate("04-11-2002");
+        school.setEndDate("04-11-2007");
+        basicProfileModel.editSchool(userId,"FxtXekH69N4LU0Q", school.toString());
+
     }
-    @Test
-    public void deleteWrokPlace() 
-    {
-     basicProfileModel.deleteWrokPlace(userId,"w0qoMvuzkrSj7qj");  
+
+//    @Test
+    public void deleteWrokPlace() {
+        basicProfileModel.deleteWrokPlace(userId, "js67aTI7lbVkipY");
     }
 //    @Test
-    public void testEditField() 
-    {
-       basicProfileModel.testEditField("100157","-it");  
-    
+
+    public void testEditField() {
+        basicProfileModel.testEditField("100157", "-it");
+
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
@@ -366,8 +371,6 @@ public class BasicProfileServiceTest {
         System.out.println(basicProfileModel.getOverview("Dq9y3wHnMC3Y8ag"));
     }
 
-
-
     public void getWorkPlaces() {
         System.out.println(basicProfileModel.getWorkPlaces("100157"));
     }
@@ -463,7 +466,7 @@ public class BasicProfileServiceTest {
         fQuote.setfQuote("khachar fake fake...porose mukhe mukhe...nirobe chokhe chokhe chae..");
         System.out.println(basicProfileModel.addFQuote("100157", fQuote.toString()));
     }
-  //  @Test
+    //  @Test
 
     public void addAbout() {
         About about = new About();

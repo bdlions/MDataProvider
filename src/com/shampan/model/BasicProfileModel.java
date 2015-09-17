@@ -5,6 +5,7 @@ import com.mongodb.QueryBuilder;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.operation.FindAndDeleteOperation;
 import com.mongodb.util.JSON;
 import com.sampan.response.ResultEvent;
 import com.shampan.db.Collections;
@@ -231,8 +232,6 @@ public class BasicProfileModel {
         sQuery.put("uId", userId);
         sQuery.put("wps.id", workPlaceId);
         WorkPlace workPlace = WorkPlace.getWorkPlace(workPlaceInfo);
-        BasicProfileDAO schoolCursor = mongoCollection.find(sQuery).first();
-        System.out.println(schoolCursor);
         if (workPlace != null) {
             BasicProfileDAO result = mongoCollection.findOneAndUpdate(sQuery, new Document("$set", new Document("wps.$", JSON.parse(workPlace.toString()))));
         }
@@ -245,9 +244,18 @@ public class BasicProfileModel {
      *
      * @author nazmul hasan on 5th september 2015
      */
-    public String editProfessionalSkill() {
-
-        return "";
+    public String editProfessionalSkill(String userId, String pSkillId, String pSkillInfo) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
+        Document sQuery = new Document();
+        sQuery.put("uId", userId);
+        sQuery.put("pss.id", pSkillId);
+        PSkill pSInfo = PSkill.getProfessionalSkill(pSkillInfo);
+        if (pSInfo != null) {
+            BasicProfileDAO result = mongoCollection.findOneAndUpdate(sQuery, new Document("$set", new Document("pss.$", JSON.parse(pSInfo.toString()))));
+        }
+        resultEvent.setResponseCode("100157");
+        return resultEvent.toString();
     }
 
     /**
@@ -255,9 +263,18 @@ public class BasicProfileModel {
      *
      * @author nazmul hasan on 5th september 2015
      */
-    public String editUniversity() {
-
-        return "";
+    public String editUniversity(String userId, String universityId, String universityInfo) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
+        Document sQuery = new Document();
+        sQuery.put("uId", userId);
+        sQuery.put("unis.id", universityId);
+        University uvInfo = University.getUniversity(universityInfo);
+        if (uvInfo != null) {
+            BasicProfileDAO result = mongoCollection.findOneAndUpdate(sQuery, new Document("$set", new Document("unis.$", JSON.parse(uvInfo.toString()))));
+        }
+        resultEvent.setResponseCode("100157");
+        return resultEvent.toString();
     }
 
     /**
@@ -265,9 +282,18 @@ public class BasicProfileModel {
      *
      * @author nazmul hasan on 5th september 2015
      */
-    public String editCollege() {
-
-        return "";
+    public String editCollege(String userId, String collegeId, String collegeInfo) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
+        Document sQuery = new Document();
+        sQuery.put("uId", userId);
+        sQuery.put("clgs.id", collegeId);
+        College clgInfo = College.getCollege(collegeInfo);
+        if (clgInfo != null) {
+            BasicProfileDAO result = mongoCollection.findOneAndUpdate(sQuery, new Document("$set", new Document("clgs.$", JSON.parse(clgInfo.toString()))));
+        }
+        resultEvent.setResponseCode("100157");
+        return resultEvent.toString();
     }
 
     /**
@@ -275,9 +301,18 @@ public class BasicProfileModel {
      *
      * @author nazmul hasan on 5th september 2015
      */
-    public String editSchool() {
-
-        return "";
+    public String editSchool(String userId, String schoolId, String schoolInfo) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
+        Document sQuery = new Document();
+        sQuery.put("uId", userId);
+        sQuery.put("schs.id", schoolId);
+        School schInfo = School.getSchool(schoolInfo);
+        if (schInfo != null) {
+            BasicProfileDAO result = mongoCollection.findOneAndUpdate(sQuery, new Document("$set", new Document("schs.$", JSON.parse(schInfo.toString()))));
+        }
+        resultEvent.setResponseCode("100157");
+        return resultEvent.toString();
     }
 
     public String deleteWrokPlace(String userId, String workPlaceId) {
@@ -286,7 +321,14 @@ public class BasicProfileModel {
         Document sQuery = new Document();
         sQuery.put("uId", userId);
         sQuery.put("wps.id", workPlaceId);
-         BasicProfileDAO result = mongoCollection.findOneAndUpdate(sQuery, new Document("$pullAll", "wps.$"));
+        Document pQuery = new Document();
+        pQuery.put("wps.$.id", "$all");
+
+        System.out.println(mongoCollection.find(sQuery).projection(pQuery).first());
+//        System.out.println(new Document("wps", "js67aTI7lbVkipY"));
+//        BasicProfileDAO result = mongoCollection.findOneAndUpdate(sQuery, new Document("$pull", new Document("wps", "wps.$")));
+//         BasicProfileDAO result = mongoCollection.findOneAndUpdate(sQuery, new Document("$pull",new Document("wps.id",null)));
+//         BasicProfileDAO result = mongoCollection.findOneAndUpdate(sQuery, new Document("$unset",new Document("wps.$",null)));
         return "successful";
     }
 

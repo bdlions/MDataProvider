@@ -95,8 +95,8 @@ public class BasicProfileService {
      * @return string, status of the operation
      * @author nazmul hasan on 5th September 2015
      */
-    public static String editWorkPlace(String userId, String workPlace, String workPlaceData) {
-        String response = basicProfileModel.editWorkPlace(userId, workPlace, workPlaceData);
+    public static String editWorkPlace(String userId, String workPlaceId, String workPlaceData) {
+        String response = basicProfileModel.editWorkPlace(userId, workPlaceId, workPlaceData);
         return response;
     }
 
@@ -106,9 +106,9 @@ public class BasicProfileService {
      * @return string, status of the operation
      * @author nazmul hasan on 5th September 2015
      */
-    public static String editProfessionalSkill() {
-
-        return "";
+    public static String editProfessionalSkill(String userId, String pSkillId, String pSkillData) {
+        String response = basicProfileModel.editProfessionalSkill(userId, pSkillId, pSkillData);
+        return response;
     }
 
     /**
@@ -117,9 +117,9 @@ public class BasicProfileService {
      * @return string, status of the operation
      * @author nazmul hasan on 5th September 2015
      */
-    public static String editUniversity() {
-
-        return "";
+    public static String editUniversity(String userId, String universityId, String universityData) {
+        String response = basicProfileModel.editUniversity(userId, universityId, universityData);
+        return response;
     }
 
     /**
@@ -128,9 +128,9 @@ public class BasicProfileService {
      * @return string, status of the operation
      * @author nazmul hasan on 5th September 2015
      */
-    public static String editCollege() {
-
-        return "";
+    public static String editCollege(String userId, String collegeId, String collegeData) {
+        String response = basicProfileModel.editCollege(userId, collegeId, collegeData);
+        return response;
     }
 
     /**
@@ -139,13 +139,13 @@ public class BasicProfileService {
      * @return string, status of the operation
      * @author nazmul hasan on 5th September 2015
      */
-    public static String editSchool() {
-
-        return "";
+    public static String editSchool(String userId, String schoolId, String schoolData) {
+        String response = basicProfileModel.editCollege(userId, schoolId, schoolData);
+        return response;
     }
 
-    public static String deleteWrokPlace( String userId,String wrokPlaceId) {
-        String response = basicProfileModel.deleteWrokPlace( userId,wrokPlaceId);
+    public static String deleteWrokPlace(String userId, String wrokPlaceId) {
+        String response = basicProfileModel.deleteWrokPlace(userId, wrokPlaceId);
         return response;
     }
 

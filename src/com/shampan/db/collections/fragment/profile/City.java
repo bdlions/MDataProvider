@@ -14,11 +14,20 @@ import com.shampan.db.collections.CountriesDAO;
  */
 public class City {
 
+    private String id;
     private String cityName;
     private CountriesDAO country;
 
     public String getCityName() {
         return cityName;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setCityName(String cityName) {
