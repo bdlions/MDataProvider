@@ -46,7 +46,7 @@ import static org.junit.Assert.*;
  */
 public class BasicProfileServiceTest {
 
-    public String userId = "r7xzobTjOhs7wmN";
+    public String userId = "woOd1ruOyGfJ4IM";
     BasicProfileModel basicProfileModel = new BasicProfileModel();
 
     public BasicProfileServiceTest() {
@@ -158,7 +158,7 @@ public class BasicProfileServiceTest {
         System.out.println(basicProfileModel.getWorksEducation(userId));
     }
     
-   @Test
+//   @Test
     public void editWorkPlace() {
         WorkPlace workPlace = new WorkPlace();
         workPlace.setId("2");
@@ -166,7 +166,7 @@ public class BasicProfileServiceTest {
         workPlace.setDescription("Nothing to say");
         workPlace.setCity("Dhaka");
         String workplace1 = workPlace.toString();
-        basicProfileModel.UpdateWorkPlace("100157", "2", workplace1.toString());
+        basicProfileModel.editWorkPlace("100157", "2", workplace1.toString());
     }
     
     //@Test
@@ -191,6 +191,11 @@ public class BasicProfileServiceTest {
     public void editSchool() 
     {
     
+    }
+    @Test
+    public void deleteWrokPlace() 
+    {
+     basicProfileModel.deleteWrokPlace(userId,"w0qoMvuzkrSj7qj");  
     }
 //    @Test
     public void testEditField() 

@@ -6,6 +6,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.util.JSON;
+import com.sampan.response.ResultEvent;
 import com.shampan.db.Collections;
 import com.shampan.db.DBConnection;
 import com.shampan.db.collections.BasicProfileDAO;
@@ -34,6 +35,8 @@ import org.json.JSONObject;
  * @author Sampan-IT
  */
 public class BasicProfileModel {
+
+    ResultEvent resultEvent = new ResultEvent();
 
     public BasicProfileModel() {
 
@@ -221,7 +224,7 @@ public class BasicProfileModel {
      *
      * @author nazmul hasan on 5th september 2015
      */
-    public String UpdateWorkPlace(String userId, String workPlaceId, String workPlaceInfo) {
+    public String editWorkPlace(String userId, String workPlaceId, String workPlaceInfo) {
         MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
         Document sQuery = new Document();
@@ -232,11 +235,9 @@ public class BasicProfileModel {
         System.out.println(schoolCursor);
         if (workPlace != null) {
             BasicProfileDAO result = mongoCollection.findOneAndUpdate(sQuery, new Document("$set", new Document("wps.$", JSON.parse(workPlace.toString()))));
-//            BasicProfileDAO result = mongoCollection.findOneAndUpdate(sQuery, new Document("$set", new Document("wps.$.desc","desccc")));
-//            BasicProfileDAO result = mongoCollection.findOneAndUpdate(sQuery, new Document("$set", new Document("wps.$.$pushAll","descrition")));
         }
-        String response = "successful";
-        return response;
+        resultEvent.setResponseCode("100157");
+        return resultEvent.toString();
     }
 
     /**
@@ -277,6 +278,16 @@ public class BasicProfileModel {
     public String editSchool() {
 
         return "";
+    }
+
+    public String deleteWrokPlace(String userId, String workPlaceId) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
+        Document sQuery = new Document();
+        sQuery.put("uId", userId);
+        sQuery.put("wps.id", workPlaceId);
+         BasicProfileDAO result = mongoCollection.findOneAndUpdate(sQuery, new Document("$pullAll", "wps.$"));
+        return "successful";
     }
 
 //...........About Module.........................    

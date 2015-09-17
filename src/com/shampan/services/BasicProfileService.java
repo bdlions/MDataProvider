@@ -95,8 +95,8 @@ public class BasicProfileService {
      * @return string, status of the operation
      * @author nazmul hasan on 5th September 2015
      */
-    public static String UpdateWorkPlace(String userId, String workPlace, String workPlaceData) {
-        String response = basicProfileModel.UpdateWorkPlace(userId, workPlace, workPlaceData);
+    public static String editWorkPlace(String userId, String workPlace, String workPlaceData) {
+        String response = basicProfileModel.editWorkPlace(userId, workPlace, workPlaceData);
         return response;
     }
 
@@ -142,6 +142,11 @@ public class BasicProfileService {
     public static String editSchool() {
 
         return "";
+    }
+
+    public static String deleteWrokPlace( String userId,String wrokPlaceId) {
+        String response = basicProfileModel.deleteWrokPlace( userId,wrokPlaceId);
+        return response;
     }
 
     public static String getOverview(String userId) {
