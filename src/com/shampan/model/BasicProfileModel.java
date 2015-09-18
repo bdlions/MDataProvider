@@ -471,6 +471,27 @@ public class BasicProfileModel {
         return response;
     }
 
+    public String editCurrentCity(String userId, String cCityInfo) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("uId").is(userId).get();
+        City cityInfo = City.getCurrentCity(cCityInfo);
+        if (cityInfo != null) {
+            BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("bInfo.city", JSON.parse(cityInfo.toString()))));
+        }
+        resultEvent.setResponseCode("100157");
+        return resultEvent.toString();
+    }
+
+    public String deleteCurrentCity(String userId) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("uId").is(userId).get();
+        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$unset", new Document("bInfo.city", "")));
+        resultEvent.setResponseCode("100157");
+        return resultEvent.toString();
+    }
+
     public String addHomeTown(String userId, String additionalData) {
         MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
@@ -481,7 +502,28 @@ public class BasicProfileModel {
         return response;
     }
 
+    public String editHomeTown(String userId, String hTownInfo) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("uId").is(userId).get();
+        Town townInfo = Town.getHomeTown(hTownInfo);
+        if (townInfo != null) {
+            BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("bInfo.town", JSON.parse(townInfo.toString()))));
+        }
+        resultEvent.setResponseCode("100157");
+        return resultEvent.toString();
+    }
+
+    public String deleteHomeTown(String userId) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("uId").is(userId).get();
+        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$unset", new Document("bInfo.town", "")));
+        resultEvent.setResponseCode("100157");
+        return resultEvent.toString();
+    }
 //...........About Family and Relation................
+
     public BasicProfileDAO getFamilyRelation(String userId) {
         MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);

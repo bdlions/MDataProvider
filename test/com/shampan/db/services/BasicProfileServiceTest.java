@@ -89,7 +89,6 @@ public class BasicProfileServiceTest {
     }
 
     // @Test
-
     public void addUniversity() {
         University university = new University();
         university.setUniversity("Sydney University");
@@ -100,7 +99,6 @@ public class BasicProfileServiceTest {
     }
 
     // @Test
-
     public void addCollege() {
         College college = new College();
         college.setCollege("Cambridge College");
@@ -121,7 +119,6 @@ public class BasicProfileServiceTest {
     }
 
     //@Test
-
     public void addWorksAndEducation() {
         WorkPlace workPlace = new WorkPlace();
         workPlace.setCompany("NASA");
@@ -189,18 +186,18 @@ public class BasicProfileServiceTest {
         university.setDescription("have nice memories");
         university.setStartDate("04-11-15");
         university.setEndDate("04-11-19");
-        basicProfileModel.editUniversity(userId,"bFnjzXgEwcORE6o", university.toString());
+        basicProfileModel.editUniversity(userId, "bFnjzXgEwcORE6o", university.toString());
 
     }
 
 //    @Test
     public void editCollege() {
-         College college = new College();
+        College college = new College();
         college.setCollege("Cambridge College");
         college.setDescription("I was very Shy in my college Life");
         college.setStartDate("04-11-07");
         college.setEndDate("04-11-09");
-        basicProfileModel.editCollege(userId,"U91om5Mv6tRb4TY", college.toString());
+        basicProfileModel.editCollege(userId, "U91om5Mv6tRb4TY", college.toString());
 
     }
 
@@ -211,7 +208,7 @@ public class BasicProfileServiceTest {
         school.setDescription(" I had no friend");
         school.setStartDate("04-11-2002");
         school.setEndDate("04-11-2007");
-        basicProfileModel.editSchool(userId,"FxtXekH69N4LU0Q", school.toString());
+        basicProfileModel.editSchool(userId, "FxtXekH69N4LU0Q", school.toString());
 
     }
 
@@ -395,9 +392,9 @@ public class BasicProfileServiceTest {
         System.out.println(basicProfileModel.getSchools("100157"));
     }
 
-//    @Test
+    @Test
     public void getCityTown() {
-        System.out.println(basicProfileModel.getCityTown("100157"));
+        System.out.println(basicProfileModel.getCityTown(userId));
     }
 //    @Test
 
@@ -408,10 +405,38 @@ public class BasicProfileServiceTest {
     }
 
 //    @Test
+    public void editCurrentCity() {
+        City currentCity = new City();
+        currentCity.setCityName("Sydney");
+        basicProfileModel.editCurrentCity(userId, currentCity.toString());
+
+    }
+
+//    @Test
+    public void deleteCurrentCity() {
+        basicProfileModel.deleteCurrentCity(userId);
+
+    }
+
+//    @Test
+    public void deleteHomeTown() {
+        basicProfileModel.deleteHomeTown(userId);
+
+    }
+
+//    @Test
     public void addHomeTown() {
         Town homeTown = new Town();
         homeTown.setTownName("Dhaka");
         System.out.println(basicProfileModel.addHomeTown("100157", homeTown.toString()));
+    }
+
+//    @Test
+    public void editHomeTown() {
+        Town homeTown = new Town();
+        homeTown.setTownName("Dhaka");
+        basicProfileModel.editHomeTown(userId, homeTown.toString());
+
     }
 
 //    @Test

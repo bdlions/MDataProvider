@@ -140,7 +140,7 @@ public class BasicProfileService {
      * @author nazmul hasan on 5th September 2015
      */
     public static String editSchool(String userId, String schoolId, String schoolData) {
-        String response = basicProfileModel.editCollege(userId, schoolId, schoolData);
+        String response = basicProfileModel.editSchool(userId, schoolId, schoolData);
         return response;
     }
 
@@ -189,9 +189,29 @@ public class BasicProfileService {
         return response;
     }
 
+    public static String editCurrentCity(String userId, String cityInfo) {
+        String cityTown = basicProfileModel.editCurrentCity(userId, cityInfo);
+        return cityTown.toString();
+    }
+
+    public static String deleteCurrentCity(String userId) {
+        String cityTown = basicProfileModel.deleteCurrentCity(userId);
+        return cityTown.toString();
+    }
+
     public static String addHomeTown(String userId, String additionalData) {
         String response = basicProfileModel.addHomeTown(userId, additionalData);
         return response;
+    }
+
+    public static String editHomeTown(String userId, String townInfo) {
+        String cityTown = basicProfileModel.editHomeTown(userId, townInfo);
+        return cityTown.toString();
+    }
+
+    public static String deleteHomeTown(String userId) {
+        String cityTown = basicProfileModel.deleteHomeTown(userId);
+        return cityTown.toString();
     }
 
     public static String addRelationshipStatus(String userId, String relationshipStatus) {
