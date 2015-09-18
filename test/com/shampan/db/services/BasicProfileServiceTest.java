@@ -456,13 +456,29 @@ public class BasicProfileServiceTest {
         System.out.println(basicProfileModel.getContactBasicInfo("100157"));
     }
 
-    //@Test
+//    @Test
     public void addMobilePhone() {
         MobilePhone mPhone1 = new MobilePhone();
+        mPhone1.setId("1");
         mPhone1.setPhone("01723598606");
-        System.out.println(basicProfileModel.addMobilePhone("100157", mPhone1.toString()));
+        System.out.println(basicProfileModel.addMobilePhone(userId, mPhone1.toString()));
     }
-    //@Test
+
+//    @Test
+    public void editMobilePhone() {
+        String mobileId = "1";
+        MobilePhone mPhone1 = new MobilePhone();
+        mPhone1.setId("1");
+        mPhone1.setPhone("017235");
+        System.out.println(basicProfileModel.editMobilePhone(userId, mobileId, mPhone1.toString()));
+    }
+//    @Test
+
+    public void deleteMobilePhone() {
+        String mobileId = "1";
+        System.out.println(basicProfileModel.deleteMobilePhone(userId, mobileId));
+    }
+//    @Test
 
     public void addAddress() {
         Address address = new Address();
@@ -470,19 +486,47 @@ public class BasicProfileServiceTest {
         address.setCity("Dhaka");
         address.setPostCode("025");
         address.setZip("Ranigong");
-        System.out.println(basicProfileModel.addAddress("100157", address.toString()));
+        System.out.println(basicProfileModel.addAddress(userId, address.toString()));
+    }
+
+//    @Test
+    public void deleteAddress() {
+        String mobileId = "1";
+        System.out.println(basicProfileModel.deleteAddress(userId, mobileId));
+    }
+//    @Test
+
+    public void editAddress() {
+        Address address = new Address();
+        address.setAddress("Kapasia,ng");
+        address.setCity("Dhaka");
+        address.setPostCode("025");
+        address.setZip("Ranigong");
+        System.out.println(basicProfileModel.editAddress(userId, address.toString()));
     }
 
 //    @Test
     public void addWebsite() {
         Website website = new Website();
         website.setWebsite("sampan-it");
-        System.out.println(basicProfileModel.addWebsite("100157", website.toString()));
+        System.out.println(basicProfileModel.addWebsite(userId, website.toString()));
+    }
+
+//        @Test
+    public void deleteWebsite() {
+        System.out.println(basicProfileModel.deleteWebsite(userId));
+    }
+
+//    @Test
+    public void editWebsite() {
+        Website website = new Website();
+        website.setWebsite("sampan");
+        System.out.println(basicProfileModel.editWebsite(userId, website.toString()));
     }
 
     //@Test
     public void getAboutFQuote() {
-        System.out.println(basicProfileModel.getAboutFQuote("100157"));
+        System.out.println(basicProfileModel.getAboutFQuote(userId));
     }
 
     //@Test
