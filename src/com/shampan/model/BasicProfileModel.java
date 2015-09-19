@@ -553,13 +553,15 @@ public class BasicProfileModel {
 
 //........ About Contact and BasicInfo...............
     public BasicProfileDAO getContactBasicInfo(String userId) {
-        MongoCollection<BasicProfileDAO> mongoCollection
+         MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("uId").is(userId).get();
         Document pQuery = new Document();
-        pQuery.put("bInfo", "$all");
-        BasicProfileDAO basicInfo = mongoCollection.find(selectQuery).projection(pQuery).first();
-        return basicInfo;
+        pQuery.put("bInfo.mps", "$all");
+        pQuery.put("bInfo.adrses", "$all");
+        pQuery.put("bInfo.ws", "$all");
+        BasicProfileDAO basicInfoResult = mongoCollection.find(selectQuery).projection(pQuery).first();
+        return basicInfoResult;
     }
 
     public String addMobilePhone(String userId, String mobilePhoneInfo) {
@@ -640,17 +642,11 @@ public class BasicProfileModel {
         return resultEvent.toString();
     }
 
-    public String deleteAddress(String userId, String addressInfo) {
+    public String deleteAddress(String userId) {
         MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("uId").is(userId).get();
-        try {
-            if (addressInfo != null) {
-                BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$unset", new Document("bInfo.adrses", "")));
-            }
-        } catch (NullPointerException npe) {
-            LogWriter.getErrorLog().error("null value exception");
-        }
+        BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$unset", new Document("bInfo.adrses", "")));
         resultEvent.setResponseCode("100157");
         return resultEvent.toString();
     }
@@ -687,7 +683,7 @@ public class BasicProfileModel {
         return resultEvent.toString();
     }
 
-    public String deleteWebsite(String userId) {
+    public String deleteWebsite(String userId, String websiteId ) {
         MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("uId").is(userId).get();
@@ -704,6 +700,22 @@ public class BasicProfileModel {
         try {
             if (email != null) {
                 BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("basicInfo.emails", JSON.parse(email.toString()))));
+            }
+
+        } catch (NullPointerException npe) {
+            LogWriter.getErrorLog().error("null value exception");
+        }
+        String response = "successful";
+        return response;
+    }
+    public String editEmail(String userId,String emailId, String additionalData) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("uId").is(userId).get();
+        Email email = Email.getEmail(additionalData);
+        try {
+            if (email != null) {
+                BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("basicInfo.emails.$", JSON.parse(email.toString()))));
             }
 
         } catch (NullPointerException npe) {

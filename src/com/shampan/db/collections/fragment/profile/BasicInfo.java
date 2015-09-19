@@ -14,7 +14,7 @@ public class BasicInfo {
     private Website website;
     @JsonProperty("bDate")
     private BirthDate birthDate;
-    @JsonProperty("bDate")
+    @JsonProperty("gender")
     private Gender gender;
     @JsonProperty("ct")
     private City city;

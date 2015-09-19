@@ -224,15 +224,47 @@ public class BasicProfileService {
         return response;
     }
 
+    public static String editMobilePhone(String userId, String mobileId, String mobilePhoneInfo) {
+        String response = basicProfileModel.editMobilePhone(userId, mobileId, mobilePhoneInfo);
+        return response;
+    }
+
+    public static String deleteMobilePhone(String userId, String mobileId) {
+        String response = basicProfileModel.deleteMobilePhone(userId, mobileId);
+        return response;
+    }
+
     public static String addAddress(String userId, String addressInfo) {
         String response = basicProfileModel.addAddress(userId, addressInfo);
         return response;
     }
+    
+    public static String editAddress(String userId, String addressInfo)  {
+        String response = basicProfileModel.editAddress(userId, addressInfo);
+        return response;
+    }
+    
+    public static String deleteAddress(String userId, String addressInfo) {
+        String response = basicProfileModel.deleteAddress(userId);
+        return response;
+    }
+    
 
     public static String addWebsite(String userId, String websiteInfo) {
         String response = basicProfileModel.addWebsite(userId, websiteInfo);
         return response;
     }
+    
+    public static String editWebsite(String userId, String websiteInfo) {
+        String response = basicProfileModel.editWebsite(userId, websiteInfo);
+        return response;
+    }
+    
+    public static String deleteWebsite(String userId, String websiteId) {
+        String response = basicProfileModel.deleteWebsite(userId, websiteId);
+        return response;
+    }
+    
 
     public static String addEmail(String userId, String emailInfo) {
         String response = basicProfileModel.addEmail(userId, emailInfo);

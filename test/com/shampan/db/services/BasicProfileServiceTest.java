@@ -77,7 +77,7 @@ public class BasicProfileServiceTest {
         workPlace.setDescription("Nothing to say");
         workPlace.setCity("Dhaka");
         String workplace1 = workPlace.toString();
-        basicProfileModel.addWorkPlace("100157", workplace1);
+        basicProfileModel.addWorkPlace(userId, workplace1);
     }
 
     //@Test
@@ -168,7 +168,7 @@ public class BasicProfileServiceTest {
         workPlace.setDescription("Nothing to say");
         workPlace.setCity("Dhaka");
         String workplace1 = workPlace.toString();
-        basicProfileModel.editWorkPlace("100157", "2", workplace1.toString());
+        basicProfileModel.editWorkPlace(userId, "2", workplace1.toString());
     }
 
 //    @Test
@@ -219,7 +219,7 @@ public class BasicProfileServiceTest {
 //    @Test
 
     public void testEditField() {
-        basicProfileModel.testEditField("100157", "-it");
+        basicProfileModel.testEditField(userId, "-it");
 
     }
 
@@ -347,7 +347,7 @@ public class BasicProfileServiceTest {
         schoolList.add(school);
 
         BasicProfileDAO userProfileInfo = new BasicProfileDAOBuilder()
-                .setUserId("100157")
+                .setUserId(userId)
                 .setBasicInfo(basicInfo)
                 .setWorkPlaces(workPlaceList)
                 .setpSkills(pSkillList)
@@ -369,27 +369,27 @@ public class BasicProfileServiceTest {
     }
 
     public void getWorkPlaces() {
-        System.out.println(basicProfileModel.getWorkPlaces("100157"));
+        System.out.println(basicProfileModel.getWorkPlaces(userId));
     }
 //    @Test
 
     public void getProfessionalSkills() {
-        System.out.println(basicProfileModel.getProfessionalSkills("100157"));
+        System.out.println(basicProfileModel.getProfessionalSkills(userId));
     }
 
 //    @Test
     public void getUniversities() {
-        System.out.println(basicProfileModel.getUniversities("100157"));
+        System.out.println(basicProfileModel.getUniversities(userId));
     }
 //    @Test
 
     public void getColleges() {
-        System.out.println(basicProfileModel.getColleges("100157"));
+        System.out.println(basicProfileModel.getColleges(userId));
     }
 
 //    @Test
     public void getSchools() {
-        System.out.println(basicProfileModel.getSchools("100157"));
+        System.out.println(basicProfileModel.getSchools(userId));
     }
 
     @Test
@@ -401,7 +401,7 @@ public class BasicProfileServiceTest {
     public void addCurrentCity() {
         City currentCity = new City();
         currentCity.setCityName("Sydney");
-        System.out.println(basicProfileModel.addCurrentCity("100157", currentCity.toString()));
+        System.out.println(basicProfileModel.addCurrentCity(userId, currentCity.toString()));
     }
 
 //    @Test
@@ -428,7 +428,7 @@ public class BasicProfileServiceTest {
     public void addHomeTown() {
         Town homeTown = new Town();
         homeTown.setTownName("Dhaka");
-        System.out.println(basicProfileModel.addHomeTown("100157", homeTown.toString()));
+        System.out.println(basicProfileModel.addHomeTown(userId, homeTown.toString()));
     }
 
 //    @Test
@@ -441,19 +441,19 @@ public class BasicProfileServiceTest {
 
 //    @Test
     public void getFamilyRelation() {
-        System.out.println(basicProfileModel.getFamilyRelation("100157"));
+        System.out.println(basicProfileModel.getFamilyRelation(userId));
     }
 //    @Test
 
     public void addRelationshipStatus() {
         RelationStatus relationStatus = new RelationStatus();
         relationStatus.setRelationshipStatus("Single");
-        System.out.println(basicProfileModel.addRelationshipStatus("100157", relationStatus.toString()));
+        System.out.println(basicProfileModel.addRelationshipStatus(userId, relationStatus.toString()));
     }
 
-    //  @Test
+    @Test
     public void getContactBasicInfo() {
-        System.out.println(basicProfileModel.getContactBasicInfo("100157"));
+        System.out.println(basicProfileModel.getContactBasicInfo(userId));
     }
 
 //    @Test
@@ -478,7 +478,7 @@ public class BasicProfileServiceTest {
         String mobileId = "1";
         System.out.println(basicProfileModel.deleteMobilePhone(userId, mobileId));
     }
-//    @Test
+    @Test
 
     public void addAddress() {
         Address address = new Address();
@@ -491,8 +491,7 @@ public class BasicProfileServiceTest {
 
 //    @Test
     public void deleteAddress() {
-        String mobileId = "1";
-        System.out.println(basicProfileModel.deleteAddress(userId, mobileId));
+        System.out.println(basicProfileModel.deleteAddress(userId));
     }
 //    @Test
 
@@ -514,7 +513,8 @@ public class BasicProfileServiceTest {
 
 //        @Test
     public void deleteWebsite() {
-        System.out.println(basicProfileModel.deleteWebsite(userId));
+        String websiteId = "";
+        System.out.println(basicProfileModel.deleteWebsite(userId, websiteId));
     }
 
 //    @Test
@@ -533,14 +533,14 @@ public class BasicProfileServiceTest {
     public void addFQuote() {
         FavouriteQuote fQuote = new FavouriteQuote();
         fQuote.setfQuote("khachar fake fake...porose mukhe mukhe...nirobe chokhe chokhe chae..");
-        System.out.println(basicProfileModel.addFQuote("100157", fQuote.toString()));
+        System.out.println(basicProfileModel.addFQuote(userId, fQuote.toString()));
     }
     //  @Test
 
     public void addAbout() {
         About about = new About();
         about.setAbout(" honest,very simple,very careful about dearest persons ");
-        System.out.println(basicProfileModel.addAbout("100157", about.toString()));
+        System.out.println(basicProfileModel.addAbout(userId, about.toString()));
     }
 
     //@Test
