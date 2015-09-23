@@ -28,7 +28,8 @@ public class PhotoDAO implements Bson {
     private String photoId;
     private String albumId;
     private String image;
-    private int categoryId;
+    private String description;
+    private String categoryId;
     private String createdOn;
     private String modifiedOn;
     private Privacy privacy;
@@ -43,6 +44,14 @@ public class PhotoDAO implements Bson {
 
     public void set_id(String _id) {
         this._id = _id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getPhotoId() {
@@ -69,11 +78,11 @@ public class PhotoDAO implements Bson {
         this.image = image;
     }
 
-    public int getCategoryId() {
+    public String getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
     }
 

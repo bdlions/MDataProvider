@@ -14,9 +14,17 @@ import java.util.List;
  */
 public class Like {
 
+    private String id;
     private UserInfo userInfo;
 
-  
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public UserInfo getUserInfo() {
         return userInfo;
     }

@@ -13,9 +13,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class Comment {
 
+    private String id;
     private String description;
     private UserInfo userInfo;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    
     public String getDescription() {
         return description;
     }

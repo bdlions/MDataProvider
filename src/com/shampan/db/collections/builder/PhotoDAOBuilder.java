@@ -30,7 +30,8 @@ public class PhotoDAOBuilder {
     private String photoId;
     private String albumId;
     private String image;
-    private int categoryId;
+    private String description;
+    private String categoryId;
     private String createdOn;
     private String modifiedOn;
     private Privacy privacy;
@@ -44,7 +45,12 @@ public class PhotoDAOBuilder {
         return this;
     }
 
-    public PhotoDAOBuilder setCategoryId(int categoryId) {
+    public PhotoDAOBuilder setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public PhotoDAOBuilder setCategoryId(String categoryId) {
         this.categoryId = categoryId;
         return this;
     }
@@ -104,6 +110,7 @@ public class PhotoDAOBuilder {
         photoInfo.setPhotoId(photoId);
         photoInfo.setCategoryId(categoryId);
         photoInfo.setImage(image);
+        photoInfo.setDescription(description);
         photoInfo.setComment(comment);
         photoInfo.setCommentPrivacy(commentPrivacy);
         photoInfo.setLike(like);
