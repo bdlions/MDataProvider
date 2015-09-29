@@ -66,18 +66,27 @@ public class PhotoService {
         String response = photoObject.addAlbumComment(albumId, commentInfo);
         return response;
     }
-    public static String editAlbumComment(String albumId,String commentId, String commentInfo) {
-        String response = photoObject.editAlbumComment(albumId, commentId,commentInfo);
+
+    public static String editAlbumComment(String albumId, String commentId, String commentInfo) {
+        String response = photoObject.editAlbumComment(albumId, commentId, commentInfo);
         return response;
     }
-    public static String deleteAlbumComment(String albumId,String commentId) {
+
+    public static String deleteAlbumComment(String albumId, String commentId) {
         String response = photoObject.deleteAlbumComment(albumId, commentId);
         return response;
     }
 
+    public static String getUserPhotos(String userId, int offset, int limit) {
+        JSONObject photos = new JSONObject();
+        photos.put("photoList", photoObject.getUserPhotos(userId, offset, limit));
+        return photos.toString();
+    }
+
     public static String getPhotos(String albumId) {
         JSONObject photos = new JSONObject();
-        photos.put("categoryList", photoObject.getPhotos(albumId));
+        photos.put("albumInfo", photoObject.getAlbum(albumId));
+        photos.put("photoList", photoObject.getPhotos(albumId));
         return photos.toString();
     }
 
@@ -120,6 +129,7 @@ public class PhotoService {
         String response = photoObject.editPhotoComment(photoId, commentId, commentInfo);
         return response;
     }
+
     public static String deletePhotoComment(String photoId, String commentId) {
         String response = photoObject.deletePhotoComment(photoId, commentId);
         return response;

@@ -8,6 +8,7 @@ package com.shampan.model;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.QueryBuilder;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.util.JSON;
@@ -99,10 +100,10 @@ public class PhotoModel {
                 = DBConnection.getInstance().getConnection().getCollection(Collections.USERALBUMS.toString(), AlbumDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
         Document pQuery = new Document();
-        pQuery.put("albumId","$all");
-        pQuery.put("title","$all");
-        pQuery.put("totalImg","$all");
-        pQuery.put("defaultImg","$all");
+        pQuery.put("albumId", "$all");
+        pQuery.put("title", "$all");
+        pQuery.put("totalImg", "$all");
+        pQuery.put("defaultImg", "$all");
         MongoCursor<AlbumDAO> cursorAlbumList = mongoCollection.find(selectQuery).projection(pQuery).iterator();
         List<AlbumDAO> albumList = IteratorUtils.toList(cursorAlbumList);
         return albumList;
@@ -228,18 +229,33 @@ public class PhotoModel {
     }
 
     //.......................................End Album module.....................
+    //....................................... Start Photo Module........................
+    /*
+     * This method will return all photos of a album, 
+     * @param userId, user id
+     * @author created by Rashida on 21th September 2015
+     */
+    public  FindIterable<PhotoDAO> getUserPhotos(String userId, int offset, int limit) {
+        MongoCollection<PhotoDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), PhotoDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("albumId").is(userId).get();
+        FindIterable<PhotoDAO> photoList =  mongoCollection.find(selectQuery).skip(offset).limit(offset);
+        return photoList;
+
+    }
     /*
      * This method will return all photos of a album, 
      * @param albumId, album id
      * @author created by Rashida on 21th September 2015
      */
+
     public List<PhotoDAO> getPhotos(String albumId) {
         MongoCollection<PhotoDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), PhotoDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("albumId").is(albumId).get();
         MongoCursor<PhotoDAO> cursorStatusInfoList = mongoCollection.find(selectQuery).iterator();
-        List<PhotoDAO> statusList = IteratorUtils.toList(cursorStatusInfoList);
-        return statusList;
+        List<PhotoDAO> photoList = IteratorUtils.toList(cursorStatusInfoList);
+        return photoList;
 
     }
     /*

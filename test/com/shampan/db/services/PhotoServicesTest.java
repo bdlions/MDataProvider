@@ -29,7 +29,7 @@ public class PhotoServicesTest {
     PhotoModel photoObject = new PhotoModel();
     String userId = "eQeOwhE7hrUkCyP";
     String albumId = "2";
-    String photoId = "1";
+    String photoId = "3";
 
 //    @Test
     public void addCategory() {
@@ -89,11 +89,11 @@ public class PhotoServicesTest {
                 .setAlbumId("2")
                 .setTitle("Flowers Albumhgfhgfj")
                 .setDescription("My jyhjuyk")
-                .setDefaultImg("Cheri.jpg")
+                .setDefaultImg("Kamini.jpg")
                 .setTotalImg(6)
                 .setUserInfo(userInfo)
                 .build();
-        System.out.println(photoObject.editAlbum(albumId, userAlbum.toString()));
+        System.out.println(photoObject.editAlbum("s1MsYK50VELd34h", userAlbum.toString()));
 
     }
 
@@ -128,8 +128,8 @@ public class PhotoServicesTest {
         System.out.println(photoObject.addAlbumComment(albumId, albumCommentInfo.toString()));
 
     }
-    
-    @Test
+
+//    @Test
     public void editAlbumComment() {
         String commentId = "1";
         System.out.println(photoObject.editAlbumComment(albumId, commentId, "I dislike your track !"));
@@ -137,13 +137,13 @@ public class PhotoServicesTest {
     }
 
 //    @Test
-    public void createPhoto() {
+    public void addPhotos() {
         PhotoDAO userPhoto1 = new PhotoDAOBuilder()
                 .setPhotoId("1")
                 .setAlbumId(albumId)
                 .setCategoryId(userId)
-                .setImage("cheri.jpg")
-                .setDescription("Gfdgfdh")
+                .setImage("hasnehena.jpg")
+                .setDescription("i dislike it very much")
                 .build();
         PhotoDAO userPhoto2 = new PhotoDAOBuilder()
                 .setPhotoId("2")
@@ -172,6 +172,17 @@ public class PhotoServicesTest {
 //    @Test
     public void deletePhoto() {
         System.out.println(photoObject.deletePhoto(photoId));
+
+    }
+
+//    @Test
+    public void getUserPhotos() {
+        String albumId = "2";
+        int limit = 5;
+        int offset = 0;
+        JSONObject photos = new JSONObject();
+        photos.put("photoList", photoObject.getUserPhotos(userId, offset, limit));
+        System.out.println(photos);
 
     }
 
@@ -209,7 +220,7 @@ public class PhotoServicesTest {
 
     }
 
-    @Test
+//    @Test
     public void deletePhotoLike() {
         String photoId = "1";
         String likeId = "1";
