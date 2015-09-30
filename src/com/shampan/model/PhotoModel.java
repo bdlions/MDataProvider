@@ -25,6 +25,7 @@ import com.shampan.db.collections.fragment.common.Comment;
 import com.shampan.db.collections.fragment.common.Like;
 import com.shampan.db.collections.fragment.common.Share;
 import com.shampan.db.collections.fragment.common.UserInfo;
+import com.shampan.util.LogWriter;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.collections4.IteratorUtils;
@@ -186,6 +187,16 @@ public class PhotoModel {
         resultEvent.setResponseCode("100157");
         return resultEvent.toString();
     }
+    
+    public String getAlbumLikeList(String albumId) {
+        MongoCollection<AlbumDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERALBUMS.toString(), AlbumDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("albumId").is(albumId).get();
+        Document pQuery = new Document();
+        pQuery.put("like", "$all");
+        AlbumDAO albumLikeList = mongoCollection.find(selectQuery).projection(pQuery).first();
+        return albumLikeList.toString();
+    }
     /*
      * This method will add a album comment, 
      * @param albumId, album id
@@ -198,7 +209,14 @@ public class PhotoModel {
                 = DBConnection.getInstance().getConnection().getCollection(Collections.USERALBUMS.toString(), AlbumDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("albumId").is(albumId).get();
         Comment albumCommentInfo = Comment.getCommentInfo(commentInfo);
-        mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("comment", JSON.parse(albumCommentInfo.toString()))));
+        try {
+            if (albumCommentInfo != null) {
+                mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("comment", JSON.parse(albumCommentInfo.toString()))));
+            }
+        } catch (NullPointerException npe) {
+            LogWriter.getErrorLog().error("null value exception");
+        }
+        
         resultEvent.setResponseCode("100157");
         return resultEvent.toString();
     }

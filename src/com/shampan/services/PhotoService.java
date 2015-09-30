@@ -61,6 +61,10 @@ public class PhotoService {
         String response = photoObject.addAlbumLike(albumId, likeInfo);
         return response;
     }
+    public static String getAlbumLikeList(String albumId) {
+        String response = photoObject.getAlbumLikeList(albumId);
+        return response;
+    }
 
     public static String addAlbumComment(String albumId, String commentInfo) {
         String response = photoObject.addAlbumComment(albumId, commentInfo);
