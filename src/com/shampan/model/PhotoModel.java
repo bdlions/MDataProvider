@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.shampan.model;
 
 import com.mongodb.BasicDBList;
@@ -121,7 +117,48 @@ public class PhotoModel {
                 = DBConnection.getInstance().getConnection().getCollection(Collections.USERALBUMS.toString(), AlbumDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("albumId").is(albumId).get();
         AlbumDAO albumInfo = mongoCollection.find(selectQuery).first();
-        return albumInfo.toString();
+        JSONObject albumInfoJson = new JSONObject();
+        try {
+            albumInfoJson.put("albumId", albumInfo.getAlbumId());
+            albumInfoJson.put("userId", albumInfo.getUserId());
+            albumInfoJson.put("title", albumInfo.getTitle());
+            albumInfoJson.put("description", albumInfo.getDescription());
+            albumInfoJson.put("totalImg", albumInfo.getTotalImg());
+            albumInfoJson.put("defaultImg", albumInfo.getTotalImg());
+            if (albumInfo.getLike() != null) {
+                int likeSize = albumInfo.getLike().size();
+                if (likeSize > 0) {
+                    albumInfoJson.put("likeCounter", likeSize);
+                }
+            }
+            if (albumInfo.getComment() != null) {
+                int commentSize = albumInfo.getComment().size();
+                System.out.println(commentSize);
+                List<Comment> commentList = new ArrayList();
+                if (commentSize >= 1) {
+                    Comment lastComment = albumInfo.getComment().get(commentSize - 1);
+                    commentList.add(lastComment);
+                }
+                if (commentSize >= 2) {
+                    Comment secondlastComment = albumInfo.getComment().get(commentSize - 2);
+                    commentList.add(secondlastComment);
+                }
+                if (commentSize > 2) {
+                    albumInfoJson.put("commentCounter", commentSize - 2);
+                }
+                albumInfoJson.put("comment", commentList);
+            }
+            if (albumInfo.getShare() != null) {
+                int shareSize = albumInfo.getShare().size();
+                if (shareSize > 0) {
+                    albumInfoJson.put("shareCounter", shareSize);
+                }
+            }
+        } catch (NullPointerException npe) {
+            LogWriter.getErrorLog().error(npe);
+        }
+
+        return albumInfoJson.toString();
     }
 
     /*
@@ -187,7 +224,7 @@ public class PhotoModel {
         resultEvent.setResponseCode("100157");
         return resultEvent.toString();
     }
-    
+
     public String getAlbumLikeList(String albumId) {
         MongoCollection<AlbumDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.USERALBUMS.toString(), AlbumDAO.class);
@@ -216,9 +253,24 @@ public class PhotoModel {
         } catch (NullPointerException npe) {
             LogWriter.getErrorLog().error("null value exception");
         }
-        
+
         resultEvent.setResponseCode("100157");
         return resultEvent.toString();
+    }
+
+    /*
+     * This method will get all comments of a album , 
+     * @param albumId, album id
+     * @author created by Rashida on 1st Octobar 2015
+     */
+    public String getAlbumComments(String albumId) {
+        MongoCollection<AlbumDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERALBUMS.toString(), AlbumDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("albumId").is(albumId).get();
+        Document pQuery = new Document();
+        pQuery.put("comment", "$all");
+        AlbumDAO albumCommentList = mongoCollection.find(selectQuery).projection(pQuery).first();
+        return albumCommentList.toString();
     }
 
     /*
@@ -245,7 +297,7 @@ public class PhotoModel {
         resultEvent.setResponseCode("100157");
         return resultEvent.toString();
     }
-
+    
     //.......................................End Album module.....................
     //....................................... Start Photo Module........................
     /*
@@ -253,11 +305,11 @@ public class PhotoModel {
      * @param userId, user id
      * @author created by Rashida on 21th September 2015
      */
-    public  FindIterable<PhotoDAO> getUserPhotos(String userId, int offset, int limit) {
+    public FindIterable<PhotoDAO> getUserPhotos(String userId, int offset, int limit) {
         MongoCollection<PhotoDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), PhotoDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("albumId").is(userId).get();
-        FindIterable<PhotoDAO> photoList =  mongoCollection.find(selectQuery).skip(offset).limit(offset);
+        FindIterable<PhotoDAO> photoList = mongoCollection.find(selectQuery).skip(offset).limit(offset);
         return photoList;
 
     }
@@ -271,11 +323,32 @@ public class PhotoModel {
         MongoCollection<PhotoDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), PhotoDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("albumId").is(albumId).get();
-        MongoCursor<PhotoDAO> cursorStatusInfoList = mongoCollection.find(selectQuery).iterator();
+        Document pQurey = new Document();
+        pQurey.put("photoId", "$all");
+        pQurey.put("image", "$all");
+        MongoCursor<PhotoDAO> cursorStatusInfoList = mongoCollection.find(selectQuery).projection(pQurey).iterator();
         List<PhotoDAO> photoList = IteratorUtils.toList(cursorStatusInfoList);
         return photoList;
 
     }
+    
+    public List<PhotoDAO> getPhotoListByCategory(String albumId, String categoryId,int limit,int offset) {
+        MongoCollection<PhotoDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), PhotoDAO.class);
+        Document selectQuery = new Document();
+        selectQuery.put("albumId", albumId);
+        selectQuery.put("categoryId", categoryId);
+        Document pQurey = new Document();
+        pQurey.put("photoId", "$all");
+        pQurey.put("image", "$all");
+        MongoCursor<PhotoDAO> cursorStatusInfoList = mongoCollection.find(selectQuery).projection(pQurey).iterator();
+        List<PhotoDAO> photoList = IteratorUtils.toList(cursorStatusInfoList);
+        return photoList;
+
+    }
+    
+    
+    
     /*
      * This method will return a photo , 
      * @param photoId, photo id
@@ -287,7 +360,46 @@ public class PhotoModel {
                 = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), PhotoDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("photoId").is(photoId).get();
         PhotoDAO photoInfo = mongoCollection.find(selectQuery).first();
-        return photoInfo.toString();
+        JSONObject photoInfoJson = new JSONObject();
+        try {
+            photoInfoJson.put("albumId", photoInfo.getAlbumId());
+            photoInfoJson.put("photoId", photoInfo.getPhotoId());
+            photoInfoJson.put("description", photoInfo.getDescription());
+            photoInfoJson.put("categoryId", photoInfo.getCategoryId());
+            photoInfoJson.put("image", photoInfo.getImage());
+            if (photoInfo.getLike() != null) {
+                int likeSize = photoInfo.getLike().size();
+                if (likeSize > 0) {
+                    photoInfoJson.put("likeCounter", likeSize);
+                }
+            }
+            if (photoInfo.getComment() != null) {
+                int commentSize = photoInfo.getComment().size();
+                List<Comment> commentList = new ArrayList();
+                if (commentSize > 1) {
+                    Comment lastComment = photoInfo.getComment().get(commentSize - 1);
+                    commentList.add(lastComment);
+                }
+                if (commentSize > 1) {
+                    Comment secondlastComment = photoInfo.getComment().get(commentSize - 2);
+                    commentList.add(secondlastComment);
+                }
+                if (commentSize > 2) {
+                    photoInfoJson.put("commentCounter", commentSize - 2);
+                }
+                photoInfoJson.put("comment", commentList);
+            }
+            if (photoInfo.getShare() != null) {
+                int shareSize = photoInfo.getShare().size();
+                if (shareSize > 0) {
+                    photoInfoJson.put("shareCounter", shareSize);
+                }
+            }
+        } catch (NullPointerException npe) {
+            LogWriter.getErrorLog().error(npe);
+        }
+
+        return photoInfoJson.toString();
     }
 
     /*
@@ -307,6 +419,7 @@ public class PhotoModel {
             }
         }
         mongoCollection.insertMany(photoList);
+        
         resultEvent.setResponseCode("100157");
         return resultEvent.toString();
     }
@@ -360,6 +473,17 @@ public class PhotoModel {
         return resultEvent.toString();
     }
 
+    
+    
+     public String getPhotoLikeList(String photoId) {
+        MongoCollection<AlbumDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), AlbumDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("photoId").is(photoId).get();
+        Document pQuery = new Document();
+        pQuery.put("like", "$all");
+        AlbumDAO albumLikeList = mongoCollection.find(selectQuery).projection(pQuery).first();
+        return albumLikeList.toString();
+    }
     /*
      * This method will delete a photo like , 
      * @param photoId, photo id
@@ -398,6 +522,21 @@ public class PhotoModel {
         mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("comment", JSON.parse(photoCommentInfo.toString()))));
         resultEvent.setResponseCode("100157");
         return resultEvent.toString();
+    }
+
+    /*
+     * This method will get all comments of a album , 
+     * @param albumId, album id
+     * @author created by Rashida on 1st Octobar 2015
+     */
+    public String getPhotoComments(String photoId) {
+        MongoCollection<AlbumDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), AlbumDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("photoId").is(photoId).get();
+        Document pQuery = new Document();
+        pQuery.put("comment", "$all");
+        AlbumDAO albumCommentList = mongoCollection.find(selectQuery).projection(pQuery).first();
+        return albumCommentList.toString();
     }
 
     /*

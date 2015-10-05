@@ -30,6 +30,7 @@ public class PhotoServicesTest {
     String userId = "eQeOwhE7hrUkCyP";
     String albumId = "2";
     String photoId = "3";
+    String categoryId = "eQeOwhE7hrUkCyP";
 
 //    @Test
     public void addCategory() {
@@ -53,7 +54,7 @@ public class PhotoServicesTest {
 
     }
 
-//    @Test
+    @Test
     public void getAlbum() {
         System.out.println(photoObject.getAlbum(albumId));
 
@@ -114,6 +115,11 @@ public class PhotoServicesTest {
         System.out.println(photoObject.addAlbumLike(albumId, likeuserInfo.toString()));
 
     }
+//    @Test
+    public void getAlbumLikeList() {
+        System.out.println(photoObject.getAlbumLikeList(albumId));
+
+    }
 
 //    @Test
     public void addAlbumComment() {
@@ -170,6 +176,17 @@ public class PhotoServicesTest {
     }
 
 //    @Test
+    public void getPhotos() {
+        System.out.println(photoObject.getPhotos(albumId));
+
+    }
+//    @Test
+    public void getPhoto() {
+        System.out.println(photoObject.getPhoto(photoId));
+
+    }
+
+//    @Test
     public void deletePhoto() {
         System.out.println(photoObject.deletePhoto(photoId));
 
@@ -183,6 +200,16 @@ public class PhotoServicesTest {
         JSONObject photos = new JSONObject();
         photos.put("photoList", photoObject.getUserPhotos(userId, offset, limit));
         System.out.println(photos);
+
+    }
+    
+    @Test
+    public void getPhotoListByCategory() {
+        int limit = 5;
+        int offset = 0;
+        JSONObject photos = new JSONObject();
+//        photos.put("photoList", );
+        System.out.println(photoObject.getPhotoListByCategory(albumId,categoryId, offset, limit));
 
     }
 

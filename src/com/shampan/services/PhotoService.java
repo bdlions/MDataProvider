@@ -46,6 +46,10 @@ public class PhotoService {
         String response = photoObject.createAlbum(albumInfo);
         return response;
     }
+    public static String getAlbumComments(String albumId) {
+        String response = photoObject.getAlbumComments(albumId);
+        return response;
+    }
 
     public static String editAlbum(String albumId, String albumInfo) {
         String response = photoObject.editAlbum(albumId, albumInfo);
@@ -93,19 +97,31 @@ public class PhotoService {
         photos.put("photoList", photoObject.getPhotos(albumId));
         return photos.toString();
     }
+    public static String getPhotoListByCategory(String albumId,String categoryId, int limit, int offset) {
+        JSONObject photos = new JSONObject();
+        photos.put("photoList", photoObject.getPhotoListByCategory(albumId,categoryId,limit,offset));
+        return photos.toString();
+    }
 
     public static String getPhoto(String photoId) {
         String response = photoObject.getPhoto(photoId);
         return response;
     }
-
-    public static String addPhotos(String photoInfo) {
-        String response = photoObject.addPhotos(photoInfo);
+  public static String getPhotoLikeList(String photoId) {
+        String response = photoObject.getPhotoLikeList(photoId);
+        return response;
+    }
+    public static String addPhotos(String photoList) {
+        String response = photoObject.addPhotos(photoList);
         return response;
     }
 
     public static String editPhoto(String photoId, String image) {
         String response = photoObject.editPhoto(photoId, image);
+        return response;
+    }
+    public static String getPhotoComments(String photoId) {
+        String response = photoObject.getPhotoComments(photoId);
         return response;
     }
 
