@@ -32,6 +32,8 @@ public class AlbumDAOBuilder {
     private String description;
     private String createdOn;
     private String modifiedOn;
+    private String photoId;
+
     private String defaultImg;
     private int totalImg;
     private UserInfo userInfo;
@@ -68,6 +70,11 @@ public class AlbumDAOBuilder {
 
     public AlbumDAOBuilder setDescription(String description) {
         this.description = description;
+        return this;
+    }
+    
+    public AlbumDAOBuilder setPhotoId(String photoId) {
+        this.photoId = photoId;
         return this;
     }
 
@@ -125,6 +132,7 @@ public class AlbumDAOBuilder {
         userAlbum.setDescription(description);
         userAlbum.setUserInfo(userInfo);
         userAlbum.setDefaultImg(defaultImg);
+        userAlbum.setPhotoId(photoId);
         userAlbum.setTotalImg(totalImg);
         userAlbum.setComment(comment);
         userAlbum.setCommentPrivacy(commentPrivacy);

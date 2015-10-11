@@ -33,6 +33,7 @@ public class AlbumDAO implements Bson {
     private String description;
     private String createdOn;
     private String modifiedOn;
+    private String photoId;
     private String defaultImg;
     private int totalImg;
     private UserInfo userInfo;
@@ -60,6 +61,14 @@ public class AlbumDAO implements Bson {
 
     public String getUserId() {
         return userId;
+    }
+
+    public String getPhotoId() {
+        return photoId;
+    }
+
+    public void setPhotoId(String photoId) {
+        this.photoId = photoId;
     }
 
     public void setUserId(String userId) {

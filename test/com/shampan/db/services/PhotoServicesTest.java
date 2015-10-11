@@ -28,8 +28,8 @@ public class PhotoServicesTest {
 
     PhotoModel photoObject = new PhotoModel();
     String userId = "eQeOwhE7hrUkCyP";
-    String albumId = "2";
-    String photoId = "3";
+    String albumId = "2M3FGmb8I9XmZ8X";
+    String photoId = "65sKxJtOFfExN65";
     String categoryId = "eQeOwhE7hrUkCyP";
 
 //    @Test
@@ -54,9 +54,9 @@ public class PhotoServicesTest {
 
     }
 
-    @Test
+//    @Test
     public void getAlbum() {
-        System.out.println(photoObject.getAlbum(albumId));
+        System.out.println(photoObject.getAlbum(userId,albumId));
 
     }
 //  @Test
@@ -68,9 +68,10 @@ public class PhotoServicesTest {
         userInfo.setUserId(userId);
         AlbumDAO userAlbum = new AlbumDAOBuilder()
                 .setUserId(userId)
-                .setAlbumId("2")
+                .setAlbumId(albumId)
                 .setTitle("Flowers Album")
                 .setDescription("My fevorate garden at font my home")
+                .setPhotoId(photoId)
                 .setDefaultImg("Cheri.jpg")
                 .setTotalImg(6)
                 .setUserInfo(userInfo)
@@ -94,10 +95,17 @@ public class PhotoServicesTest {
                 .setTotalImg(6)
                 .setUserInfo(userInfo)
                 .build();
-        System.out.println(photoObject.editAlbum("s1MsYK50VELd34h", userAlbum.toString()));
+        System.out.println(photoObject.editAlbum(albumId, userAlbum.toString()));
 
     }
+    
 
+//    @Test
+    public void editAlbumTotalImg() {
+        int totalImgInfo = 100 ;
+        System.out.println(photoObject.editAlbumTotalImg(albumId,totalImgInfo));
+
+    }
 //    @Test
     public void deleteAlbum() {
         System.out.println(photoObject.deleteAlbum(albumId));
@@ -109,7 +117,7 @@ public class PhotoServicesTest {
         UserInfo refUserInfo = new UserInfo();
         refUserInfo.setFristName("Alamgir");
         refUserInfo.setLastName("Kabir");
-        refUserInfo.setUserId(userId);
+        refUserInfo.setUserId("2");
         Like likeuserInfo = new Like();
         likeuserInfo.setUserInfo(refUserInfo);
         System.out.println(photoObject.addAlbumLike(albumId, likeuserInfo.toString()));
@@ -142,7 +150,7 @@ public class PhotoServicesTest {
 
     }
 
-//    @Test
+    @Test
     public void addPhotos() {
         PhotoDAO userPhoto1 = new PhotoDAOBuilder()
                 .setPhotoId("1")
@@ -161,7 +169,7 @@ public class PhotoServicesTest {
         List<PhotoDAO> photoList = new ArrayList<PhotoDAO>();
         photoList.add(userPhoto1);
         photoList.add(userPhoto2);
-        System.out.println(photoObject.addPhotos(photoList.toString()));
+        photoObject.addPhotos(albumId,photoList.toString());
 
     }
 
@@ -182,13 +190,13 @@ public class PhotoServicesTest {
     }
 //    @Test
     public void getPhoto() {
-        System.out.println(photoObject.getPhoto(photoId));
+        System.out.println(photoObject.getPhoto(userId,photoId));
 
     }
 
 //    @Test
     public void deletePhoto() {
-        System.out.println(photoObject.deletePhoto(photoId));
+        System.out.println(photoObject.deletePhoto(albumId,photoId));
 
     }
 
@@ -203,7 +211,7 @@ public class PhotoServicesTest {
 
     }
     
-    @Test
+//    @Test
     public void getPhotoListByCategory() {
         int limit = 5;
         int offset = 0;

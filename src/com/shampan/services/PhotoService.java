@@ -37,8 +37,8 @@ public class PhotoService {
         return albums.toString();
     }
 
-    public static String getAlbum(String albumId) {
-        String response = photoObject.getAlbum(albumId);
+    public static String getAlbum(String userId,String albumId) {
+        String response = photoObject.getAlbum(userId,albumId);
         return response;
     }
 
@@ -91,9 +91,9 @@ public class PhotoService {
         return photos.toString();
     }
 
-    public static String getPhotos(String albumId) {
+    public static String getPhotos(String userId,String albumId) {
         JSONObject photos = new JSONObject();
-        photos.put("albumInfo", photoObject.getAlbum(albumId));
+        photos.put("albumInfo", photoObject.getAlbum(userId,albumId));
         photos.put("photoList", photoObject.getPhotos(albumId));
         return photos.toString();
     }
@@ -103,16 +103,16 @@ public class PhotoService {
         return photos.toString();
     }
 
-    public static String getPhoto(String photoId) {
-        String response = photoObject.getPhoto(photoId);
+    public static String getPhoto(String userId,String photoId) {
+        String response = photoObject.getPhoto(userId,photoId);
         return response;
     }
   public static String getPhotoLikeList(String photoId) {
         String response = photoObject.getPhotoLikeList(photoId);
         return response;
     }
-    public static String addPhotos(String photoList) {
-        String response = photoObject.addPhotos(photoList);
+    public static String addPhotos(String albumId,String photoList) {
+        String response = photoObject.addPhotos(albumId,photoList);
         return response;
     }
 
@@ -125,8 +125,8 @@ public class PhotoService {
         return response;
     }
 
-    public static String deletePhoto(String photoId) {
-        String response = photoObject.deletePhoto(photoId);
+    public static String deletePhoto(String albumId,String photoId) {
+        String response = photoObject.deletePhoto(albumId,photoId);
         return response;
     }
 
