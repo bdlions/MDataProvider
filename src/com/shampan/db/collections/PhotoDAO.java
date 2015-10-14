@@ -158,4 +158,6 @@ public class PhotoDAO implements Bson {
     public <C> BsonDocument toBsonDocument(final Class<C> documentClass, final CodecRegistry codecRegistry) {
         return new BsonDocumentWrapper<PhotoDAO>(this, codecRegistry.get(PhotoDAO.class));
     }
+
+  
 }

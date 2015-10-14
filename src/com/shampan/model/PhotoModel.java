@@ -22,6 +22,7 @@ import com.shampan.db.collections.fragment.common.Share;
 import com.shampan.db.collections.fragment.common.UserInfo;
 import com.shampan.util.LogWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import org.apache.commons.collections4.IteratorUtils;
 import org.bson.Document;
@@ -220,7 +221,6 @@ public class PhotoModel {
         MongoCollection<AlbumDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.USERALBUMS.toString(), AlbumDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("albumId").is(albumId).get();
-        System.out.println(selectQuery);
         AlbumDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("totalImg", totalImgInfo)));
         resultEvent.setResponseCode("100157");
         return resultEvent.toString();
@@ -335,12 +335,18 @@ public class PhotoModel {
      * @param userId, user id
      * @author created by Rashida on 21th September 2015
      */
-    public FindIterable<PhotoDAO> getUserPhotos(String userId, int offset, int limit) {
+    public List<PhotoDAO> getUserPhotos(String albumId, int offset, int limit) {
         MongoCollection<PhotoDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), PhotoDAO.class);
-        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("albumId").is(userId).get();
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("albumId").is(albumId).get();
         FindIterable<PhotoDAO> photoList = mongoCollection.find(selectQuery).skip(offset).limit(offset);
-        return photoList;
+        List<PhotoDAO> photos = new ArrayList<>();
+        for (PhotoDAO photo : photoList) {
+            photos.add(photo);
+            System.out.println(photo);
+        }
+        System.out.println(photos);
+        return photos;
 
     }
     /*
@@ -448,6 +454,27 @@ public class PhotoModel {
         return photoInfoJson.toString();
     }
 
+    public String getNextPhoto(String photoId) {
+        MongoCollection<PhotoDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), PhotoDAO.class);
+        Document sortQuery = new Document();
+        sortQuery.put("photoId", 1);
+        Document sQuery = new Document();
+        sQuery.put("photoId", new Document("$gt", photoId));
+        Document pQuery = new Document();
+        pQuery.put("photoId", "$all");
+        FindIterable<PhotoDAO> photoList = mongoCollection.find(sQuery).projection(pQuery).sort(sortQuery).limit(1);
+        List<PhotoDAO> photos = new ArrayList<>();
+        for (PhotoDAO photo : photoList) {
+            photos.add(photo);
+            System.out.println(photo);
+        }
+        System.out.println(photos);
+//        System.out.println(mongoCollection.find(sQuery).projection(pQuery).sort(sortQuery).limit(1).toString());
+//        System.out.println(photoInfo);
+        return "";
+    }
+
     /*
      * This method will add list of photos , 
      * @param photoInfoList, photo list
@@ -486,9 +513,9 @@ public class PhotoModel {
 
                     }
                 }
-                mongoCollection.insertMany(photoList);
-            }
 
+            } 
+            mongoCollection.insertMany(photoList);
         }
 
         resultEvent.setResponseCode("100157");

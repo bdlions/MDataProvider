@@ -12,6 +12,7 @@ public class RelationInfo {
     private String fristName;
     private String lastName;
     private String isInitiated;
+    private String relationTypeId;
     private String createdOn;
 
     public RelationInfo() {
@@ -48,6 +49,14 @@ public class RelationInfo {
 
     public void setIsInitiated(String isInitiated) {
         this.isInitiated = isInitiated;
+    }
+
+    public String getRelationTypeId() {
+        return relationTypeId;
+    }
+
+    public void setRelationTypeId(String relationTypeId) {
+        this.relationTypeId = relationTypeId;
     }
 
     public String getCreatedOn() {

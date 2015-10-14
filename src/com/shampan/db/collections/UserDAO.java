@@ -17,13 +17,9 @@ import java.util.List;
 public class UserDAO implements Bson {
 
     private String _id;
-    @JsonProperty("uId")
     private String userId;
-    @JsonProperty("fn")
     private String firstName;
-    @JsonProperty("ln")
     private String lastName;
-    @JsonProperty("un")
     private String userName;
 
     public String get_id() {

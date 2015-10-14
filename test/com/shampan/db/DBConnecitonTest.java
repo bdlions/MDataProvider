@@ -284,12 +284,12 @@ public class DBConnecitonTest {
 //        BasicProfileDAO selectUserProfileInfo5 = mongoCollection.find(andQuery).first();
 //        System.out.println(selectUserProfileInfo5);
 //......select and using $or cluse....
-//        Document orQuery = new Document();
-//        List<Document> obj1 = new ArrayList<Document>();
-//        obj1.add(new Document("lastName", "Moni"));
-//        obj1.add(new Document("userId", 10));
-//        orQuery.put("$or", obj1);
-//        MongoCursor selectUserProfileInfo6 = mongoCollection.find(orQuery).iterator();
+        Document orQuery = new Document();
+        List<Document> obj1 = new ArrayList<Document>();
+        obj1.add(new Document("lastName", "Moni"));
+        obj1.add(new Document("userId", 10));
+        orQuery.put("$or", obj1);
+        MongoCursor selectUserProfileInfo6 = mongoCollection.find(orQuery).iterator();
 //        while (selectUserProfileInfo6.hasNext()) {
 ////            System.out.println(selectUserProfileInfo6.next());
 //        }

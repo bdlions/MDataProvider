@@ -28,7 +28,7 @@ public class PhotoServicesTest {
 
     PhotoModel photoObject = new PhotoModel();
     String userId = "eQeOwhE7hrUkCyP";
-    String albumId = "2M3FGmb8I9XmZ8X";
+    String albumId = "qAuUBxk4ZqjDiAS";
     String photoId = "65sKxJtOFfExN65";
     String categoryId = "eQeOwhE7hrUkCyP";
 
@@ -149,18 +149,18 @@ public class PhotoServicesTest {
         System.out.println(photoObject.editAlbumComment(albumId, commentId, "I dislike your track !"));
 
     }
-
-    @Test
+//
+//    @Test
     public void addPhotos() {
         PhotoDAO userPhoto1 = new PhotoDAOBuilder()
-                .setPhotoId("1")
+                .setPhotoId("3")
                 .setAlbumId(albumId)
                 .setCategoryId(userId)
                 .setImage("hasnehena.jpg")
                 .setDescription("i dislike it very much")
                 .build();
         PhotoDAO userPhoto2 = new PhotoDAOBuilder()
-                .setPhotoId("2")
+                .setPhotoId("4")
                 .setAlbumId(albumId)
                 .setCategoryId(userId)
                 .setImage("kamini.jpg")
@@ -169,7 +169,7 @@ public class PhotoServicesTest {
         List<PhotoDAO> photoList = new ArrayList<PhotoDAO>();
         photoList.add(userPhoto1);
         photoList.add(userPhoto2);
-        photoObject.addPhotos(albumId,photoList.toString());
+        photoObject.addPhotos("zVrKQGJaL24c1mW",photoList.toString());
 
     }
 
@@ -193,6 +193,12 @@ public class PhotoServicesTest {
         System.out.println(photoObject.getPhoto(userId,photoId));
 
     }
+    
+//    @Test
+    public void getNextPhoto() {
+        System.out.println(photoObject.getNextPhoto("2"));
+
+    }
 
 //    @Test
     public void deletePhoto() {
@@ -202,11 +208,11 @@ public class PhotoServicesTest {
 
 //    @Test
     public void getUserPhotos() {
-        String albumId = "2";
+        String albumId = "zVrKQGJaL24c1mW";
         int limit = 5;
         int offset = 0;
         JSONObject photos = new JSONObject();
-        photos.put("photoList", photoObject.getUserPhotos(userId, offset, limit));
+        photos.put("photoList", photoObject.getUserPhotos(albumId, offset, limit));
         System.out.println(photos);
 
     }
