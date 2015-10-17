@@ -34,7 +34,7 @@ public class StatusDAO implements Bson {
     private String mappingId;
     private String statusTypeId;
     private String description;
-    private List<Image> image;
+    private List<Image> images;
     private String createdOn;
     private String modifiedOn;
     private UserInfo userInfo;
@@ -53,12 +53,12 @@ public class StatusDAO implements Bson {
         this._id = _id;
     }
 
-    public List<Image> getImage() {
-        return image;
+    public List<Image> getImages() {
+        return images;
     }
 
-    public void setImage(List<Image> image) {
-        this.image = image;
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 
     public String getStatusId() {

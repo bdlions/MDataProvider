@@ -10,6 +10,7 @@ import com.shampan.db.Collections;
 import com.shampan.db.DBConnection;
 import com.shampan.db.collections.StatusDAO;
 import com.shampan.db.collections.builder.StatusDAOBuilder;
+import com.shampan.db.collections.fragment.photo.Image;
 import com.shampan.db.collections.fragment.status.Comment;
 import com.shampan.db.collections.fragment.status.Like;
 import com.shampan.db.collections.fragment.status.ReferenceInfo;
@@ -36,6 +37,8 @@ public class StatusServiceTest {
     public void addStatus() {
         String userId = "100157";
         String statusId = "1";
+        List<Image> images = new ArrayList<Image>();
+        
         UserInfo userInfo = new UserInfo();
         userInfo.setFristName("Alamgir");
         userInfo.setLastName("Kabir");

@@ -76,6 +76,9 @@ public class StatusModel {
             statusJson.put("statusId", status.getStatusId());
             statusJson.put("userInfo", status.getUserInfo());
             statusJson.put("description", status.getDescription());
+            if(status.getImages() != null){
+            statusJson.put("images", status.getImages());
+            }
             if (status.getLike() != null) {
                 int likeSize = status.getLike().size();
                 if (likeSize > 0) {

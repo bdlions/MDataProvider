@@ -38,7 +38,7 @@ public class StatusDAOBuilder {
     private String createdOn;
     private String modifiedOn;
     private UserInfo userInfo;
-    private List<Image> image;
+    private List<Image> images;
     private ReferenceInfo referenceInfo;
     private List<ReferenceList> referenceList;
     private Privacy privacy;
@@ -50,8 +50,8 @@ public class StatusDAOBuilder {
         return status;
     }
 
-    public StatusDAOBuilder setImage(List<Image> image) {
-        this.image = image;
+    public StatusDAOBuilder setImages(List<Image> images) {
+        this.images = images;
         return this;
     }
 
@@ -155,7 +155,7 @@ public class StatusDAOBuilder {
         status.setLike(like);
         status.setComment(comment);
         status.setShare(share);
-        status.setImage(image);
+        status.setImages(images);
         return status;
     }
 

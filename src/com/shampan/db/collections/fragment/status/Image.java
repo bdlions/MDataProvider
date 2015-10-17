@@ -34,7 +34,7 @@ public class Image {
         return json;
     }
 
-    public static Image getImage(String jsonContent) {
+    public static Image getImageList(String jsonContent) {
         Image imageInfo = null;
         try {
             ObjectMapper mapper = new ObjectMapper();
