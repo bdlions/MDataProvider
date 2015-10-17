@@ -21,10 +21,8 @@ public class StatusService {
         return response;
     }
 
-    public static String getStatuses(String userId) {
-        JSONObject json = new JSONObject();
-        json.put("statusList", obj.getStatuses(userId));
-        return json.toString();
+    public static String getStatuses(String userId, int offset, int limit) {
+        return obj.getStatuses(userId, offset, limit).toString();
     }
 
     public static String deleteStatus(String statusId) {
@@ -42,13 +40,25 @@ public class StatusService {
         return response;
 
     }
+
     public static String addStatusComment(String statusId, String commentInfo) {
         String response = obj.addStatusComment(statusId, commentInfo);
         return response;
 
     }
-    public static String shareStatus(String statusId,String refUserInfo, String shareInfo) {
+
+    public static String shareStatus(String statusId, String refUserInfo, String shareInfo) {
         String response = obj.shareStatus(statusId, refUserInfo, shareInfo);
+        return response;
+
+    }
+    public static String getStatusLikeList(String statusId) {
+        String response = obj.getStatusLikeList(statusId);
+        return response;
+
+    }
+    public static String getStatusComments(String statusId) {
+        String response = obj.getStatusComments(statusId);
         return response;
 
     }

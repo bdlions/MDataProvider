@@ -29,45 +29,8 @@ import static org.junit.Assert.*;
 public class StatusServiceTest {
 
     StatusModel statusObject = new StatusModel();
-
-    //@Test
-    public void main() {
-        DBConnection.getInstance().getConnection();
-        MongoCollection<StatusDAO> mongoCollection
-                = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
-        String userId = "100157";
-        String statusId = "1";
-        UserInfo userInfo = new UserInfo();
-        userInfo.setFristName("Alamgir");
-        userInfo.setLastName("Kabir");
-        userInfo.setUserId(userId);
-        UserInfo rUserInfo = new UserInfo();
-        rUserInfo.setFristName("Nazmul");
-        rUserInfo.setLastName("Hasan");
-        rUserInfo.setUserId("100105");
-
-        ReferenceInfo referenceInfo = new ReferenceInfo();
-        referenceInfo.setDescription("I Like this Invention");
-        referenceInfo.setImg("shemin.jpg");
-        referenceInfo.setUserInfo(rUserInfo);
-//        Like statusLikeInfo = new Like();
-//        statusLikeInfo.setUserInfo(rUserInfo);
-
-        Comment statusCommentInfo = new Comment();
-        statusCommentInfo.setDescription("Thank you !!");
-        statusCommentInfo.setUserInfo(userInfo);
-
-        Share shareShareInfo = new Share();
-//        shareShareInfo.setShareCounter(statusId);
-        shareShareInfo.setUserInfo(rUserInfo);
-
-        ReferenceList refStatusIdList = new ReferenceList();
-        refStatusIdList.setStatusId(statusId);
-
-        List<ReferenceList> refStatusList = new ArrayList<ReferenceList>();
-        refStatusList.add(refStatusIdList);
-
-    }
+    String userId ="eQeOwhE7hrUkCyP";
+    String statusId ="YC0EHMn2JVxcpyz";
 
 //    @Test
     public void addStatus() {
@@ -98,13 +61,12 @@ public class StatusServiceTest {
         statusCommentInfo.setDescription("Thank you !!");
         statusCommentInfo.setUserInfo(rUserInfo);
         System.out.println(statusCommentInfo.toString());
-        System.out.println(statusObject.addStatusComment("2", statusCommentInfo.toString()));
+        System.out.println(statusObject.addStatusComment(statusId, statusCommentInfo.toString()));
 
     }
 
-    @Test
+//    @Test
     public void shareStatus() {
-        String userId = "100157";
         UserInfo rUserInfo = new UserInfo();
         rUserInfo.setFristName("Nazmul");
         rUserInfo.setLastName("Hasan");
@@ -112,20 +74,23 @@ public class StatusServiceTest {
         ReferenceInfo referenceInfo = new ReferenceInfo();
         referenceInfo.setDescription("Old status description");
         referenceInfo.setUserInfo(rUserInfo);
+        
         UserInfo userInfo = new UserInfo();
         userInfo.setFristName("Alamgir");
         userInfo.setLastName("Kabir");
-        userInfo.setUserId(userId);
+        userInfo.setUserId("1");
+        Share shareInfo = new Share();
+        shareInfo.setUserInfo(userInfo);
         StatusDAO satusInfo = new StatusDAOBuilder()
-                .setStatusId("3")
-                .setUserId(userId)
+                .setStatusId(statusId)
+                .setUserId("1")
                 .setUserInfo(userInfo)
                 .setMappingId(userId)
                 .setReferenceInfo(referenceInfo)
                 .setDescription("this is a wounderful invention By scientist Shemin of NASA")
                 .setStatusTypeId("3")
                 .build();
-        System.out.println(statusObject.shareStatus("1", userInfo.toString(), satusInfo.toString()));
+        System.out.println(statusObject.shareStatus(statusId, shareInfo.toString(), satusInfo.toString()));
     }
 
 //    @Test
@@ -137,7 +102,19 @@ public class StatusServiceTest {
         Like statusLikeInfo = new Like();
         statusLikeInfo.setUserInfo(rUserInfo);
         System.out.println(statusLikeInfo.toString());
-        System.out.println(statusObject.addStatusLike("2", statusLikeInfo.toString()));
+        System.out.println(statusObject.addStatusLike(statusId, statusLikeInfo.toString()));
+
+    }
+//    @Test
+    public void addStatusShare() {
+        UserInfo rUserInfo = new UserInfo();
+        rUserInfo.setFristName("Nazmul");
+        rUserInfo.setLastName("Hasan");
+        rUserInfo.setUserId("100105");
+        Share statusLikeInfo = new Share();
+        statusLikeInfo.setUserInfo(rUserInfo);
+        System.out.println(statusLikeInfo.toString());
+        System.out.println(statusObject.addStatusLike(statusId, statusLikeInfo.toString()));
 
     }
 //    @Test
@@ -150,6 +127,26 @@ public class StatusServiceTest {
 
     public void deleteStatus() {
         System.out.println(statusObject.deleteStatus("2"));
+
+    }
+//    @Test
+
+    public void getStatusLikeList() {
+        System.out.println(statusObject.getStatusLikeList(statusId));
+
+    }
+//    @Test
+
+    public void getStatusComments() {
+        System.out.println(statusObject.getStatusComments(statusId));
+
+    }
+    
+//    @Test
+    public void getStatuses() {
+        int offset = 0;
+        int limit = 5;
+       statusObject.getStatuses(userId,offset,limit);
 
     }
 
