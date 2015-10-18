@@ -21,6 +21,7 @@ import com.shampan.db.collections.fragment.common.Like;
 import com.shampan.db.collections.fragment.common.Share;
 import com.shampan.db.collections.fragment.common.UserInfo;
 import com.shampan.util.LogWriter;
+import com.shampan.util.PropertyProvider;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -38,7 +39,7 @@ public class PhotoModel {
     ResultEvent resultEvent = new ResultEvent();
 
     public PhotoModel() {
-
+        PropertyProvider.add("response");
     }
     //.........................Start Album module.....................................
 
@@ -117,6 +118,24 @@ public class PhotoModel {
         pQuery.put("totalImg", "$all");
         AlbumDAO albumInfo = mongoCollection.find(selectQuery).projection(pQuery).first();
         return albumInfo;
+    }
+
+    public String getAlbumInfo(String userId, String albumId) {
+        MongoCollection<AlbumDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERALBUMS.toString(), AlbumDAO.class);
+        Document sQuery = new Document();
+        sQuery.put("userId", userId);
+        sQuery.put("albumId", albumId);
+        Document pQuery = new Document();
+        pQuery.put("userId", "$all");
+        pQuery.put("albumId", "$all");
+        AlbumDAO albumInfo = mongoCollection.find(sQuery).projection(pQuery).first();
+        if (albumInfo != null) {
+            resultEvent.setResponseCode(PropertyProvider.get("success"));
+            return resultEvent.toString();
+        }
+        resultEvent.setResponseCode(PropertyProvider.get("unsuccess"));
+        return resultEvent.toString();
     }
 
     /*
@@ -514,7 +533,7 @@ public class PhotoModel {
                     }
                 }
 
-            } 
+            }
             mongoCollection.insertMany(photoList);
         }
 

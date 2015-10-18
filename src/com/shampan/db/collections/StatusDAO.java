@@ -34,10 +34,10 @@ public class StatusDAO implements Bson {
     private String mappingId;
     private String statusTypeId;
     private String description;
-    private List<Image> images;
     private String createdOn;
     private String modifiedOn;
     private UserInfo userInfo;
+    private List<Image> images;
     private ReferenceInfo referenceInfo;
     private List<ReferenceList> referenceList;
     private Privacy privacy;

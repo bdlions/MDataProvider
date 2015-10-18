@@ -12,34 +12,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author Sampan-IT
  */
 public class ReferenceList {
-    private String description;
-    private String image;
-    private UserInfo userInfo;
 
-    public String getDescription() {
-        return description;
+    private String statusId;
+
+    public String getStatusId() {
+        return statusId;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setStatusId(String statusId) {
+        this.statusId = statusId;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public UserInfo getUserInfo() {
-        return userInfo;
-    }
-
-    public void setUserInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
-    }
-     @Override
+    @Override
     public String toString() {
         ObjectMapper mapper = new ObjectMapper();
         String json = "";
@@ -62,5 +46,4 @@ public class ReferenceList {
         return refList;
     }
 
-    
 }

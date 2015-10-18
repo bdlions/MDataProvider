@@ -10,8 +10,8 @@ import com.shampan.db.Collections;
 import com.shampan.db.DBConnection;
 import com.shampan.db.collections.StatusDAO;
 import com.shampan.db.collections.builder.StatusDAOBuilder;
-import com.shampan.db.collections.fragment.photo.Image;
 import com.shampan.db.collections.fragment.status.Comment;
+import com.shampan.db.collections.fragment.status.Image;
 import com.shampan.db.collections.fragment.status.Like;
 import com.shampan.db.collections.fragment.status.ReferenceInfo;
 import com.shampan.db.collections.fragment.status.ReferenceList;
@@ -30,19 +30,28 @@ import static org.junit.Assert.*;
 public class StatusServiceTest {
 
     StatusModel statusObject = new StatusModel();
-    String userId ="eQeOwhE7hrUkCyP";
-    String statusId ="YC0EHMn2JVxcpyz";
+    String userId = "eQeOwhE7hrUkCyP";
+    String statusId = "Mrm39IJrHOjLlkN";
 
 //    @Test
     public void addStatus() {
-        String userId = "100157";
-        String statusId = "1";
-        List<Image> images = new ArrayList<Image>();
-        
         UserInfo userInfo = new UserInfo();
         userInfo.setFristName("Alamgir");
         userInfo.setLastName("Kabir");
         userInfo.setUserId(userId);
+        Image image = new Image();
+        image.setImage("hasenhen.jpg");
+        List<Image> imageList = new ArrayList<Image>();
+        imageList.add(image);
+        List<Like> likeList = new ArrayList<Like>();
+        ReferenceList refId = new ReferenceList();
+        refId.setStatusId(statusId);
+        List<ReferenceList> refList = new ArrayList<ReferenceList>();
+        refList.add(refId);
+        ReferenceInfo refInfo = new ReferenceInfo();
+        refInfo.setDescription("reference info");
+        refInfo.setUserInfo(userInfo);
+        refInfo.setImg(imageList);
         StatusDAO satusInfo = new StatusDAOBuilder()
                 .setStatusId(statusId)
                 .setUserId(userId)
@@ -50,8 +59,13 @@ public class StatusServiceTest {
                 .setMappingId(userId)
                 .setDescription("this is a wounderful invention By scientist Shemin of NASA")
                 .setStatusTypeId("1")
+                .setLike(likeList)
+                .setReferenceList(refList)
+                .setReferenceInfo(refInfo)
+//                .setImages(imageList)
                 .build();
-        System.out.println(statusObject.addStatus(satusInfo.toString()));
+        System.out.println(satusInfo.toString());
+//        System.out.println(statusObject.addStatus(satusInfo.toString()));
     }
 
 //    @Test
@@ -73,11 +87,11 @@ public class StatusServiceTest {
         UserInfo rUserInfo = new UserInfo();
         rUserInfo.setFristName("Nazmul");
         rUserInfo.setLastName("Hasan");
-        rUserInfo.setUserId("100105");
+        rUserInfo.setUserId(userId);
         ReferenceInfo referenceInfo = new ReferenceInfo();
         referenceInfo.setDescription("Old status description");
         referenceInfo.setUserInfo(rUserInfo);
-        
+
         UserInfo userInfo = new UserInfo();
         userInfo.setFristName("Alamgir");
         userInfo.setLastName("Kabir");
@@ -109,6 +123,7 @@ public class StatusServiceTest {
 
     }
 //    @Test
+
     public void addStatusShare() {
         UserInfo rUserInfo = new UserInfo();
         rUserInfo.setFristName("Nazmul");
@@ -126,8 +141,8 @@ public class StatusServiceTest {
         System.out.println(statusObject.updateStatus("2", "update status...."));
 
     }
-//    @Test
 
+//    @Test
     public void deleteStatus() {
         System.out.println(statusObject.deleteStatus("2"));
 
@@ -138,18 +153,25 @@ public class StatusServiceTest {
         System.out.println(statusObject.getStatusLikeList(statusId));
 
     }
+    
+    @Test
+
+    public void getStatusShareList() {
+        System.out.println(statusObject.getStatusShareList(statusId));
+
+    }
 //    @Test
 
     public void getStatusComments() {
         System.out.println(statusObject.getStatusComments(statusId));
 
     }
-    
+
 //    @Test
     public void getStatuses() {
         int offset = 0;
         int limit = 5;
-       statusObject.getStatuses(userId,offset,limit);
+        System.out.println(statusObject.getStatuses(userId, offset, limit));
 
     }
 

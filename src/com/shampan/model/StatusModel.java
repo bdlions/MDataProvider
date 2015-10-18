@@ -52,7 +52,6 @@ public class StatusModel {
         MongoCollection<StatusDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
         StatusDAO statusInfoObj = new StatusDAOBuilder().build(statusInfo);
-        System.out.println(statusInfoObj);
         try {
             if (statusInfoObj != null) {
                 mongoCollection.insertOne(statusInfoObj);
@@ -76,8 +75,9 @@ public class StatusModel {
             statusJson.put("statusId", status.getStatusId());
             statusJson.put("userInfo", status.getUserInfo());
             statusJson.put("description", status.getDescription());
-            if(status.getImages() != null){
-            statusJson.put("images", status.getImages());
+            statusJson.put("statusTypeId", status.getStatusTypeId());
+            if (status.getImages() != null) {
+                statusJson.put("images", status.getImages());
             }
             if (status.getLike() != null) {
                 int likeSize = status.getLike().size();
@@ -114,10 +114,12 @@ public class StatusModel {
             }
             if (status.getShare() != null) {
                 int shareSize = status.getShare().size();
-                System.out.println(shareSize);
                 if (shareSize > 0) {
                     statusJson.put("shareCounter", shareSize);
                 }
+            }
+            if (status.getReferenceInfo() != null) {
+                statusJson.put("referenceInfo", status.getReferenceInfo());
             }
             statusInfoList.add(statusJson);
         }
@@ -209,9 +211,7 @@ public class StatusModel {
         MongoCollection<StatusDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("statusId").is(statusId).get();
-        System.out.println(refUserInfo);
         Share statusRefInfo = Share.getStatusShare(refUserInfo);
-        System.out.println(statusRefInfo);
         try {
             if (statusRefInfo != null) {
                 mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("share", JSON.parse(statusRefInfo.toString()))));
@@ -245,6 +245,21 @@ public class StatusModel {
         pQuery.put("comment", "$all");
         StatusDAO albumCommentList = mongoCollection.find(selectQuery).projection(pQuery).first();
         return albumCommentList.toString();
+    }
+
+    public String getStatusShareList(String statusId) {
+        MongoCollection<StatusDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("statusId").is(statusId).get();
+        Document pQuery = new Document();
+        pQuery.put("share", "$all");
+        StatusDAO albumCommentList = mongoCollection.find(selectQuery).projection(pQuery).first();
+        if (albumCommentList != null) {
+            return albumCommentList.toString();
+        } else {
+            resultEvent.setResponseCode(PropertyProvider.get("unsuccess"));
+            return resultEvent.toString();
+        }
     }
 
     public String updateStatusPrivacy(String statusId, String privacyInfo) {

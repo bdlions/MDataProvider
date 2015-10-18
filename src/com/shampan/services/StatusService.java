@@ -57,6 +57,11 @@ public class StatusService {
         return response;
 
     }
+    public static String getStatusShareList(String statusId) {
+        String response = obj.getStatusShareList(statusId);
+        return response;
+
+    }
     public static String getStatusComments(String statusId) {
         String response = obj.getStatusComments(statusId);
         return response;

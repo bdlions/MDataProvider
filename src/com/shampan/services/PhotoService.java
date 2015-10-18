@@ -41,6 +41,10 @@ public class PhotoService {
         String response = photoObject.getAlbum(userId,albumId);
         return response;
     }
+    public static String getAlbumInfo(String userId,String albumId) {
+        String response = photoObject.getAlbumInfo(userId,albumId);
+        return response;
+    }
 
     public static String createAlbum(String albumInfo) {
         String response = photoObject.createAlbum(albumInfo);

@@ -50,11 +50,6 @@ public class StatusDAOBuilder {
         return status;
     }
 
-    public StatusDAOBuilder setImages(List<Image> images) {
-        this.images = images;
-        return this;
-    }
-
     public StatusDAOBuilder setStatus(StatusDAO status) {
         this.status = status;
         return this;
@@ -126,6 +121,11 @@ public class StatusDAOBuilder {
 
     public StatusDAOBuilder setLike(List<Like> like) {
         this.like = like;
+        return this;
+    }
+
+    public StatusDAOBuilder setImages(List<Image> images) {
+        this.images = images;
         return this;
     }
 

@@ -9,9 +9,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  *
- * @author Sampan-IT
+ * @author Sampan IT
  */
 public class Image {
+
     private String image;
 
     public String getImage() {
@@ -21,8 +22,8 @@ public class Image {
     public void setImage(String image) {
         this.image = image;
     }
-    
-      @Override
+
+    @Override
     public String toString() {
         ObjectMapper mapper = new ObjectMapper();
         String json = "";
@@ -34,7 +35,7 @@ public class Image {
         return json;
     }
 
-    public static Image getImageList(String jsonContent) {
+    public static Image getImageInfo(String jsonContent) {
         Image imageInfo = null;
         try {
             ObjectMapper mapper = new ObjectMapper();
