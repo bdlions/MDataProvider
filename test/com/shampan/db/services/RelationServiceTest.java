@@ -26,16 +26,16 @@ import org.junit.Test;
 public class RelationServiceTest {
 
     FriendModel friendObj = new FriendModel();
-    String userId = "2";
+    String userId = "1";
     String friendId = "3";
 
 //    @Test
     public void addUser() {
 
         UserDAO userInfo = new UserDAOBuilder()
-                .setFirstName("Shemin")
-                .setLastName("Haque")
-                .setUserId("4")
+                .setFirstName("Nazmul")
+                .setLastName("Hasan")
+                .setUserId("3")
                 .build();
         System.out.println(friendObj.addUser(userInfo.toString()));
 
@@ -59,6 +59,12 @@ public class RelationServiceTest {
     public void getRelationShipStatus() {
 
         System.out.println(friendObj.getRelationShipStatus(userId, friendId));
+
+    }
+//    @Test
+    public void shearchFriend() {
+
+        System.out.println(friendObj.shearchFriend("A"));
 
     }
 //    @Test
@@ -97,7 +103,7 @@ public class RelationServiceTest {
 
     }
 
-    @Test
+//    @Test
     public void getFriendList() {
         PropertyProvider.add("com.shampan.properties/relations");
         String typeId = PropertyProvider.get("FriendTypeId");

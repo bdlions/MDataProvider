@@ -4,6 +4,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.QueryBuilder;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.util.JSON;
 import com.sampan.response.ResultEvent;
 import com.shampan.db.Collections;
@@ -17,6 +18,7 @@ import com.shampan.util.PropertyProvider;
 import java.util.ArrayList;
 import static java.util.Collections.list;
 import java.util.List;
+import org.apache.commons.collections4.IteratorUtils;
 import org.bson.Document;
 import org.json.JSONObject;
 
@@ -101,12 +103,12 @@ public class FriendModel {
                 = DBConnection.getInstance().getConnection().getCollection(Collections.RELATIONS.toString(), RelationsDAO.class);
         FriendModel friendObj = new FriendModel();
         UserDAO fromUserInfo = friendObj.getUserInfo(userId);
-        RelationInfo formRelation = new RelationInfo();
-        formRelation.setUserId(userId);
-        formRelation.setIsInitiated(PropertyProvider.get("RequestSender"));
-        formRelation.setRelationTypeId(statusTypeId);
-        formRelation.setFristName(fromUserInfo.getFirstName());
-        formRelation.setLastName(fromUserInfo.getLastName());
+        RelationInfo fromRelation = new RelationInfo();
+        fromRelation.setUserId(userId);
+        fromRelation.setIsInitiated(PropertyProvider.get("RequestSender"));
+        fromRelation.setRelationTypeId(statusTypeId);
+        fromRelation.setFristName(fromUserInfo.getFirstName());
+        fromRelation.setLastName(fromUserInfo.getLastName());
 
         UserDAO toUserInfo = friendObj.getUserInfo(friendId);
         RelationInfo toRelation = new RelationInfo();
@@ -121,31 +123,29 @@ public class FriendModel {
         fromPQuery.put("friendList", new Document("$elemMatch", new Document("userId", friendId)));
         Document toPQuery = new Document();
         toPQuery.put("friendList", new Document("$elemMatch", new Document("userId", userId)));
-        RelationsDAO formRelationInfoCursor = mongoCollection.find(fromSelectQuery).projection(fromPQuery).first();
+        RelationsDAO fromRelationInfoCursor = mongoCollection.find(fromSelectQuery).projection(fromPQuery).first();
         RelationsDAO toRelationInfoCursor = mongoCollection.find(toSelectQuery).projection(toPQuery).first();
         int fromStatus = 0;
         int toStatus = 0;
-        if (formRelationInfoCursor != null) {
-            int fromFriendList = formRelationInfoCursor.getFriendList().size();
+        if (fromRelationInfoCursor != null) {
+            int fromFriendList = fromRelationInfoCursor.getFriendList().size();
             for (int i = 0; i < fromFriendList; i++) {
-                if (formRelationInfoCursor.getFriendList().get(i).getUserId().equals(friendId)) {
-                    System.out.println(fromStatus);
+                if (fromRelationInfoCursor.getFriendList().get(i).getUserId().equals(friendId)) {
                     fromStatus = 1;
                 }
             }
             if (fromStatus == 0) {
-                System.out.println(fromStatus);
-                RelationsDAO result = mongoCollection.findOneAndUpdate(fromSelectQuery, new Document("$push", new Document("friendList", JSON.parse(toRelation.toString()))));
+                mongoCollection.findOneAndUpdate(fromSelectQuery, new Document("$push", new Document("friendList", JSON.parse(toRelation.toString()))));
             }
 
         } else {
             List<RelationInfo> toRelationsList = new ArrayList<RelationInfo>();
             toRelationsList.add(toRelation);
-            RelationsDAO formRelationInfo = new RelationsDAOBuilder()
+            RelationsDAO fromRelationInfo = new RelationsDAOBuilder()
                     .setUserId(userId)
                     .setFriendList(toRelationsList)
                     .build();
-            mongoCollection.insertOne(formRelationInfo);
+            mongoCollection.insertOne(fromRelationInfo);
         }
         if (toRelationInfoCursor != null) {
             int toFriendList = toRelationInfoCursor.getFriendList().size();
@@ -156,15 +156,15 @@ public class FriendModel {
             }
 
             if (toStatus == 0) {
-                RelationsDAO result = mongoCollection.findOneAndUpdate(toSelectQuery, new Document("$push", new Document("friendList", JSON.parse(formRelation.toString()))));
+                RelationsDAO result = mongoCollection.findOneAndUpdate(toSelectQuery, new Document("$push", new Document("friendList", JSON.parse(fromRelation.toString()))));
             }
 
         } else {
-            List<RelationInfo> formRelationsList = new ArrayList<RelationInfo>();
-            formRelationsList.add(formRelation);
+            List<RelationInfo> fromRelationsList = new ArrayList<RelationInfo>();
+            fromRelationsList.add(fromRelation);
             RelationsDAO toRelationInfo = new RelationsDAOBuilder()
                     .setUserId(friendId)
-                    .setFriendList(formRelationsList)
+                    .setFriendList(fromRelationsList)
                     .build();
             mongoCollection.insertOne(toRelationInfo);
 
@@ -293,12 +293,12 @@ public class FriendModel {
                 = DBConnection.getInstance().getConnection().getCollection(Collections.RELATIONS.toString(), RelationsDAO.class);
         FriendModel friendObj = new FriendModel();
         UserDAO fromUserInfo = friendObj.getUserInfo(userId);
-        RelationInfo formRelation = new RelationInfo();
-        formRelation.setUserId(userId);
-        formRelation.setIsInitiated(PropertyProvider.get("FriendRequestSender"));
-        formRelation.setRelationTypeId(PropertyProvider.get("BlockedTypeId"));
-        formRelation.setFristName(fromUserInfo.getFirstName());
-        formRelation.setLastName(fromUserInfo.getLastName());
+        RelationInfo fromRelation = new RelationInfo();
+        fromRelation.setUserId(userId);
+        fromRelation.setIsInitiated(PropertyProvider.get("FriendRequestSender"));
+        fromRelation.setRelationTypeId(PropertyProvider.get("BlockedTypeId"));
+        fromRelation.setFristName(fromUserInfo.getFirstName());
+        fromRelation.setLastName(fromUserInfo.getLastName());
 
         UserDAO toUserInfo = friendObj.getUserInfo(friendId);
         RelationInfo toRelation = new RelationInfo();
@@ -309,19 +309,19 @@ public class FriendModel {
         toRelation.setLastName(toUserInfo.getLastName());
         List<RelationInfo> toRelationsList = new ArrayList<RelationInfo>();
         toRelationsList.add(toRelation);
-        RelationsDAO formRelationInfo = new RelationsDAOBuilder()
+        RelationsDAO fromRelationInfo = new RelationsDAOBuilder()
                 .setUserId(userId)
                 .setFriendList(toRelationsList)
                 .build();
-//        mongoCollection.insertOne(formRelationInfo);
-        List<RelationInfo> formRelationsList = new ArrayList<RelationInfo>();
-        formRelationsList.add(formRelation);
+//        mongoCollection.insertOne(fromRelationInfo);
+        List<RelationInfo> fromRelationsList = new ArrayList<RelationInfo>();
+        fromRelationsList.add(fromRelation);
         RelationsDAO toRelationInfo = new RelationsDAOBuilder()
                 .setUserId(friendId)
-                .setFriendList(formRelationsList)
+                .setFriendList(fromRelationsList)
                 .build();
         List<RelationsDAO> insertList = new ArrayList<RelationsDAO>();
-        insertList.add(formRelationInfo);
+        insertList.add(fromRelationInfo);
         insertList.add(toRelationInfo);
         mongoCollection.insertMany(insertList);
         resultEvent.setResponseCode(PropertyProvider.get("success"));
@@ -424,12 +424,29 @@ public class FriendModel {
 
     }
 
-    public String shearchFriend() {
-        MongoCollection<RelationsDAO> mongoCollection
-                = DBConnection.getInstance().getConnection().getCollection(Collections.RELATIONS.toString(), RelationsDAO.class);
-
-//        MongoCursor<RelationsDAO> CursorReligionList = mongoCollection.find({"name": /.*m.*/}).iterator();
-        return "success";
+    public List<UserDAO> shearchFriend(String keyQuery) {
+        MongoCollection<UserDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERS.toString(), UserDAO.class);
+        Document selectQ = new Document();
+        selectQ.put("$regex",  keyQuery );
+//        selectQ.put("$regex", "/" + keyQuery + "/");
+//        selectQ.put("$options", 'm');
+        System.out.println(selectQ);
+        List<Document> orObj = new ArrayList<Document>();
+        orObj.add(new Document("firstName", selectQ));
+        orObj.add(new Document("lastName", selectQ));
+        
+        Document sQuery = new Document();
+        sQuery.put("$or", orObj);
+        System.out.println(sQuery);
+        Document pQuery = new Document();
+        pQuery.put("userId", "$all");
+        pQuery.put("firstName", "$all");
+        pQuery.put("lastName", "$all");
+       
+        MongoCursor<UserDAO> userList = mongoCollection.find(sQuery).projection(pQuery).iterator();
+        List<UserDAO> userInfoList = IteratorUtils.toList(userList);
+        return userInfoList;
     }
 
 }

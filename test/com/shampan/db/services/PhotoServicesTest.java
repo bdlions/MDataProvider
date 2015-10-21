@@ -136,7 +136,7 @@ public class PhotoServicesTest {
         refUserInfo.setLastName("Kabir");
         refUserInfo.setUserId(userId);
         Comment albumCommentInfo = new Comment();
-        albumCommentInfo.setId("1");
+        albumCommentInfo.setId(userId);
         albumCommentInfo.setUserInfo(refUserInfo);
         albumCommentInfo.setDescription("I like your track !");
         System.out.println(photoObject.addAlbumComment(albumId, albumCommentInfo.toString()));
@@ -234,7 +234,7 @@ public class PhotoServicesTest {
         refUserInfo.setLastName("Kabir");
         refUserInfo.setUserId(userId);
         Like likeuserInfo = new Like();
-        likeuserInfo.setId("2");
+        likeuserInfo.setId(userId);
         likeuserInfo.setUserInfo(refUserInfo);
         System.out.println(photoObject.addPhotoLike(photoId, likeuserInfo.toString()));
 
@@ -247,7 +247,7 @@ public class PhotoServicesTest {
         refUserInfo.setLastName("Kabir");
         refUserInfo.setUserId(userId);
         Comment photoCommentInfo = new Comment();
-        photoCommentInfo.setId("1");
+        photoCommentInfo.setId(userId);
         photoCommentInfo.setUserInfo(refUserInfo);
         photoCommentInfo.setDescription("I like your track !");
         System.out.println(photoObject.addPhotoComment(photoId, photoCommentInfo.toString()));
