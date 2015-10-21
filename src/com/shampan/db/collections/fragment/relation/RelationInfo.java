@@ -1,11 +1,13 @@
 package com.shampan.db.collections.fragment.relation;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  *
  * @author nazmul hasan
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class RelationInfo {
 
     private String userId;
