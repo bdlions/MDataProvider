@@ -27,15 +27,15 @@ public class RelationServiceTest {
 
     FriendModel friendObj = new FriendModel();
     String userId = "1";
-    String friendId = "3";
+    String friendId = "6";
 
 //    @Test
     public void addUser() {
 
         UserDAO userInfo = new UserDAOBuilder()
-                .setFirstName("Nazmul")
+                .setFirstName("Salma")
                 .setLastName("Hasan")
-                .setUserId("3")
+                .setUserId("6")
                 .build();
         System.out.println(friendObj.addUser(userInfo.toString()));
 
@@ -43,14 +43,14 @@ public class RelationServiceTest {
 
 //    @Test
     public void getUserInfo() {
-        System.out.println(friendObj.getUserInfo("2"));
+//        System.out.println(friendObj.getUserInfo("2"));
 
     }
 
 //    @Test
     public void addRequest() {
         PropertyProvider.add("com.shampan.properties/relations");
-        String typeId = PropertyProvider.get("FriendTypeId");
+        String typeId = PropertyProvider.get("RELATION_TYPE_PENDING_ID");
         friendObj.addRequest(userId, friendId, typeId);
 
     }
@@ -106,19 +106,19 @@ public class RelationServiceTest {
 //    @Test
     public void getFriendList() {
         PropertyProvider.add("com.shampan.properties/relations");
-        String typeId = PropertyProvider.get("FriendTypeId");
-        int offset = 1;
-        int limit = 2;
+        String typeId = PropertyProvider.get("RELATION_TYPE_PENDING_ID");
+        int offset = 0;
+        int limit = 1;
         friendObj.getFriendList(userId, offset, limit, typeId);
 
     }
-//    @Test
+    @Test
     public void getTestFriendList() {
         PropertyProvider.add("com.shampan.properties/relations");
-        String typeId = PropertyProvider.get("FriendTypeId");
+        String typeId = PropertyProvider.get("RELATION_TYPE_PENDING_ID");
         int offset = 0;
         int limit = 5;
-        friendObj.getTestFriendList(userId, offset, limit, typeId);
+        friendObj.getFriendList(userId, offset, limit, typeId);
 
     }
 

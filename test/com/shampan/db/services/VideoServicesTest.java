@@ -24,12 +24,12 @@ public class VideoServicesTest {
     VideoModel videoObject = new VideoModel();
     String videoId = "1";
     String categoryId = "1";
-    String userId = "1";
+    String userId = "l3Leypo632aWWcV";
 
 //    @Test
     public void addVideoCategory() {
         UserInfo userInfo = new UserInfo();
-        userInfo.setFristName("Alamgir");
+        userInfo.setFirstName("Alamgir");
         userInfo.setLastName("Kabir");
         userInfo.setUserId(userId);
         VideoCategoryDAO vedioCategory = new VideoCategoryDAOBuilder()
@@ -50,7 +50,7 @@ public class VideoServicesTest {
 //    @Test
     public void addVideo() {
         UserInfo userInfo = new UserInfo();
-        userInfo.setFristName("Alamgir");
+        userInfo.setFirstName("Alamgir");
         userInfo.setLastName("Kabir");
         userInfo.setUserId(userId);
         VideoDAO videoInfo = new VideoDAOBuilder()
@@ -70,6 +70,11 @@ public class VideoServicesTest {
         System.out.println(videoObject.getVideo(videoId));
 
     }
+    @Test
+    public void getVideos() {
+        System.out.println(videoObject.getVideos(userId));
+
+    }
 //    @Test
 
     public void updateVideo() {
@@ -86,7 +91,7 @@ public class VideoServicesTest {
 //    @Test
     public void addVideoLike() {
         UserInfo userInfo = new UserInfo();
-        userInfo.setFristName("Alamgir");
+        userInfo.setFirstName("Alamgir");
         userInfo.setLastName("Kabir");
         userInfo.setUserId(userId);
         Like likeInfo = new Like();
@@ -111,7 +116,7 @@ public class VideoServicesTest {
 //        @Test
     public void addVideoComment() {
         UserInfo userInfo = new UserInfo();
-        userInfo.setFristName("Alamgir");
+        userInfo.setFirstName("Alamgir");
         userInfo.setLastName("Kabir");
         userInfo.setUserId(userId);
         Comment commentInfo = new Comment();

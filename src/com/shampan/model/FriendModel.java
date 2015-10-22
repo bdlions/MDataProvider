@@ -17,6 +17,7 @@ import com.shampan.db.collections.fragment.relation.RelationInfo;
 import com.shampan.util.PropertyProvider;
 import java.util.ArrayList;
 import static java.util.Collections.list;
+import java.util.Iterator;
 import java.util.List;
 import org.apache.commons.collections4.IteratorUtils;
 import org.bson.Document;
@@ -358,9 +359,12 @@ public class FriendModel {
         List fSelection = new ArrayList<>();
         fSelection.add(offset);
         fSelection.add(limit);
+        Document selectQ = new Document();
+        //selectQ.put("$elemMatch", new Document("relationTypeId", typeId));
+        selectQ.put("$slice", fSelection);
         Document pQuery = new Document();
-//        pQuery.put("friendList", new Document("$slice", fSelection));
-        pQuery.put("friendList", new Document("$elemMatch", new Document("relationTypeId", typeId)));
+        pQuery.put("friendList", selectQ);
+//        pQuery.put("friendList", new Document("$elemMatch", new Document("relationTypeId", typeId)));
         RelationsDAO friendList = mongoCollection.find(sQuery).projection(pQuery).first();
         if (friendList != null) {
             System.out.println(friendList);
@@ -378,28 +382,55 @@ public class FriendModel {
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
         Document sQuery = new Document();
         sQuery.put("userId", userId);
+        sQuery.put("friendList", new Document("$elemMatch", new Document("relationTypeId", typeId)));
         List fSelection = new ArrayList<>();
-        fSelection.add(offset);
-        fSelection.add(limit);
+//        fSelection.add(new Document("$elemMatch", new Document("relationTypeId", typeId)));
+        fSelection.add( typeId);
+//        fSelection.add(limit);
+        
+        Document allQ = new Document();
+        allQ.put("$in", fSelection);
+//        System.out.println(allQ);
+//        Document sallQ = new Document();
+//        sallQ.put("friendList",allQ);
+//        sallQ.put("friendList.relationTypeId",allQ);
+       
         Document pQuery = new Document();
-        pQuery.put("friendList", "$all");
-        RelationsDAO friendList = mongoCollection.find(sQuery).projection(pQuery).first();
-        List<RelationInfo> requestList = new ArrayList<RelationInfo>();
-        if (friendList != null) {
-            for (int i = 0; i < friendList.getFriendList().size(); i++) {
-                if (friendList.getFriendList().get(i).getRelationTypeId().equals(typeId)) {
-                    requestList.add(friendList.getFriendList().get(i));
-                }
-            }
-        }
-        if (requestList != null) {
-            System.out.println(requestList);
-            return requestList.toString();
+//        pQuery.put("friendList.relationTypeId", new Document("$elemMatch", new Document("relationTypeId", typeId)));
+        pQuery.put("friendList", allQ);
+//        System.out.println("Projection: "+pQuery.toJson());
+//        System.out.println(mongoCollection.find(sQuery).projection(pQuery));
+        Document testP = new Document();
+        testP.put("friendList.relationTypeId","2");
+        System.out.println(testP);
+       RelationsDAO list =  mongoCollection.find(sQuery).projection(testP).first();
+        System.out.println(list.toString());
+        
+//        System.out.println("Projection: " + new Document("friendList.relationTypeId", new Document("$in", fSelection)).toJson());
+//        MongoCursor friendList = mongoCollection.find(sQuery).projection(new Document("friendList.relationTypeId", new Document("$in", fSelection))).iterator();
+//        System.out.println( "FriendList: " + friendList);
+//        for (Iterator iterator = friendList; friendList.hasNext();) {
+//            Object next = friendList.next();
+//            System.out.println("Freind: " + next.toString());
+//        }
+//        List<RelationInfo> requestList = new ArrayList<>();
+//        if (friendList != null) {
+//            for (int i = 0; i < friendList.getFriendList().size(); i++) {
+//                if (friendList.getFriendList().get(i).getRelationTypeId().equals(typeId)) {
+//                    requestList.add(friendList.getFriendList().get(i));
+//                }
+//            }
+//        }
+//        
+//        if (requestList.size() > 0) {
+////            System.out.println(requestList);
+//            return requestList.toString();
+//
+//        } else {
+//            return "";
+//        }
 
-        } else {
-            return "";
-        }
-
+        return null;
     }
 
     /**
@@ -428,9 +459,9 @@ public class FriendModel {
         MongoCollection<UserDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.USERS.toString(), UserDAO.class);
         Document selectQ = new Document();
+//        selectQ.put("$regex",  keyQuery );
         selectQ.put("$regex",  keyQuery );
-//        selectQ.put("$regex", "/" + keyQuery + "/");
-//        selectQ.put("$options", 'm');
+        selectQ.put("$options", 'i');
         System.out.println(selectQ);
         List<Document> orObj = new ArrayList<Document>();
         orObj.add(new Document("firstName", selectQ));

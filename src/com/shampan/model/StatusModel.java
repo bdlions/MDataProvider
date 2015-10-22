@@ -63,6 +63,13 @@ public class StatusModel {
         return resultEvent.toString();
     }
 
+    /**
+     * *
+     * this method will return all status of a user
+     *
+     * @param userId, user Id
+     * @author created by Rashida on 15 October
+     */
     public List<JSONObject> getStatuses(String userId, int offset, int limit) {
         MongoCollection<StatusDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
@@ -207,6 +214,14 @@ public class StatusModel {
         return resultEvent.toString();
     }
 
+    /**
+     * share Status
+     *
+     * @param statusId, status id
+     * @param refUserInfo, reference info
+     * @param shareInfo, new status info
+     *
+     */
     public String shareStatus(String statusId, String refUserInfo, String shareInfo) {
         MongoCollection<StatusDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
@@ -227,6 +242,12 @@ public class StatusModel {
         return resultEvent.toString();
     }
 
+    /**
+     * Status like list
+     *
+     * @param statusId, status id
+     *
+     */
     public String getStatusLikeList(String statusId) {
         MongoCollection<StatusDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
@@ -237,6 +258,12 @@ public class StatusModel {
         return albumLikeList.toString();
     }
 
+    /**
+     * Status comment list
+     *
+     * @param statusId, status id
+     *
+     */
     public String getStatusComments(String statusId) {
         MongoCollection<StatusDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
@@ -247,6 +274,12 @@ public class StatusModel {
         return albumCommentList.toString();
     }
 
+    /**
+     * Status share list
+     *
+     * @param statusId, status id
+     *
+     */
     public String getStatusShareList(String statusId) {
         MongoCollection<StatusDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);

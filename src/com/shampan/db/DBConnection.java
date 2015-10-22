@@ -10,6 +10,7 @@ import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoDatabase;
 import com.shampan.db.codec.AlbumCodec;
 import com.shampan.db.codec.BasicProfileCodec;
+import com.shampan.db.codec.CharacterCodec;
 import com.shampan.db.codec.CountriesCodec;
 import com.shampan.db.codec.PhotoCategoryCodec;
 import com.shampan.db.codec.PhotoCodec;
@@ -66,6 +67,7 @@ public class DBConnection {
             VideoCategoryCodec videoCategoryCodec = new VideoCategoryCodec();
             VideoCodec videoCodec = new VideoCodec();
             PhotoCategoryCodec photoCategoryCodec = new PhotoCategoryCodec();
+            CharacterCodec characterCodec = new CharacterCodec();
             CodecRegistry codecRegistry = CodecRegistries.fromRegistries(
                     MongoClient.getDefaultCodecRegistry(),
                     CodecRegistries.fromCodecs(userCodec),
@@ -78,7 +80,8 @@ public class DBConnection {
                     CodecRegistries.fromCodecs(photoCodec),
                     CodecRegistries.fromCodecs(photoCategoryCodec),
                     CodecRegistries.fromCodecs(videoCategoryCodec),
-                    CodecRegistries.fromCodecs(videoCodec)
+                    CodecRegistries.fromCodecs(videoCodec),
+                    CodecRegistries.fromCodecs(characterCodec)
             );
 
             MongoClientOptions options = MongoClientOptions.builder().codecRegistry(codecRegistry).build();

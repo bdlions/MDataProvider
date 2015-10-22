@@ -63,7 +63,7 @@ public class PhotoServicesTest {
 
     public void createAlbum() {
         UserInfo userInfo = new UserInfo();
-        userInfo.setFristName("Rashida");
+        userInfo.setFirstName("Rashida");
         userInfo.setLastName("Sultana");
         userInfo.setUserId(userId);
         AlbumDAO userAlbum = new AlbumDAOBuilder()
@@ -83,7 +83,7 @@ public class PhotoServicesTest {
 //    @Test
     public void editAlbum() {
         UserInfo userInfo = new UserInfo();
-        userInfo.setFristName("Rashida");
+        userInfo.setFirstName("Rashida");
         userInfo.setLastName("Sultana");
         userInfo.setUserId(userId);
         AlbumDAO userAlbum = new AlbumDAOBuilder()
@@ -115,7 +115,7 @@ public class PhotoServicesTest {
 //    @Test
     public void addAlbumLike() {
         UserInfo refUserInfo = new UserInfo();
-        refUserInfo.setFristName("Alamgir");
+        refUserInfo.setFirstName("Alamgir");
         refUserInfo.setLastName("Kabir");
         refUserInfo.setUserId("2");
         Like likeuserInfo = new Like();
@@ -132,7 +132,7 @@ public class PhotoServicesTest {
 //    @Test
     public void addAlbumComment() {
         UserInfo refUserInfo = new UserInfo();
-        refUserInfo.setFristName("Alamgir");
+        refUserInfo.setFirstName("Alamgir");
         refUserInfo.setLastName("Kabir");
         refUserInfo.setUserId(userId);
         Comment albumCommentInfo = new Comment();
@@ -230,7 +230,7 @@ public class PhotoServicesTest {
 //    @Test
     public void addPhotoLike() {
         UserInfo refUserInfo = new UserInfo();
-        refUserInfo.setFristName("Alamgir");
+        refUserInfo.setFirstName("Alamgir");
         refUserInfo.setLastName("Kabir");
         refUserInfo.setUserId(userId);
         Like likeuserInfo = new Like();
@@ -243,7 +243,7 @@ public class PhotoServicesTest {
 //    @Test
     public void addPhotoComment() {
         UserInfo refUserInfo = new UserInfo();
-        refUserInfo.setFristName("Alamgir");
+        refUserInfo.setFirstName("Alamgir");
         refUserInfo.setLastName("Kabir");
         refUserInfo.setUserId(userId);
         Comment photoCommentInfo = new Comment();

@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class UserInfo {
     private String userId ;
-    private String fristName;
+    private String firstName;
     private String lastName;
 
     public String getUserId() {
@@ -24,12 +24,12 @@ public class UserInfo {
         this.userId = userId;
     }
 
-    public String getFristName() {
-        return fristName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFristName(String fristName) {
-        this.fristName = fristName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {

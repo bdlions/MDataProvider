@@ -102,6 +102,26 @@ public class VideoModel {
      * @param videoId video Id
      * @author created by Rashida on 21 October
      */
+    public List<VideoDAO> getVideos(String userId) {
+        MongoCollection<VideoDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.VIDEOS.toString(), VideoDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+        Document pQuery = new Document();
+        pQuery.put("videoId","$all");
+        pQuery.put("categoryId","$all");
+        pQuery.put("userInfo","$all");
+        pQuery.put("url","$all");
+         MongoCursor<VideoDAO> cursorVideoList = mongoCollection.find(selectQuery).projection(pQuery).iterator();
+        List<VideoDAO> videoList = IteratorUtils.toList(cursorVideoList);
+        return videoList;
+    }
+
+    /**
+     * This method will return a video information
+     *
+     * @param videoId video Id
+     * @author created by Rashida on 21 October
+     */
     public String getVideo(String videoId) {
         MongoCollection<VideoDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.VIDEOS.toString(), VideoDAO.class);
