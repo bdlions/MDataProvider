@@ -128,19 +128,20 @@ public class RelationService {
         resultEvent.setResult(relationList);
         return resultEvent.toString();
     }
+    
     /**
-     * This method will return relation type of two users
+     * This method will return relation info of one user to another user
      * @param fromUserId, from user id of a relation
      * @param toUserId, to user id of a relation
-     * @return String, relation type id between two users
+     * @return String, relation info
      */
-    public static String getRelationType(String fromUserId, String toUserId)
+    public static String getRelationInfo(String fromUserId, String toUserId)
     {
-        return relationModel.getRelationType(fromUserId, toUserId);
+        return relationModel.getRelationInfo(fromUserId, toUserId).toString();
     }
     
     public static void main(String args[])
     {
-        //System.out.println(getRelationList("1", "1", "0", "1"));
+
     }
 }

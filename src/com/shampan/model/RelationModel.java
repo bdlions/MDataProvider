@@ -2,7 +2,9 @@ package com.shampan.model;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.QueryBuilder;
+import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.util.JSON;
 import com.sampan.response.ResultEvent;
 import com.shampan.db.Collections;
@@ -15,6 +17,7 @@ import com.shampan.util.Utility;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
+import org.json.JSONObject;
 
 /**
  *
@@ -347,14 +350,34 @@ public class RelationModel {
     }
     
     /**
-     * This method will return relation type of two users
+     * This method will return relation info of one user to another user
      * @param fromUserId, from user id of a relation
      * @param toUserId, to user id of a relation
-     * @return String, relation type id between two users
+     * @return RelationInfo, relation info
      */
-    public String getRelationType(String fromUserId, String toUserId)
+    public RelationInfo getRelationInfo(String fromUserId, String toUserId)
     {
-        //right now some dummy data is returned
-        return PropertyProvider.get("RELATION_TYPE_FRIEND_ID");
+        MongoCollection<RelationsDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.RELATIONS.toString(), RelationsDAO.class);
+        
+        String attrUserId = PropertyProvider.get("USER_ID");
+        String attrRelationList = PropertyProvider.get("RELATION_LIST");
+        
+        Document selectionDocument = new Document();
+        selectionDocument.put(attrUserId, fromUserId);
+        selectionDocument.put(attrRelationList+"."+attrUserId, toUserId);
+        
+        Document projectionDocument = new Document();
+        projectionDocument.put(attrRelationList+".$", "$all");
+        
+        RelationsDAO relationsDAO = mongoCollection.find(selectionDocument).projection(projectionDocument).first();
+        RelationInfo relationInfo = new RelationInfo();
+        
+        if (relationsDAO != null && relationsDAO.getFriendList().size() > 0) {
+            relationInfo = relationsDAO.getFriendList().get(0);
+        } else {
+            relationInfo.setRelationTypeId(PropertyProvider.get("RELATION_TYPE_NON_FRIEND_ID"));
+        }
+        return relationInfo;
     }
 }
