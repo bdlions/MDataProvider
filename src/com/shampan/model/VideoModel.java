@@ -22,9 +22,11 @@ import com.shampan.db.collections.fragment.common.Like;
 import com.shampan.db.collections.fragment.common.UserInfo;
 import com.shampan.util.LogWriter;
 import com.shampan.util.PropertyProvider;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.collections4.IteratorUtils;
 import org.bson.Document;
+import org.json.JSONObject;
 
 /**
  *
@@ -107,14 +109,15 @@ public class VideoModel {
                 = DBConnection.getInstance().getConnection().getCollection(Collections.VIDEOS.toString(), VideoDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
         Document pQuery = new Document();
-        pQuery.put("videoId","$all");
-        pQuery.put("categoryId","$all");
-        pQuery.put("userInfo","$all");
-        pQuery.put("url","$all");
-         MongoCursor<VideoDAO> cursorVideoList = mongoCollection.find(selectQuery).projection(pQuery).iterator();
+        pQuery.put("videoId", "$all");
+        pQuery.put("categoryId", "$all");
+        pQuery.put("userInfo", "$all");
+        pQuery.put("imageUrl", "$all");
+        MongoCursor<VideoDAO> cursorVideoList = mongoCollection.find(selectQuery).projection(pQuery).iterator();
         List<VideoDAO> videoList = IteratorUtils.toList(cursorVideoList);
         return videoList;
     }
+
 
     /**
      * This method will return a video information
@@ -122,17 +125,60 @@ public class VideoModel {
      * @param videoId video Id
      * @author created by Rashida on 21 October
      */
-    public String getVideo(String videoId) {
+    public String getVideo(String userId, String videoId ) {
         MongoCollection<VideoDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.VIDEOS.toString(), VideoDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("videoId").is(videoId).get();
         VideoDAO videoInfo = mongoCollection.find(selectQuery).first();
-        if (videoInfo != null) {
-            return videoInfo.toString();
-        } else {
-            resultEvent.setResponseCode(PropertyProvider.get("Null"));
-            return resultEvent.toString();
+        JSONObject videoInfoJson = new JSONObject();
+        try {
+            videoInfoJson.put("videoId", videoInfo.getVideoId());
+            videoInfoJson.put("userId", videoInfo.getUserId());
+            videoInfoJson.put("url", videoInfo.getUrl());
+            if (videoInfo.getLike() != null) {
+                int likeSize = videoInfo.getLike().size();
+                if (likeSize > 0) {
+                    videoInfoJson.put("likeCounter", likeSize);
+
+                }
+                int i = 0;
+                while (likeSize > 0) {
+                    String tempUserId = videoInfo.getLike().get(i).getUserInfo().getUserId();
+                    if (tempUserId.equals(userId)) {
+                        videoInfoJson.put("likeStatus", "1");
+                    }
+                    likeSize--;
+                    i++;
+                }
+
+            }
+            if (videoInfo.getComment() != null) {
+                int commentSize = videoInfo.getComment().size();
+                List<Comment> commentList = new ArrayList();
+                if (commentSize >= 1) {
+                    Comment lastComment = videoInfo.getComment().get(commentSize - 1);
+                    commentList.add(lastComment);
+                }
+                if (commentSize >= 2) {
+                    Comment secondlastComment = videoInfo.getComment().get(commentSize - 2);
+                    commentList.add(secondlastComment);
+                }
+                if (commentSize > 2) {
+                    videoInfoJson.put("commentCounter", commentSize - 2);
+                }
+                videoInfoJson.put("comment", commentList);
+            }
+            if (videoInfo.getShare() != null) {
+                int shareSize = videoInfo.getShare().size();
+                if (shareSize > 0) {
+                    videoInfoJson.put("shareCounter", shareSize);
+                }
+            }
+        } catch (NullPointerException npe) {
+            LogWriter.getErrorLog().error(npe);
         }
+
+        return videoInfoJson.toString();
     }
 
     /**

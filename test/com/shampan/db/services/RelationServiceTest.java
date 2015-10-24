@@ -61,12 +61,7 @@ public class RelationServiceTest {
         System.out.println(friendObj.getRelationShipStatus(userId, friendId));
 
     }
-//    @Test
-    public void shearchFriend() {
 
-        System.out.println(friendObj.shearchFriend("A"));
-
-    }
 //    @Test
 
     public void deleteRequest() {
@@ -112,7 +107,7 @@ public class RelationServiceTest {
         friendObj.getFriendList(userId, offset, limit, typeId);
 
     }
-    @Test
+//    @Test
     public void getTestFriendList() {
         PropertyProvider.add("com.shampan.properties/relations");
         String typeId = PropertyProvider.get("RELATION_TYPE_PENDING_ID");

@@ -455,29 +455,6 @@ public class FriendModel {
 
     }
 
-    public List<UserDAO> shearchFriend(String keyQuery) {
-        MongoCollection<UserDAO> mongoCollection
-                = DBConnection.getInstance().getConnection().getCollection(Collections.USERS.toString(), UserDAO.class);
-        Document selectQ = new Document();
-//        selectQ.put("$regex",  keyQuery );
-        selectQ.put("$regex",  keyQuery );
-        selectQ.put("$options", 'i');
-        System.out.println(selectQ);
-        List<Document> orObj = new ArrayList<Document>();
-        orObj.add(new Document("firstName", selectQ));
-        orObj.add(new Document("lastName", selectQ));
-        
-        Document sQuery = new Document();
-        sQuery.put("$or", orObj);
-        System.out.println(sQuery);
-        Document pQuery = new Document();
-        pQuery.put("userId", "$all");
-        pQuery.put("firstName", "$all");
-        pQuery.put("lastName", "$all");
-       
-        MongoCursor<UserDAO> userList = mongoCollection.find(sQuery).projection(pQuery).iterator();
-        List<UserDAO> userInfoList = IteratorUtils.toList(userList);
-        return userInfoList;
-    }
+ 
 
 }

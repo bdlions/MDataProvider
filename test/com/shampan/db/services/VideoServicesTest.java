@@ -22,7 +22,7 @@ import org.junit.Test;
 public class VideoServicesTest {
 
     VideoModel videoObject = new VideoModel();
-    String videoId = "1";
+    String videoId = "y06eVGno7SWQs1S";
     String categoryId = "1";
     String userId = "l3Leypo632aWWcV";
 
@@ -65,12 +65,12 @@ public class VideoServicesTest {
 
     }
 
-//    @Test
+    @Test
     public void getVideo() {
-        System.out.println(videoObject.getVideo(videoId));
+        System.out.println(videoObject.getVideo(userId,videoId));
 
     }
-    @Test
+//    @Test
     public void getVideos() {
         System.out.println(videoObject.getVideos(userId));
 

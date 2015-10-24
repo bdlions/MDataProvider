@@ -33,8 +33,8 @@ public class VideoService {
         return videos.toString();
     }
 
-    public static String getVideo(String videoId) {
-        String response = vedioObj.getVideo(videoId);
+    public static String getVideo(String userId, String videoId) {
+        String response = vedioObj.getVideo(userId,videoId);
         return response;
     }
 

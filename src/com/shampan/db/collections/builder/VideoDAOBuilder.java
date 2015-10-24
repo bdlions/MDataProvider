@@ -31,6 +31,7 @@ public class VideoDAOBuilder {
     private String userId;
     private String categoryId;
     private String url;
+    private String imageUrl;
     private String createdOn;
     private UserInfo UserInfo;
     private Privacy privacy;
@@ -66,6 +67,11 @@ public class VideoDAOBuilder {
 
     public VideoDAOBuilder setUrl(String url) {
         this.url = url;
+        return this;
+    }
+
+    public VideoDAOBuilder setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
         return this;
     }
 
@@ -110,6 +116,7 @@ public class VideoDAOBuilder {
         videoInfo.setUserInfo(UserInfo);
         videoInfo.setCategoryId(categoryId);
         videoInfo.setUrl(url);
+        videoInfo.setImageUrl(imageUrl);
         videoInfo.setComment(comment);
         videoInfo.setLike(like);
         videoInfo.setShare(share);

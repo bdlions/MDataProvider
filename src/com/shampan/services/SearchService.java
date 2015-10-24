@@ -5,6 +5,7 @@
  */
 package com.shampan.services;
 
+import com.sampan.response.ResultEvent;
 import com.shampan.model.SearchModel;
 
 /**
@@ -13,10 +14,17 @@ import com.shampan.model.SearchModel;
  */
 public class SearchService {
 
-    private static SearchModel searchObj = new SearchModel();
-    public static String getUsers(String statusInfo) {
-        String response = searchObj.getUsers(statusInfo);
-        return response;
+    private static final SearchModel searchModel = new SearchModel();
+
+
+    /**
+     * This method will return users
+     *
+     * @param requestPatten, request String
+     * @return users
+     */
+    public static String getUsers(String searchValue) {
+        return searchModel.getUsers(searchValue).toString();
     }
 
 }

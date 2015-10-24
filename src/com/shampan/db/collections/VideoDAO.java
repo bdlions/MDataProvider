@@ -31,6 +31,7 @@ public class VideoDAO implements Bson {
     private String userId;
     private String categoryId;
     private String url;
+    private String imageUrl;
     private String createdOn;
     private UserInfo UserInfo;
     private Privacy privacy;
@@ -45,6 +46,14 @@ public class VideoDAO implements Bson {
 
     public void setVideoId(String videoId) {
         this.videoId = videoId;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String get_id() {

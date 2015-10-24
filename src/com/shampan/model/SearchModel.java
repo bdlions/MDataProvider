@@ -6,12 +6,17 @@
 package com.shampan.model;
 
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.sampan.response.ResultEvent;
 import com.shampan.db.Collections;
 import com.shampan.db.DBConnection;
 import com.shampan.db.collections.UserDAO;
 import com.shampan.db.collections.fragment.status.UserInfo;
+import com.shampan.util.PropertyProvider;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.collections4.IteratorUtils;
+import org.bson.Document;
 
 /**
  *
@@ -20,83 +25,58 @@ import java.util.List;
 public class SearchModel {
 
     public SearchModel() {
+        PropertyProvider.add("com.shampan.properties/response");
+        PropertyProvider.add("com.shampan.properties/attributes");
+    }
+    private ResultEvent resultEvent = new ResultEvent();
 
+    /**
+     * This method will return result event
+     *
+     * @return ResultEvent, result event
+     */
+    public ResultEvent getResultEvent() {
+        return resultEvent;
     }
 
-    public String getUsers(String statusInfo) {
-
-        UserInfo userInfo1 = new UserInfo();
-        userInfo1.setFristName("Alamgir");
-        userInfo1.setLastName("Kabir");
-        userInfo1.setUserId("2");
-
-        UserInfo userInfo2 = new UserInfo();
-        userInfo2.setFristName("Nazmul");
-        userInfo2.setLastName("Hasan");
-        userInfo2.setUserId("1");
-
-        UserInfo userInfo3 = new UserInfo();
-        userInfo3.setFristName("Rashida");
-        userInfo3.setLastName("Sultana");
-        userInfo3.setUserId("3");
-
-        UserInfo userInfo4 = new UserInfo();
-        userInfo4.setFristName("Ridoy");
-        userInfo4.setLastName("Khsn");
-        userInfo4.setUserId("4");
-
-        UserInfo userInfo5 = new UserInfo();
-        userInfo5.setFristName("Salma");
-        userInfo5.setLastName("Khatun");
-        userInfo5.setUserId("5");
-
-        List<UserInfo> userList = new ArrayList<UserInfo>();
-        userList.add(userInfo2);
-        userList.add(userInfo1);
-        userList.add(userInfo3);
-        userList.add(userInfo4);
-        userList.add(userInfo5);
-
-        return userList.toString();
-
+    /**
+     * This method will set result event
+     *
+     * @param resultEvent, result event
+     */
+    public void setResultEvent(ResultEvent resultEvent) {
+        this.resultEvent = resultEvent;
     }
 
-    public static void main(String[] args) {
-        DBConnection.getInstance().getConnection();
+    /**
+     * This method will return users
+     *
+     * @param requestPatten, request String
+     * @return users
+     */
+    public List<UserDAO> getUsers(String searchValue) {
         MongoCollection<UserDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.USERS.toString(), UserDAO.class);
+        String attrUserId = PropertyProvider.get("USER_ID");
+        String attrFirstName = PropertyProvider.get("FIRST_NAME");
+        String attrLastName = PropertyProvider.get("LAST_NAME");
+        Document selectDocument = new Document();
+        selectDocument.put("$regex", searchValue);
+        selectDocument.put("$options", 'i');
+        List<Document> orDocument = new ArrayList<Document>();
+        orDocument.add(new Document(attrFirstName, selectDocument));
+        orDocument.add(new Document(attrLastName, selectDocument));
 
-        UserInfo userInfo1 = new UserInfo();
-        userInfo1.setFristName("Alamgir");
-        userInfo1.setLastName("Kabir");
-        userInfo1.setUserId("1");
+        Document sDocument = new Document();
+        sDocument.put("$or", orDocument);
+        Document projectionDocument = new Document();
+        projectionDocument.put(attrUserId, "$all");
+        projectionDocument.put(attrFirstName, "$all");
+        projectionDocument.put(attrLastName, "$all");
 
-        UserInfo userInfo2 = new UserInfo();
-        userInfo2.setFristName("Nazmul");
-        userInfo2.setLastName("Hasan");
-        userInfo2.setUserId("2");
-
-        UserInfo userInfo3 = new UserInfo();
-        userInfo3.setFristName("Rashida");
-        userInfo3.setLastName("Sultana");
-        userInfo3.setUserId("3");
-
-        UserInfo userInfo4 = new UserInfo();
-        userInfo4.setFristName("Ridoy");
-        userInfo4.setLastName("Khsn");
-        userInfo4.setUserId("4");
-
-        UserInfo userInfo5 = new UserInfo();
-        userInfo5.setFristName("Salma");
-        userInfo5.setLastName("Khatun");
-        userInfo5.setUserId("5");
-
-        List<UserInfo> userList = new ArrayList<UserInfo>();
-        userList.add(userInfo1);
-        userList.add(userInfo2);
-        userList.add(userInfo3);
-
-        System.out.println(userList.toString());
-
+        MongoCursor<UserDAO> userList = mongoCollection.find(sDocument).projection(projectionDocument).iterator();
+        List<UserDAO> userInfoList = IteratorUtils.toList(userList);
+        return userInfoList;
     }
+
 }
