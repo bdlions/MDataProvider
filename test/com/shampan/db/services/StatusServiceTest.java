@@ -36,7 +36,7 @@ public class StatusServiceTest {
 //    @Test
     public void addStatus() {
         UserInfo userInfo = new UserInfo();
-        userInfo.setFristName("Alamgir");
+        userInfo.setfirstName("Alamgir");
         userInfo.setLastName("Kabir");
         userInfo.setUserId(userId);
         Image image = new Image();
@@ -71,7 +71,7 @@ public class StatusServiceTest {
 //    @Test
     public void addStatusComment() {
         UserInfo rUserInfo = new UserInfo();
-        rUserInfo.setFristName("Nazmul");
+        rUserInfo.setfirstName("Nazmul");
         rUserInfo.setLastName("Hasan");
         rUserInfo.setUserId("100105");
         Comment statusCommentInfo = new Comment();
@@ -85,7 +85,7 @@ public class StatusServiceTest {
 //    @Test
     public void shareStatus() {
         UserInfo rUserInfo = new UserInfo();
-        rUserInfo.setFristName("Nazmul");
+        rUserInfo.setfirstName("Nazmul");
         rUserInfo.setLastName("Hasan");
         rUserInfo.setUserId(userId);
         ReferenceInfo referenceInfo = new ReferenceInfo();
@@ -93,7 +93,7 @@ public class StatusServiceTest {
         referenceInfo.setUserInfo(rUserInfo);
 
         UserInfo userInfo = new UserInfo();
-        userInfo.setFristName("Alamgir");
+        userInfo.setfirstName("Alamgir");
         userInfo.setLastName("Kabir");
         userInfo.setUserId("1");
         Share shareInfo = new Share();
@@ -113,7 +113,7 @@ public class StatusServiceTest {
 //    @Test
     public void addStatusLike() {
         UserInfo rUserInfo = new UserInfo();
-        rUserInfo.setFristName("Nazmul");
+        rUserInfo.setfirstName("Nazmul");
         rUserInfo.setLastName("Hasan");
         rUserInfo.setUserId("100105");
         Like statusLikeInfo = new Like();
@@ -126,7 +126,7 @@ public class StatusServiceTest {
 
     public void addStatusShare() {
         UserInfo rUserInfo = new UserInfo();
-        rUserInfo.setFristName("Nazmul");
+        rUserInfo.setfirstName("Nazmul");
         rUserInfo.setLastName("Hasan");
         rUserInfo.setUserId("100105");
         Share statusLikeInfo = new Share();

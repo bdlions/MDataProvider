@@ -39,7 +39,7 @@ public class PhotoModel {
     ResultEvent resultEvent = new ResultEvent();
 
     public PhotoModel() {
-        PropertyProvider.add("response");
+        PropertyProvider.add("com.shampan.properties/responseStatusCodes");
     }
     //.........................Start Album module.....................................
 
@@ -535,10 +535,13 @@ public class PhotoModel {
 
             }
             mongoCollection.insertMany(photoList);
-        }
+            resultEvent.setResponseCode(PropertyProvider.get("Created"));
+            return resultEvent.toString();
+        } else {
+            resultEvent.setResponseCode(PropertyProvider.get("BadRequest"));
+            return resultEvent.toString();
 
-        resultEvent.setResponseCode("100157");
-        return resultEvent.toString();
+        }
     }
 
     /*

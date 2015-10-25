@@ -343,7 +343,7 @@ public class RelationModel {
         List<RelationInfo> relationList = new ArrayList<>();
         RelationInfo relationInfo = new RelationInfo();
         relationInfo.setUserId("1");
-        relationInfo.setFristName("a");
+        relationInfo.setfirstName("a");
         relationInfo.setLastName("b");
         relationList.add(relationInfo);
         return relationList;

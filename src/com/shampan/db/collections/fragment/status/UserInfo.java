@@ -14,7 +14,7 @@ import com.shampan.db.collections.fragment.profile.WorkPlace;
  */
 public class UserInfo {
     private String userId ;
-    private String fristName;
+    private String firstName;
     private String lastName;
 
     public String getUserId() {
@@ -25,12 +25,12 @@ public class UserInfo {
         this.userId = userId;
     }
 
-    public String getFristName() {
-        return fristName;
+    public String getfirstName() {
+        return firstName;
     }
 
-    public void setFristName(String fristName) {
-        this.fristName = fristName;
+    public void setfirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {

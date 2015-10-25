@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class RelationInfo {
 
     private String userId;
-    private String fristName;
+    private String firstName;
     private String lastName;
     private String isInitiated;
     private String relationTypeId;
@@ -21,12 +21,12 @@ public class RelationInfo {
 
     }
 
-    public String getFristName() {
-        return fristName;
+    public String getfirstName() {
+        return firstName;
     }
 
-    public void setFristName(String fristName) {
-        this.fristName = fristName;
+    public void setfirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
