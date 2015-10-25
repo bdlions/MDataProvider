@@ -134,6 +134,8 @@ public class VideoModel {
         try {
             videoInfoJson.put("videoId", videoInfo.getVideoId());
             videoInfoJson.put("userId", videoInfo.getUserId());
+            videoInfoJson.put("userInfo", videoInfo.getUserInfo());
+            videoInfoJson.put("imageUrl", videoInfo.getImageUrl());
             videoInfoJson.put("url", videoInfo.getUrl());
             if (videoInfo.getLike() != null) {
                 int likeSize = videoInfo.getLike().size();
