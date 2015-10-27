@@ -154,7 +154,7 @@ public class StatusServiceTest {
 
     }
     
-    @Test
+//    @Test
 
     public void getStatusShareList() {
         System.out.println(statusObject.getStatusShareList(statusId));
@@ -167,7 +167,7 @@ public class StatusServiceTest {
 
     }
 
-//    @Test
+    @Test
     public void getStatuses() {
         int offset = 0;
         int limit = 5;

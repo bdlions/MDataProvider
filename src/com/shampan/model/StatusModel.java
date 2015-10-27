@@ -74,7 +74,7 @@ public class StatusModel {
         MongoCollection<StatusDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
-        MongoCursor<StatusDAO> StatusList = mongoCollection.find(selectQuery).skip(offset).limit(limit).iterator();
+        MongoCursor<StatusDAO> StatusList = mongoCollection.find().skip(offset).limit(limit).iterator();
         List<JSONObject> statusInfoList = new ArrayList<JSONObject>();
         while (StatusList.hasNext()) {
             JSONObject statusJson = new JSONObject();
