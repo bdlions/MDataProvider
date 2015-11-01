@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class ReferenceInfo {
     private String description;
-    private List<Image> img;
+    private List<Image> images;
     private UserInfo userInfo;
 
     public String getDescription() {
@@ -25,13 +25,16 @@ public class ReferenceInfo {
         this.description = description;
     }
 
-    public List<Image> getImg() {
-        return img;
+    public List<Image> getImages() {
+        return images;
     }
 
-    public void setImg(List<Image> img) {
-        this.img = img;
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
+
+
+  
     public UserInfo getUserInfo() {
         return userInfo;
     }

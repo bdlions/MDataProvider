@@ -117,7 +117,7 @@ public class StatusModel {
                     statusJson.put("commentCounter", commentSize - 2);
                 }
                 statusJson.put("commentList", commentList);
-
+                System.out.println(commentList);
             }
             if (status.getShare() != null) {
                 int shareSize = status.getShare().size();

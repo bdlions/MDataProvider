@@ -14,6 +14,7 @@ import com.shampan.db.collections.builder.RelationsDAOBuilder;
 import com.shampan.db.collections.builder.UserDAOBuilder;
 import com.shampan.db.collections.fragment.relation.RelationInfo;
 import com.shampan.model.FriendModel;
+import com.shampan.model.RelationModel;
 import com.shampan.util.PropertyProvider;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +26,9 @@ import org.junit.Test;
  */
 public class RelationServiceTest {
 
-    FriendModel friendObj = new FriendModel();
-    String userId = "1";
-    String friendId = "6";
+    RelationModel friendObj = new RelationModel();
+    String userId = "55Lj6k4iZReT4ck";
+    String friendId = "mqQ06eko9TqYYul";
 
 //    @Test
     public void addUser() {
@@ -37,7 +38,7 @@ public class RelationServiceTest {
                 .setLastName("Hasan")
                 .setUserId("6")
                 .build();
-        System.out.println(friendObj.addUser(userInfo.toString()));
+//        System.out.println(friendObj.addUser(userInfo.toString()));
 
     }
 
@@ -51,23 +52,20 @@ public class RelationServiceTest {
     public void addRequest() {
         PropertyProvider.add("com.shampan.properties/relations");
         String typeId = PropertyProvider.get("RELATION_TYPE_PENDING_ID");
-        friendObj.addRequest(userId, friendId, typeId);
+        friendObj.addFriend(userId, friendId);
 
     }
 
 //    @Test
     public void getRelationShipStatus() {
 
-        System.out.println(friendObj.getRelationShipStatus(userId, friendId));
-
+//        System.out.println(friendObj.getRelationShipStatus(userId, friendId));
     }
 
 //    @Test
-
     public void deleteRequest() {
 
-        System.out.println(friendObj.deleteRequest(userId, friendId));
-
+//        System.out.println(friendObj.deleteRequest(userId, friendId));
     }
 
 //    @Test
@@ -86,7 +84,7 @@ public class RelationServiceTest {
 
 //    @Test
     public void getFriendInfo() {
-        System.out.println(friendObj.getFriendInfo(userId, friendId).toString());
+//        System.out.println(friendObj.getFriendInfo(userId, friendId).toString());
 
     }
 
@@ -94,26 +92,27 @@ public class RelationServiceTest {
     public void approveRequest() {
         PropertyProvider.add("com.shampan.properties/relations");
         String typeId = PropertyProvider.get("FriendTypeId");
-        System.out.println(friendObj.changeRelationShipStatus(userId, friendId,typeId));
+//        System.out.println(friendObj.changeRelationShipStatus(userId, friendId,typeId));
 
     }
 
-//    @Test
+    @Test
     public void getFriendList() {
         PropertyProvider.add("com.shampan.properties/relations");
-        String typeId = PropertyProvider.get("RELATION_TYPE_PENDING_ID");
+        String typeId = "1";
         int offset = 0;
-        int limit = 1;
-        friendObj.getFriendList(userId, offset, limit, typeId);
+        int limit = 5;
+        System.out.println(friendObj.getRelationList("mqQ06eko9TqYYul", "1", offset, limit).toString());
 
     }
 //    @Test
+
     public void getTestFriendList() {
         PropertyProvider.add("com.shampan.properties/relations");
         String typeId = PropertyProvider.get("RELATION_TYPE_PENDING_ID");
         int offset = 0;
         int limit = 5;
-        friendObj.getFriendList(userId, offset, limit, typeId);
+//        friendObj.getFriendList(userId, offset, limit, typeId);
 
     }
 

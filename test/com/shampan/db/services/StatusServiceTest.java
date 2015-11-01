@@ -51,7 +51,7 @@ public class StatusServiceTest {
         ReferenceInfo refInfo = new ReferenceInfo();
         refInfo.setDescription("reference info");
         refInfo.setUserInfo(userInfo);
-        refInfo.setImg(imageList);
+        refInfo.setImages(imageList);
         StatusDAO satusInfo = new StatusDAOBuilder()
                 .setStatusId(statusId)
                 .setUserId(userId)
@@ -171,7 +171,7 @@ public class StatusServiceTest {
     public void getStatuses() {
         int offset = 0;
         int limit = 5;
-        System.out.println(statusObject.getStatuses(userId, offset, limit));
+     statusObject.getStatuses(userId, offset, limit);
 
     }
 
