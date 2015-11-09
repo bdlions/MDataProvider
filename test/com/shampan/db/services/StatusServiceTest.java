@@ -30,10 +30,10 @@ import static org.junit.Assert.*;
 public class StatusServiceTest {
 
     StatusModel statusObject = new StatusModel();
-    String userId = "eQeOwhE7hrUkCyP";
-    String statusId = "Mrm39IJrHOjLlkN";
+    String userId = "u1";
+    String statusId = "135ZjKetRtqR7lS";
 
-//    @Test
+    @Test
     public void addStatus() {
         UserInfo userInfo = new UserInfo();
         userInfo.setfirstName("Alamgir");
@@ -43,7 +43,6 @@ public class StatusServiceTest {
         image.setImage("hasenhen.jpg");
         List<Image> imageList = new ArrayList<Image>();
         imageList.add(image);
-        List<Like> likeList = new ArrayList<Like>();
         ReferenceList refId = new ReferenceList();
         refId.setStatusId(statusId);
         List<ReferenceList> refList = new ArrayList<ReferenceList>();
@@ -56,16 +55,20 @@ public class StatusServiceTest {
                 .setStatusId(statusId)
                 .setUserId(userId)
                 .setUserInfo(userInfo)
-                .setMappingId(userId)
-                .setDescription("this is a wounderful invention By scientist Shemin of NASA")
+                .setMappingId("u2")
+                .setDescription("status post by user in his profile")
                 .setStatusTypeId("1")
-                .setLike(likeList)
                 .setReferenceList(refList)
                 .setReferenceInfo(refInfo)
-//                .setImages(imageList)
+                //                .setImages(imageList)
                 .build();
-        System.out.println(satusInfo.toString());
-//        System.out.println(statusObject.addStatus(satusInfo.toString()));
+//        System.out.println(satusInfo.toString());
+        System.out.println(statusObject.addStatus(satusInfo.toString()));
+    }
+
+//    @Test
+    public void getStatusDetails() {
+        System.out.println(statusObject.getStatusDetails(statusId).toString());
     }
 
 //    @Test
@@ -73,12 +76,12 @@ public class StatusServiceTest {
         UserInfo rUserInfo = new UserInfo();
         rUserInfo.setfirstName("Nazmul");
         rUserInfo.setLastName("Hasan");
-        rUserInfo.setUserId("100105");
+        rUserInfo.setUserId("u1");
         Comment statusCommentInfo = new Comment();
         statusCommentInfo.setDescription("Thank you !!");
         statusCommentInfo.setUserInfo(rUserInfo);
         System.out.println(statusCommentInfo.toString());
-        System.out.println(statusObject.addStatusComment(statusId, statusCommentInfo.toString()));
+        System.out.println(statusObject.addStatusComment(userId, statusId, statusCommentInfo.toString()));
 
     }
 
@@ -107,7 +110,7 @@ public class StatusServiceTest {
                 .setDescription("this is a wounderful invention By scientist Shemin of NASA")
                 .setStatusTypeId("3")
                 .build();
-        System.out.println(statusObject.shareStatus(statusId, shareInfo.toString(), satusInfo.toString()));
+        System.out.println(statusObject.shareStatus(userId, statusId, shareInfo.toString(), satusInfo.toString()));
     }
 
 //    @Test
@@ -115,11 +118,11 @@ public class StatusServiceTest {
         UserInfo rUserInfo = new UserInfo();
         rUserInfo.setfirstName("Nazmul");
         rUserInfo.setLastName("Hasan");
-        rUserInfo.setUserId("100105");
+        rUserInfo.setUserId("1");
         Like statusLikeInfo = new Like();
         statusLikeInfo.setUserInfo(rUserInfo);
         System.out.println(statusLikeInfo.toString());
-        System.out.println(statusObject.addStatusLike(statusId, statusLikeInfo.toString()));
+        System.out.println(statusObject.addStatusLike(userId, statusId, statusLikeInfo.toString()));
 
     }
 //    @Test
@@ -132,7 +135,7 @@ public class StatusServiceTest {
         Share statusLikeInfo = new Share();
         statusLikeInfo.setUserInfo(rUserInfo);
         System.out.println(statusLikeInfo.toString());
-        System.out.println(statusObject.addStatusLike(statusId, statusLikeInfo.toString()));
+//        System.out.println(statusObject.addStatusLike(statusId, statusLikeInfo.toString()));
 
     }
 //    @Test
@@ -153,9 +156,8 @@ public class StatusServiceTest {
         System.out.println(statusObject.getStatusLikeList(statusId));
 
     }
-    
-//    @Test
 
+//    @Test
     public void getStatusShareList() {
         System.out.println(statusObject.getStatusShareList(statusId));
 
@@ -167,11 +169,11 @@ public class StatusServiceTest {
 
     }
 
-    @Test
+//    @Test
     public void getStatuses() {
         int offset = 0;
         int limit = 5;
-     statusObject.getStatuses(userId, offset, limit);
+        statusObject.getStatuses(userId, offset, limit);
 
     }
 

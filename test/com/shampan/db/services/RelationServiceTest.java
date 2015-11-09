@@ -102,7 +102,7 @@ public class RelationServiceTest {
         String typeId = "1";
         int offset = 0;
         int limit = 5;
-        System.out.println(friendObj.getRelationList("mqQ06eko9TqYYul", "1", offset, limit).toString());
+        System.out.println(friendObj.getRelationList(userId, "1", offset, limit).toString());
 
     }
 //    @Test

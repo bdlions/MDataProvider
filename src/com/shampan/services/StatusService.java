@@ -24,6 +24,9 @@ public class StatusService {
     public static String getStatuses(String userId, int offset, int limit) {
         return obj.getStatuses(userId, offset, limit).toString();
     }
+    public static String getStatusDetails(String statusId) {
+        return obj.getStatusDetails(statusId).toString();
+    }
 
     public static String deleteStatus(String statusId) {
         String response = obj.deleteStatus(statusId);
@@ -35,20 +38,20 @@ public class StatusService {
         return response;
     }
 
-    public static String addStatusLike(String statusId, String likeInfo) {
-        String response = obj.addStatusLike(statusId, likeInfo);
+    public static String addStatusLike(String userId,String statusId, String likeInfo) {
+        String response = obj.addStatusLike(userId,statusId, likeInfo).toString();
         return response;
 
     }
 
-    public static String addStatusComment(String statusId, String commentInfo) {
-        String response = obj.addStatusComment(statusId, commentInfo);
+    public static String addStatusComment(String userId,String statusId, String commentInfo) {
+        String response = obj.addStatusComment(userId, statusId, commentInfo);
         return response;
 
     }
 
-    public static String shareStatus(String statusId, String refUserInfo, String shareInfo) {
-        String response = obj.shareStatus(statusId, refUserInfo, shareInfo);
+    public static String shareStatus(String userId, String statusId, String refUserInfo, String shareInfo) {
+        String response = obj.shareStatus(userId, statusId, refUserInfo, shareInfo);
         return response;
 
     }

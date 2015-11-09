@@ -35,10 +35,31 @@ public class StatusModel {
 
     ResultEvent resultEvent = new ResultEvent();
 
+    NotificationModel notificationModel = new NotificationModel();
+
     public StatusModel() {
         PropertyProvider.add("response");
         PropertyProvider.add("com.shampan.properties/common");
+        PropertyProvider.add("com.shampan.properties/attributes");
 
+    }
+
+    /**
+     * This method will return result event
+     *
+     * @return ResultEvent, result event
+     */
+    public ResultEvent getResultEvent() {
+        return resultEvent;
+    }
+
+    /**
+     * This method will set result event
+     *
+     * @param resultEvent, result event
+     */
+    public void setResultEvent(ResultEvent resultEvent) {
+        this.resultEvent = resultEvent;
     }
 
     /**
@@ -134,6 +155,20 @@ public class StatusModel {
 
     }
 
+    public StatusDAO getStatusDetails(String statusId) {
+        MongoCollection<StatusDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("statusId").is(statusId).get();
+        StatusDAO status = mongoCollection.find(selectQuery).first();
+        return status;
+    }
+    
+    
+    public void getStatusInfo(StatusDAO status){
+    
+    
+    }
+
     /**
      * *
      * Delete a status parameter StatusId status id
@@ -175,20 +210,24 @@ public class StatusModel {
      * @param statusId, status id
      * @param likeInfo, status like user info
      */
-    public String addStatusLike(String statusId, String likeInfo) {
-        MongoCollection<StatusDAO> mongoCollection
-                = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
-        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("statusId").is(statusId).get();
-        Like statusLikeInfo = Like.getStatusLike(likeInfo);
+    public ResultEvent addStatusLike(String userId, String statusId, String likeInfo) {
         try {
+            MongoCollection<StatusDAO> mongoCollection
+                    = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
+            String attrStatusId = PropertyProvider.get("STATUS_ID");
+            String attrlike = PropertyProvider.get("LIKE");
+            BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start(attrStatusId).is(statusId).get();
+            Like statusLikeInfo = Like.getStatusLike(likeInfo);
             if (statusLikeInfo != null) {
-                mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("like", JSON.parse(statusLikeInfo.toString()))));
+                mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document(attrlike, JSON.parse(statusLikeInfo.toString()))));
+                UserInfo userInfo = statusLikeInfo.getUserInfo();
+                notificationModel.addGeneralNotificationStatusLike(userId, statusId, userInfo.toString());
             }
-        } catch (NullPointerException npe) {
-            LogWriter.getErrorLog().error(npe);
+            this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
+        } catch (Exception ex) {
+            this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
         }
-        resultEvent.setResponseCode(PropertyProvider.get("success"));
-        return resultEvent.toString();
+        return this.resultEvent;
     }
 
     /**
@@ -198,14 +237,17 @@ public class StatusModel {
      * @param commentInfo, status comment and user info
      *
      */
-    public String addStatusComment(String statusId, String commentInfo) {
+    public String addStatusComment(String userId, String statusId, String commentInfo) {
         MongoCollection<StatusDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("statusId").is(statusId).get();
         Comment statusCommentInfo = Comment.getStatusComment(commentInfo);
         try {
             if (statusCommentInfo != null) {
+
                 mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("comment", JSON.parse(statusCommentInfo.toString()))));
+                UserInfo userInfo = statusCommentInfo.getUserInfo();
+                notificationModel.addGeneralNotificationStatusComment(userId, statusId, userInfo.toString());
             }
         } catch (NullPointerException npe) {
             LogWriter.getErrorLog().error(npe);
@@ -222,7 +264,7 @@ public class StatusModel {
      * @param shareInfo, new status info
      *
      */
-    public String shareStatus(String statusId, String refUserInfo, String shareInfo) {
+    public String shareStatus(String userId, String statusId, String refUserInfo, String shareInfo) {
         MongoCollection<StatusDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("statusId").is(statusId).get();
@@ -230,13 +272,19 @@ public class StatusModel {
         try {
             if (statusRefInfo != null) {
                 mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("share", JSON.parse(statusRefInfo.toString()))));
+
             }
         } catch (NullPointerException npe) {
             LogWriter.getErrorLog().error(npe);
         }
         if (shareInfo != null) {
-            StatusModel obj = new StatusModel();
-            obj.addStatus(shareInfo);
+            addStatus(shareInfo);
+            StatusDAO statusInfoObj = new StatusDAOBuilder().build(shareInfo);
+            if (statusInfoObj != null) {
+                UserInfo userInfo = statusInfoObj.getUserInfo();
+                notificationModel.addGeneralNotificationStatusShare(userId, statusId, userInfo.toString());
+            }
+
         }
         resultEvent.setResponseCode(PropertyProvider.get("success"));
         return resultEvent.toString();

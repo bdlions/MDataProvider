@@ -553,12 +553,10 @@ public class PhotoModel {
                 );
         Document sortQuery = new Document();
 
-        sortQuery.put(
-                "photoId", 1);
+        sortQuery.put("photoId", 1);
         Document sQuery = new Document();
 
-        sQuery.put(
-                "photoId", new Document("$gt", photoId));
+        sQuery.put( "photoId", new Document("$gt", photoId));
         Document pQuery = new Document();
 
         pQuery.put(

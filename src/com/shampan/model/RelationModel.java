@@ -28,6 +28,8 @@ public class RelationModel {
 
     private ResultEvent resultEvent = new ResultEvent();
     Utility utility = new Utility();
+    NotificationModel notificationModel = new NotificationModel();
+    UserModel userModel = new UserModel();
 
     public RelationModel() {
         PropertyProvider.add("com.shampan.properties/relations");
@@ -63,6 +65,7 @@ public class RelationModel {
     public ResultEvent addFriend(String fromUserId, String toUserId) {
         //after adding a friend newly added user will be under pending list
         createRelation(fromUserId, toUserId, PropertyProvider.get("RELATION_TYPE_PENDING_ID"));
+        notificationModel.addFriendNotification(fromUserId, toUserId);
         return this.resultEvent;
     }
 
@@ -99,6 +102,7 @@ public class RelationModel {
      */
     public ResultEvent approveFriend(String fromUserId, String toUserId) {
         updateRelation(fromUserId, toUserId, PropertyProvider.get("RELATION_TYPE_FRIEND_ID"));
+        notificationModel.deleteFriendNotification(fromUserId, toUserId);
         return this.resultEvent;
     }
 
@@ -111,6 +115,7 @@ public class RelationModel {
      */
     public ResultEvent removeFriendRequest(String fromUserId, String toUserId) {
         deleteRelation(fromUserId, toUserId);
+        notificationModel.deleteFriendNotification(fromUserId, toUserId);
         return this.resultEvent;
     }
 
@@ -149,8 +154,6 @@ public class RelationModel {
         try {
             MongoCollection<RelationsDAO> mongoCollection
                     = DBConnection.getInstance().getConnection().getCollection(Collections.RELATIONS.toString(), RelationsDAO.class);
-            FriendModel friendObj = new FriendModel();
-            
             RelationInfo fromRelationInfo = new RelationInfo();
             fromRelationInfo.setUserId(toUserId);
             fromRelationInfo.setIsInitiated(PropertyProvider.get("IS_INITIATED_YES"));
@@ -325,18 +328,32 @@ public class RelationModel {
     public List<RelationInfo> getRelationList(String userId, String relationTypeId, int offset, int limit) {
         MongoCollection<RelationsDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.RELATIONS.toString(), RelationsDAO.class);
+        String attrUserId = PropertyProvider.get("USER_ID");
+        String attrRelationList = PropertyProvider.get("RELATION_LIST");
         Document sQuery = new Document();
-        sQuery.put("userId", userId);
+        sQuery.put(attrUserId, userId);
         Document pQuery = new Document();
-        pQuery.put("friendList", "$all");
-        RelationsDAO friendList = mongoCollection.find(sQuery).projection(pQuery).first();
+        pQuery.put(attrRelationList, "$all");
+        RelationsDAO userList = mongoCollection.find(sQuery).projection(pQuery).first();
         List<RelationInfo> requestList = new ArrayList<>();
-        if (friendList != null) {
-            for (int i = 0; i < friendList.getFriendList().size(); i++) {
-                if (friendList.getFriendList().get(i).getRelationTypeId().equals(relationTypeId)) {
-                    friendList.getFriendList().get(i).setfirstName("Nazmul");
-                    friendList.getFriendList().get(i).setLastName("Hasan");
-                    requestList.add(friendList.getFriendList().get(i));
+        List<String> userIdList = new ArrayList<>();
+        if (userList != null) {
+            for (int i = 0; i < userList.getFriendList().size(); i++) {
+                if (userList.getFriendList().get(i).getRelationTypeId().equals(relationTypeId)) {
+                    userIdList.add(userList.getFriendList().get(i).getUserId());
+                    requestList.add(userList.getFriendList().get(i));
+                }
+            }
+            if (userIdList != null) {
+                List<UserDAO> userInfoList = userModel.getUserInfoList(userIdList.toString());
+                int userListSize = userInfoList.size();
+                int requestListSize = requestList.size();
+                for (int j = 0; j < requestListSize; j++) {
+                    if (userInfoList.get(j) != null) {
+                        requestList.get(j).setUserId(userInfoList.get(j).getUserId());
+                        requestList.get(j).setfirstName(userInfoList.get(j).getFirstName());
+                        requestList.get(j).setLastName(userInfoList.get(j).getLastName());
+                    }
                 }
             }
         }

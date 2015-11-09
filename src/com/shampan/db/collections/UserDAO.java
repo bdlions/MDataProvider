@@ -7,6 +7,8 @@ import org.bson.conversions.Bson;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.shampan.db.collections.fragment.user.Country;
+import com.shampan.db.collections.fragment.user.Group;
 import java.util.List;
 
 /**
@@ -21,6 +23,14 @@ public class UserDAO implements Bson {
     private String firstName;
     private String lastName;
     private String userName;
+    private String password;
+    private String email;
+    private String ipAddress;
+    private String createdOn;
+    private String last_login;
+    private String accountStatusId;
+    private Country country;
+    private List<Group> groups;
 
     public String get_id() {
         return _id;
@@ -61,6 +71,72 @@ public class UserDAO implements Bson {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
+
+    public String getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(String createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public String getLast_login() {
+        return last_login;
+    }
+
+    public void setLast_login(String last_login) {
+        this.last_login = last_login;
+    }
+
+    public String getAccountStatusId() {
+        return accountStatusId;
+    }
+
+    public void setAccountStatusId(String accountStatusId) {
+        this.accountStatusId = accountStatusId;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public List<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<Group> groups) {
+        this.groups = groups;
+    }
+    
+    
 
     @Override
     public String toString() {

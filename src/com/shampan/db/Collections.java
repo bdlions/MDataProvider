@@ -16,7 +16,10 @@ public enum Collections {
     ALBUMPHOTOS("album_photos"),
     PHOTOCATEGORIES("photo_categories"),
     VIDEOCATEGORIES("video_categories"),
-    VIDEOS("videos");
+    VIDEOS("videos"),
+    NOTIFICATIONS("notifications"),
+    MESSAGES("messages"),
+    MESSAGESDETAILS("messages_details");
 
     private String name;
 

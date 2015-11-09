@@ -16,9 +16,9 @@ public class NotificationService {
      * This method will return notification counter of all categories
      * @return  String, result event with notification counter values
      */
-    public static String getNotificationCounter()
+    public static String getNotificationCounter(String userId)
     {
-        return notificationModel.getNotificationCounter();
+        return notificationModel.getNotificationCounter(userId);
     }
     
     /**
@@ -110,7 +110,7 @@ public class NotificationService {
      * @param limit, limit
      * @return String, general notification list
      */
-    public static String updateStatusGetGeneralNotifications(String userId, String statusTypeId, String offset, String limit)
+    public static String updateStatusGetGeneralNotifications(String userId, String statusTypeId, int offset, int limit)
     {
         notificationModel.updateStatusGeneralNotifications(userId, statusTypeId);
         return notificationModel.getGeneralNotifications(userId, offset, limit).toString();
@@ -123,8 +123,9 @@ public class NotificationService {
      * @param limit, limit
      * @return String, general notification list
      */
-    public static String getGeneralNotifications(String userId, String offset, String limit)
+    public static String getGeneralNotifications(String userId, int offset, int limit)
     {
         return notificationModel.getGeneralNotifications(userId, offset, limit).toString();
     }
+    
 }

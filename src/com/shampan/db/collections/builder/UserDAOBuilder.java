@@ -2,6 +2,8 @@ package com.shampan.db.collections.builder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shampan.db.collections.UserDAO;
+import com.shampan.db.collections.fragment.user.Country;
+import com.shampan.db.collections.fragment.user.Group;
 import java.util.List;
 
 /**
@@ -21,6 +23,15 @@ public class UserDAOBuilder {
     private String firstName;
     private String lastName;
     private String userName;
+    private String password;
+    private String email;
+    private String ipAddress;
+    private String createdOn;
+    private String last_login;
+    private String accountStatusId;
+    private Country country;
+    private List<Group> groups;
+    
 
     public UserDAOBuilder setUserId(String userId) {
         this.userId = userId;
@@ -46,6 +57,41 @@ public class UserDAOBuilder {
         this.userName = userName;
         return this;
     }
+
+    public UserDAOBuilder setPassword(String password) {
+        this.password = password;
+        return this;
+    }
+
+    public UserDAOBuilder setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public UserDAOBuilder setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+        return this;
+    }
+
+    public UserDAOBuilder setCreatedOn(String createdOn) {
+        this.createdOn = createdOn;
+        return this;
+    }
+
+    public UserDAOBuilder setLast_login(String last_login) {
+        this.last_login = last_login;
+        return this;
+    }
+
+    public UserDAOBuilder setCountry(Country country) {
+        this.country = country;
+        return this;
+    }
+
+    public UserDAOBuilder setGroups(List<Group> groups) {
+        this.groups = groups;
+        return this;
+    }
     
  
     
@@ -55,6 +101,11 @@ public class UserDAOBuilder {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setUserName(userName);
+        user.setAccountStatusId(accountStatusId);
+        user.setCountry(country);
+        user.setCreatedOn(createdOn);
+        user.setEmail(email);
+        user.setGroups(groups);
         return user;
     }
     public UserDAO build(String daoContent){
