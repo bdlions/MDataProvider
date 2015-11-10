@@ -30,10 +30,12 @@ import static org.junit.Assert.*;
 public class StatusServiceTest {
 
     StatusModel statusObject = new StatusModel();
-    String userId = "u1";
-    String statusId = "135ZjKetRtqR7lS";
+    String userId = "55Lj6k4iZReT4ck";
+    String mappingId = "mqQ06eko9TqYYul";
+    String friendId = "9nSEiMgzieo1O4K";
+    String statusId = "135ZjKetRtqR7lS2";
 
-    @Test
+//    @Test
     public void addStatus() {
         UserInfo userInfo = new UserInfo();
         userInfo.setfirstName("Alamgir");
@@ -53,10 +55,10 @@ public class StatusServiceTest {
         refInfo.setImages(imageList);
         StatusDAO satusInfo = new StatusDAOBuilder()
                 .setStatusId(statusId)
-                .setUserId(userId)
+                .setUserId(friendId)
                 .setUserInfo(userInfo)
-                .setMappingId("u2")
-                .setDescription("status post by user in his profile")
+                .setMappingId(friendId)
+                .setDescription("hi hi ha ha ha")
                 .setStatusTypeId("1")
                 .setReferenceList(refList)
                 .setReferenceInfo(refInfo)
@@ -68,7 +70,7 @@ public class StatusServiceTest {
 
 //    @Test
     public void getStatusDetails() {
-        System.out.println(statusObject.getStatusDetails(statusId).toString());
+        System.out.println(statusObject.getStatusDetails(userId,statusId).toString());
     }
 
 //    @Test
@@ -173,7 +175,14 @@ public class StatusServiceTest {
     public void getStatuses() {
         int offset = 0;
         int limit = 5;
-        statusObject.getStatuses(userId, offset, limit);
+        System.out.println(statusObject.getStatuses(userId, offset, limit));
+
+    }
+//    @Test
+    public void getUserProfileStatuses() {
+        int offset = 0;
+        int limit = 5;
+        System.out.println(statusObject.getUserProfileStatuses(userId,mappingId, offset, limit));
 
     }
 

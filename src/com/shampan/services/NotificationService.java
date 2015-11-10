@@ -41,9 +41,9 @@ public class NotificationService {
      * @param limit, limit
      * @return  String, friend notification list
      */
-    public static String updateStatusGetFriendNotifications(String userId, String statusTypeId, String offset, String limit)
+    public static String updateStatusGetFriendNotifications(String userId, String offset, String limit)
     {
-        notificationModel.updateStatusFriendNotifications(userId, statusTypeId);
+        notificationModel.updateStatusFriendNotifications(userId);
         return notificationModel.getFriendNotifications(userId).toString();
     }
     

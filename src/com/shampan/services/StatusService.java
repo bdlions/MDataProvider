@@ -24,8 +24,11 @@ public class StatusService {
     public static String getStatuses(String userId, int offset, int limit) {
         return obj.getStatuses(userId, offset, limit).toString();
     }
-    public static String getStatusDetails(String statusId) {
-        return obj.getStatusDetails(statusId).toString();
+    public static String getUserProfileStatuses(String userId,String mappingId, int offset, int limit) {
+        return obj.getUserProfileStatuses(userId, mappingId, offset, limit).toString();
+    }
+    public static String getStatusDetails(String userId,String statusId) {
+        return obj.getStatusDetails(userId,statusId).toString();
     }
 
     public static String deleteStatus(String statusId) {

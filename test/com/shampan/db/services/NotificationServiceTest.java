@@ -22,7 +22,7 @@ import org.junit.Test;
 public class NotificationServiceTest {
 
     NotificationModel notificationModel = new NotificationModel();
-    String userId = "55Lj6k4iZReT4ck";
+    String userId = "9nSEiMgzieo1O4K";
     String friendId = "55Lj6k4iZReT4ck";
 //    String friendId = "9nSEiMgzieo1O4K";
     String referenceId = "2";
@@ -54,7 +54,7 @@ public class NotificationServiceTest {
 
 //    @Test
     public void deleteFriendNotification() {
-        notificationModel.deleteFriendNotification(userId, friendId);
+        notificationModel.deleteFriendNotification(friendId, userId);
 
     }
 //    @Test
@@ -82,6 +82,10 @@ public class NotificationServiceTest {
         userInfo.setLastName("Sultana");
         notificationModel.addGeneralNotificationStatusComment("u1", referenceId, userInfo.toString());
 
+    }
+//    @Test
+    public void updateStatusFriendNotifications(){
+    notificationModel.updateStatusFriendNotifications(friendId);
     }
 //    @Test
     public void testMongoSql(){

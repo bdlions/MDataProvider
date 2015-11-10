@@ -362,6 +362,36 @@ public class RelationModel {
     }
 
     /**
+     * This method will return relation list of a userId
+     *
+     * @param userId, user id
+     * @param relationTypeId, type of relation
+     * @return List, list of user Id's
+     */
+    public List<String> getUserIdList(String userId, String relationTypeId) {
+        MongoCollection<RelationsDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.RELATIONS.toString(), RelationsDAO.class);
+        String attrUserId = PropertyProvider.get("USER_ID");
+        String attrRelationList = PropertyProvider.get("RELATION_LIST");
+        Document sQuery = new Document();
+        sQuery.put(attrUserId, userId);
+        Document pQuery = new Document();
+        pQuery.put(attrRelationList, "$all");
+        RelationsDAO userList = mongoCollection.find(sQuery).projection(pQuery).first();
+        List<RelationInfo> requestList = new ArrayList<>();
+        List<String> userIdList = new ArrayList<>();
+        if (userList != null) {
+            for (int i = 0; i < userList.getFriendList().size(); i++) {
+                if (userList.getFriendList().get(i).getRelationTypeId().equals(relationTypeId)) {
+                    userIdList.add(userList.getFriendList().get(i).getUserId());
+                }
+            }
+        }
+        return userIdList;
+
+    }
+
+    /**
      * This method will return relation info of one user to another user
      *
      * @param fromUserId, from user id of a relation
@@ -387,8 +417,15 @@ public class RelationModel {
 
         if (relationsDAO != null && relationsDAO.getFriendList().size() > 0) {
             relationInfo = relationsDAO.getFriendList().get(0);
+
         } else {
             relationInfo.setRelationTypeId(PropertyProvider.get("RELATION_TYPE_NON_FRIEND_ID"));
+
+        }
+        UserDAO userInfo = userModel.getUserInfo(toUserId);
+        if (userInfo != null) {
+            relationInfo.setfirstName(userInfo.getFirstName());
+            relationInfo.setLastName(userInfo.getLastName());
         }
         return relationInfo;
     }

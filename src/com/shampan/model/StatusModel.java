@@ -36,11 +36,14 @@ public class StatusModel {
     ResultEvent resultEvent = new ResultEvent();
 
     NotificationModel notificationModel = new NotificationModel();
+    RelationModel relationModel = new RelationModel();
+    UserModel userModel = new UserModel();
 
     public StatusModel() {
         PropertyProvider.add("response");
         PropertyProvider.add("com.shampan.properties/common");
         PropertyProvider.add("com.shampan.properties/attributes");
+        PropertyProvider.add("com.shampan.properties/relations");
 
     }
 
@@ -86,20 +89,86 @@ public class StatusModel {
 
     /**
      * *
-     * this method will return all status of a user
+     * this method will return all status of a user newsfeed
      *
      * @param userId, user Id
+     * @param offset, offset
+     * @param limit, limit
      * @author created by Rashida on 15 October
      */
     public List<JSONObject> getStatuses(String userId, int offset, int limit) {
         MongoCollection<StatusDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
-        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
-        MongoCursor<StatusDAO> StatusList = mongoCollection.find().skip(offset).limit(limit).iterator();
+        String relationTypeId = PropertyProvider.get("RELATION_TYPE_FRIEND_ID");
+        String attrUserId = PropertyProvider.get("USER_ID");
+        //add user own to status selection list
+        List<Document> orSelectionDocument = new ArrayList<Document>();
+        Document userDocument = new Document();
+        userDocument.put(attrUserId, userId);
+        orSelectionDocument.add(userDocument);
+        //add user friend to status selection list
+        List<String> userIdList = relationModel.getUserIdList(userId, relationTypeId);
+        int userIdsSize = userIdList.size();
+        if (userIdsSize > 0) {
+            for (int i = 0; i < userIdsSize; i++) {
+                Document userSelectionDocument = new Document();
+                userSelectionDocument.put(attrUserId, userIdList.get(i));
+                orSelectionDocument.add(userSelectionDocument);
+            }
+        }
+        Document selectDocument = new Document();
+        selectDocument.put("$or", orSelectionDocument);
+        MongoCursor<StatusDAO> statusList = mongoCollection.find(selectDocument).skip(offset).limit(limit).iterator();
+        List<JSONObject> statusInfoList = getStatusInfo(userId, statusList);
+        return statusInfoList;
+    }
+
+    /**
+     * *
+     * this method will return all status of a user profile
+     *
+     * @param userId, user Id
+     * @author created by Rashida on 9th Nov
+     */
+    public List<JSONObject> getUserProfileStatuses(String userId, String mappingId, int offset, int limit) {
+        MongoCollection<StatusDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
+        Document selectdocument = new Document();
+        selectdocument.put("mappingId", mappingId);
+        MongoCursor<StatusDAO> statusList = mongoCollection.find(selectdocument).skip(offset).limit(limit).iterator();
+        List<JSONObject> statusInfoList = getStatusInfo(userId, statusList);
+        return statusInfoList;
+    }
+
+    /**
+     * *
+     * this method will return all status of a user profile
+     *
+     * @param userId, user Id
+     * @param statusId, status Id
+     * @author created by Rashida on 9th Nov
+     */
+    public List<JSONObject> getStatusDetails(String userId, String statusId) {
+        MongoCollection<StatusDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("statusId").is(statusId).get();
+        MongoCursor<StatusDAO> status = mongoCollection.find(selectQuery).limit(1).iterator();
+        List<JSONObject> statusInfo = getStatusInfo(userId, status);
+        return statusInfo;
+    }
+
+    /**
+     * *
+     * this method will return all status needed information
+     *
+     * @param statusList, status List
+     * @author created by Rashida on 9th Nov
+     */
+    public List<JSONObject> getStatusInfo(String userId, MongoCursor<StatusDAO> statusList) {
         List<JSONObject> statusInfoList = new ArrayList<JSONObject>();
-        while (StatusList.hasNext()) {
+        while (statusList.hasNext()) {
             JSONObject statusJson = new JSONObject();
-            StatusDAO status = (StatusDAO) StatusList.next();
+            StatusDAO status = (StatusDAO) statusList.next();
             statusJson.put("statusId", status.getStatusId());
             statusJson.put("userInfo", status.getUserInfo());
             statusJson.put("description", status.getDescription());
@@ -149,24 +218,12 @@ public class StatusModel {
             if (status.getReferenceInfo() != null) {
                 statusJson.put("referenceInfo", status.getReferenceInfo());
             }
+            if (!status.getUserId().equals(status.getMappingId())) {
+                statusJson.put("mappingUserInfo", userModel.getUserInfo(status.getMappingId()));
+            }
             statusInfoList.add(statusJson);
         }
         return statusInfoList;
-
-    }
-
-    public StatusDAO getStatusDetails(String statusId) {
-        MongoCollection<StatusDAO> mongoCollection
-                = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
-        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("statusId").is(statusId).get();
-        StatusDAO status = mongoCollection.find(selectQuery).first();
-        return status;
-    }
-    
-    
-    public void getStatusInfo(StatusDAO status){
-    
-    
     }
 
     /**
@@ -244,7 +301,6 @@ public class StatusModel {
         Comment statusCommentInfo = Comment.getStatusComment(commentInfo);
         try {
             if (statusCommentInfo != null) {
-
                 mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("comment", JSON.parse(statusCommentInfo.toString()))));
                 UserInfo userInfo = statusCommentInfo.getUserInfo();
                 notificationModel.addGeneralNotificationStatusComment(userId, statusId, userInfo.toString());

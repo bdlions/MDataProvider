@@ -1,6 +1,5 @@
 package com.shampan.model;
 
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonAnyFormatVisitor;
 import com.mongodb.BasicDBObject;
 import com.mongodb.QueryBuilder;
 import com.mongodb.client.MongoCollection;
@@ -9,8 +8,8 @@ import com.mongodb.util.JSON;
 import com.sampan.response.ResultEvent;
 import com.shampan.db.Collections;
 import com.shampan.db.DBConnection;
-import com.shampan.db.collections.CountriesDAO;
 import com.shampan.db.collections.NotificationDAO;
+import com.shampan.db.collections.UserDAO;
 import com.shampan.db.collections.builder.NotificationDAOBuilder;
 import com.shampan.db.collections.fragment.common.UserInfo;
 import com.shampan.db.collections.fragment.notification.FriendNotification;
@@ -30,6 +29,7 @@ public class NotificationModel {
 
     private ResultEvent resultEvent = new ResultEvent();
     Utility utility = new Utility();
+    UserModel userModel = new UserModel();
 
     public NotificationModel() {
 
@@ -58,6 +58,12 @@ public class NotificationModel {
         this.resultEvent = resultEvent;
     }
 
+    /**
+     * This method will return all notification counter of a user
+     *
+     * @param userId, user id of a user
+     * @return void
+     */
     public String getNotificationCounter(String userId) {
         MongoCollection<NotificationDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.NOTIFICATIONS.toString(), NotificationDAO.class);
@@ -68,11 +74,11 @@ public class NotificationModel {
         String attrFriendNotifications = PropertyProvider.get("FRIEND_NOTIFICATIONS");
         Document selectionDocument = new Document();
         selectionDocument.put(attrUserId, userId);
-        List allSelection = new ArrayList<>();
-        allSelection.add(statusId);
+//        List allSelection = new ArrayList<>();
+//        allSelection.add(statusId);
 //            allSelection.add(new Document("$elemMatch", new Document(attrStatusId,statusId)));
-        Document allProjection = new Document();
-        allProjection.put("$all", allSelection);
+//        Document allProjection = new Document();
+//        allProjection.put("$all", allSelection);
 //            System.out.println(allProjection);
         Document projectionDocument = new Document();
 //            projectionDocument.put(attrGeneralNotifications, allProjection);
@@ -93,9 +99,15 @@ public class NotificationModel {
                 }
             }
             if (notificationCursor.getFriendNotifications() != null) {
-                friendCounter = notificationCursor.getFriendNotifications().size();
+                int friendNotificationCounter = notificationCursor.getFriendNotifications().size();
+                if (friendNotificationCounter > 0) {
+                    for (int j = 0; j < friendNotificationCounter; j++) {
+                        if (notificationCursor.getFriendNotifications().get(j).getStatusId().equals(statusId)) {
+                            friendCounter++;
+                        }
+                    }
+                }
             }
-
         }
         JSONObject resultedNotifications = new JSONObject();
         JSONObject counter = new JSONObject();
@@ -147,32 +159,94 @@ public class NotificationModel {
         }
     }
 
-    public void updateStatusFriendNotifications(String userId, String statusTypeId) {
-
-    }
-
-    public List<UserInfo> getFriendNotifications(String userId) {
+    /**
+     * This method will return a user pending friend list
+     *
+     * @param userId, user id of a user
+     * @return NotificationDAO
+     */
+    public NotificationDAO getPendingFriendList(String userId) {
         MongoCollection<NotificationDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.NOTIFICATIONS.toString(), NotificationDAO.class);
         String attrUserId = PropertyProvider.get("USER_ID");
         String attrFriendNotifications = PropertyProvider.get("FRIEND_NOTIFICATIONS");
-//        String attrUserInfo = PropertyProvider.get("USER_INFO");
         Document selectionDocument = new Document();
         selectionDocument.put(attrUserId, userId);
         Document projectionDocument = new Document();
         projectionDocument.put(attrFriendNotifications, "$all");
-        NotificationDAO friendNotificationCursor = mongoCollection.find(selectionDocument).projection(projectionDocument).first();
-        System.out.println(friendNotificationCursor);
+        NotificationDAO pendingFriendList = mongoCollection.find(selectionDocument).projection(projectionDocument).first();
+        return pendingFriendList;
+    }
+
+    /**
+     * This method will update status type unread to read status type
+     *
+     * @param userId, user id of a user
+     * @return void
+     */
+    public void updateStatusFriendNotifications(String userId) {
+        try {
+            MongoCollection<NotificationDAO> mongoCollection
+                    = DBConnection.getInstance().getConnection().getCollection(Collections.NOTIFICATIONS.toString(), NotificationDAO.class);
+            String attrUserId = PropertyProvider.get("USER_ID");
+            String attrFriendNotifications = PropertyProvider.get("FRIEND_NOTIFICATIONS");
+            String unReadStatusId = PropertyProvider.get("NOTIFICATION_STATUS_TYPE_UNREAD_ID");
+            String readStatusId = PropertyProvider.get("NOTIFICATION_STATUS_TYPE_READ_ID");
+            Document selectionDocument = new Document();
+            selectionDocument.put(attrUserId, userId);
+            NotificationDAO friendNotification = getPendingFriendList(userId);
+            if (friendNotification.getFriendNotifications() != null) {
+                int pendingfriendSize = friendNotification.getFriendNotifications().size();
+                for (int i = 0; i < pendingfriendSize; i++) {
+                    if (friendNotification.getFriendNotifications().get(i).getStatusId().equals(unReadStatusId)) {
+                        friendNotification.getFriendNotifications().get(i).setStatusId(readStatusId);
+                    }
+                }
+            }
+            mongoCollection.findOneAndUpdate(selectionDocument, new Document("$set", new Document(attrFriendNotifications, JSON.parse(friendNotification.getFriendNotifications().toString()))));
+            this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
+        } catch (Exception ex) {
+            this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
+        }
+    }
+
+    /**
+     * This method will return pending friend list of a user
+     *
+     * @param userId, user id of a user
+     * @return userInfo
+     */
+    
+    public List<UserInfo> getFriendNotifications(String userId) {
+        MongoCollection<NotificationDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.NOTIFICATIONS.toString(), NotificationDAO.class);
+        String attrUserId = PropertyProvider.get("USER_ID");
+        Document selectionDocument = new Document();
+        selectionDocument.put(attrUserId, userId);
+        NotificationDAO friendNotificationCursor = getPendingFriendList(userId);
         List<UserInfo> userList = new ArrayList<>();
+        List<String> userIdList = new ArrayList<>();
         if (friendNotificationCursor != null) {
             if (friendNotificationCursor.getFriendNotifications() != null) {
                 int friendNotificationSize = friendNotificationCursor.getFriendNotifications().size();
                 if (friendNotificationSize > 0) {
                     for (int i = 0; i < friendNotificationSize; i++) {
                         userList.add(friendNotificationCursor.getFriendNotifications().get(i).getUserInfo());
+                        userIdList.add(friendNotificationCursor.getFriendNotifications().get(i).getUserInfo().getUserId());
                     }
-                    System.out.println(userList);
                 }
+            }
+        }
+        if (userIdList.size() > 0) {
+            List<UserDAO> userInfo = userModel.getUserInfoList(userIdList.toString());
+            if (userInfo != null) {
+                for (int j = 0; j < userInfo.size(); j++) {
+                    if (userList.get(j) != null) {
+                        userList.get(j).setFirstName(userInfo.get(j).getFirstName());
+                        userList.get(j).setLastName(userInfo.get(j).getLastName());
+                    }
+                }
+
             }
         }
         return userList;
@@ -336,9 +410,9 @@ public class NotificationModel {
                                     //if the user enter notificaton colection first time
                                     GeneralNotification generalNotification = new GeneralNotification();
                                     if (!userList.get(i).getUserId().equals(userInfo.getUserId())) {
-                                    generalNotification.setStatusId(unReadStatusId);
-                                    }else{
-                                    generalNotification.setStatusId(readStatusId);
+                                        generalNotification.setStatusId(unReadStatusId);
+                                    } else {
+                                        generalNotification.setStatusId(readStatusId);
                                     }
                                     generalNotification.setTypeId(typeId);
                                     generalNotification.setReferenceId(referenceId);
@@ -370,7 +444,7 @@ public class NotificationModel {
                             if (!userId.equals(userInfo.getUserId())) {
                                 updateDocument.put(attrGeneralNotifications + ".$." + attrStatusId, readStatusId);
                                 updateDocument.put(attrGeneralNotifications + ".$." + attrStatusId, unReadStatusId);
-                            } 
+                            }
                             updateDocument.put(attrGeneralNotifications + ".$." + "modifiedOn", (utility.getCurrentTime()));
                             updateDocument.put(attrGeneralNotifications + ".$." + attrUserList, JSON.parse(userList.toString()));
                             mongoCollection.findOneAndUpdate(selectionDocument, new Document("$set", updateDocument));
@@ -382,8 +456,8 @@ public class NotificationModel {
                         userList.add(userInfo);
                         GeneralNotification generalNotification = new GeneralNotification();
                         if (!userId.equals(userInfo.getUserId())) {
-                        generalNotification.setStatusId(unReadStatusId);
-                        } 
+                            generalNotification.setStatusId(unReadStatusId);
+                        }
                         generalNotification.setTypeId(typeId);
                         generalNotification.setCreatedOn(utility.getCurrentTime());
                         generalNotification.setModifiedOn(utility.getCurrentTime());
