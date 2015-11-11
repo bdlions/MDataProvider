@@ -33,12 +33,12 @@ public class StatusServiceTest {
     String userId = "55Lj6k4iZReT4ck";
     String mappingId = "mqQ06eko9TqYYul";
     String friendId = "9nSEiMgzieo1O4K";
-    String statusId = "135ZjKetRtqR7lS2";
+    String statusId = "Xs2Z3qLtNQmY1Iq";
 
 //    @Test
     public void addStatus() {
         UserInfo userInfo = new UserInfo();
-        userInfo.setfirstName("Alamgir");
+        userInfo.setFirstName("Alamgir");
         userInfo.setLastName("Kabir");
         userInfo.setUserId(userId);
         Image image = new Image();
@@ -68,7 +68,7 @@ public class StatusServiceTest {
         System.out.println(statusObject.addStatus(satusInfo.toString()));
     }
 
-//    @Test
+    @Test
     public void getStatusDetails() {
         System.out.println(statusObject.getStatusDetails(userId,statusId).toString());
     }
@@ -76,7 +76,7 @@ public class StatusServiceTest {
 //    @Test
     public void addStatusComment() {
         UserInfo rUserInfo = new UserInfo();
-        rUserInfo.setfirstName("Nazmul");
+        rUserInfo.setFirstName("Nazmul");
         rUserInfo.setLastName("Hasan");
         rUserInfo.setUserId("u1");
         Comment statusCommentInfo = new Comment();
@@ -90,7 +90,7 @@ public class StatusServiceTest {
 //    @Test
     public void shareStatus() {
         UserInfo rUserInfo = new UserInfo();
-        rUserInfo.setfirstName("Nazmul");
+        rUserInfo.setFirstName("Nazmul");
         rUserInfo.setLastName("Hasan");
         rUserInfo.setUserId(userId);
         ReferenceInfo referenceInfo = new ReferenceInfo();
@@ -98,7 +98,7 @@ public class StatusServiceTest {
         referenceInfo.setUserInfo(rUserInfo);
 
         UserInfo userInfo = new UserInfo();
-        userInfo.setfirstName("Alamgir");
+        userInfo.setFirstName("Alamgir");
         userInfo.setLastName("Kabir");
         userInfo.setUserId("1");
         Share shareInfo = new Share();
@@ -118,7 +118,7 @@ public class StatusServiceTest {
 //    @Test
     public void addStatusLike() {
         UserInfo rUserInfo = new UserInfo();
-        rUserInfo.setfirstName("Nazmul");
+        rUserInfo.setFirstName("Nazmul");
         rUserInfo.setLastName("Hasan");
         rUserInfo.setUserId("1");
         Like statusLikeInfo = new Like();
@@ -131,7 +131,7 @@ public class StatusServiceTest {
 
     public void addStatusShare() {
         UserInfo rUserInfo = new UserInfo();
-        rUserInfo.setfirstName("Nazmul");
+        rUserInfo.setFirstName("NAzmul");
         rUserInfo.setLastName("Hasan");
         rUserInfo.setUserId("100105");
         Share statusLikeInfo = new Share();
