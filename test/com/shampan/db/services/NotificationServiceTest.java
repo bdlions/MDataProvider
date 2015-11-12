@@ -22,7 +22,7 @@ import org.junit.Test;
 public class NotificationServiceTest {
 
     NotificationModel notificationModel = new NotificationModel();
-    String userId = "9nSEiMgzieo1O4K";
+    String userId = "zdTG6R3pRPBc4Yw";
     String friendId = "55Lj6k4iZReT4ck";
 //    String friendId = "9nSEiMgzieo1O4K";
     String referenceId = "2";
@@ -38,10 +38,10 @@ public class NotificationServiceTest {
 
     }
     
-//    @Test
+    @Test
     public void getGeneralNotifications() {
         int offset =0;
-        int limit =0;
+        int limit =10;
         System.out.println(notificationModel.getGeneralNotifications(userId,offset,limit).toString());
 
     }

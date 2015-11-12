@@ -195,13 +195,13 @@ public class StatusModel {
             if (status.getComment() != null) {
                 int commentSize = status.getComment().size();
                 List<Comment> commentList = new ArrayList();
+                 if (commentSize >= 2) {
+                    Comment secondlastComment = status.getComment().get(commentSize - 2);
+                    commentList.add(secondlastComment);
+                }
                 if (commentSize >= 1) {
                     Comment lastComment = status.getComment().get(commentSize - 1);
                     commentList.add(lastComment);
-                }
-                if (commentSize >= 2) {
-                    Comment secondlastComment = status.getComment().get(commentSize - 2);
-                    commentList.add(secondlastComment);
                 }
                 if (commentSize > 2) {
                     statusJson.put("commentCounter", commentSize - 2);

@@ -677,43 +677,20 @@ public class NotificationModel {
         Document selectionDocument = new Document();
         selectionDocument.put("$orderby", sortQuery);
         MongoCursor generalNotificationCursor1 = mongoCollection.find().sort(sortQuery).iterator();
-        while (generalNotificationCursor1.hasNext()) {
-            System.out.println(generalNotificationCursor1.next());
-        }
+        
     }
 
-    public List<GeneralNotification> getGeneralNotifications(String userId, int offset, int limit) {
-
+    public NotificationDAO getGeneralNotifications(String userId, int offset, int limit) {
         MongoCollection<NotificationDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.NOTIFICATIONS.toString(), NotificationDAO.class);
         String attrUserId = PropertyProvider.get("USER_ID");
         String attrGeneralNotifications = PropertyProvider.get("GENERAL_NOTIFICATIONS");
-//        String attrUserInfo = PropertyProvider.get("USER_INFO");
         Document selectionDocument = new Document();
         selectionDocument.put(attrUserId, userId);
         Document projectionDocument = new Document();
         projectionDocument.put(attrGeneralNotifications, "$all");
-//        projectionDocument.put(attrGeneralNotifications, "$all");
-//        Document sortQuery = new Document();
-//        sortQuery.put(attrGeneralNotifications+"."+"createdOn", 1);
-//        sortQuery.put("createdOn", -1);
-//        NotificationDAO generalNotificationCursor1 = mongoCollection.find(selectionDocument).projection(projectionDocument).first();
-//        System.out.println(generalNotificationCursor1);
+        projectionDocument.put(attrUserId, "$all");
         NotificationDAO generalNotificationCursor = mongoCollection.find(selectionDocument).projection(projectionDocument).first();
-//        System.out.println(generalNotificationCursor);
-        List<UserInfo> userList = new ArrayList<>();
-        List<GeneralNotification> generalNotifications = new ArrayList<>();
-        if (generalNotificationCursor != null) {
-            if (generalNotificationCursor.getGeneralNotifications() != null) {
-                int generalNotificationSize = generalNotificationCursor.getGeneralNotifications().size();
-                if (generalNotificationSize > 0) {
-                    for (int i = 0; i < generalNotificationSize; i++) {
-                        generalNotifications.add(generalNotificationCursor.getGeneralNotifications().get(i));
-                    }
-                }
-            }
-        }
-        return generalNotifications;
-
+        return generalNotificationCursor;
     }
 }
