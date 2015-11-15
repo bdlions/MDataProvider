@@ -22,10 +22,10 @@ import org.junit.Test;
 public class NotificationServiceTest {
 
     NotificationModel notificationModel = new NotificationModel();
-    String userId = "zdTG6R3pRPBc4Yw";
-    String friendId = "55Lj6k4iZReT4ck";
+    String userId = "iSj2GNOqeoka2TH";
+    String friendId = "WPkbWVADuhT8Vmj";
 //    String friendId = "9nSEiMgzieo1O4K";
-    String referenceId = "2";
+    String referenceId = "1";
 
 //    @Test
     public void addFriendNotification() {
@@ -33,22 +33,24 @@ public class NotificationServiceTest {
 
     }
 //    @Test
+
     public void getFriendNotifications() {
         notificationModel.getFriendNotifications(userId);
 
     }
-    
-    @Test
+
+//    @Test
     public void getGeneralNotifications() {
-        int offset =0;
-        int limit =10;
-        System.out.println(notificationModel.getGeneralNotifications(userId,offset,limit).toString());
+        int offset = 0;
+        int limit = 10;
+        System.out.println(notificationModel.getGeneralNotifications(userId, offset, limit).toString());
 
     }
 //    @Test
+
     public void updateStatusGeneralNotifications() {
-       String statusTypeId = "";
-        notificationModel.updateStatusGeneralNotifications(userId,statusTypeId);
+        String statusTypeId = "";
+        notificationModel.updateStatusGeneralNotifications(userId, statusTypeId);
 
     }
 
@@ -58,37 +60,44 @@ public class NotificationServiceTest {
 
     }
 //    @Test
+
     public void getNotificationCounter() {
-        System.out.println( notificationModel.getNotificationCounter(userId));
+        System.out.println(notificationModel.getNotificationCounter(userId));
 
     }
-    
-//    @Test
 
+//    @Test
     public void addGeneralNotificationStatusLike() {
         UserInfo userInfo = new UserInfo();
-        userInfo.setUserId("u1");
-        userInfo.setFirstName("Alamgir");
-        userInfo.setLastName("Kabir");
+        userInfo.setUserId("u2");
+        userInfo.setFirstName("Rashida");
+        userInfo.setLastName("Sultana");
+
         notificationModel.addGeneralNotificationStatusLike("u1", referenceId, userInfo.toString());
 
     }
 
-//    @Test
+    @Test
     public void addGeneralNotificationStatusComment() {
         UserInfo userInfo = new UserInfo();
-        userInfo.setUserId("u4");
+        userInfo.setUserId("u1");
         userInfo.setFirstName("Rashida");
         userInfo.setLastName("Sultana");
-        notificationModel.addGeneralNotificationStatusComment("u1", referenceId, userInfo.toString());
+        UserInfo refuserInfo = new UserInfo();
+        refuserInfo.setUserId("u1");
+        refuserInfo.setFirstName("Alamgir");
+        refuserInfo.setLastName("Kabir");
+        notificationModel.addGeneralNotificationStatusComment(refuserInfo.toString(), referenceId, userInfo.toString());
 
     }
 //    @Test
-    public void updateStatusFriendNotifications(){
-    notificationModel.updateStatusFriendNotifications(friendId);
+
+    public void updateStatusFriendNotifications() {
+        notificationModel.updateStatusFriendNotifications(friendId);
     }
 //    @Test
-    public void testMongoSql(){
-    notificationModel.testMongoSql(userId);
+
+    public void testMongoSql() {
+        notificationModel.testMongoSql(userId);
     }
 }

@@ -15,6 +15,7 @@ public class GeneralNotification {
     private String statusId;
     private String typeId;
     private String referenceId;
+    private UserInfo referenceUserInfo ;
     private List<UserInfo> userList = new ArrayList<>();
     private String createdOn;
     private String modifiedOn;
@@ -38,6 +39,15 @@ public class GeneralNotification {
     public String getReferenceId() {
         return referenceId;
     }
+
+    public UserInfo getReferenceUserInfo() {
+        return referenceUserInfo;
+    }
+
+    public void setReferenceUserInfo(UserInfo referenceUserInfo) {
+        this.referenceUserInfo = referenceUserInfo;
+    }
+    
 
     public void setReferenceId(String referenceId) {
         this.referenceId = referenceId;

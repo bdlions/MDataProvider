@@ -18,8 +18,13 @@ import com.shampan.db.collections.fragment.status.ReferenceList;
 import com.shampan.db.collections.fragment.status.Share;
 import com.shampan.db.collections.fragment.status.UserInfo;
 import com.shampan.model.StatusModel;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import org.json.JSONArray;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -30,7 +35,7 @@ import static org.junit.Assert.*;
 public class StatusServiceTest {
 
     StatusModel statusObject = new StatusModel();
-    String userId = "55Lj6k4iZReT4ck";
+    String userId = "iSj2GNOqeoka2TH";
     String mappingId = "mqQ06eko9TqYYul";
     String friendId = "9nSEiMgzieo1O4K";
     String statusId = "Xs2Z3qLtNQmY1Iq";
@@ -68,9 +73,9 @@ public class StatusServiceTest {
         System.out.println(statusObject.addStatus(satusInfo.toString()));
     }
 
-    @Test
+//    @Test
     public void getStatusDetails() {
-        System.out.println(statusObject.getStatusDetails(userId,statusId).toString());
+        System.out.println(statusObject.getStatusDetails(userId, statusId).toString());
     }
 
 //    @Test
@@ -79,11 +84,15 @@ public class StatusServiceTest {
         rUserInfo.setFirstName("Nazmul");
         rUserInfo.setLastName("Hasan");
         rUserInfo.setUserId("u1");
+        UserInfo rUserInfo1 = new UserInfo();
+        rUserInfo1.setFirstName("Nazmul");
+        rUserInfo1.setLastName("Hasan");
+        rUserInfo1.setUserId("u1");
         Comment statusCommentInfo = new Comment();
         statusCommentInfo.setDescription("Thank you !!");
         statusCommentInfo.setUserInfo(rUserInfo);
         System.out.println(statusCommentInfo.toString());
-        System.out.println(statusObject.addStatusComment(userId, statusId, statusCommentInfo.toString()));
+        System.out.println(statusObject.addStatusComment(rUserInfo1.toString(), statusId, statusCommentInfo.toString()));
 
     }
 
@@ -125,6 +134,18 @@ public class StatusServiceTest {
         statusLikeInfo.setUserInfo(rUserInfo);
         System.out.println(statusLikeInfo.toString());
         System.out.println(statusObject.addStatusLike(userId, statusId, statusLikeInfo.toString()));
+
+    }
+    @Test
+    public void addStatusCommentLike() {
+        UserInfo rUserInfo = new UserInfo();
+        rUserInfo.setFirstName("Nazmul");
+        rUserInfo.setLastName("Hasan");
+        rUserInfo.setUserId("1");
+        Like statusLikeInfo = new Like();
+        statusLikeInfo.setUserInfo(rUserInfo);
+        System.out.println(statusLikeInfo.toString());
+        System.out.println(statusObject.addStatusCommentLike("QSJx8nbBz8mmITD", "Dz89LgSeuL7Cvpk", statusLikeInfo.toString()));
 
     }
 //    @Test
@@ -179,11 +200,25 @@ public class StatusServiceTest {
 
     }
 //    @Test
+
     public void getUserProfileStatuses() {
         int offset = 0;
         int limit = 5;
-        System.out.println(statusObject.getUserProfileStatuses(userId,mappingId, offset, limit));
+        System.out.println(statusObject.getUserProfileStatuses(userId, mappingId, offset, limit));
 
     }
+
+//    @Test
+    public void unixToHuman() throws ParseException {
+        long unixdate = 1447476259;
+        DateFormat formatter = new SimpleDateFormat("EEE, MMM d yyyy, HH.mm a");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(unixdate * 1000);
+        String formattedDate = formatter.format(calendar.getTime());
+        System.out.println("Formatted Date:" + formatter.format(calendar.getTime()));
+
+    }
+
+
 
 }

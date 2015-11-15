@@ -47,7 +47,7 @@ public class UserInfo {
         return json;
     }
 
-    public static UserInfo getuserInfo(String jsonContent) {
+    public static UserInfo getUserInformation(String jsonContent) {
         UserInfo userInfo = null;
         try {
             ObjectMapper mapper = new ObjectMapper();

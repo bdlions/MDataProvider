@@ -6,6 +6,7 @@
 package com.shampan.db.collections.fragment.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
 
 /**
  *
@@ -16,6 +17,7 @@ public class Comment {
     private String description;
     private String commentId;
     private UserInfo userInfo;
+    private List<Like> like;
 
     public String getDescription() {
         return description;
@@ -39,6 +41,14 @@ public class Comment {
 
     public void setUserInfo(UserInfo userInfo) {
         this.userInfo = userInfo;
+    }
+
+    public List<Like> getLike() {
+        return like;
+    }
+
+    public void setLike(List<Like> like) {
+        this.like = like;
     }
 
     @Override

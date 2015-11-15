@@ -17,7 +17,7 @@ public class StatusService {
     private static StatusModel obj = new StatusModel();
 
     public static String addStatus(String statusInfo) {
-        String response = obj.addStatus(statusInfo);
+        String response = obj.addStatus(statusInfo).toString();
         return response;
     }
 
@@ -32,12 +32,12 @@ public class StatusService {
     }
 
     public static String deleteStatus(String statusId) {
-        String response = obj.deleteStatus(statusId);
+        String response = obj.deleteStatus(statusId).toString();
         return response;
     }
 
     public static String updateStatus(String statusId, String statusInfo) {
-        String response = obj.updateStatus(statusId, statusInfo);
+        String response = obj.updateStatus(statusId, statusInfo).toString();
         return response;
     }
 
@@ -46,30 +46,35 @@ public class StatusService {
         return response;
 
     }
+    public static String addStatusCommentLike(String statusId, String commentId, String likeInfo) {
+        String response = obj.addStatusCommentLike(statusId,statusId, likeInfo).toString();
+        return response;
 
-    public static String addStatusComment(String userId,String statusId, String commentInfo) {
-        String response = obj.addStatusComment(userId, statusId, commentInfo);
+    }
+
+    public static String addStatusComment(String referenceUserInfo, String statusId, String commentInfo) {
+        String response = obj.addStatusComment(referenceUserInfo, statusId, commentInfo).toString();
         return response;
 
     }
 
     public static String shareStatus(String userId, String statusId, String refUserInfo, String shareInfo) {
-        String response = obj.shareStatus(userId, statusId, refUserInfo, shareInfo);
+        String response = obj.shareStatus(userId, statusId, refUserInfo, shareInfo).toString();
         return response;
 
     }
     public static String getStatusLikeList(String statusId) {
-        String response = obj.getStatusLikeList(statusId);
+        String response = obj.getStatusLikeList(statusId).toString();
         return response;
 
     }
     public static String getStatusShareList(String statusId) {
-        String response = obj.getStatusShareList(statusId);
+        String response = obj.getStatusShareList(statusId).toString();
         return response;
 
     }
     public static String getStatusComments(String statusId) {
-        String response = obj.getStatusComments(statusId);
+        String response = obj.getStatusComments(statusId).toString();
         return response;
 
     }
