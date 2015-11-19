@@ -18,12 +18,15 @@ import com.shampan.db.collections.fragment.status.ReferenceList;
 import com.shampan.db.collections.fragment.status.Share;
 import com.shampan.db.collections.fragment.status.UserInfo;
 import com.shampan.model.StatusModel;
+import java.security.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 import org.json.JSONArray;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -35,7 +38,7 @@ import static org.junit.Assert.*;
 public class StatusServiceTest {
 
     StatusModel statusObject = new StatusModel();
-    String userId = "iSj2GNOqeoka2TH";
+    String userId = "2Q52DbDnqKEiSCn";
     String mappingId = "mqQ06eko9TqYYul";
     String friendId = "9nSEiMgzieo1O4K";
     String statusId = "Xs2Z3qLtNQmY1Iq";
@@ -60,9 +63,9 @@ public class StatusServiceTest {
         refInfo.setImages(imageList);
         StatusDAO satusInfo = new StatusDAOBuilder()
                 .setStatusId(statusId)
-                .setUserId(friendId)
+                .setUserId(userId)
                 .setUserInfo(userInfo)
-                .setMappingId(friendId)
+                .setMappingId(userId)
                 .setDescription("hi hi ha ha ha")
                 .setStatusTypeId("1")
                 .setReferenceList(refList)
@@ -74,7 +77,7 @@ public class StatusServiceTest {
     }
 
 //    @Test
-    public void getStatusDetails() {
+    public void getStatusDetails() throws ParseException {
         System.out.println(statusObject.getStatusDetails(userId, statusId).toString());
     }
 
@@ -136,8 +139,11 @@ public class StatusServiceTest {
         System.out.println(statusObject.addStatusLike(userId, statusId, statusLikeInfo.toString()));
 
     }
-    @Test
+
+//    @Test
     public void addStatusCommentLike() {
+        String statusId = "Ztrm3L1XXoIg7sJ";
+        String commentId = "8xzNSFN7nuLqXty";
         UserInfo rUserInfo = new UserInfo();
         rUserInfo.setFirstName("Nazmul");
         rUserInfo.setLastName("Hasan");
@@ -145,7 +151,7 @@ public class StatusServiceTest {
         Like statusLikeInfo = new Like();
         statusLikeInfo.setUserInfo(rUserInfo);
         System.out.println(statusLikeInfo.toString());
-        System.out.println(statusObject.addStatusCommentLike("QSJx8nbBz8mmITD", "Dz89LgSeuL7Cvpk", statusLikeInfo.toString()));
+        System.out.println(statusObject.addStatusCommentLike(statusId, commentId, statusLikeInfo.toString()));
 
     }
 //    @Test
@@ -193,15 +199,15 @@ public class StatusServiceTest {
     }
 
 //    @Test
-    public void getStatuses() {
+    public void getStatuses() throws ParseException {
         int offset = 0;
         int limit = 5;
-        System.out.println(statusObject.getStatuses(userId, offset, limit));
+        System.out.println(statusObject.getStatuses("2Q52DbDnqKEiSCn", offset, limit));
 
     }
 //    @Test
 
-    public void getUserProfileStatuses() {
+    public void getUserProfileStatuses() throws ParseException {
         int offset = 0;
         int limit = 5;
         System.out.println(statusObject.getUserProfileStatuses(userId, mappingId, offset, limit));
@@ -210,15 +216,46 @@ public class StatusServiceTest {
 
 //    @Test
     public void unixToHuman() throws ParseException {
-        long unixdate = 1447476259;
-        DateFormat formatter = new SimpleDateFormat("EEE, MMM d yyyy, HH.mm a");
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(unixdate * 1000);
-        String formattedDate = formatter.format(calendar.getTime());
-        System.out.println("Formatted Date:" + formatter.format(calendar.getTime()));
+//        long unixSeconds = 1447681923;
+        long unixSeconds = System.currentTimeMillis();
+//        Date date = new Date(unixSeconds*1000L); // *1000 is to convert seconds to milliseconds
+        Date date = new Date(unixSeconds); // *1000 is to convert seconds to milliseconds
+//        System.out.println(date);
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z"); // the format of your date
+//        sdf.setTimeZone(TimeZone.getTimeZone("GMT+14")); // give a timezone reference for formating (see comment at the bottom
+//        String formattedDate = sdf.format(date);
+//        System.out.println("GMT other country  Date = " + formattedDate);
+//        long a = sdf.parse(formattedDate).getTime();
+//        System.out.println("unixGMTTime = " + a);
+        SimpleDateFormat sdfForBD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z"); // the format of your date
+        sdfForBD.setTimeZone(TimeZone.getTimeZone("GMT+6")); // give a timezone reference for formating (see comment at the bottom
+        String formattedDateForBD = sdfForBD.format(date);
+        System.out.println("BD Date = " + formattedDateForBD);
+//        long bdTime = sdfForBD.parse(formattedDateForBD).getTime();
+//        System.out.println("unixGMTTime = " + bdTime);
+        SimpleDateFormat sdfForGMT0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z"); // the format of your date
+        sdfForGMT0.setTimeZone(TimeZone.getTimeZone("GMT+0")); // give a timezone reference for formating (see comment at the bottom
+        String formattedDateForGMT0 = sdfForGMT0.format(date);
+        System.out.println("BD Date = " + formattedDateForGMT0);
+        long gmt0Time1 = sdfForBD.parse(formattedDateForGMT0).getTime();
+        long gmt0Time2 = sdfForBD.parse(formattedDateForBD).getTime();
+        System.out.println(gmt0Time1);
+        System.out.println(gmt0Time2);
+//        System.out.println("unixTime = " + bT);
 
     }
 
-
+//    @Test
+    public void getCurrentDate() {
+        String offset = "+06";
+        String gmtOffset = "GMT" + offset;
+        System.out.println(gmtOffset);
+        long unixSeconds = 1447681923 * 1000L;
+        Date date = new Date(unixSeconds);
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
+        sDateFormat.setTimeZone(TimeZone.getTimeZone(gmtOffset));
+        String currentDate = sDateFormat.format(date);
+        System.out.println(currentDate);
+    }
 
 }

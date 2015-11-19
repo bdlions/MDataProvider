@@ -32,25 +32,25 @@ public class LandingPageServiceTest {
         DBConnection.getInstance().getConnection();
         MongoCollection<ReligionsDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.RELIGIONS.toString(), ReligionsDAO.class);
-        
+
         ReligionsDAO religionDAO1 = new ReligionsDAOBuilder()
                 .setReligionId("1")
                 .setTitle("Islam")
                 .setOrder("1")
                 .build();
-        
+
         ReligionsDAO religionDAO2 = new ReligionsDAOBuilder()
                 .setReligionId("2")
                 .setTitle("Hindu")
                 .setOrder("2")
                 .build();
-        
+
         ReligionsDAO religionDAO3 = new ReligionsDAOBuilder()
                 .setReligionId("3")
                 .setTitle("Christianity")
                 .setOrder("3")
                 .build();
-        
+
         ReligionsDAO religionDAO4 = new ReligionsDAOBuilder()
                 .setReligionId("4")
                 .setTitle("Buddhism")
@@ -61,17 +61,17 @@ public class LandingPageServiceTest {
         religions.add(religionDAO2);
         religions.add(religionDAO3);
         religions.add(religionDAO4);
-       
+
         mongoCollection.insertMany(religions);
     }
-    
-    @Test
-    
+
+//    @Test
+
     public void storeCountries() {
         DBConnection.getInstance().getConnection();
         MongoCollection<CountriesDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.COUNTRIES.toString(), CountriesDAO.class);
-        
+
         CountriesDAO countryDAO1 = new CountriesDAOBuilder()
                 .setCode("US")
                 .setTitle("United States")
@@ -87,13 +87,13 @@ public class LandingPageServiceTest {
                 .setTitle("Afghanistan")
                 .setOrder("3")
                 .build();
-        
+
         CountriesDAO countryDAO4 = new CountriesDAOBuilder()
                 .setCode("AL")
                 .setTitle("Albania")
                 .setOrder("4")
                 .build();
-        
+
         CountriesDAO countryDAO5 = new CountriesDAOBuilder()
                 .setCode("DZ")
                 .setTitle("Algeria")
@@ -104,7 +104,7 @@ public class LandingPageServiceTest {
                 .setTitle("American Samoa")
                 .setOrder("6")
                 .build();
-        
+
         CountriesDAO countryDAO7 = new CountriesDAOBuilder()
                 .setCode("AD")
                 .setTitle("Andorra")
@@ -130,7 +130,7 @@ public class LandingPageServiceTest {
                 .setTitle("Antigua and/or Barbuda")
                 .setOrder("11")
                 .build();
-        
+
         CountriesDAO countryDAO12 = new CountriesDAOBuilder()
                 .setCode("AR")
                 .setTitle("Argentina")
@@ -151,13 +151,13 @@ public class LandingPageServiceTest {
                 .setTitle("Australia")
                 .setOrder("15")
                 .build();
-        
+
         CountriesDAO countryDAO16 = new CountriesDAOBuilder()
                 .setCode("AT")
                 .setTitle("Austria")
                 .setOrder("16")
                 .build();
-        
+
         CountriesDAO countryDAO17 = new CountriesDAOBuilder()
                 .setCode("AZ")
                 .setTitle("Azerbaijan")
@@ -173,7 +173,7 @@ public class LandingPageServiceTest {
                 .setTitle("Bahrain")
                 .setOrder("19")
                 .build();
-        
+
         CountriesDAO countryDAO20 = new CountriesDAOBuilder()
                 .setCode("BD")
                 .setTitle("Bangladesh")
@@ -199,25 +199,25 @@ public class LandingPageServiceTest {
                 .setTitle("Belize")
                 .setOrder("24")
                 .build();
-        
+
         CountriesDAO countryDAO25 = new CountriesDAOBuilder()
                 .setCode("BJ")
                 .setTitle("Benin")
                 .setOrder("25")
                 .build();
-        
+
         CountriesDAO countryDAO26 = new CountriesDAOBuilder()
                 .setCode("BM")
                 .setTitle("Bermuda")
                 .setOrder("26")
                 .build();
-        
+
         CountriesDAO countryDAO27 = new CountriesDAOBuilder()
                 .setCode("BT")
                 .setTitle("Bhutan")
                 .setOrder("27")
                 .build();
-        
+
         CountriesDAO countryDAO28 = new CountriesDAOBuilder()
                 .setCode("BO")
                 .setTitle("Bolivia")
@@ -253,38 +253,37 @@ public class LandingPageServiceTest {
                 .setTitle("Brunei Darussalam")
                 .setOrder("34")
                 .build();
-        
+
         CountriesDAO countryDAO35 = new CountriesDAOBuilder()
                 .setCode("BG")
                 .setTitle("Bulgaria")
                 .setOrder("35")
                 .build();
-        
-        
+
         CountriesDAO countryDAO36 = new CountriesDAOBuilder()
                 .setCode("BF")
                 .setTitle("Burkina Faso")
                 .setOrder("36")
                 .build();
-        
+
         CountriesDAO countryDAO37 = new CountriesDAOBuilder()
                 .setCode("BI")
                 .setTitle("Burundi")
                 .setOrder("37")
                 .build();
-        
+
         CountriesDAO countryDAO38 = new CountriesDAOBuilder()
                 .setCode("KH")
                 .setTitle("Cambodia")
                 .setOrder("38")
                 .build();
-        
+
         CountriesDAO countryDAO39 = new CountriesDAOBuilder()
                 .setCode("CM")
                 .setTitle("Cameroon")
                 .setOrder("39")
                 .build();
-        
+
         CountriesDAO countryDAO40 = new CountriesDAOBuilder()
                 .setCode("CV")
                 .setTitle("Cape Verde")
@@ -461,7 +460,6 @@ public class LandingPageServiceTest {
                 .setOrder("74")
                 .build();
 
-        
         CountriesDAO countryDAO75 = new CountriesDAOBuilder()
                 .setCode("GF")
                 .setTitle("French Guiana")
@@ -663,7 +661,6 @@ public class LandingPageServiceTest {
                 .setOrder("114")
                 .build();
 
-        
         CountriesDAO countryDAO115 = new CountriesDAOBuilder()
                 .setCode("KW")
                 .setTitle("Kuwait")
@@ -680,13 +677,12 @@ public class LandingPageServiceTest {
                 .setOrder("117")
                 .build();
 
-        
         CountriesDAO countryDAO118 = new CountriesDAOBuilder()
                 .setCode("LV")
                 .setTitle("Latvia")
                 .setOrder("118")
                 .build();
-        
+
         CountriesDAO countryDAO119 = new CountriesDAOBuilder()
                 .setCode("LB")
                 .setTitle("Lebanon")
@@ -783,14 +779,12 @@ public class LandingPageServiceTest {
                 .setOrder("137")
                 .build();
 
-        
         CountriesDAO countryDAO138 = new CountriesDAOBuilder()
                 .setCode("TY")
                 .setTitle("Mayotte")
                 .setOrder("138")
                 .build();
 
-        
         CountriesDAO countryDAO139 = new CountriesDAOBuilder()
                 .setCode("MX")
                 .setTitle("Mexico")
@@ -827,7 +821,6 @@ public class LandingPageServiceTest {
                 .setOrder("145")
                 .build();
 
-        
         CountriesDAO countryDAO146 = new CountriesDAOBuilder()
                 .setCode("MZ")
                 .setTitle("Mozambique")
@@ -1065,7 +1058,6 @@ public class LandingPageServiceTest {
                 .setOrder("192")
                 .build();
 
-        
         CountriesDAO countryDAO193 = new CountriesDAOBuilder()
                 .setCode("SO")
                 .setTitle("Somalia")
@@ -1302,7 +1294,6 @@ public class LandingPageServiceTest {
                 .setOrder("239")
                 .build();
 
-        
         List<CountriesDAO> countries = new ArrayList<>();
         countries.add(countryDAO1);
         countries.add(countryDAO2);
@@ -1544,9 +1535,9 @@ public class LandingPageServiceTest {
         countries.add(countryDAO238);
         countries.add(countryDAO239);
         mongoCollection.insertMany(countries);
-        
+
     }
-    
+
 //    @Test
     public void photoCategories() {
         MongoCollection<PhotoCategoryDAO> mongoCollection
@@ -1571,7 +1562,7 @@ public class LandingPageServiceTest {
                 .setCategoryId("5")
                 .setTitle("Designs & Interfaces")
                 .build();
-        
+
         PhotoCategoryDAO category6 = new PhotoCategoryBuilder()
                 .setCategoryId("6")
                 .setTitle("Digital Art")
@@ -1580,7 +1571,7 @@ public class LandingPageServiceTest {
                 .setCategoryId("7")
                 .setTitle("Fan Art")
                 .build();
-        
+
         PhotoCategoryDAO category8 = new PhotoCategoryBuilder()
                 .setCategoryId("8")
                 .setTitle("Film & Animation")
@@ -1601,7 +1592,7 @@ public class LandingPageServiceTest {
                 .setCategoryId("12")
                 .setTitle("People")
                 .build();
-        
+
         PhotoCategoryDAO category13 = new PhotoCategoryBuilder()
                 .setCategoryId("13")
                 .setTitle("Pets & Animals")
@@ -1610,12 +1601,12 @@ public class LandingPageServiceTest {
                 .setCategoryId("14")
                 .setTitle("Sports")
                 .build();
-        
+
         PhotoCategoryDAO category15 = new PhotoCategoryBuilder()
                 .setCategoryId("15")
                 .setTitle("Traditional Art")
                 .build();
-        
+
         List<PhotoCategoryDAO> photoCategories = new ArrayList<>();
         photoCategories.add(category1);
         photoCategories.add(category2);
@@ -1634,12 +1625,12 @@ public class LandingPageServiceTest {
         photoCategories.add(category15);
         mongoCollection.insertMany(photoCategories);
     }
-    
+
 //    @Test
     public void videoCategories() {
         MongoCollection<VideoCategoryDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.VIDEOCATEGORIES.toString(), VideoCategoryDAO.class);
-        
+
         VideoCategoryDAO vedioCategory1 = new VideoCategoryDAOBuilder()
                 .setCategoryId("1")
                 .setTitle("Quran")
@@ -1696,7 +1687,7 @@ public class LandingPageServiceTest {
                 .setCategoryId("14")
                 .setTitle("Travels & Events")
                 .build();
-       
+
         VideoCategoryDAO vedioCategory15 = new VideoCategoryDAOBuilder()
                 .setCategoryId("15")
                 .setTitle("Styles")
@@ -1705,7 +1696,7 @@ public class LandingPageServiceTest {
                 .setCategoryId("16")
                 .setTitle("Entertainment & Arts")
                 .build();
-       
+
         List<VideoCategoryDAO> videoCategories = new ArrayList<>();
         videoCategories.add(vedioCategory1);
         videoCategories.add(vedioCategory2);
@@ -1725,7 +1716,7 @@ public class LandingPageServiceTest {
         videoCategories.add(vedioCategory16);
         mongoCollection.insertMany(videoCategories);
     }
-    
+
 //    @Test
     public void addUser() {
         MongoCollection<UserDAO> mongoCollection
@@ -1765,7 +1756,6 @@ public class LandingPageServiceTest {
                 .setLastName("Gope")
                 .setUserId("8")
                 .build();
-    
 
         List<UserDAO> users = new ArrayList<>();
         users.add(userInfo1);
@@ -1776,5 +1766,35 @@ public class LandingPageServiceTest {
         users.add(userInfo8);
         mongoCollection.insertMany(users);
     }
-    
+
+    @Test
+    public void storeTestCountries() {
+        DBConnection.getInstance().getConnection();
+        MongoCollection<CountriesDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.COUNTRIES.toString(), CountriesDAO.class);
+
+        CountriesDAO countryDAO1 = new CountriesDAOBuilder()
+                .setCode("US")
+                .setTitle("United States")
+                .setOrder("1")
+                .setGmtOffset("-11:00")
+                .build();
+        CountriesDAO countryDAO2 = new CountriesDAOBuilder()
+                .setCode("BD")
+                .setTitle("Bangladesh")
+                .setOrder("2")
+                .setGmtOffset("+08:00")
+                .build();
+        CountriesDAO countryDAO3 = new CountriesDAOBuilder()
+                .setCode("AU")
+                .setTitle("Australia")
+                .setOrder("3")
+                .setGmtOffset("+11:00")
+                .build();
+        List<CountriesDAO> countries = new ArrayList<>();
+        countries.add(countryDAO1);
+        countries.add(countryDAO2);
+        countries.add(countryDAO3);
+        mongoCollection.insertMany(countries);
+    }
 }

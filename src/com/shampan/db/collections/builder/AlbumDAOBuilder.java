@@ -30,10 +30,9 @@ public class AlbumDAOBuilder {
     private String userId;
     private String title;
     private String description;
-    private String createdOn;
-    private String modifiedOn;
+    private long createdOn;
+    private long modifiedOn;
     private String photoId;
-
     private String defaultImg;
     private int totalImg;
     private UserInfo userInfo;
@@ -78,14 +77,12 @@ public class AlbumDAOBuilder {
         return this;
     }
 
-    public AlbumDAOBuilder setCreatedOn(String createdOn) {
+    public void setCreatedOn(long createdOn) {
         this.createdOn = createdOn;
-        return this;
     }
 
-    public AlbumDAOBuilder setModifiedOn(String modifiedOn) {
+    public void setModifiedOn(long modifiedOn) {
         this.modifiedOn = modifiedOn;
-        return this;
     }
 
     public AlbumDAOBuilder setDefaultImg(String defaultImg) {

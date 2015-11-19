@@ -11,8 +11,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class MessageNotification {
 
     private String statusId;
-    private String createdOn;
-    private String modifiedOn;
+    private long createdOn;
+    private long modifiedOn;
 
     public String getStatusId() {
         return statusId;
@@ -22,19 +22,19 @@ public class MessageNotification {
         this.statusId = statusId;
     }
 
-    public String getCreatedOn() {
+    public long getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(String createdOn) {
+    public void setCreatedOn(long createdOn) {
         this.createdOn = createdOn;
     }
 
-    public String getModifiedOn() {
+    public long getModifiedOn() {
         return modifiedOn;
     }
 
-    public void setModifiedOn(String modifiedOn) {
+    public void setModifiedOn(long modifiedOn) {
         this.modifiedOn = modifiedOn;
     }
 

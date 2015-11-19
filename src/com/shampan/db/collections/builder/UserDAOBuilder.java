@@ -11,13 +11,13 @@ import java.util.List;
  * @author Sampan-IT
  */
 public class UserDAOBuilder {
-    
+
     private UserDAO user;
-    
-    public UserDAOBuilder(){
+
+    public UserDAOBuilder() {
         user = new UserDAO();
     }
-    
+
     private String id;
     private String userId;
     private String firstName;
@@ -26,18 +26,17 @@ public class UserDAOBuilder {
     private String password;
     private String email;
     private String ipAddress;
-    private String createdOn;
+    private long createdOn;
     private String last_login;
     private String accountStatusId;
     private Country country;
     private List<Group> groups;
-    
 
     public UserDAOBuilder setUserId(String userId) {
         this.userId = userId;
         return this;
     }
-    
+
     public UserDAOBuilder setFirstName(String firstName) {
         this.firstName = firstName;
         return this;
@@ -50,7 +49,7 @@ public class UserDAOBuilder {
 
     public UserDAOBuilder setLastName(String lastName) {
         this.lastName = lastName;
-        return  this;
+        return this;
     }
 
     public UserDAOBuilder setUserName(String userName) {
@@ -73,9 +72,8 @@ public class UserDAOBuilder {
         return this;
     }
 
-    public UserDAOBuilder setCreatedOn(String createdOn) {
+    public void setCreatedOn(long createdOn) {
         this.createdOn = createdOn;
-        return this;
     }
 
     public UserDAOBuilder setLast_login(String last_login) {
@@ -92,10 +90,8 @@ public class UserDAOBuilder {
         this.groups = groups;
         return this;
     }
-    
- 
-    
-    public UserDAO build(){
+
+    public UserDAO build() {
         user.set_id(id);
         user.setUserId(userId);
         user.setFirstName(firstName);
@@ -108,7 +104,8 @@ public class UserDAOBuilder {
         user.setGroups(groups);
         return user;
     }
-    public UserDAO build(String daoContent){
+
+    public UserDAO build(String daoContent) {
         ObjectMapper mapper = new ObjectMapper();
         try {
             user = mapper.readValue(daoContent, UserDAO.class);

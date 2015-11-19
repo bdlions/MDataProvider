@@ -158,13 +158,13 @@ public class RelationModel {
             fromRelationInfo.setUserId(toUserId);
             fromRelationInfo.setIsInitiated(PropertyProvider.get("IS_INITIATED_YES"));
             fromRelationInfo.setRelationTypeId(relationTypeId);
-            fromRelationInfo.setCreatedOn(utility.getCurrentTime());
+//            fromRelationInfo.setCreatedOn(utility.getCurrentTime());
 
             RelationInfo toRelationInfo = new RelationInfo();
             toRelationInfo.setUserId(fromUserId);
             toRelationInfo.setIsInitiated(PropertyProvider.get("IS_INITIATED_NO"));
             toRelationInfo.setRelationTypeId(relationTypeId);
-            toRelationInfo.setCreatedOn(utility.getCurrentTime());
+//            toRelationInfo.setCreatedOn(utility.getCurrentTime());
 
             String attrUserId = PropertyProvider.get("USER_ID");
             String attrRelationList = PropertyProvider.get("RELATION_LIST");
@@ -351,7 +351,7 @@ public class RelationModel {
                 for (int j = 0; j < requestListSize; j++) {
                     if (userInfoList.get(j) != null) {
                         requestList.get(j).setUserId(userInfoList.get(j).getUserId());
-                        requestList.get(j).setfirstName(userInfoList.get(j).getFirstName());
+                        requestList.get(j).setFirstName(userInfoList.get(j).getFirstName());
                         requestList.get(j).setLastName(userInfoList.get(j).getLastName());
                     }
                 }
@@ -424,7 +424,7 @@ public class RelationModel {
         }
         UserDAO userInfo = userModel.getUserInfo(toUserId);
         if (userInfo != null) {
-            relationInfo.setfirstName(userInfo.getFirstName());
+            relationInfo.setFirstName(userInfo.getFirstName());
             relationInfo.setLastName(userInfo.getLastName());
         }
         return relationInfo;

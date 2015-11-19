@@ -9,6 +9,7 @@ import com.sampan.response.ResultEvent;
 import com.shampan.db.Collections;
 import com.shampan.db.DBConnection;
 import com.shampan.db.collections.StatusDAO;
+import com.shampan.db.collections.UserDAO;
 import com.shampan.db.collections.builder.StatusDAOBuilder;
 import com.shampan.db.collections.fragment.status.Comment;
 import com.shampan.db.collections.fragment.status.Like;
@@ -93,7 +94,7 @@ public class StatusModel {
      * @param limit, limit
      * @author created by Rashida on 15 October
      */
-    public List<JSONObject> getStatuses(String userId, int offset, int limit) {
+    public String getStatuses(String userId, int offset, int limit) {
         MongoCollection<StatusDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
         String relationTypeId = PropertyProvider.get("RELATION_TYPE_FRIEND_ID");
@@ -115,10 +116,9 @@ public class StatusModel {
         }
         Document selectDocument = new Document();
         selectDocument.put("$or", orSelectionDocument);
-//        MongoCursor<StatusDAO> statusList = mongoCollection.find(selectDocument).skip(offset).limit(limit).iterator();
         MongoCursor<StatusDAO> statusList = mongoCollection.find(selectDocument).sort(new Document("modifiedOn", -1)).skip(offset).limit(limit).iterator();
-        List<JSONObject> statusInfoList = getStatusInfo(userId, statusList);
-        return statusInfoList;
+        JSONObject statusInfoList = getStatusInfo(userId, statusList);
+        return statusInfoList.toString();
     }
 
     /**
@@ -128,15 +128,15 @@ public class StatusModel {
      * @param userId, user Id
      * @author created by Rashida on 9th Nov
      */
-    public List<JSONObject> getUserProfileStatuses(String userId, String mappingId, int offset, int limit) {
+    public String getUserProfileStatuses(String userId, String mappingId, int offset, int limit) {
         MongoCollection<StatusDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
         String attrMappingId = PropertyProvider.get("MAPPING_ID");
         Document selectDocument = new Document();
         selectDocument.put(attrMappingId, mappingId);
         MongoCursor<StatusDAO> statusList = mongoCollection.find(selectDocument).sort(new Document("modifiedOn", -1)).skip(offset).limit(limit).iterator();
-        List<JSONObject> statusInfoList = getStatusInfo(userId, statusList);
-        return statusInfoList;
+        JSONObject statusInfoList = getStatusInfo(userId, statusList);
+        return statusInfoList.toString();
     }
 
     /**
@@ -147,14 +147,14 @@ public class StatusModel {
      * @param statusId, status Id
      * @author created by Rashida on 9th Nov
      */
-    public List<JSONObject> getStatusDetails(String userId, String statusId) {
+    public String getStatusDetails(String userId, String statusId) {
         MongoCollection<StatusDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
         String attrStatusId = PropertyProvider.get("STATUS_ID");
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start(attrStatusId).is(statusId).get();
         MongoCursor<StatusDAO> status = mongoCollection.find(selectQuery).limit(1).iterator();
-        List<JSONObject> statusInfo = getStatusInfo(userId, status);
-        return statusInfo;
+        JSONObject statusInfo = getStatusInfo(userId, status);
+        return statusInfo.toString();
     }
 
     /**
@@ -164,8 +164,10 @@ public class StatusModel {
      * @param statusList, status List
      * @author created by Rashida on 9th Nov
      */
-    public List<JSONObject> getStatusInfo(String userId, MongoCursor<StatusDAO> statusList) {
+    public JSONObject getStatusInfo(String userId, MongoCursor<StatusDAO> statusList) {
+        int commentLimit = 2;
         List<JSONObject> statusInfoList = new ArrayList<JSONObject>();
+
         while (statusList.hasNext()) {
             JSONObject statusJson = new JSONObject();
             StatusDAO status = (StatusDAO) statusList.next();
@@ -173,6 +175,7 @@ public class StatusModel {
             statusJson.put("userInfo", status.getUserInfo());
             statusJson.put("description", status.getDescription());
             statusJson.put("statusTypeId", status.getStatusTypeId());
+            statusJson.put("createdOn", status.getCreatedOn());
             if (status.getImages() != null) {
                 statusJson.put("images", status.getImages());
             }
@@ -193,20 +196,47 @@ public class StatusModel {
 
             }
             if (status.getComment() != null) {
+                List<JSONObject> commentList = new ArrayList<JSONObject>();
                 int commentSize = status.getComment().size();
-                List<Comment> commentList = new ArrayList();
-                if (commentSize >= 2) {
-                    Comment secondlastComment = status.getComment().get(commentSize - 2);
-                    commentList.add(secondlastComment);
+                if (commentSize > 0) {
+                    int commentLimitIn = 0;
+//                    List<Comment> commentList = new ArrayList();
+                    for (int j = commentSize; j > 0; j--) {
+                        JSONObject commentJson = new JSONObject();
+                        Comment comment = status.getComment().get(j - 1);
+                        commentJson.put("commentId", comment.getCommentId());
+                        commentJson.put("description", comment.getDescription());
+                        commentJson.put("createdOn", comment.getCreatedOn());
+                        commentJson.put("userInfo", comment.getUserInfo());
+                        if (comment.getLike() != null) {
+                            int commentLikeSize = comment.getLike().size();
+                            if (commentLikeSize > 0) {
+                                commentJson.put("commentlikeCounter", commentLikeSize);
+                            }
+                            int k = 0;
+                            while (commentLikeSize > 0) {
+                                String tempUserId = comment.getLike().get(k).getUserInfo().getUserId();
+                                if (tempUserId.equals(userId)) {
+                                    commentJson.put("CommentlikeStatus", PropertyProvider.get("YourLikeStatus"));
+                                }
+                                commentLikeSize--;
+                                k++;
+                            }
+                        }
+                        commentList.add(commentJson);
+//                        commentList.add(comment);
+                        commentLimitIn = commentLimitIn + 1;
+                        if (commentLimitIn != commentLimit) {
+                            continue;
+                        } else {
+                            break;
+                        }
+                    }
+                    if (commentSize > commentLimit) {
+                        statusJson.put("commentCounter", commentSize - commentLimit);
+                    }
+                    statusJson.put("commentList", commentList);
                 }
-                if (commentSize >= 1) {
-                    Comment lastComment = status.getComment().get(commentSize - 1);
-                    commentList.add(lastComment);
-                }
-                if (commentSize > 2) {
-                    statusJson.put("commentCounter", commentSize - 2);
-                }
-                statusJson.put("commentList", commentList);
             }
             if (status.getShare() != null) {
                 int shareSize = status.getShare().size();
@@ -222,7 +252,10 @@ public class StatusModel {
             }
             statusInfoList.add(statusJson);
         }
-        return statusInfoList;
+        JSONObject userStatusInfo = new JSONObject();
+        userStatusInfo.put("userCurrentTime", utility.getCurrentTime());
+        userStatusInfo.put("statusInfoList", statusInfoList);
+        return userStatusInfo;
     }
 
     /**
@@ -317,7 +350,7 @@ public class StatusModel {
             selectionDocument.put(attrStatusId, statusId);
             selectionDocument.put(attrComment + "." + attrCommentId, commentId);
             Like statusLikeInfo = Like.getStatusLike(likeInfo);
-            System.out.println(statusLikeInfo);
+            System.out.println(JSON.parse(statusLikeInfo.toString()));
             if (statusLikeInfo != null) {
                 mongoCollection.findOneAndUpdate(selectionDocument, new Document("$push", new Document("comment.$.like", JSON.parse(statusLikeInfo.toString()))));
             }
@@ -345,6 +378,7 @@ public class StatusModel {
             Comment statusCommentInfo = Comment.getStatusComment(commentInfo);
 
             if (statusCommentInfo != null) {
+                statusCommentInfo.setCreatedOn(utility.getCurrentTime());
                 mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document(attrComment, JSON.parse(statusCommentInfo.toString()))));
                 UserInfo userInfo = statusCommentInfo.getUserInfo();
                 notificationModel.addGeneralNotificationStatusComment(referenceUserInfo, statusId, userInfo.toString());

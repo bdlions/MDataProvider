@@ -19,6 +19,7 @@ import com.shampan.util.PropertyProvider;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
+import org.junit.internal.runners.TestClass;
 
 /**
  *
@@ -27,8 +28,8 @@ import org.junit.Test;
 public class RelationServiceTest {
 
     RelationModel friendObj = new RelationModel();
-    String userId = "55Lj6k4iZReT4ck";
-    String friendId = "mqQ06eko9TqYYul";
+    String userId = "qaFiam3y1OavCfn";
+    String friendId = "hcZrdhteaIeUYrP";
 
 //    @Test
     public void addUser() {
@@ -56,10 +57,10 @@ public class RelationServiceTest {
 
     }
 
-//    @Test
+    @Test
     public void getRelationShipStatus() {
 
-//        System.out.println(friendObj.getRelationShipStatus(userId, friendId));
+        System.out.println(friendObj.getRelationInfo(userId, friendId));
     }
 
 //    @Test

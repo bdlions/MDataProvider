@@ -17,6 +17,7 @@ import com.shampan.db.collections.fragment.status.Comment;
 public class Country {
     private String code;
     private String title;
+    private String gmtOffset;
 
     public String getCode() {
         return code;
@@ -33,6 +34,15 @@ public class Country {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public String getGmtOffset() {
+        return gmtOffset;
+    }
+
+    public void setGmtOffset(String gmtOffset) {
+        this.gmtOffset = gmtOffset;
+    }
+    
     
   @Override
     public String toString() {

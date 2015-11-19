@@ -13,7 +13,7 @@ public class FriendNotification {
 
     private String statusId;
     private UserInfo userInfo;
-    private String createdOn;
+    private long createdOn;
 
     public String getStatusId() {
         return statusId;
@@ -31,13 +31,15 @@ public class FriendNotification {
         this.userInfo = userInfo;
     }
 
-    public String getCreatedOn() {
+    public long getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(String createdOn) {
+    public void setCreatedOn(long createdOn) {
         this.createdOn = createdOn;
     }
+
+
 
     @Override
     public String toString() {

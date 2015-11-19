@@ -108,4 +108,16 @@ public class UserModel {
         return userList;
 
     }
+
+    public UserDAO getUserCountryInfo(String userId) {
+        MongoCollection<UserDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERS.toString(), UserDAO.class);
+        String attrUserId = PropertyProvider.get("USER_ID");
+        String attrCountry = PropertyProvider.get("COUNTRY");
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start(attrUserId).is(userId).get();
+        Document pQueryDocument = new Document();
+        pQueryDocument.put(attrCountry, "$all");
+        UserDAO userInfo = mongoCollection.find(selectQuery).projection(pQueryDocument).first();
+        return userInfo;
+    }
 }

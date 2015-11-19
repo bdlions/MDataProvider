@@ -30,8 +30,8 @@ public class PhotoDAO implements Bson {
     private String image;
     private String description;
     private String categoryId;
-    private String createdOn;
-    private String modifiedOn;
+    private long createdOn;
+    private long modifiedOn;
     private Privacy privacy;
     private Privacy commentPrivacy;
     private List<Like> like;
@@ -86,19 +86,19 @@ public class PhotoDAO implements Bson {
         this.categoryId = categoryId;
     }
 
-    public String getCreatedOn() {
+    public long getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(String createdOn) {
+    public void setCreatedOn(long createdOn) {
         this.createdOn = createdOn;
     }
 
-    public String getModifiedOn() {
+    public long getModifiedOn() {
         return modifiedOn;
     }
 
-    public void setModifiedOn(String modifiedOn) {
+    public void setModifiedOn(long modifiedOn) {
         this.modifiedOn = modifiedOn;
     }
 
@@ -159,5 +159,4 @@ public class PhotoDAO implements Bson {
         return new BsonDocumentWrapper<PhotoDAO>(this, codecRegistry.get(PhotoDAO.class));
     }
 
-  
 }

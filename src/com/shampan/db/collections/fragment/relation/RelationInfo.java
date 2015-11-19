@@ -1,13 +1,15 @@
 package com.shampan.db.collections.fragment.relation;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
+//import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  *
  * @author nazmul hasan
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class RelationInfo {
 
     private String userId;
@@ -15,17 +17,25 @@ public class RelationInfo {
     private String lastName;
     private String isInitiated;
     private String relationTypeId;
-    private String createdOn;
+    private long createdOn;
 
     public RelationInfo() {
 
     }
 
-    public String getfirstName() {
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setfirstName(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
@@ -35,14 +45,6 @@ public class RelationInfo {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getIsInitiated() {
@@ -61,13 +63,14 @@ public class RelationInfo {
         this.relationTypeId = relationTypeId;
     }
 
-    public String getCreatedOn() {
+    public long getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(String createdOn) {
+    public void setCreatedOn(long createdOn) {
         this.createdOn = createdOn;
     }
+
 
     @Override
     public String toString() {
@@ -80,4 +83,5 @@ public class RelationInfo {
         }
         return json;
     }
+
 }

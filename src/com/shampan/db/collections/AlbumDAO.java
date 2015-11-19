@@ -31,8 +31,8 @@ public class AlbumDAO implements Bson {
     private String userId;
     private String title;
     private String description;
-    private String createdOn;
-    private String modifiedOn;
+    private long createdOn;
+    private long modifiedOn;
     private String photoId;
     private String defaultImg;
     private int totalImg;
@@ -91,21 +91,31 @@ public class AlbumDAO implements Bson {
         this.description = description;
     }
 
-    public String getCreatedOn() {
+    public String getId() {
+        return _id;
+    }
+
+    public void setId(String _id) {
+        this._id = _id;
+    }
+
+    public long getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(String createdOn) {
+    public void setCreatedOn(long createdOn) {
         this.createdOn = createdOn;
     }
 
-    public String getModifiedOn() {
+    public long getModifiedOn() {
         return modifiedOn;
     }
 
-    public void setModifiedOn(String modifiedOn) {
+    public void setModifiedOn(long modifiedOn) {
         this.modifiedOn = modifiedOn;
     }
+
+ 
 
     public String getDefaultImg() {
         return defaultImg;

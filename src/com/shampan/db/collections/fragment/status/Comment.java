@@ -18,6 +18,7 @@ public class Comment {
     private String commentId;
     private UserInfo userInfo;
     private List<Like> like;
+    private long createdOn ; 
 
     public String getDescription() {
         return description;
@@ -50,6 +51,16 @@ public class Comment {
     public void setLike(List<Like> like) {
         this.like = like;
     }
+
+    public long getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(long createdOn) {
+        this.createdOn = createdOn;
+    }
+
+   
 
     @Override
     public String toString() {

@@ -23,6 +23,7 @@ public class CountriesDAO implements Bson {
     private String code;
     private String title;
     private String order;
+    private String gmtOffset;
 
     public String get_id() {
         return _id;
@@ -67,6 +68,15 @@ public class CountriesDAO implements Bson {
     public void setOrder(String order) {
         this.order = order;
     }
+
+    public String getGmtOffset() {
+        return gmtOffset;
+    }
+
+    public void setGmtOffset(String gmtOffset) {
+        this.gmtOffset = gmtOffset;
+    }
+    
 
     @Override
     public <C> BsonDocument toBsonDocument(final Class<C> documentClass, final CodecRegistry codecRegistry) {

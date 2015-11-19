@@ -22,13 +22,13 @@ public class StatusService {
     }
 
     public static String getStatuses(String userId, int offset, int limit) {
-        return obj.getStatuses(userId, offset, limit).toString();
+        return obj.getStatuses(userId, offset, limit);
     }
     public static String getUserProfileStatuses(String userId,String mappingId, int offset, int limit) {
-        return obj.getUserProfileStatuses(userId, mappingId, offset, limit).toString();
+        return obj.getUserProfileStatuses(userId, mappingId, offset, limit);
     }
     public static String getStatusDetails(String userId,String statusId) {
-        return obj.getStatusDetails(userId,statusId).toString();
+        return obj.getStatusDetails(userId,statusId);
     }
 
     public static String deleteStatus(String statusId) {
@@ -47,7 +47,7 @@ public class StatusService {
 
     }
     public static String addStatusCommentLike(String statusId, String commentId, String likeInfo) {
-        String response = obj.addStatusCommentLike(statusId,statusId, likeInfo).toString();
+        String response = obj.addStatusCommentLike(statusId, commentId, likeInfo).toString();
         return response;
 
     }

@@ -67,6 +67,9 @@ public class PropertyProvider {
     public static String get(String key) {
         return get(key, null, null);
     }
+//    public static int getInt(String key) {
+//        return get(key, null, null);
+//    }
 
     /**
      *

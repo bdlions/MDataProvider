@@ -22,6 +22,7 @@ public class CountriesDAOBuilder {
     private String code;
     private String title;
     private String order;
+    private String gmtOffset;
 
     public CountriesDAOBuilder setId(String _id) {
         this._id = _id;
@@ -43,11 +44,17 @@ public class CountriesDAOBuilder {
         return this;
     }
 
+    public CountriesDAOBuilder setGmtOffset(String gmtOffset) {
+        this.gmtOffset = gmtOffset;
+        return this;
+    }
+
     public CountriesDAO build() {
         country.set_id(_id);
         country.setCode(code);
         country.setTitle(title);
         country.setOrder(order);
+        country.setGmtOffset(gmtOffset);
         return country;
     }
 

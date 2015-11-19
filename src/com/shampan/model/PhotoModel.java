@@ -253,8 +253,7 @@ public class PhotoModel {
         return resultEvent.toString();
     }
 
-    public String
-            editAlbumTotalImg(String albumId, int totalImgInfo) {
+    public String editAlbumTotalImg(String albumId, int totalImgInfo) {
         MongoCollection<AlbumDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.USERALBUMS.toString(), AlbumDAO.class
                 );
@@ -556,7 +555,7 @@ public class PhotoModel {
         sortQuery.put("photoId", 1);
         Document sQuery = new Document();
 
-        sQuery.put( "photoId", new Document("$gt", photoId));
+        sQuery.put("photoId", new Document("$gt", photoId));
         Document pQuery = new Document();
 
         pQuery.put(
@@ -580,8 +579,7 @@ public class PhotoModel {
      * @param photoInfoList, photo list
      * @author created by Rashida on 21th September 2015
      */
-    public String
-            addPhotos(String albumId, String photoInfoList) {
+    public String addPhotos(String albumId, String photoInfoList) {
         MongoCollection<PhotoDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), PhotoDAO.class
                 );
@@ -590,8 +588,7 @@ public class PhotoModel {
         String defaultImg = "";
         String photoId = "";
         int totalImg = photoArray.length();
-        if (photoArray
-                != null) {
+        if (photoArray != null) {
             for (int i = 0; i < totalImg; i++) {
                 PhotoDAO photoInfoObj1 = new PhotoDAOBuilder().build(photoArray.get(0).toString());
                 PhotoDAO photoInfoObj = new PhotoDAOBuilder().build(photoArray.get(i).toString());

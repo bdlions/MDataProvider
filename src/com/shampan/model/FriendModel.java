@@ -108,7 +108,7 @@ public class FriendModel {
         fromRelation.setUserId(userId);
         fromRelation.setIsInitiated(PropertyProvider.get("RequestSender"));
         fromRelation.setRelationTypeId(statusTypeId);
-        fromRelation.setfirstName(fromUserInfo.getFirstName());
+//        fromRelation.setfirstName(fromUserInfo.getFirstName());
         fromRelation.setLastName(fromUserInfo.getLastName());
 
         UserDAO toUserInfo = friendObj.getUserInfo(friendId);
@@ -116,7 +116,7 @@ public class FriendModel {
         toRelation.setUserId(friendId);
         toRelation.setIsInitiated(PropertyProvider.get("RequestReceiver"));
         toRelation.setRelationTypeId(statusTypeId);
-        toRelation.setfirstName(toUserInfo.getFirstName());
+//        toRelation.setfirstName(toUserInfo.getFirstName());
         toRelation.setLastName(toUserInfo.getLastName());
         BasicDBObject fromSelectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
         BasicDBObject toSelectQuery = (BasicDBObject) QueryBuilder.start("userId").is(friendId).get();
@@ -298,7 +298,7 @@ public class FriendModel {
         fromRelation.setUserId(userId);
         fromRelation.setIsInitiated(PropertyProvider.get("FriendRequestSender"));
         fromRelation.setRelationTypeId(PropertyProvider.get("BlockedTypeId"));
-        fromRelation.setfirstName(fromUserInfo.getFirstName());
+//        fromRelation.setfirstName(fromUserInfo.getFirstName());
         fromRelation.setLastName(fromUserInfo.getLastName());
 
         UserDAO toUserInfo = friendObj.getUserInfo(friendId);
@@ -306,7 +306,7 @@ public class FriendModel {
         toRelation.setUserId(friendId);
         toRelation.setIsInitiated(PropertyProvider.get("FriendRequestReceiver"));
         toRelation.setRelationTypeId(PropertyProvider.get("BlockedTypeId"));
-        toRelation.setfirstName(toUserInfo.getFirstName());
+//        toRelation.setfirstName(toUserInfo.getFirstName());
         toRelation.setLastName(toUserInfo.getLastName());
         List<RelationInfo> toRelationsList = new ArrayList<RelationInfo>();
         toRelationsList.add(toRelation);

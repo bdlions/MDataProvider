@@ -32,8 +32,8 @@ public class PhotoDAOBuilder {
     private String image;
     private String description;
     private String categoryId;
-    private String createdOn;
-    private String modifiedOn;
+    private long createdOn;
+    private long modifiedOn;
     private Privacy privacy;
     private Privacy commentPrivacy;
     private List<Like> like;
@@ -70,14 +70,12 @@ public class PhotoDAOBuilder {
         return this;
     }
 
-    public PhotoDAOBuilder setCreatedOn(String createdOn) {
+    public void setCreatedOn(long createdOn) {
         this.createdOn = createdOn;
-        return this;
     }
 
-    public PhotoDAOBuilder setModifiedOn(String modifiedOn) {
+    public void setModifiedOn(long modifiedOn) {
         this.modifiedOn = modifiedOn;
-        return this;
     }
 
     public PhotoDAOBuilder setPrivacy(Privacy privacy) {
