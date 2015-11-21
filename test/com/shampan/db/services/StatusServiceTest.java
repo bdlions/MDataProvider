@@ -41,7 +41,7 @@ public class StatusServiceTest {
     String userId = "2Q52DbDnqKEiSCn";
     String mappingId = "mqQ06eko9TqYYul";
     String friendId = "9nSEiMgzieo1O4K";
-    String statusId = "Xs2Z3qLtNQmY1Iq";
+    String statusId = "U1gBHO0O5XHzbGc";
 
 //    @Test
     public void addStatus() {
@@ -142,8 +142,8 @@ public class StatusServiceTest {
 
 //    @Test
     public void addStatusCommentLike() {
-        String statusId = "Ztrm3L1XXoIg7sJ";
-        String commentId = "8xzNSFN7nuLqXty";
+        String statusId = "U1gBHO0O5XHzbGc";
+        String commentId = "ChGr7xzobTjOhs7";
         UserInfo rUserInfo = new UserInfo();
         rUserInfo.setFirstName("Nazmul");
         rUserInfo.setLastName("Hasan");
@@ -192,9 +192,8 @@ public class StatusServiceTest {
 
     }
 //    @Test
-
     public void getStatusComments() {
-        System.out.println(statusObject.getStatusComments(statusId));
+        System.out.println(statusObject.getStatusComments(userId, statusId));
 
     }
 

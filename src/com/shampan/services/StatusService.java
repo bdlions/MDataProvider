@@ -73,8 +73,8 @@ public class StatusService {
         return response;
 
     }
-    public static String getStatusComments(String statusId) {
-        String response = obj.getStatusComments(statusId).toString();
+    public static String getStatusComments(String userId, String statusId) {
+        String response = obj.getStatusComments(userId, statusId).toString();
         return response;
 
     }
