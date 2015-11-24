@@ -22,20 +22,25 @@ import org.junit.Test;
 public class NotificationServiceTest {
 
     NotificationModel notificationModel = new NotificationModel();
-    String userId = "iSj2GNOqeoka2TH";
+    String userId = "2Q52DbDnqKEiSCn";
     String friendId = "WPkbWVADuhT8Vmj";
 //    String friendId = "9nSEiMgzieo1O4K";
     String referenceId = "1";
 
 //    @Test
     public void addFriendNotification() {
-        notificationModel.addFriendNotification(userId, friendId);
+        notificationModel.addFriendPendingNotification(userId, friendId);
+
+    }
+//    @Test
+    public void addFriendAcceptNotification() {
+        notificationModel.addFriendAcceptNotification(userId, friendId);
 
     }
 //    @Test
 
     public void getFriendNotifications() {
-        notificationModel.getFriendNotifications(userId);
+        System.out.println( notificationModel.getFriendNotifications(userId));
 
     }
 
@@ -62,22 +67,22 @@ public class NotificationServiceTest {
 //    @Test
 
     public void getNotificationCounter() {
-        System.out.println(notificationModel.getNotificationCounter(userId));
+        System.out.println(notificationModel.getNotificationCounter("u2"));
 
     }
 
 //    @Test
     public void addGeneralNotificationStatusLike() {
         UserInfo userInfo = new UserInfo();
-        userInfo.setUserId("u2");
+        userInfo.setUserId("u1");
         userInfo.setFirstName("Rashida");
         userInfo.setLastName("Sultana");
 
-        notificationModel.addGeneralNotificationStatusLike("u1", referenceId, userInfo.toString());
+        notificationModel.addGeneralNotificationStatusLike("u2", referenceId, userInfo.toString());
 
     }
 
-    @Test
+//    @Test
     public void addGeneralNotificationStatusComment() {
         UserInfo userInfo = new UserInfo();
         userInfo.setUserId("u1");
@@ -90,10 +95,11 @@ public class NotificationServiceTest {
         notificationModel.addGeneralNotificationStatusComment(refuserInfo.toString(), referenceId, userInfo.toString());
 
     }
-//    @Test
+    
+    @Test
 
     public void updateStatusFriendNotifications() {
-        notificationModel.updateStatusFriendNotifications(friendId);
+        notificationModel.updateStatusFriendNotifications(userId);
     }
 //    @Test
 

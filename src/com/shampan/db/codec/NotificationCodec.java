@@ -36,7 +36,7 @@ public class NotificationCodec implements CollectibleCodec<NotificationDAO>{
         ObjectMapper mapper = new ObjectMapper();
         NotificationDAO Notification = new NotificationDAO();
         try {
-            Notification = mapper.readValue(document.toJson().toString(), NotificationDAO.class);
+            Notification = mapper.readValue(document.toJson(), NotificationDAO.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

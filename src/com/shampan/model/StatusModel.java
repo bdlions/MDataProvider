@@ -174,13 +174,16 @@ public class StatusModel {
      * @author created by Rashida on 9th Nov
      */
     public List<JSONObject> getStatusInfo(String userId, MongoCursor<StatusDAO> statusList) {
-        int commentLimit = 2;
+        
+        int commentLimit = Integer.parseInt(PropertyProvider.get("COMMENT_LIMIT"));
         List<JSONObject> statusInfoList = new ArrayList<JSONObject>();
 
         while (statusList.hasNext()) {
             JSONObject statusJson = new JSONObject();
             StatusDAO status = (StatusDAO) statusList.next();
             statusJson.put("statusId", status.getStatusId());
+            statusJson.put("userId", status.getUserId());
+            statusJson.put("mappingId", status.getMappingId());
             statusJson.put("userInfo", status.getUserInfo());
             statusJson.put("description", status.getDescription());
             statusJson.put("statusTypeId", status.getStatusTypeId());
@@ -522,6 +525,66 @@ public class StatusModel {
     public String updateStatusPrivacy(String statusId, String privacyInfo) {
 
         return "Successful";
+    }
+
+    public ResultEvent updateStatusComment(String statusId, String commentId, String description) {
+        try {
+            MongoCollection<StatusDAO> mongoCollection
+                    = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
+            String attrStatusId = PropertyProvider.get("STATUS_ID");
+            String attrCommentId = PropertyProvider.get("COMMENT_ID");
+            Document selectDocument = new Document();
+            selectDocument.put(attrStatusId, statusId);
+            selectDocument.put("comment." + attrCommentId, commentId);
+            Document updatedDocument = new Document();
+            updatedDocument.put("comment.$.description", description);
+            mongoCollection.findOneAndUpdate(selectDocument, new Document("$set", updatedDocument));
+            this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
+        } catch (Exception ex) {
+            this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
+        }
+        return this.resultEvent;
+    }
+
+    public ResultEvent deleteStatusComment(String statusId, String commentId) {
+        try {
+            MongoCollection<StatusDAO> mongoCollection
+                    = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
+            String attrStatusId = PropertyProvider.get("STATUS_ID");
+            String attrCommentId = PropertyProvider.get("COMMENT_ID");
+            Document selectDocument = new Document();
+            selectDocument.put(attrStatusId, statusId);
+            selectDocument.put("comment." + attrCommentId, commentId);
+            Document removeDocument = new Document();
+            removeDocument.put("commentId", commentId);
+            mongoCollection.findOneAndUpdate(selectDocument, new Document("$pull", new Document("comment", removeDocument)));
+            this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
+        } catch (Exception ex) {
+            this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
+        }
+        return this.resultEvent;
+    }
+
+    /**
+     * Status like list
+     *
+     * @param statusId, status id
+     *
+     */
+    public List<Like> getStatusCommentLikeList(String statusId, String commentId) {
+        MongoCollection<StatusDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
+        String attrStatusId = PropertyProvider.get("STATUS_ID");
+        String attCommentId = PropertyProvider.get("COMMENT_ID");
+        String attrLike = PropertyProvider.get("LIKE");
+        Document selectDocument = new Document();
+        selectDocument.put("statusId", statusId);
+        selectDocument.put("comment.commentId", commentId);
+        Document pQuery = new Document();
+        pQuery.put("comment.$.like", "$all");
+        StatusDAO albumLikeList = mongoCollection.find(selectDocument).projection(pQuery).first();
+        List<Like> likeList = albumLikeList.getComment().get(0).getLike();
+        return likeList;
     }
 
 }

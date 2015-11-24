@@ -35,8 +35,8 @@ public class StatusDAOBuilder {
     private String mappingId;
     private String statusTypeId;
     private String description;
-    private long createdOn;
-    private long modifiedOn;
+    private int createdOn;
+    private int modifiedOn;
     private UserInfo userInfo;
     private List<Image> images;
     private ReferenceInfo referenceInfo;
@@ -85,12 +85,12 @@ public class StatusDAOBuilder {
         return this;
     }
 
-    public StatusDAOBuilder setCreatedOn(long createdOn) {
+    public StatusDAOBuilder setCreatedOn(int createdOn) {
         this.createdOn = createdOn;
         return this;
     }
 
-    public StatusDAOBuilder setModifiedOn(long modifiedOn) {
+    public StatusDAOBuilder setModifiedOn(int modifiedOn) {
         this.modifiedOn = modifiedOn;
         return this;
     }

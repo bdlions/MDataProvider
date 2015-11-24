@@ -1538,7 +1538,7 @@ public class LandingPageServiceTest {
 
     }
 
-//    @Test
+    @Test
     public void photoCategories() {
         MongoCollection<PhotoCategoryDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.PHOTOCATEGORIES.toString(), PhotoCategoryDAO.class);
@@ -1767,7 +1767,7 @@ public class LandingPageServiceTest {
         mongoCollection.insertMany(users);
     }
 
-    @Test
+//    @Test
     public void storeTestCountries() {
         DBConnection.getInstance().getConnection();
         MongoCollection<CountriesDAO> mongoCollection

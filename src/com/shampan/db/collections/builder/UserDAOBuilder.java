@@ -26,7 +26,7 @@ public class UserDAOBuilder {
     private String password;
     private String email;
     private String ipAddress;
-    private long createdOn;
+    private int createdOn;
     private String last_login;
     private String accountStatusId;
     private Country country;
@@ -72,7 +72,7 @@ public class UserDAOBuilder {
         return this;
     }
 
-    public void setCreatedOn(long createdOn) {
+    public void setCreatedOn(int createdOn) {
         this.createdOn = createdOn;
     }
 

@@ -65,7 +65,7 @@ public class RelationModel {
     public ResultEvent addFriend(String fromUserId, String toUserId) {
         //after adding a friend newly added user will be under pending list
         createRelation(fromUserId, toUserId, PropertyProvider.get("RELATION_TYPE_PENDING_ID"));
-        notificationModel.addFriendNotification(fromUserId, toUserId);
+        notificationModel.addFriendPendingNotification(fromUserId, toUserId);
         return this.resultEvent;
     }
 
@@ -102,6 +102,7 @@ public class RelationModel {
      */
     public ResultEvent approveFriend(String fromUserId, String toUserId) {
         updateRelation(fromUserId, toUserId, PropertyProvider.get("RELATION_TYPE_FRIEND_ID"));
+        notificationModel.addFriendAcceptNotification(fromUserId, toUserId);
         notificationModel.deleteFriendNotification(fromUserId, toUserId);
         return this.resultEvent;
     }

@@ -14,6 +14,15 @@ public class FriendNotification {
     private String statusId;
     private UserInfo userInfo;
     private long createdOn;
+    private String typeId ;
+
+    public String getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(String typeId) {
+        this.typeId = typeId;
+    }
 
     public String getStatusId() {
         return statusId;

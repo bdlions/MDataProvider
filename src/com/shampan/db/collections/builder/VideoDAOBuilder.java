@@ -32,7 +32,7 @@ public class VideoDAOBuilder {
     private String categoryId;
     private String url;
     private String imageUrl;
-    private long createdOn;
+    private int createdOn;
     private UserInfo UserInfo;
     private Privacy privacy;
     private Privacy commentPrivacy;
@@ -75,7 +75,7 @@ public class VideoDAOBuilder {
         return this;
     }
 
-    public void setCreatedOn(long createdOn) {
+    public void setCreatedOn(int createdOn) {
         this.createdOn = createdOn;
     }
 

@@ -5,6 +5,7 @@
  */
 package com.shampan.db.collections.fragment.status;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  *
  * @author Sampan-IT
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Like {
 
     private UserInfo userInfo;

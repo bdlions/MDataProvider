@@ -32,7 +32,7 @@ public class VideoDAO implements Bson {
     private String categoryId;
     private String url;
     private String imageUrl;
-    private long createdOn;
+    private int createdOn;
     private UserInfo UserInfo;
     private Privacy privacy;
     private Privacy commentPrivacy;
@@ -88,11 +88,11 @@ public class VideoDAO implements Bson {
         this.url = url;
     }
 
-    public long getCreatedOn() {
+    public int getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(long createdOn) {
+    public void setCreatedOn(int createdOn) {
         this.createdOn = createdOn;
     }
 

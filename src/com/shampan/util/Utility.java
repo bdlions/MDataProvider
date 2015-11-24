@@ -46,15 +46,15 @@ public class Utility {
      *
      * @return string, system time in seconds
      */
-    public long getCurrentTime(){
+    public int getCurrentTime(){
         long unixTime = System.currentTimeMillis();
         Date date = new Date(unixTime);
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
         sDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
         String currentDate = sDateFormat.format(date);
-        long gmt0TimeStamp = 0;
+        int gmt0TimeStamp = (int) (unixTime / 1000L);
         try {
-            gmt0TimeStamp = sDateFormat.parse(currentDate).getTime() / 1000L;
+            gmt0TimeStamp = (int)(sDateFormat.parse(currentDate).getTime() / 1000L);
         } catch (Exception ex) {
             this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
         }

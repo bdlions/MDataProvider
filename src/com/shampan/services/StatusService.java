@@ -78,4 +78,20 @@ public class StatusService {
         return response;
 
     }
+    public static String updateStatusComment(String statusId,String commentId, String description) {
+        String response = obj.updateStatusComment(statusId, commentId, description).toString();
+        return response;
+
+    }
+    
+    public static String deleteStatusComment(String statusId,String commentId) {
+        String response = obj.deleteStatusComment(statusId, commentId ).toString();
+        return response;
+
+    }
+    public static String getStatusCommentLikeList(String statusId,String commentId) {
+        String response = obj.getStatusCommentLikeList(statusId, commentId ).toString();
+        return response;
+
+    }
 }

@@ -26,7 +26,7 @@ public class UserDAO implements Bson {
     private String password;
     private String email;
     private String ipAddress;
-    private long createdOn;
+    private int createdOn;
     private String last_login;
     private String accountStatusId;
     private Country country;
@@ -96,11 +96,11 @@ public class UserDAO implements Bson {
         this.ipAddress = ipAddress;
     }
 
-    public long getCreatedOn() {
+    public int getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(long createdOn) {
+    public void setCreatedOn(int createdOn) {
         this.createdOn = createdOn;
     }
 

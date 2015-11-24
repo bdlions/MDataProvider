@@ -41,7 +41,8 @@ public class StatusServiceTest {
     String userId = "2Q52DbDnqKEiSCn";
     String mappingId = "mqQ06eko9TqYYul";
     String friendId = "9nSEiMgzieo1O4K";
-    String statusId = "U1gBHO0O5XHzbGc";
+    String statusId = "IQoc6iX3ldy7Eq9";
+    String commentId = "mz1BYKnlTMmjAL9";
 
 //    @Test
     public void addStatus() {
@@ -173,6 +174,13 @@ public class StatusServiceTest {
         System.out.println(statusObject.updateStatus("2", "update status...."));
 
     }
+    
+//    @Test
+
+    public void updateStatusComment() {
+        System.out.println(statusObject.updateStatusComment("3iUkjdSgvff8YS8","0Q6rP5E90A4IuV6", "update status comment ...."));
+
+    }
 
 //    @Test
     public void deleteStatus() {
@@ -192,6 +200,11 @@ public class StatusServiceTest {
 
     }
 //    @Test
+    public void deleteStatusComment() {
+        System.out.println(statusObject.deleteStatusComment(statusId, commentId));
+
+    }
+//    @Test
     public void getStatusComments() {
         System.out.println(statusObject.getStatusComments(userId, statusId));
 
@@ -202,6 +215,13 @@ public class StatusServiceTest {
         int offset = 0;
         int limit = 5;
         System.out.println(statusObject.getStatuses("2Q52DbDnqKEiSCn", offset, limit));
+
+    }
+    @Test
+    public void getStatusCommentLikeList() {
+        int offset = 0;
+        int limit = 5;
+        System.out.println(statusObject.getStatusCommentLikeList(statusId, commentId));
 
     }
 //    @Test

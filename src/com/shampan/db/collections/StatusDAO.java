@@ -34,8 +34,8 @@ public class StatusDAO implements Bson {
     private String mappingId;
     private String statusTypeId;
     private String description;
-    private long createdOn;
-    private long modifiedOn;
+    private int createdOn;
+    private int modifiedOn;
     private UserInfo userInfo;
     private List<Image> images;
     private ReferenceInfo referenceInfo;
@@ -101,19 +101,19 @@ public class StatusDAO implements Bson {
         this.description = description;
     }
 
-    public Long getCreatedOn() {
+    public int getCreatedOn() {
         return createdOn;
     }
 
-    public void setCreatedOn(Long createdOn) {
+    public void setCreatedOn(int createdOn) {
         this.createdOn = createdOn;
     }
 
-    public Long getModifiedOn() {
+    public int getModifiedOn() {
         return modifiedOn;
     }
 
-    public void setModifiedOn(Long modifiedOn) {
+    public void setModifiedOn(int modifiedOn) {
         this.modifiedOn = modifiedOn;
     }
 
