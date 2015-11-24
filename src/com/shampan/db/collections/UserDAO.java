@@ -7,6 +7,7 @@ import org.bson.conversions.Bson;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.shampan.db.collections.fragment.profile.Gender;
 import com.shampan.db.collections.fragment.user.Country;
 import com.shampan.db.collections.fragment.user.Group;
 import java.util.List;
@@ -30,6 +31,7 @@ public class UserDAO implements Bson {
     private String last_login;
     private String accountStatusId;
     private Country country;
+    private Gender gender;
     private List<Group> groups;
 
     public String get_id() {
@@ -47,7 +49,7 @@ public class UserDAO implements Bson {
     public void setUserId(String userId) {
         this.userId = userId;
     }
-    
+
     public String getFirstName() {
         return firstName;
     }
@@ -134,6 +136,14 @@ public class UserDAO implements Bson {
 
     public void setGroups(List<Group> groups) {
         this.groups = groups;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
     
     

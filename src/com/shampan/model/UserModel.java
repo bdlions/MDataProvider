@@ -120,4 +120,19 @@ public class UserModel {
         UserDAO userInfo = mongoCollection.find(selectQuery).projection(pQueryDocument).first();
         return userInfo;
     }
+
+    public String getUserGenderInfo(String userId) {
+        MongoCollection<UserDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERS.toString(), UserDAO.class);
+        String attrUserId = PropertyProvider.get("USER_ID");
+        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start(attrUserId).is(userId).get();
+        Document pQueryDocument = new Document();
+        pQueryDocument.put("gender", "$all");
+        UserDAO userInfo = mongoCollection.find(selectQuery).projection(pQueryDocument).first();
+        String userGenderId = "";
+        if(userInfo.getGender() != null){
+         userGenderId = userInfo.getGender().getGenderId();
+        }
+        return userGenderId;
+    }
 }

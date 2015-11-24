@@ -121,6 +121,7 @@ public class StatusModel {
         JSONObject userStatusInfo = new JSONObject();
         userStatusInfo.put("statusInfoList", statusInfoList);
         userStatusInfo.put("userCurrentTime", utility.getCurrentTime());
+        userStatusInfo.put("userGenderId", userModel.getUserGenderInfo(userId));
         return userStatusInfo.toString();
     }
 
@@ -142,6 +143,7 @@ public class StatusModel {
         JSONObject userStatusInfo = new JSONObject();
         userStatusInfo.put("statusInfoList", statusInfoList);
         userStatusInfo.put("userCurrentTime", utility.getCurrentTime());
+        userStatusInfo.put("userGenderId", userModel.getUserGenderInfo(mappingId));
         return userStatusInfo.toString();
     }
 
@@ -163,6 +165,7 @@ public class StatusModel {
         JSONObject userStatusInfo = new JSONObject();
         userStatusInfo.put("statusInfoList", statusInfoList);
         userStatusInfo.put("userCurrentTime", utility.getCurrentTime());
+        userStatusInfo.put("userGenderId", userModel.getUserGenderInfo(userId));
         return userStatusInfo.toString();
     }
 
@@ -174,7 +177,7 @@ public class StatusModel {
      * @author created by Rashida on 9th Nov
      */
     public List<JSONObject> getStatusInfo(String userId, MongoCursor<StatusDAO> statusList) {
-        
+
         int commentLimit = Integer.parseInt(PropertyProvider.get("COMMENT_LIMIT"));
         List<JSONObject> statusInfoList = new ArrayList<JSONObject>();
 
@@ -220,6 +223,7 @@ public class StatusModel {
                         commentJson.put("description", comment.getDescription());
                         commentJson.put("createdOn", comment.getCreatedOn());
                         commentJson.put("userInfo", comment.getUserInfo());
+                        commentJson.put("userGenderId", userModel.getUserGenderInfo(comment.getUserInfo().getUserId()));
                         if (comment.getLike() != null) {
                             int commentLikeSize = comment.getLike().size();
                             if (commentLikeSize > 0) {

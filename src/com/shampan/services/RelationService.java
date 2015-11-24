@@ -3,122 +3,128 @@ package com.shampan.services;
 import com.sampan.response.ResultEvent;
 import com.shampan.db.collections.fragment.relation.RelationInfo;
 import com.shampan.model.RelationModel;
+import com.shampan.model.UserModel;
 import com.shampan.util.PropertyProvider;
 import java.util.ArrayList;
 import java.util.List;
+import org.json.JSONObject;
 
 /**
  *
  * @author nazmul hasan
  */
 public class RelationService {
+
     private static RelationModel relationModel = new RelationModel();
-    public RelationService()
-    {
-        
+    private static UserModel userModel = new UserModel();
+
+    public RelationService() {
+
     }
+
     /**
      * This method will add a friend relation
+     *
      * @param fromUserId, from user id of a friend relation
      * @param toUserId, to user id of a friend relation
      * @return ResultEvent, result of the operation
      */
-    public static String addFriend(String fromUserId, String toUserId)
-    {
+    public static String addFriend(String fromUserId, String toUserId) {
         return relationModel.addFriend(fromUserId, toUserId).toString();
     }
+
     /**
      * This method will add a block relation
+     *
      * @param fromUserId, from user id of a block relation
      * @param toUserId, to user id of a block relation
      * @return ResultEvent, result of the operation
      */
-    public static String blockNonFriend(String fromUserId, String toUserId)
-    {
+    public static String blockNonFriend(String fromUserId, String toUserId) {
         return relationModel.blockNonFriend(fromUserId, toUserId).toString();
     }
+
     /**
      * This method will update block relation
+     *
      * @param fromUserId, from user id of a block relation
      * @param toUserId, to user id of a block relation
      * @return ResultEvent, result of the operation
      */
-    public static String blockFriend(String fromUserId, String toUserId)
-    {
+    public static String blockFriend(String fromUserId, String toUserId) {
         return relationModel.blockFriend(fromUserId, toUserId).toString();
     }
+
     /**
      * This method will approve a friend relation
+     *
      * @param fromUserId, from user id of a friend relation
      * @param toUserId, to user id of a friend relation
      * @return ResultEvent, result of the operation
      */
-    public static String approveFriend(String fromUserId, String toUserId)
-    {
+    public static String approveFriend(String fromUserId, String toUserId) {
         return relationModel.approveFriend(fromUserId, toUserId).toString();
     }
+
     /**
      * This method will remove friend relation
+     *
      * @param fromUserId, from user id of a friend relation
      * @param toUserId, to user id of a friend relation
      * @return ResultEvent, result of the operation
      */
-    public static String removeFriendRequest(String fromUserId, String toUserId)
-    {
+    public static String removeFriendRequest(String fromUserId, String toUserId) {
         return relationModel.removeFriendRequest(fromUserId, toUserId).toString();
     }
+
     /**
      * This method will remove block relation
+     *
      * @param fromUserId, from user id of a block relation
      * @param toUserId, to user id of a block relation
      * @return ResultEvent, result of the operation
      */
-    public static String unblockFriend(String fromUserId, String toUserId)
-    {
+    public static String unblockFriend(String fromUserId, String toUserId) {
         return relationModel.unblockFriend(fromUserId, toUserId).toString();
     }
+
     /**
      * This method will remove friend relation
+     *
      * @param fromUserId, from user id of a friend relation
      * @param toUserId, to user id of a friend relation
      * @return ResultEvent, result of the operation
      */
-    public static String removeFriend(String fromUserId, String toUserId)
-    {
+    public static String removeFriend(String fromUserId, String toUserId) {
         return relationModel.removeFriend(fromUserId, toUserId).toString();
     }
+
     /**
      * This method will return relation list of a user
+     *
      * @param userId, user id
      * @param relationTypeId, type of relation
      * @param stringOffset, offset
      * @param stringLimit, limit
      * @return List, list of relation info
      */
-    public static String getRelationList(String userId, String relationTypeId, String stringOffset, String stringLimit)
-    {
+    public static String getRelationList(String userId, String relationTypeId, String stringOffset, String stringLimit) {
         PropertyProvider.add("com.shampan.properties/relations");
         PropertyProvider.add("com.shampan.properties/response");
         ResultEvent resultEvent = new ResultEvent();
         List<RelationInfo> relationList = new ArrayList<>();
         int offset = 0;
         int limit = 0;
-        try
-        {
+        try {
             offset = Integer.parseInt(stringOffset);
-        }
-        catch(Exception ex)
-        {
+        } catch (Exception ex) {
             resultEvent.setResponseCode(PropertyProvider.get("ERROR_RELATION_INVALID_OFFSET"));
             resultEvent.setResult(relationList);
             return resultEvent.toString();
         }
-        try
-        {
+        try {
             limit = Integer.parseInt(stringLimit);
-        }
-        catch(Exception ex)
-        {
+        } catch (Exception ex) {
             resultEvent.setResponseCode(PropertyProvider.get("ERROR_RELATION_INVALID_LIMIT"));
             resultEvent.setResult(relationList);
             return resultEvent.toString();
@@ -128,20 +134,27 @@ public class RelationService {
         resultEvent.setResult(relationList);
         return resultEvent.toString();
     }
-    
+
     /**
      * This method will return relation info of one user to another user
+     *
      * @param fromUserId, from user id of a relation
      * @param toUserId, to user id of a relation
      * @return String, relation info
      */
-    public static String getRelationInfo(String fromUserId, String toUserId)
-    {
-        return relationModel.getRelationInfo(fromUserId, toUserId).toString();
+    public static String getRelationInfo(String fromUserId, String toUserId) {
+        JSONObject relationInfo = new JSONObject();
+        relationInfo.put("relationInfo", relationModel.getRelationInfo(fromUserId, toUserId).toString());
+        relationInfo.put("userGenderId", userModel.getUserGenderInfo(toUserId));
+        return relationInfo.toString();
     }
     
-    public static void main(String args[])
-    {
+    public static String getUserGenderInfo(String userId) {
+        return userModel.getUserGenderInfo(userId);
+    }
+    
+
+    public static void main(String args[]) {
 
     }
 }

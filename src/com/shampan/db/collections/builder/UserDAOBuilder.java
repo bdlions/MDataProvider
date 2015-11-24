@@ -2,6 +2,7 @@ package com.shampan.db.collections.builder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shampan.db.collections.UserDAO;
+import com.shampan.db.collections.fragment.profile.Gender;
 import com.shampan.db.collections.fragment.user.Country;
 import com.shampan.db.collections.fragment.user.Group;
 import java.util.List;
@@ -30,6 +31,7 @@ public class UserDAOBuilder {
     private String last_login;
     private String accountStatusId;
     private Country country;
+    private Gender gender;
     private List<Group> groups;
 
     public UserDAOBuilder setUserId(String userId) {
@@ -91,6 +93,11 @@ public class UserDAOBuilder {
         return this;
     }
 
+    public UserDAOBuilder setGender(Gender gender) {
+        this.gender = gender;
+        return this;
+    }
+
     public UserDAO build() {
         user.set_id(id);
         user.setUserId(userId);
@@ -102,6 +109,7 @@ public class UserDAOBuilder {
         user.setCreatedOn(createdOn);
         user.setEmail(email);
         user.setGroups(groups);
+        user.setGender(gender);
         return user;
     }
 

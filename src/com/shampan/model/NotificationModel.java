@@ -103,12 +103,13 @@ public class NotificationModel {
             }
         }
         JSONObject resultedNotifications = new JSONObject();
-        JSONObject counter = new JSONObject();
-        counter.put("friend", friendCounter);
-        counter.put("message", "5");
-        counter.put("general", generalCounter);
-        counter.put("userCurrentTimeStamp", utility.getCurrentTime());
-        resultedNotifications.put("notificationInfo", counter.toString());
+        JSONObject userInitiation = new JSONObject();
+        userInitiation.put("friend", friendCounter);
+        userInitiation.put("message", "5");
+        userInitiation.put("general", generalCounter);
+        userInitiation.put("userCurrentTimeStamp", utility.getCurrentTime());
+        userInitiation.put("genderId", userModel.getUserGenderInfo(userId));
+        resultedNotifications.put("userInitiationInfo", userInitiation.toString());
 
         return resultedNotifications.toString();
     }
