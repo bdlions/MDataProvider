@@ -27,7 +27,7 @@ import org.junit.Test;
 public class PhotoServicesTest {
 
     PhotoModel photoObject = new PhotoModel();
-    String userId = "eQeOwhE7hrUkCyP";
+    String userId = "CnlZ8aFiLEh3JH8";
     String albumId = "qAuUBxk4ZqjDiAS";
     String photoId = "65sKxJtOFfExN65";
     String categoryId = "eQeOwhE7hrUkCyP";
@@ -48,7 +48,7 @@ public class PhotoServicesTest {
 
     }
 
-    //    @Test
+        @Test
     public void getAlbums() {
         System.out.println(photoObject.getAlbums(userId));
 
@@ -95,7 +95,7 @@ public class PhotoServicesTest {
                 .setTotalImg(6)
                 .setUserInfo(userInfo)
                 .build();
-        System.out.println(photoObject.editAlbum(albumId, userAlbum.toString()));
+        System.out.println(photoObject.editAlbum(userId, albumId, userAlbum.toString()));
 
     }
     
@@ -103,7 +103,7 @@ public class PhotoServicesTest {
 //    @Test
     public void editAlbumTotalImg() {
         int totalImgInfo = 100 ;
-        System.out.println(photoObject.editAlbumTotalImg(albumId,totalImgInfo));
+        System.out.println(photoObject.editAlbumTotalImg(userId, albumId, totalImgInfo));
 
     }
 //    @Test
@@ -169,7 +169,7 @@ public class PhotoServicesTest {
         List<PhotoDAO> photoList = new ArrayList<PhotoDAO>();
         photoList.add(userPhoto1);
         photoList.add(userPhoto2);
-        photoObject.addPhotos("zVrKQGJaL24c1mW",photoList.toString());
+        photoObject.addPhotos(userId, albumId, photoList.toString());
 
     }
 
@@ -202,7 +202,7 @@ public class PhotoServicesTest {
 
 //    @Test
     public void deletePhoto() {
-        System.out.println(photoObject.deletePhoto(albumId,photoId));
+        System.out.println(photoObject.deletePhoto(userId, albumId, photoId));
 
     }
 

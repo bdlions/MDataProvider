@@ -41,8 +41,8 @@ public class PhotoService {
         String response = photoObject.getAlbum(userId,albumId);
         return response;
     }
-    public static String getAlbumInfo(String userId,String albumId) {
-        String response = photoObject.getAlbumInfo(userId,albumId);
+    public static String getAlbumInfo(String userId, String albumId) {
+        String response = photoObject.getAlbumInfo(userId, albumId).toString();
         return response;
     }
 
@@ -55,8 +55,8 @@ public class PhotoService {
         return response;
     }
 
-    public static String editAlbum(String albumId, String albumInfo) {
-        String response = photoObject.editAlbum(albumId, albumInfo);
+    public static String editAlbum(String userId, String albumId, String albumInfo) {
+        String response = photoObject.editAlbum(userId, albumId, albumInfo);
         return response;
     }
 
@@ -115,8 +115,8 @@ public class PhotoService {
         String response = photoObject.getPhotoLikeList(photoId);
         return response;
     }
-    public static String addPhotos(String albumId,String photoList) {
-        String response = photoObject.addPhotos(albumId,photoList);
+    public static String addPhotos(String userId, String albumId, String photoList) {
+        String response = photoObject.addPhotos(userId, albumId, photoList);
         return response;
     }
 
@@ -129,8 +129,8 @@ public class PhotoService {
         return response;
     }
 
-    public static String deletePhoto(String albumId,String photoId) {
-        String response = photoObject.deletePhoto(albumId,photoId);
+    public static String deletePhoto(String userId, String albumId,String photoId) {
+        String response = photoObject.deletePhoto(userId, albumId,photoId);
         return response;
     }
 
