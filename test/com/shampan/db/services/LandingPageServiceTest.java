@@ -27,7 +27,7 @@ public class LandingPageServiceTest {
 //    public static void main(String[] args) {
 //        LandingPageServiceTest.storeCountries();
 //    }
-//    @Test
+    @Test
     public void storeReligions() {
         DBConnection.getInstance().getConnection();
         MongoCollection<ReligionsDAO> mongoCollection
@@ -1538,7 +1538,7 @@ public class LandingPageServiceTest {
 
     }
 
-    @Test
+//    @Test
     public void photoCategories() {
         MongoCollection<PhotoCategoryDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.PHOTOCATEGORIES.toString(), PhotoCategoryDAO.class);

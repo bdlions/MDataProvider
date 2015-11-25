@@ -21,7 +21,7 @@ import org.junit.Test;
 public class UserServicesTest {
 
     UserModel userModel = new UserModel();
-    String userId1 = "2Q52DbDnqKEiSCn";
+    String userId1 = "CnlZ8aFiLEh3JH8";
     String userId2 = "mqQ06eko9TqYYul";
     String userId3 = "9nSEiMgzieo1O4K";
 
@@ -40,6 +40,12 @@ public class UserServicesTest {
         System.out.println(userModel.getUserInfoList(userIdList.toString()));
 
     }
+       @Test 
+    public void getUserGenderInfo() {
+
+        System.out.println(userModel.getUserGenderInfo(userId1));
+
+    }
 
 //        @Test
     public void getUserCountryInfo() {
@@ -56,7 +62,7 @@ public class UserServicesTest {
 //        System.out.println(statusDate);
     }
 
-    @Test
+//    @Test
     public void timeTest() throws ParseException {
         Utility utility = new Utility();
         String  gmt0Time = utility.getUserCurrentDate("+0");

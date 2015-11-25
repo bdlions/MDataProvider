@@ -73,6 +73,7 @@ public class SearchModel {
         projectionDocument.put(attrUserId, "$all");
         projectionDocument.put(attrFirstName, "$all");
         projectionDocument.put(attrLastName, "$all");
+        projectionDocument.put("gender", "$all");
 
         MongoCursor<UserDAO> userList = mongoCollection.find(sDocument).projection(projectionDocument).iterator();
         List<UserDAO> userInfoList = IteratorUtils.toList(userList);

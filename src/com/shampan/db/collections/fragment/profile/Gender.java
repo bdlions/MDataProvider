@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author nazmul hasan
  */
 public class Gender {
-    @JsonProperty("gId")
     private String genderId;
     private String title;
 
