@@ -38,7 +38,7 @@ import static org.junit.Assert.*;
 public class StatusServiceTest {
 
     StatusModel statusObject = new StatusModel();
-    String userId = "2Q52DbDnqKEiSCn";
+    String userId = "BuB3ZKtu6G3VjNs";
     String mappingId = "mqQ06eko9TqYYul";
     String friendId = "9nSEiMgzieo1O4K";
     String statusId = "IQoc6iX3ldy7Eq9";
@@ -90,7 +90,7 @@ public class StatusServiceTest {
         rUserInfo.setUserId("u1");
         UserInfo rUserInfo1 = new UserInfo();
         rUserInfo1.setFirstName("Nazmul");
-        rUserInfo1.setLastName("Hasan");
+        rUserInfo1.setLastName ("Hasan");
         rUserInfo1.setUserId("u1");
         Comment statusCommentInfo = new Comment();
         statusCommentInfo.setDescription("Thank you !!");
@@ -217,7 +217,7 @@ public class StatusServiceTest {
         System.out.println(statusObject.getStatuses("2Q52DbDnqKEiSCn", offset, limit));
 
     }
-    @Test
+//    @Test
     public void getStatusCommentLikeList() {
         int offset = 0;
         int limit = 5;
@@ -230,6 +230,14 @@ public class StatusServiceTest {
         int offset = 0;
         int limit = 5;
         System.out.println(statusObject.getUserProfileStatuses(userId, mappingId, offset, limit));
+
+    }
+    @Test
+
+    public void resentActivities() {
+        int offset = 0;
+        int limit = 5;
+        System.out.println(statusObject.resentActivities(userId, offset, limit));
 
     }
 
