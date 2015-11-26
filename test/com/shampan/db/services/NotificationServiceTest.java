@@ -71,14 +71,14 @@ public class NotificationServiceTest {
 
     }
 
-//    @Test
+    @Test
     public void addGeneralNotificationStatusLike() {
         UserInfo userInfo = new UserInfo();
-        userInfo.setUserId("u1");
+        userInfo.setUserId("u3");
         userInfo.setFirstName("Rashida");
         userInfo.setLastName("Sultana");
 
-        notificationModel.addGeneralNotificationStatusLike("u2", referenceId, userInfo.toString());
+        notificationModel.addGeneralNotificationStatusLike("u1", referenceId, userInfo.toString());
 
     }
 
@@ -96,7 +96,7 @@ public class NotificationServiceTest {
 
     }
     
-    @Test
+//    @Test
 
     public void updateStatusFriendNotifications() {
         notificationModel.updateStatusFriendNotifications(userId);

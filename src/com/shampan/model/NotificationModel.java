@@ -217,7 +217,7 @@ public class NotificationModel {
                 for (int i = 0; i < pendingfriendSize; i++) {
                     if (friendNotification.getFriendNotifications().get(i).getStatusId().equals(unReadStatusId)) {
                         friendNotification.getFriendNotifications().get(i).setStatusId(readStatusId);
-                        if (! friendNotification.getFriendNotifications().get(i).getTypeId().equals(typeId)) {
+                        if (!friendNotification.getFriendNotifications().get(i).getTypeId().equals(typeId)) {
                             FriendNotification notification = new FriendNotification();
                             notification = friendNotification.getFriendNotifications().get(i);
                             friendNotifications.add(notification);
@@ -598,15 +598,20 @@ public class NotificationModel {
                     projectionQuery.put(attrGeneralNotifications, new Document("$elemMatch", projectionSelectionDocument));
 
                     NotificationDAO generalNotificationCursor = mongoCollection.find(selectionDocument).projection(projectionQuery).first();
+                    System.out.println(generalNotificationCursor.toString());
                     //If  has a notification for this status and type
                     if (generalNotificationCursor != null) {
+                        GeneralNotification generalNotification = new GeneralNotification();
+                        List<UserInfo> userList = generalNotificationCursor.getGeneralNotifications().get(0).getUserList();
+                        userList.add(userInfo);
                         Document updateDocument = new Document();
                         if (!userId.equals(userInfo.getUserId())) {
-                            updateDocument.put("$set", new Document(attrGeneralNotifications + ".$." + attrStatusId, unReadStatusId));
+                            updateDocument.put(attrGeneralNotifications + ".$." + attrStatusId, unReadStatusId);
                         }
-                        updateDocument.put("$set", new Document(attrGeneralNotifications + ".$.modifiedOn", utility.getCurrentTime()));
-                        updateDocument.put("$push", new Document(attrGeneralNotifications + ".$." + attrUserList, JSON.parse(userInfo.toString())));
-                        mongoCollection.findOneAndUpdate(selectionDocument, updateDocument);
+                        updateDocument.put(attrGeneralNotifications + ".$." + "modifiedOn", (utility.getCurrentTime()));
+                        updateDocument.put(attrGeneralNotifications + ".$." + attrUserList, JSON.parse(userList.toString()));
+                        mongoCollection.findOneAndUpdate(selectionDocument, new Document("$set", updateDocument));
+
                     } else {
                         //First entry for this status and type
                         List<UserInfo> userList = new ArrayList<>();
