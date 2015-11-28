@@ -22,7 +22,7 @@ import org.junit.Test;
 public class NotificationServiceTest {
 
     NotificationModel notificationModel = new NotificationModel();
-    String userId = "2Q52DbDnqKEiSCn";
+    String userId = "dRmgLnlhu8OTSbY";
     String friendId = "WPkbWVADuhT8Vmj";
 //    String friendId = "9nSEiMgzieo1O4K";
     String referenceId = "1";
@@ -71,7 +71,7 @@ public class NotificationServiceTest {
 
     }
 
-    @Test
+//    @Test
     public void addGeneralNotificationStatusLike() {
         UserInfo userInfo = new UserInfo();
         userInfo.setUserId("u3");

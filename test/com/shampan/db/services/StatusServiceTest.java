@@ -38,7 +38,7 @@ import static org.junit.Assert.*;
 public class StatusServiceTest {
 
     StatusModel statusObject = new StatusModel();
-    String userId = "BuB3ZKtu6G3VjNs";
+    String userId = "iEcqEO1ehRIlKwC";
     String mappingId = "mqQ06eko9TqYYul";
     String friendId = "9nSEiMgzieo1O4K";
     String statusId = "IQoc6iX3ldy7Eq9";
@@ -234,10 +234,10 @@ public class StatusServiceTest {
     }
     @Test
 
-    public void resentActivities() {
+    public void recentActivities() {
         int offset = 0;
-        int limit = 5;
-        System.out.println(statusObject.resentActivities(userId, offset, limit));
+        int limit = 10;
+        System.out.println(statusObject.getRecentActivities(userId, offset, limit));
 
     }
 

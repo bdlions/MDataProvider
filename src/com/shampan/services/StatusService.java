@@ -94,4 +94,9 @@ public class StatusService {
         return response;
 
     }
+    public static String getRecentActivities(String userId, int offset, int limit) {
+        String response = obj.getRecentActivities(userId, offset, limit ).toString();
+        return response;
+
+    }
 }

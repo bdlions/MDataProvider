@@ -238,7 +238,7 @@ public class NotificationModel {
      * @param userId, user id of a user
      * @return userInfo
      */
-    public List<FriendNotification> getFriendNotifications(String userId) {
+    public List<JSONObject> getFriendNotifications(String userId) {
         MongoCollection<NotificationDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.NOTIFICATIONS.toString(), NotificationDAO.class);
         String attrUserId = PropertyProvider.get("USER_ID");
@@ -246,7 +246,7 @@ public class NotificationModel {
         selectionDocument.put(attrUserId, userId);
         NotificationDAO friendNotificationCursor = getPendingFriendList(userId);
         List<FriendNotification> friendNotifications = new ArrayList<>();
-        List<UserInfo> userList = new ArrayList<>();
+        List<JSONObject> friendNotificationList = new ArrayList<>();
         List<String> userIdList = new ArrayList<>();
         if (friendNotificationCursor != null) {
             if (friendNotificationCursor.getFriendNotifications() != null) {
@@ -265,17 +265,21 @@ public class NotificationModel {
             List<UserDAO> userInfo = userModel.getUserInfoList(userIdList.toString());
             if (userInfo != null) {
                 for (int j = 0; j < userInfo.size(); j++) {
+                    JSONObject notificationJson = new JSONObject();
                     if (friendNotifications.get(j) != null) {
                         UserInfo userInfo1 = new UserInfo();
                         userInfo1.setUserId(userInfo.get(j).getUserId());
                         userInfo1.setFirstName(userInfo.get(j).getFirstName());
                         userInfo1.setLastName(userInfo.get(j).getLastName());
                         friendNotifications.get(j).setUserInfo(userInfo1);
+                        notificationJson.put("friendNotification", friendNotifications.get(j));
+                        notificationJson.put("genderId", userModel.getUserGenderInfo(userInfo.get(j).getUserId()));
+                        friendNotificationList.add(notificationJson);
                     }
                 }
             }
         }
-        return friendNotifications;
+        return friendNotificationList;
     }
 
     /**
@@ -666,31 +670,26 @@ public class NotificationModel {
 
         String attrUserId = PropertyProvider.get("USER_ID");
         String attrGeneralNotifications = PropertyProvider.get("GENERAL_NOTIFICATIONS");
-        String attrUserList = PropertyProvider.get("USER_LIST");
-        String attrStatusId = PropertyProvider.get("STATUS_ID");
-        String attrTypeId = PropertyProvider.get("TYPE_ID");
         String readStatusId = PropertyProvider.get("NOTIFICATION_STATUS_TYPE_READ_ID");
-        String unReadStatusId = PropertyProvider.get("NOTIFICATION_STATUS_TYPE_UNREAD_ID");
-        String likeTypeId = PropertyProvider.get("NOTIFICATION_TYPE_POST_LIKE");
-        String shareTypeId = PropertyProvider.get("NOTIFICATION_TYPE_POST_SHARE");
-        String commentTypeId = PropertyProvider.get("NOTIFICATION_TYPE_POST_COMMENT");
-        Document selectionDocumentForLike = new Document();
-        selectionDocumentForLike.put(attrUserId, userId);
-        selectionDocumentForLike.put(attrGeneralNotifications + "." + attrStatusId, unReadStatusId);
-        selectionDocumentForLike.put(attrGeneralNotifications + "." + attrTypeId, likeTypeId);
-        Document selectionDocumentForShare = new Document();
-        selectionDocumentForShare.put(attrUserId, userId);
-        selectionDocumentForShare.put(attrGeneralNotifications + "." + attrStatusId, unReadStatusId);
-        selectionDocumentForShare.put(attrGeneralNotifications + "." + attrTypeId, shareTypeId);
-        Document selectionDocumentForComment = new Document();
-        selectionDocumentForComment.put(attrUserId, userId);
-        selectionDocumentForComment.put(attrGeneralNotifications + "." + attrStatusId, unReadStatusId);
-        selectionDocumentForComment.put(attrGeneralNotifications + "." + attrTypeId, commentTypeId);
-        Document updateDocument = new Document();
-        updateDocument.put("$set", new Document(attrGeneralNotifications + ".$." + attrStatusId, readStatusId));
-        mongoCollection.findOneAndUpdate(selectionDocumentForLike, updateDocument);
-        mongoCollection.findOneAndUpdate(selectionDocumentForShare, updateDocument);
-        mongoCollection.findOneAndUpdate(selectionDocumentForComment, updateDocument);
+        Document selectionDocument = new Document();
+        selectionDocument.put(attrUserId, userId);
+        Document projectionDocument = new Document();
+        projectionDocument.put(attrGeneralNotifications, "$all");
+        NotificationDAO generalNotificationCursor = mongoCollection.find(selectionDocument).projection(projectionDocument).first();
+        if (generalNotificationCursor != null) {
+            if (generalNotificationCursor.getGeneralNotifications() != null) {
+                int generalNotificationSize = generalNotificationCursor.getGeneralNotifications().size();
+                if (generalNotificationSize > 0) {
+                    for (int j = 0; generalNotificationSize > 0; j++) {
+                        generalNotificationCursor.getGeneralNotifications().get(j).setStatusId(readStatusId);
+                        generalNotificationSize--;
+                    }
+
+                }
+
+                mongoCollection.findOneAndUpdate(selectionDocument, new Document("$set", new Document(attrGeneralNotifications, JSON.parse(generalNotificationCursor.getGeneralNotifications().toString()))));
+            }
+        }
     }
 
     public void testMongoSql(String userId) {

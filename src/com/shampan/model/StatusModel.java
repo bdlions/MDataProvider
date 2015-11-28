@@ -40,6 +40,7 @@ public class StatusModel {
         PropertyProvider.add("com.shampan.properties/common");
         PropertyProvider.add("com.shampan.properties/attributes");
         PropertyProvider.add("com.shampan.properties/relations");
+        PropertyProvider.add("com.shampan.properties/recentactivites");
 
     }
 
@@ -191,6 +192,7 @@ public class StatusModel {
             statusJson.put("description", status.getDescription());
             statusJson.put("statusTypeId", status.getStatusTypeId());
             statusJson.put("createdOn", status.getCreatedOn());
+            statusJson.put("genderId", userModel.getUserGenderInfo(status.getMappingId()));
             if (status.getImages() != null) {
                 statusJson.put("images", status.getImages());
             }
@@ -595,15 +597,14 @@ public class StatusModel {
         return likeList;
     }
 
-    public String resentActivities(String userId, int offset, int limit) {
+    public List<JSONObject> getRecentActivities(String userId, int offset, int limit) {
         MongoCollection<StatusDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
         String relationTypeId = PropertyProvider.get("RELATION_TYPE_FRIEND_ID");
         String attrUserId = PropertyProvider.get("USER_ID");
-        //add user own to status selection list
-        List<Document> orActivitiesSelectionDocument = new ArrayList<Document>();
 
         //add user friend to status selection list
+        List<Document> orActivitiesSelectionDocument = new ArrayList<Document>();
         List<String> userIdList = relationModel.getUserIdList(userId, relationTypeId);
         int userIdsSize = userIdList.size();
         if (userIdsSize > 0) {
@@ -623,75 +624,89 @@ public class StatusModel {
         }
         Document selectDocument = new Document();
         selectDocument.put("$or", orActivitiesSelectionDocument);
-        System.out.println(selectDocument);
         MongoCursor<StatusDAO> statusList = mongoCollection.find(selectDocument).sort(new Document("modifiedOn", -1)).skip(offset).limit(limit).iterator();
 
+        List<JSONObject> recentActivityList = new ArrayList<JSONObject>();
         while (statusList.hasNext()) {
-            JSONObject recentActivitiesJson = new JSONObject();
             StatusDAO status = (StatusDAO) statusList.next();
+            System.out.println(status.toString());
             for (int i = 0; i < userIdsSize; i++) {
-                if (status.getMappingId().equals(userIdList.get(i))) {
+                JSONObject recentActivitiesJson = new JSONObject();
+                if (status.getMappingId() != null && status.getMappingId().equals(userIdList.get(i))) {
                     if (status.getStatusTypeId().equals(PropertyProvider.get("POST_STATUS_BY_USER_AT_HIS_PROFILE_TYPE_ID"))) {
                         recentActivitiesJson.put("typeId", PropertyProvider.get("POST_STATUS_BY_USER_AT_HIS_PROFILE_TYPE_ID"));
                         recentActivitiesJson.put("userInfo", status.getUserInfo());
                         recentActivitiesJson.put("statusId", status.getStatusId());
+                        recentActivitiesJson.put("genderId", userModel.getUserGenderInfo(userIdList.get(i)));
+                        recentActivityList.add(recentActivitiesJson);
                         //write
 
                     } else if (status.getStatusTypeId().equals(PropertyProvider.get("CHANGE_PROFILE_PICTURE_ID"))) {
                         recentActivitiesJson.put("typeId", PropertyProvider.get("CHANGE_PROFILE_PICTURE_ID"));
                         recentActivitiesJson.put("userInfo", status.getUserInfo());
                         recentActivitiesJson.put("statusId", status.getStatusId());
+                        recentActivitiesJson.put("genderId", userModel.getUserGenderInfo(userIdList.get(i)));
+                        recentActivityList.add(recentActivitiesJson);
                         //write
 
                     } else if (status.getStatusTypeId().equals(PropertyProvider.get("CHANGE_COVER_PICTURE_ID"))) {
                         recentActivitiesJson.put("typeId", PropertyProvider.get("CHANGE_COVER_PICTURE_ID"));
                         recentActivitiesJson.put("userInfo", status.getUserInfo());
                         recentActivitiesJson.put("statusId", status.getStatusId());
+                        recentActivitiesJson.put("genderId", userModel.getUserGenderInfo(userIdList.get(i)));
+                        recentActivityList.add(recentActivitiesJson);
                         //write
-
                     }
-                } else if (status.getComment() != null) {
-                    int commentSize = status.getComment().size();
-                    if (commentSize > 0) {
-                        for (int j = 0; commentSize > 0; j++) {
-                            Comment comment = status.getComment().get(j);
-                            System.out.println(comment.toString());
-                            if (comment.getUserInfo().getUserId().equals(userIdList.get(i))) {
-                                recentActivitiesJson.put("typeId", PropertyProvider.get("COMMENTED_ON_ID"));
-                                recentActivitiesJson.put("userInfo", comment.getUserInfo());
-                                recentActivitiesJson.put("referenceUserInfo", status.getUserInfo());
-                                recentActivitiesJson.put("referenceTypeId", status.getStatusTypeId());
-                                recentActivitiesJson.put("statusId", status.getStatusId());
-                                //write 
+                } else {
+                    if (status.getComment() != null) {
+                        int commentSize = status.getComment().size();
+                        if (commentSize > 0) {
+                            for (int j = 0; commentSize > 0; j++) {
+                                Comment comment = status.getComment().get(j);
+                                if (comment.getUserInfo().getUserId().equals(userIdList.get(i))) {
+                                    recentActivitiesJson.put("typeId", PropertyProvider.get("COMMENTED_ON_ID"));
+                                    recentActivitiesJson.put("userInfo", comment.getUserInfo());
+                                    recentActivitiesJson.put("referenceUserInfo", status.getUserInfo());
+                                    recentActivitiesJson.put("referenceTypeId", status.getStatusTypeId());
+                                    recentActivitiesJson.put("statusId", status.getStatusId());
+                                    recentActivitiesJson.put("genderId", userModel.getUserGenderInfo(userIdList.get(i)));
+                                    recentActivityList.add(recentActivitiesJson);
+//                                    break;
+                                    //write 
+                                }
+                                commentSize--;
+
                             }
 
                         }
-
-                    }
-                } else if (status.getLike() != null) {
-                    int likeSize = status.getLike().size();
-                    if (likeSize > 0) {
-                        for (int k = 0; likeSize > 0; k++) {
-                            Like like = status.getLike().get(k);
-                            if (like.getUserInfo().getUserId().equals(userIdList.get(i))) {
-                                recentActivitiesJson.put("typeId", PropertyProvider.get("LIKED_ON_ID"));
-                                recentActivitiesJson.put("userInfo", like.getUserInfo());
-                                recentActivitiesJson.put("referenceUserInfo", status.getUserInfo());
-                                recentActivitiesJson.put("referenceTypeId", status.getStatusTypeId());
-                                recentActivitiesJson.put("statusId", status.getStatusId());
-
-                                //write
+                    } else if (status.getLike() != null) {
+                        int likeSize = status.getLike().size();
+                        if (likeSize > 0) {
+                            for (int k = 0; likeSize > 0; k++) {
+                                Like like = status.getLike().get(k);
+                                if (like.getUserInfo().getUserId().equals(userIdList.get(i))) {
+                                    recentActivitiesJson.put("typeId", PropertyProvider.get("LIKED_ON_ID"));
+                                    recentActivitiesJson.put("userInfo", like.getUserInfo());
+                                    recentActivitiesJson.put("referenceUserInfo", status.getUserInfo());
+                                    recentActivitiesJson.put("referenceTypeId", status.getStatusTypeId());
+                                    recentActivitiesJson.put("statusId", status.getStatusId());
+                                    recentActivitiesJson.put("genderId", userModel.getUserGenderInfo(userIdList.get(i)));
+                                    recentActivityList.add(recentActivitiesJson);
+                                    //write
+                                }
+                                likeSize--;
                             }
+
                         }
 
                     }
 
                 }
 
-            System.out.println(recentActivitiesJson);
             }
         }
-        return "";
+
+        return recentActivityList;
     }
 
 }
