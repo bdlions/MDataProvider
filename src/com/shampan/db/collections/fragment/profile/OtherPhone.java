@@ -8,9 +8,9 @@ import com.shampan.db.collections.CountriesDAO;
  */
 public class OtherPhone {
     private String id;
-    @JsonProperty("phn")
+//    @JsonProperty("phn")
     private String phone ;
-    @JsonProperty("cty")
+//    @JsonProperty("cty")
     private CountriesDAO country;
 
     public String getId() {

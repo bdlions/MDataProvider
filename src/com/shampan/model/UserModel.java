@@ -12,6 +12,7 @@ import com.mongodb.client.MongoCursor;
 import com.sampan.response.ResultEvent;
 import com.shampan.db.Collections;
 import com.shampan.db.DBConnection;
+import com.shampan.db.collections.StatusDAO;
 import com.shampan.db.collections.UserDAO;
 import com.shampan.db.collections.builder.UserDAOBuilder;
 import com.shampan.util.PropertyProvider;
@@ -102,6 +103,7 @@ public class UserModel {
             pQueryDocument.put(attrUserId, "$all");
             pQueryDocument.put(attrFirstName, "$all");
             pQueryDocument.put(attrLastName, "$all");
+            pQueryDocument.put("gender", "$all");
             MongoCursor<UserDAO> userInfoList = mongoCollection.find(selectDocument).projection(pQueryDocument).iterator();
             userList = IteratorUtils.toList(userInfoList);
         }
@@ -130,9 +132,26 @@ public class UserModel {
         pQueryDocument.put("gender", "$all");
         UserDAO userInfo = mongoCollection.find(selectQuery).projection(pQueryDocument).first();
         String userGenderId = "";
-        if(userInfo.getGender() != null){
-         userGenderId = userInfo.getGender().getGenderId();
+        if (userInfo.getGender() != null) {
+            userGenderId = userInfo.getGender().getGenderId();
         }
         return userGenderId;
+    }
+
+    public List<UserDAO> getRecentUser() {
+        int offset = 0;
+        int limit = 10;
+        MongoCollection<UserDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERS.toString(), UserDAO.class);
+        Document projectionDocument = new Document();
+        projectionDocument.put("firstName", "$all");
+        projectionDocument.put("lastName", "$all");
+        projectionDocument.put("userId", "$all");
+        projectionDocument.put("gender", "$all");
+        projectionDocument.put("country", "$all");
+        MongoCursor<UserDAO> userList = mongoCollection.find().sort(new Document("modifiedOn", -1)).skip(offset).limit(limit).projection(projectionDocument).iterator();
+        List<UserDAO> userListInfo = IteratorUtils.toList(userList);
+        return userListInfo;
+
     }
 }

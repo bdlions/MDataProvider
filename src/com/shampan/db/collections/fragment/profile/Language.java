@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Language {
     private String id;
-    @JsonProperty("lng")
+//    @JsonProperty("lng")
     private String language;
 
     public String getId() {

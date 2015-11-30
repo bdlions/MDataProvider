@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class FavouriteQuote {
     private String id;
-    @JsonProperty("fq")
+//    @JsonProperty("fq")
     private String fQuote;
 
     public String getId() {

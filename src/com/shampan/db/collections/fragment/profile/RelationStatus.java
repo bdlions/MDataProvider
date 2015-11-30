@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class RelationStatus {
     private String id;
-    @JsonProperty("rs")
+//    @JsonProperty("rs")
     private String relationshipStatus;
 
     public String getId() {

@@ -185,7 +185,7 @@ public class PhotoServicesTest {
 
 //    @Test
     public void getPhotos() {
-        System.out.println(photoObject.getPhotos(albumId));
+//        System.out.println(photoObject.getPhotos(albumId));
 
     }
 //    @Test
@@ -212,7 +212,7 @@ public class PhotoServicesTest {
         int limit = 5;
         int offset = 0;
         JSONObject photos = new JSONObject();
-        photos.put("photoList", photoObject.getUserPhotos(albumId, offset, limit));
+//        photos.put("photoList", photoObject.getUserPhotos(albumId, offset, limit));
         System.out.println(photos);
 
     }

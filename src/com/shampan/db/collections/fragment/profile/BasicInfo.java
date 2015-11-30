@@ -10,28 +10,28 @@ import java.util.List;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BasicInfo {
-    @JsonProperty("ws")
+//    @JsonProperty("ws")
     private Website website;
-    @JsonProperty("bDate")
+//    @JsonProperty("bDate")
     private BirthDate birthDate;
-    @JsonProperty("gender")
+//    @JsonProperty("gender")
     private Gender gender;
-    @JsonProperty("ct")
+//    @JsonProperty("ct")
     private City city;
-    @JsonProperty("twn")
+//    @JsonProperty("twn")
     private Town town;
-    @JsonProperty("adrses")
+//    @JsonProperty("adrses")
     private Address addresses;
-    @JsonProperty("rs")
+//    @JsonProperty("rs")
     private RelationStatus relationshipStatus;
-    @JsonProperty("mps")
+//    @JsonProperty("mps")
     private List<MobilePhone> mobilePhones;
-    @JsonProperty("ops")
+//    @JsonProperty("ops")
     private List<OtherPhone> otherPhones;
     private List<Email> emails;
-    @JsonProperty("abt")
+//    @JsonProperty("abt")
     private About about;
-    @JsonProperty("fq")
+//    @JsonProperty("fq")
     private FavouriteQuote fQuote;
     private Religion religions;
     private List<FamilyMember> familyMember;

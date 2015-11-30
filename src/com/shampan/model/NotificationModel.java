@@ -380,7 +380,6 @@ public class NotificationModel {
                         List<UserInfo> userListInfo = generalNotificationCursor.getGeneralNotifications().get(0).getUserList();
                         int userSize = generalNotificationCursor.getGeneralNotifications().get(0).getUserList().size();
                         //add user to user list without request user that already in userList
-                        System.out.println(userSize);
                         if (userSize > 0) {
                             // add or update status for commented users 
                             for (int i = 0; i < userSize; i++) {
@@ -704,7 +703,7 @@ public class NotificationModel {
 
     }
 
-    public NotificationDAO getGeneralNotifications(String userId, int offset, int limit) {
+    public List<JSONObject> getGeneralNotifications(String userId, int offset, int limit) {
         MongoCollection<NotificationDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.NOTIFICATIONS.toString(), NotificationDAO.class);
         String attrUserId = PropertyProvider.get("USER_ID");
@@ -714,6 +713,25 @@ public class NotificationModel {
         Document projectionDocument = new Document();
         projectionDocument.put(attrGeneralNotifications, "$all");
         NotificationDAO generalNotificationCursor = mongoCollection.find(selectionDocument).projection(projectionDocument).first();
-        return generalNotificationCursor;
+        List<JSONObject> generalNotificationList = new ArrayList<>();
+        if (generalNotificationCursor != null) {
+
+            if (generalNotificationCursor.getGeneralNotifications() != null) {
+                int generalNotificationSize = generalNotificationCursor.getGeneralNotifications().size();
+                if (generalNotificationSize > 0) {
+                    for (int i = 0; generalNotificationSize > 0; i++) {
+                        JSONObject resultedNotifications = new JSONObject();
+                        String tempUserId = generalNotificationCursor.getGeneralNotifications().get(i).getUserList().get(0).getUserId();
+                        resultedNotifications.put("notification", generalNotificationCursor.getGeneralNotifications().get(i));
+                        resultedNotifications.put("genderId", userModel.getUserGenderInfo(tempUserId));
+                        generalNotificationList.add(resultedNotifications);
+                        generalNotificationSize-- ;
+                    }
+                }
+
+            }
+
+        }
+        return generalNotificationList;
     }
 }

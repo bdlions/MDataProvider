@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class Website {
     private String id;
-    @JsonProperty("ws")
+//    @JsonProperty("ws")
     private String website;
 
     public String getId() {

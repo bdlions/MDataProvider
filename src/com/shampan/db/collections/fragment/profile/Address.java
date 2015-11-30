@@ -8,13 +8,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class Address {
     private String id;
-    @JsonProperty("adrs")
+//    @JsonProperty("adrs")
     private String address;
-    @JsonProperty("ct")
+//    @JsonProperty("ct")
     private String city;
-    @JsonProperty("zip")
+//    @JsonProperty("zip")
     private String zip;
-    @JsonProperty("pc")
+//    @JsonProperty("pc")
     private String postCode;
 
     public String getId() {

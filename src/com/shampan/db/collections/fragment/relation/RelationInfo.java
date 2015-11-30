@@ -9,12 +9,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  * @author nazmul hasan
  */
-//@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class RelationInfo {
 
     private String userId;
     private String firstName;
     private String lastName;
+    private String genderId ;
     private String isInitiated;
     private String relationTypeId;
     private long createdOn;
@@ -23,6 +24,14 @@ public class RelationInfo {
 
     }
 
+    public String getGenderId() {
+        return genderId;
+    }
+
+    public void setGenderId(String genderId) {
+        this.genderId = genderId;
+    }
+    
     public String getUserId() {
         return userId;
     }

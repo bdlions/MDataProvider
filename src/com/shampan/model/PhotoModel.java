@@ -391,19 +391,22 @@ public class PhotoModel {
      * @param userId, user id
      * @author created by Rashida on 21th September 2015
      */
-    public List<PhotoDAO> getUserPhotos(String albumId, int offset, int limit) {
+    public List<PhotoDAO> getUserPhotos(String userId, String albumId, int offset, int limit) {
         MongoCollection<PhotoDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), PhotoDAO.class
                 );
-        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("albumId").is(albumId).get();
-        FindIterable<PhotoDAO> photoList = mongoCollection.find(selectQuery).skip(offset).limit(offset);
+        Document selectDocument = new Document();
+        selectDocument.put("userId", userId);
+        selectDocument.put("albumId", albumId);
+//        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("albumId").is(albumId).get();
+        FindIterable<PhotoDAO> photoList = mongoCollection.find(selectDocument).skip(offset).limit(offset);
         List<PhotoDAO> photos = new ArrayList<>();
         for (PhotoDAO photo : photoList) {
             photos.add(photo);
-            System.out.println(photo);
+//            System.out.println(photo);
         }
 
-        System.out.println(photos);
+//        System.out.println(photos);
         return photos;
 
     }
@@ -413,18 +416,18 @@ public class PhotoModel {
      * @author created by Rashida on 21th September 2015
      */
 
-    public List<PhotoDAO> getPhotos(String albumId) {
+    public List<PhotoDAO> getPhotos(String userId, String albumId) {
         MongoCollection<PhotoDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), PhotoDAO.class
                 );
-        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("albumId").is(albumId).get();
+        Document selectDocument = new Document();
+        selectDocument.put("userId", userId);
+        selectDocument.put("albumId", albumId);
+//        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("albumId").is(albumId).get();
         Document pQurey = new Document();
-
-        pQurey.put(
-                "photoId", "$all");
-        pQurey.put(
-                "image", "$all");
-        MongoCursor<PhotoDAO> cursorStatusInfoList = mongoCollection.find(selectQuery).projection(pQurey).iterator();
+        pQurey.put("photoId", "$all");
+        pQurey.put("image", "$all");
+        MongoCursor<PhotoDAO> cursorStatusInfoList = mongoCollection.find(selectDocument).projection(pQurey).iterator();
         List<PhotoDAO> photoList = IteratorUtils.toList(cursorStatusInfoList);
         return photoList;
 
@@ -452,8 +455,7 @@ public class PhotoModel {
 
     }
 
-    public PhotoDAO
-            getPhotoByAlbumId(String albumId, String photoId) {
+    public PhotoDAO getPhotoByAlbumId(String albumId, String photoId) {
         MongoCollection<PhotoDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), PhotoDAO.class
                 );
@@ -471,8 +473,7 @@ public class PhotoModel {
      * @param photoId, photo id
      * @author created by Rashida on 21th September 2015
      */
-    public String
-            getPhoto(String userId, String photoId) {
+    public String getPhoto(String userId, String photoId) {
         MongoCollection<PhotoDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), PhotoDAO.class
                 );
@@ -530,8 +531,7 @@ public class PhotoModel {
         return photoInfoJson.toString();
     }
 
-    public String
-            getNextPhoto(String photoId) {
+    public String getNextPhoto(String photoId) {
         MongoCollection<PhotoDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), PhotoDAO.class
                 );
@@ -576,6 +576,7 @@ public class PhotoModel {
             for (int i = 0; i < totalImg; i++) {
                 PhotoDAO photoInfoObj1 = new PhotoDAOBuilder().build(photoArray.get(0).toString());
                 PhotoDAO photoInfoObj = new PhotoDAOBuilder().build(photoArray.get(i).toString());
+                photoInfoObj.setUserId(userId);
                 photoList.add(photoInfoObj);
                 defaultImg = photoInfoObj1.getImage();
                 photoId = photoInfoObj1.getPhotoId();

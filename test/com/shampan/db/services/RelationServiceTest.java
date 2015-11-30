@@ -28,7 +28,7 @@ import org.junit.internal.runners.TestClass;
 public class RelationServiceTest {
 
     RelationModel friendObj = new RelationModel();
-    String userId = "qaFiam3y1OavCfn";
+    String userId = "dRmgLnlhu8OTSbY";
     String friendId = "hcZrdhteaIeUYrP";
 
 //    @Test
@@ -57,7 +57,7 @@ public class RelationServiceTest {
 
     }
 
-    @Test
+//    @Test
     public void getRelationShipStatus() {
 
         System.out.println(friendObj.getRelationInfo(userId, friendId));

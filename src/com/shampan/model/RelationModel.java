@@ -354,6 +354,7 @@ public class RelationModel {
                         requestList.get(j).setUserId(userInfoList.get(j).getUserId());
                         requestList.get(j).setFirstName(userInfoList.get(j).getFirstName());
                         requestList.get(j).setLastName(userInfoList.get(j).getLastName());
+                        requestList.get(j).setGenderId(userInfoList.get(j).getGender().getGenderId());
                     }
                 }
             }

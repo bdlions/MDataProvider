@@ -10,19 +10,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class WorkPlace {
-    @JsonProperty("id")
+//    @JsonProperty("id")
     private String id;
-    @JsonProperty("cmp")
+//    @JsonProperty("cmp")
     private String company;
-    @JsonProperty("pos")
+//    @JsonProperty("pos")
     private String position;
-    @JsonProperty("ct")
+//    @JsonProperty("ct")
     private String city;
-    @JsonProperty("desc")
+//    @JsonProperty("desc")
     private String description;
-    @JsonProperty("sd")
+//    @JsonProperty("sd")
     private String startDate;
-    @JsonProperty("ed")
+//    @JsonProperty("ed")
     private String endDate;
 
     public String getId() {

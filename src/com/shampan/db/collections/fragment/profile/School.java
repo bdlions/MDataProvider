@@ -10,15 +10,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class School {
-    @JsonProperty("id")
+//    @JsonProperty("id")
     private String id;
-    @JsonProperty("sch")
+//    @JsonProperty("sch")
     private String school;
-    @JsonProperty("desc")
+//    @JsonProperty("desc")
     private String description;
-    @JsonProperty("sd")
+//    @JsonProperty("sd")
     private String startDate;
-    @JsonProperty("ed")
+//    @JsonProperty("ed")
     private String endDate;
 
     public String getId() {

@@ -29,6 +29,7 @@ public class PhotoDAOBuilder {
     private String _id;
     private String photoId;
     private String albumId;
+    private String userId;
     private String image;
     private String description;
     private String categoryId;
@@ -39,6 +40,11 @@ public class PhotoDAOBuilder {
     private List<Like> like;
     private List<Comment> comment;
     private List<Share> share;
+
+    public PhotoDAOBuilder setUserId(String userId) {
+        this.userId = userId;
+        return this;
+    }
 
     public PhotoDAOBuilder setPhotoId(String photoId) {
         this.photoId = photoId;
@@ -115,6 +121,7 @@ public class PhotoDAOBuilder {
         photoInfo.setModifiedOn(modifiedOn);
         photoInfo.setPrivacy(privacy);
         photoInfo.setShare(share);
+        photoInfo.setUserId(userId);
         return photoInfo;
     }
 

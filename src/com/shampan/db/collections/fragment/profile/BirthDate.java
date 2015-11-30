@@ -8,11 +8,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author nazmul hasan
  */
 public class BirthDate {
-    @JsonProperty("bd")
+//    @JsonProperty("bd")
     private String birthDay;
-    @JsonProperty("bm")
+//    @JsonProperty("bm")
     private String birthMonth;
-    @JsonProperty("by")
+//    @JsonProperty("by")
     private String birthYear;
 
     public String getBirthDay() {

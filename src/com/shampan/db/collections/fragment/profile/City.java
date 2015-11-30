@@ -16,9 +16,9 @@ import com.shampan.db.collections.CountriesDAO;
 public class City {
 
     private String id;
-    @JsonProperty("ct")
+//    @JsonProperty("ct")
     private String cityName;
-    @JsonProperty("cty")
+//    @JsonProperty("cty")
     private CountriesDAO country;
 
     public String getCityName() {

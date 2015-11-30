@@ -91,14 +91,14 @@ public class PhotoService {
 
     public static String getUserPhotos(String userId, int offset, int limit) {
         JSONObject photos = new JSONObject();
-        photos.put("photoList", photoObject.getUserPhotos(userId, offset, limit));
+//        photos.put("photoList", photoObject.getUserPhotos(userId, offset, limit));
         return photos.toString();
     }
 
     public static String getPhotos(String userId,String albumId) {
         JSONObject photos = new JSONObject();
-        photos.put("albumInfo", photoObject.getAlbum(userId,albumId));
-        photos.put("photoList", photoObject.getPhotos(albumId));
+        photos.put("albumInfo", photoObject.getAlbum(userId, albumId));
+        photos.put("photoList", photoObject.getPhotos(userId, albumId));
         return photos.toString();
     }
     public static String getPhotoListByCategory(String albumId,String categoryId, int limit, int offset) {

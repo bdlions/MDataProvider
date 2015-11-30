@@ -21,9 +21,9 @@ import org.junit.Test;
 public class UserServicesTest {
 
     UserModel userModel = new UserModel();
-    String userId1 = "CnlZ8aFiLEh3JH8";
-    String userId2 = "mqQ06eko9TqYYul";
-    String userId3 = "9nSEiMgzieo1O4K";
+    String userId1 = "dRmgLnlhu8OTSbY";
+    String userId2 = "mCQntzqOGFQrOTE";
+    String userId3 = "g59uk60UraL3Guf";
 
 //    @Test
     public void getUserInfo() {
@@ -40,10 +40,21 @@ public class UserServicesTest {
         System.out.println(userModel.getUserInfoList(userIdList.toString()));
 
     }
-       @Test 
+//       @Test 
+
     public void getUserGenderInfo() {
 
         System.out.println(userModel.getUserGenderInfo(userId1));
+
+    }
+    
+    
+       @Test 
+
+    public void getRecentUser() {
+        int offset = 0;
+        int limit = 10;
+        System.out.println(userModel.getRecentUser());
 
     }
 
@@ -65,8 +76,8 @@ public class UserServicesTest {
 //    @Test
     public void timeTest() throws ParseException {
         Utility utility = new Utility();
-        String  gmt0Time = utility.getUserCurrentDate("+0");
-        String  gmt0Time1 = utility.getUserCurrentDate("+6");
+        String gmt0Time = utility.getUserCurrentDate("+0");
+        String gmt0Time1 = utility.getUserCurrentDate("+6");
         System.out.println("gmt0TimefordatabaseStor=" + gmt0Time);
         System.out.println("gmt0TimefordatabaseStor=" + gmt0Time1);
 //        long userCurrentDateUnixTime = utility.getUserCurrentDateUnixTime("+06");
@@ -85,6 +96,5 @@ public class UserServicesTest {
 //        System.out.println(gmtTimeStampToUserTimeStamp);
 
     }
-    
 
 }

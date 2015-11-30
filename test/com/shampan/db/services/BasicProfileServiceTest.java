@@ -46,7 +46,7 @@ import static org.junit.Assert.*;
  */
 public class BasicProfileServiceTest {
 
-    public String userId = "eQeOwhE7hrUkCyP";
+    public String userId = "ijx28kmrlyOBOYv";
     BasicProfileModel basicProfileModel = new BasicProfileModel();
 
     public BasicProfileServiceTest() {
@@ -71,24 +71,25 @@ public class BasicProfileServiceTest {
 //    @Test
     public void addWorkPlace() {
         WorkPlace workPlace = new WorkPlace();
-        workPlace.setId("1");
+        workPlace.setId("2");
         workPlace.setCompany("NASA");
         workPlace.setPosition("Software Engineer");
         workPlace.setDescription("Nothing to say");
         workPlace.setCity("Dhaka");
-        String workplace1 = workPlace.toString();
-        basicProfileModel.addWorkPlace(userId, workplace1);
+//        String workplace1 = workPlace.toString();
+        basicProfileModel.addWorkPlace(userId, workPlace.toString());
     }
 
-    //@Test
+//    @Test
     public void addProSkill() {
         PSkill pSkill = new PSkill();
         pSkill.setpSkill("Software Engineer at NASA");
+        pSkill.setId("1");
         String pskillString = pSkill.toString();
         basicProfileModel.addProfessionalSkill(userId, pskillString);
     }
 
-    // @Test
+//     @Test
     public void addUniversity() {
         University university = new University();
         university.setUniversity("Sydney University");
@@ -98,7 +99,7 @@ public class BasicProfileServiceTest {
         basicProfileModel.addUniversity(userId, university.toString());
     }
 
-    // @Test
+//     @Test
     public void addCollege() {
         College college = new College();
         college.setCollege("Cambridge College");
@@ -108,7 +109,7 @@ public class BasicProfileServiceTest {
         basicProfileModel.addCollege(userId, college.toString());
     }
 
-    // @Test
+//     @Test
     public void addSchool() {
         School school = new School();
         school.setSchool("Ranigong high School");
@@ -118,9 +119,10 @@ public class BasicProfileServiceTest {
         basicProfileModel.addSchool(userId, school.toString());
     }
 
-    //@Test
+//    @Test
     public void addWorksAndEducation() {
         WorkPlace workPlace = new WorkPlace();
+        workPlace.setId(userId);
         workPlace.setCompany("NASA");
         workPlace.setPosition("Software Engineer");
         workPlace.setDescription("Nothing to say");
@@ -130,10 +132,12 @@ public class BasicProfileServiceTest {
 
         PSkill pSkill = new PSkill();
         pSkill.setpSkill("Software Engineer at NASA");
+        pSkill.setId(userId);
         String pskillString = pSkill.toString();
         basicProfileModel.addProfessionalSkill(userId, pskillString);
 
         University university = new University();
+        university.setId(userId);
         university.setUniversity("Sydney University");
         university.setDescription("have nice memories");
         university.setStartDate("04-11-15");
@@ -141,6 +145,7 @@ public class BasicProfileServiceTest {
         basicProfileModel.addUniversity(userId, university.toString());
 
         College college = new College();
+        college.setId(userId);
         college.setCollege("Cambridge College");
         college.setDescription("I was very Shy in my college Life");
         college.setStartDate("04-11-07");
@@ -148,67 +153,92 @@ public class BasicProfileServiceTest {
         basicProfileModel.addCollege(userId, college.toString());
 
         School school = new School();
+        school.setId(userId);
         school.setSchool("Ranigong high School");
         school.setDescription(" I had no friend");
         school.setStartDate("04-11-2002");
         school.setEndDate("04-11-2007");
         basicProfileModel.addSchool(userId, school.toString());
+
     }
 
-    //@Test
+//    @Test
     public void getWorksAndEducation() {
         System.out.println(basicProfileModel.getWorksEducation(userId));
     }
 
-//   @Test
-    public void editWorkPlace() {
+//    @Test
+    public void editWorksAndEducation() {
+
         WorkPlace workPlace = new WorkPlace();
-        workPlace.setId("2");
+        workPlace.setId("4");
         workPlace.setCompany("Shampan It");
-        workPlace.setDescription("Nothing to say");
+        workPlace.setDescription("Nothing to say.......");
         workPlace.setCity("Dhaka");
         String workplace1 = workPlace.toString();
-        basicProfileModel.editWorkPlace(userId, "2", workplace1.toString());
-    }
+        basicProfileModel.editWorkPlace(userId, userId, workplace1.toString());
 
-//    @Test
-    public void editProfessionalSkill() {
         PSkill pSkill = new PSkill();
         pSkill.setpSkill("Software Engineer at NASA.....");
-        basicProfileModel.editProfessionalSkill(userId, "cPFVuGY0TVdlTHB", pSkill.toString());
+        basicProfileModel.editProfessionalSkill(userId, userId, pSkill.toString());
+
+        University university = new University();
+        university.setUniversity("Sydney University");
+        university.setDescription("have nice memories.............");
+        university.setStartDate("04-11-15");
+        university.setEndDate("04-11-19");
+        basicProfileModel.editUniversity(userId, userId, university.toString());
+
+        College college = new College();
+        college.setCollege("Cambridge College");
+        college.setDescription("I was very Shy in my college Life...........");
+        college.setStartDate("04-11-07");
+        college.setEndDate("04-11-09");
+        basicProfileModel.editCollege(userId, userId, college.toString());
+
+        School school = new School();
+        school.setSchool("Ranigong high School");
+        school.setDescription(" I had no friend........");
+        school.setStartDate("04-11-2002");
+        school.setEndDate("04-11-2007");
+        basicProfileModel.editSchool(userId, userId, school.toString());
 
     }
+
+//   @Test
+    public void deleteWorksAndEducation() {
+        basicProfileModel.deleteWrokPlace(userId, userId);
+        basicProfileModel.deletePSkill(userId, userId);
+        basicProfileModel.deleteUniversity(userId, userId);
+        basicProfileModel.deleteCollege(userId, userId);
+        basicProfileModel.deleteSchool(userId, userId);
+
+    }
+//   @Test
+
+    public void getsWorksAndEducation() {
+        System.out.println(basicProfileModel.getWorkPlaces(userId).toString());
+        System.out.println(basicProfileModel.getProfessionalSkills(userId).toString());
+        System.out.println(basicProfileModel.getUniversities(userId).toString());
+        System.out.println(basicProfileModel.getColleges(userId).toString());
+        System.out.println(basicProfileModel.getSchools(userId).toString());
+
+    }
+
+
 
 //    @Test
     public void editUniversity() {
-        University university = new University();
-        university.setUniversity("Sydney University");
-        university.setDescription("have nice memories");
-        university.setStartDate("04-11-15");
-        university.setEndDate("04-11-19");
-        basicProfileModel.editUniversity(userId, "bFnjzXgEwcORE6o", university.toString());
 
     }
 
 //    @Test
     public void editCollege() {
-        College college = new College();
-        college.setCollege("Cambridge College");
-        college.setDescription("I was very Shy in my college Life");
-        college.setStartDate("04-11-07");
-        college.setEndDate("04-11-09");
-        basicProfileModel.editCollege(userId, "U91om5Mv6tRb4TY", college.toString());
 
     }
 
 //    @Test
     public void editSchool() {
-        School school = new School();
-        school.setSchool("Ranigong high School");
-        school.setDescription(" I had no friend");
-        school.setStartDate("04-11-2002");
-        school.setEndDate("04-11-2007");
-        basicProfileModel.editSchool(userId, "FxtXekH69N4LU0Q", school.toString());
 
     }
 
@@ -229,139 +259,7 @@ public class BasicProfileServiceTest {
     // @Test
     // public void hello() {}
     //@Test
-    public void main() {
-        DBConnection.getInstance().getConnection();
-        MongoCollection<BasicProfileDAO> mongoCollection
-                = DBConnection.getInstance().getConnection().getCollection("user_profiles", BasicProfileDAO.class);
 
-        About about = new About();
-        about.setAbout(" honest,very simple,very careful about dearest persons ");
-        FavouriteQuote fQuote = new FavouriteQuote();
-        fQuote.setfQuote("khachar fake fake...porose mukhe mukhe...nirobe chokhe chokhe chae..");
-        BirthDate birthDate = new BirthDate();
-        birthDate.setBirthDay("04");
-        birthDate.setBirthMonth("11");
-        birthDate.setBirthYear("1991");
-
-        Website website = new Website();
-        website.setWebsite("sampan-it");
-        CountriesDAO country = new CountriesDAO();
-        country.setCode("012");
-        country.setTitle("Australia");
-
-        Address address = new Address();
-        address.setAddress("Kapasia,Ranigong");
-        address.setCity("Dhaka");
-        address.setPostCode("025");
-        address.setZip("Ranigong");
-
-        Gender gender = new Gender();
-        gender.setGenderId("1");
-        gender.setTitle("Female");
-
-        City currentCity = new City();
-        currentCity.setCityName("Sydney");
-        currentCity.setCountry(country);
-        Religion religion = new Religion();
-        religion.setId("012");
-        religion.setTilte("muslim");
-        Language language = new Language();
-        language.setLanguage("Bangla");
-        List<Language> languageList = new ArrayList<Language>();
-        languageList.add(language);
-
-        Town homeTown = new Town();
-        homeTown.setTownName("Dhaka");
-        homeTown.setCountry(country);
-        FamilyMember fMember = new FamilyMember();
-        fMember.setMemebrName("Keya");
-        fMember.setRelation("Best Friend");
-        List<FamilyMember> fMemberList = new ArrayList<FamilyMember>();
-        fMemberList.add(fMember);
-
-        List<MobilePhone> mPhoneList = new ArrayList<MobilePhone>();
-        MobilePhone mPhone = new MobilePhone();
-        mPhone.setPhone("01723598606");
-        MobilePhone mPhone1 = new MobilePhone();
-        mPhone1.setPhone("01723598606");
-        mPhoneList.add(mPhone);
-        mPhoneList.add(mPhone1);
-        List<Email> emailList = new ArrayList<Email>();
-        Email email = new Email();
-        email.setEmail("rashida57pust@gmail.com");
-        emailList.add(email);
-        RelationStatus relationStatus = new RelationStatus();
-        relationStatus.setRelationshipStatus("Single");
-
-        BasicInfo basicInfo = new BasicInfo();
-        basicInfo.setWebsite(website);
-        basicInfo.setGender(gender);
-        basicInfo.setMobilePhones(mPhoneList);
-        basicInfo.setEmails(emailList);
-        basicInfo.setCity(currentCity);
-        basicInfo.setTown(homeTown);
-        basicInfo.setFamilyMember(fMemberList);
-        basicInfo.setReligions(religion);
-        basicInfo.setLanguage(languageList);
-        basicInfo.setAddresses(address);
-        basicInfo.setBirthDate(birthDate);
-        basicInfo.setRelationshipStatus(relationStatus);
-        basicInfo.setAbout(about);
-        basicInfo.setfQuote(fQuote);
-
-        List<WorkPlace> workPlaceList = new ArrayList<WorkPlace>();
-        WorkPlace workPlace = new WorkPlace();
-        workPlace.setCompany("NASA");
-        workPlace.setPosition("Software Engineer");
-        workPlace.setDescription("Nothing to say");
-        workPlace.setCity("Dhaka");
-        workPlaceList.add(workPlace);
-
-        List<PSkill> pSkillList = new ArrayList<PSkill>();
-        PSkill pSkill = new PSkill();
-        pSkill.setpSkill("Software Engineer at NASA");
-        pSkillList.add(pSkill);
-
-        List<University> universityList = new ArrayList<University>();
-        University university = new University();
-        university.setUniversity("Sydney University");
-        university.setDescription("have nice memories");
-        university.setStartDate("04-11-15");
-        university.setEndDate("04-11-19");
-        universityList.add(university);
-
-        List<College> collegeList = new ArrayList<College>();
-        College college = new College();
-        college.setCollege("Cambridge College");
-        college.setDescription("I was very Shy in my college Life");
-        college.setStartDate("04-11-07");
-        college.setEndDate("04-11-09");
-        collegeList.add(college);
-
-        List<School> schoolList = new ArrayList<School>();
-        School school = new School();
-        school.setSchool("Ranigong high School");
-        school.setDescription("got some best friends");
-        school.setStartDate("04-11-2002");
-        school.setEndDate("04-11-2007");
-        schoolList.add(school);
-
-        BasicProfileDAO userProfileInfo = new BasicProfileDAOBuilder()
-                .setUserId(userId)
-                .setBasicInfo(basicInfo)
-                .setWorkPlaces(workPlaceList)
-                .setpSkills(pSkillList)
-                .setUniversities(universityList)
-                .setBasicInfo(basicInfo)
-                .setColleges(collegeList)
-                .setSchools(schoolList)
-                .build();
-
-        System.out.print(userProfileInfo);
-
-//.......insert basic profile info............................................
-        mongoCollection.insertOne(userProfileInfo);
-    }
 
     //@Test
     public void getOverviewTest() {
@@ -392,7 +290,7 @@ public class BasicProfileServiceTest {
         System.out.println(basicProfileModel.getSchools(userId));
     }
 
-    @Test
+//    @Test
     public void getCityTown() {
         System.out.println(basicProfileModel.getCityTown(userId));
     }
@@ -400,6 +298,7 @@ public class BasicProfileServiceTest {
 
     public void addCurrentCity() {
         City currentCity = new City();
+        currentCity.setId(userId);
         currentCity.setCityName("Sydney");
         System.out.println(basicProfileModel.addCurrentCity(userId, currentCity.toString()));
     }
@@ -407,7 +306,8 @@ public class BasicProfileServiceTest {
 //    @Test
     public void editCurrentCity() {
         City currentCity = new City();
-        currentCity.setCityName("Sydney");
+        currentCity.setId(userId);
+        currentCity.setCityName("Sydney......");
         basicProfileModel.editCurrentCity(userId, currentCity.toString());
 
     }
@@ -427,6 +327,7 @@ public class BasicProfileServiceTest {
 //    @Test
     public void addHomeTown() {
         Town homeTown = new Town();
+        homeTown.setId(userId);      
         homeTown.setTownName("Dhaka");
         System.out.println(basicProfileModel.addHomeTown(userId, homeTown.toString()));
     }
@@ -434,7 +335,7 @@ public class BasicProfileServiceTest {
 //    @Test
     public void editHomeTown() {
         Town homeTown = new Town();
-        homeTown.setTownName("Dhaka");
+        homeTown.setTownName("Dhaka..........");
         basicProfileModel.editHomeTown(userId, homeTown.toString());
 
     }
@@ -451,7 +352,7 @@ public class BasicProfileServiceTest {
         System.out.println(basicProfileModel.addRelationshipStatus(userId, relationStatus.toString()));
     }
 
-    @Test
+//    @Test
     public void getContactBasicInfo() {
         System.out.println(basicProfileModel.getContactBasicInfo(userId));
     }
@@ -478,8 +379,8 @@ public class BasicProfileServiceTest {
         String mobileId = "1";
         System.out.println(basicProfileModel.deleteMobilePhone(userId, mobileId));
     }
-    @Test
 
+    @Test
     public void addAddress() {
         Address address = new Address();
         address.setAddress("Kapasia,Ranigong");

@@ -44,7 +44,7 @@ public class NotificationServiceTest {
 
     }
 
-//    @Test
+    @Test
     public void getGeneralNotifications() {
         int offset = 0;
         int limit = 10;

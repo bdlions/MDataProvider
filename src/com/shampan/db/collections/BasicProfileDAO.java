@@ -24,19 +24,19 @@ import java.util.List;
 public class BasicProfileDAO implements Bson {
 
     private String _id;
-    @JsonProperty("uId")
+//    @JsonProperty("uId")
     private String userId;
-    @JsonProperty("bInfo")
+//    @JsonProperty("bInfo")
     private BasicInfo basicInfo;
-    @JsonProperty("wps")
+//    @JsonProperty("wps")
     private List<WorkPlace> workPlaces;
-    @JsonProperty("pss")
+//    @JsonProperty("pss")
     private List<PSkill> pSkills;
-    @JsonProperty("unis")
+//    @JsonProperty("unis")
     private List<University> universities;
-    @JsonProperty("clgs")
+//    @JsonProperty("clgs")
     private List<College> colleges;
-    @JsonProperty("schs")
+//    @JsonProperty("schs")
     private List<School> schools;
 
     public List<University> getUniversities() {
