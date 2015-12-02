@@ -149,6 +149,26 @@ public class BasicProfileService {
         return response;
     }
 
+    public static String deletePSkill(String userId, String pSkillId) {
+        String response = basicProfileModel.deletePSkill(userId, pSkillId).toString();
+        return response;
+    }
+
+    public static String deleteUniversity(String userId, String universityId) {
+        String response = basicProfileModel.deleteUniversity(userId, universityId).toString();
+        return response;
+    }
+
+    public static String deleteCollege(String userId, String collegeId) {
+        String response = basicProfileModel.deleteCollege(userId, collegeId).toString();
+        return response;
+    }
+
+    public static String deleteSchool(String userId, String schoolId) {
+        String response = basicProfileModel.deleteSchool(userId, schoolId).toString();
+        return response;
+    }
+
     public static String getOverview(String userId) {
         String overview = basicProfileModel.getOverview(userId);
         return overview;
@@ -238,36 +258,44 @@ public class BasicProfileService {
         String response = basicProfileModel.addAddress(userId, addressInfo).toString();
         return response;
     }
-    
-    public static String editAddress(String userId, String addressInfo)  {
+
+    public static String editAddress(String userId, String addressInfo) {
         String response = basicProfileModel.editAddress(userId, addressInfo).toString();
         return response;
     }
-    
+
     public static String deleteAddress(String userId, String addressInfo) {
         String response = basicProfileModel.deleteAddress(userId).toString();
         return response;
     }
-    
 
     public static String addWebsite(String userId, String websiteInfo) {
         String response = basicProfileModel.addWebsite(userId, websiteInfo).toString();
         return response;
     }
-    
+
     public static String editWebsite(String userId, String websiteInfo) {
         String response = basicProfileModel.editWebsite(userId, websiteInfo).toString();
         return response;
     }
-    
+
     public static String deleteWebsite(String userId, String websiteId) {
         String response = basicProfileModel.deleteWebsite(userId, websiteId).toString();
         return response;
     }
-    
 
     public static String addEmail(String userId, String emailInfo) {
         String response = basicProfileModel.addEmail(userId, emailInfo).toString();
+        return response;
+    }
+
+    public static String editEmail(String userId, String emailId, String emailInfo) {
+        String response = basicProfileModel.editEmail(userId, emailId, emailInfo).toString();
+        return response;
+    }
+
+    public static String deleteEmail(String userId, String emailId) {
+        String response = basicProfileModel.deleteEmail(userId, emailId).toString();
         return response;
     }
 

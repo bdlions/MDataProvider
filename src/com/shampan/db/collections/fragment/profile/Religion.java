@@ -5,6 +5,8 @@
  */
 package com.shampan.db.collections.fragment.profile;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
  *
  * @author Sampan-IT
@@ -12,7 +14,7 @@ package com.shampan.db.collections.fragment.profile;
 public class Religion {
 
     private String id;
-    private String tilte;
+    private String title;
 
     public String getId() {
         return id;
@@ -22,12 +24,37 @@ public class Religion {
         this.id = id;
     }
 
-    public String getTilte() {
-        return tilte;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTilte(String tilte) {
-        this.tilte = tilte;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+   
+
+    @Override
+    public String toString() {
+        ObjectMapper mapper = new ObjectMapper();
+        String json = "";
+        try {
+            json = mapper.writeValueAsString(this);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return json;
+    }
+
+    public static Religion getReligionInfo(String jsonContent) {
+        Religion religion = null;
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            religion = mapper.readValue(jsonContent, Religion.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return religion;
     }
 
 }

@@ -404,13 +404,13 @@ public class BasicProfileModel {
                 = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
         Document pQuery = new Document();
-        pQuery.put("wp", "$all");
+        pQuery.put("workPlaces", "$all");
         pQuery.put("universities", "$all");
         pQuery.put("basicInfo.mobilePhones", "$all");
         pQuery.put("basicInfo.emails", "$all");
         pQuery.put("basicInfo.city", "$all");
         pQuery.put("basicInfo.addresses", "$all");
-        pQuery.put("basicInfo.bDate", "$all");
+        pQuery.put("basicInfo.birthDate", "$all");
         pQuery.put("basicInfo.website", "$all");
         BasicProfileDAO overview = mongoCollection.find(selectQuery).projection(pQuery).first();
         JSONObject overviewJson = new JSONObject();
@@ -640,15 +640,40 @@ public class BasicProfileModel {
         return this.resultEvent;
     }
 
+    public ResultEvent editRelationshipStatus(String userId, String relation) {
+        try {
+            MongoCollection<BasicProfileDAO> mongoCollection
+                    = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
+            BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+            mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("basicInfo.relationshipStatus.relationshipStatus", relation)));
+            this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
+        } catch (Exception ex) {
+            this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
+        }
+        return this.resultEvent;
+    }
+    
+    
+    public ResultEvent deleteRelationshipStatus(String userId) {
+        try {
+            MongoCollection<BasicProfileDAO> mongoCollection
+                    = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
+            BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
+            mongoCollection.findOneAndUpdate(selectQuery, new Document("$unset", new Document("basicInfo.relationshipStatus", "")));
+            this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
+        } catch (Exception ex) {
+            this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
+        }
+        return this.resultEvent;
+    }
+
 //........ About Contact and BasicInfo...............
     public BasicProfileDAO getContactBasicInfo(String userId) {
         MongoCollection<BasicProfileDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
         Document pQuery = new Document();
-        pQuery.put("basicInfo.mps", "$all");
-        pQuery.put("basicInfo.adrses", "$all");
-        pQuery.put("basicInfo.ws", "$all");
+        pQuery.put("basicInfo", "$all");
         BasicProfileDAO basicInfoResult = mongoCollection.find(selectQuery).projection(pQuery).first();
         return basicInfoResult;
     }
@@ -694,8 +719,8 @@ public class BasicProfileModel {
                     = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
             Document selectQuery = new Document();
             selectQuery.put("userId", userId);
-            selectQuery.put("basicInfo.mps.id", mobileId);
-            BasicProfileDAO result1 = mongoCollection.findOneAndUpdate(selectQuery, new Document("$unset", new Document("basicInfo.mps.$", "")));
+            selectQuery.put("basicInfo.mobilePhones.id", mobileId);
+            mongoCollection.findOneAndUpdate(selectQuery, new Document("$pull", new Document("basicInfo.mobilePhones", new Document("id", mobileId))));
             this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
         } catch (Exception ex) {
             this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
@@ -710,7 +735,7 @@ public class BasicProfileModel {
             BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
             Address address = Address.getAddress(addressInfo);
             if (addressInfo != null) {
-                BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("basicInfo.adrses", JSON.parse(address.toString()))));
+                BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("basicInfo.addresses", JSON.parse(address.toString()))));
             }
             this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
         } catch (Exception ex) {
@@ -757,7 +782,7 @@ public class BasicProfileModel {
             Website website = Website.getWebsite(websiteInfo);
 
             if (website != null) {
-                BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("basicInfo.workPlaces", JSON.parse(website.toString()))));
+                BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("basicInfo.website", JSON.parse(website.toString()))));
             }
             this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
         } catch (Exception ex) {
@@ -774,7 +799,7 @@ public class BasicProfileModel {
             Website website = Website.getWebsite(websiteInfo);
 
             if (website != null) {
-                BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("basicInfo.ws", JSON.parse(website.toString()))));
+                BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("basicInfo.website", JSON.parse(website.toString()))));
             }
             this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
         } catch (Exception ex) {
@@ -788,7 +813,7 @@ public class BasicProfileModel {
             MongoCollection<BasicProfileDAO> mongoCollection
                     = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
             BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
-            BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$unset", new Document("basicInfo.ws", "")));
+            BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$unset", new Document("basicInfo.website", "")));
             this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
         } catch (Exception ex) {
             this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
@@ -813,23 +838,40 @@ public class BasicProfileModel {
         }
         return this.resultEvent;
     }
-
-    public ResultEvent editEmail(String userId, String emailId, String additionalData) {
+    
+    
+     public ResultEvent editEmail(String userId, String emailId, String emailInfo) {
         try {
             MongoCollection<BasicProfileDAO> mongoCollection
                     = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
-            BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("userId").is(userId).get();
-            Email email = Email.getEmail(additionalData);
-
+            Document selectQuery = new Document();
+            selectQuery.put("userId", userId);
+            selectQuery.put("basicInfo.emails.id", emailId);
+              Email email = Email.getEmail(emailInfo);
             if (email != null) {
-                BasicProfileDAO result = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("basicInfo.emails.$", JSON.parse(email.toString()))));
+                BasicProfileDAO result1 = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("basicInfo.emails.$", JSON.parse(email.toString()))));
             }
-
             this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
         } catch (Exception ex) {
             this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
         }
         return this.resultEvent;
+    }
+
+    public ResultEvent deleteEmail(String userId, String emailId) {
+        try {
+            MongoCollection<BasicProfileDAO> mongoCollection
+                    = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
+            Document sQuery = new Document();
+            sQuery.put("userId", userId);
+            sQuery.put("basicInfo.emails.id", emailId);
+            mongoCollection.findOneAndUpdate(sQuery, new Document("$pull", new Document("basicInfo.emails", new Document("id", emailId))));
+            this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
+        } catch (Exception ex) {
+            this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
+        }
+        return this.resultEvent;
+
     }
 
     //.................About yourself.............

@@ -46,7 +46,7 @@ import static org.junit.Assert.*;
  */
 public class BasicProfileServiceTest {
 
-    public String userId = "ijx28kmrlyOBOYv";
+    public String userId = "t87sqMzqcM86ee2";
     BasicProfileModel basicProfileModel = new BasicProfileModel();
 
     public BasicProfileServiceTest() {
@@ -166,6 +166,14 @@ public class BasicProfileServiceTest {
     public void getWorksAndEducation() {
         System.out.println(basicProfileModel.getWorksEducation(userId));
     }
+    @Test
+    public void editEmail() {
+        Email email = new Email();
+        email.setId(userId);
+        email.setEmail("Gfhgfh");
+        String emailId = "krSUqEODwvmpeIS" ;
+        System.out.println(basicProfileModel.editEmail(userId, emailId, email.toString()));
+    }
 
 //    @Test
     public void editWorksAndEducation() {
@@ -205,13 +213,13 @@ public class BasicProfileServiceTest {
 
     }
 
-//   @Test
+   @Test
     public void deleteWorksAndEducation() {
-        basicProfileModel.deleteWrokPlace(userId, userId);
-        basicProfileModel.deletePSkill(userId, userId);
-        basicProfileModel.deleteUniversity(userId, userId);
-        basicProfileModel.deleteCollege(userId, userId);
-        basicProfileModel.deleteSchool(userId, userId);
+//        basicProfileModel.deleteWrokPlace(userId, userId);
+        basicProfileModel.deletePSkill("9FjYfJ47u3zVsm9", "WDxp0BS0SdGtKkV");
+//        basicProfileModel.deleteUniversity(userId, userId);
+//        basicProfileModel.deleteCollege(userId, userId);
+//        basicProfileModel.deleteSchool(userId, userId);
 
     }
 //   @Test
@@ -380,7 +388,7 @@ public class BasicProfileServiceTest {
         System.out.println(basicProfileModel.deleteMobilePhone(userId, mobileId));
     }
 
-    @Test
+//    @Test
     public void addAddress() {
         Address address = new Address();
         address.setAddress("Kapasia,Ranigong");
@@ -443,6 +451,16 @@ public class BasicProfileServiceTest {
         about.setAbout(" honest,very simple,very careful about dearest persons ");
         System.out.println(basicProfileModel.addAbout(userId, about.toString()));
     }
+    
+    
+//      @Test
+    public void editRelationshipStatus() {
+        System.out.println(basicProfileModel.editRelationshipStatus(userId, "married"));
+    }
+//      @Test
+    public void deleteRelationshipStatus() {
+        System.out.println(basicProfileModel.deleteRelationshipStatus(userId));
+    }
 
     //@Test
     public void addBasicProfile() {
@@ -451,4 +469,6 @@ public class BasicProfileServiceTest {
         String professionalSkillString = pSkill2.toString();
         basicProfileModel.addProfessionalSkill("Dq9y3wHnMC3Y8ag", professionalSkillString);
     }
+    
+    
 }

@@ -27,14 +27,14 @@ public class MessageTest {
     String userId3 = "9nSEiMgzieo1O4K";
     String groupId = "_"+userId1+"_"+userId2+"_" ;
 
-    @Test
+//    @Test
     public void addMessage() {
 
         List<String> userIdList = new ArrayList<>();
         userIdList.add(userId1);
         userIdList.add(userId3);
         userIdList.sort(null);
-        messageModel.addMessage(userIdList.toString(), userId1, "hi");
+        System.out.println( messageModel.addMessage(userIdList.toString(), userId1, "hi"));
 
     }
 
@@ -42,7 +42,7 @@ public class MessageTest {
     public void getMessageSummaryList() {
         int offset = 0;
         int limit = 5;
-        int messageSize =  messageModel.getMessageSummaryList(userId1, offset, limit).size();
+        System.out.println(  messageModel.getMessageSummaryList(userId1, offset, limit));
         
     }
     

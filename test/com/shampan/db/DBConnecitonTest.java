@@ -124,7 +124,7 @@ public class DBConnecitonTest {
         currentCity.setCountry(country);
         Religion religion = new Religion();
         religion.setId("012");
-        religion.setTilte("muslim");
+        religion.setTitle(null);
         Language language = new Language();
         language.setLanguage("Bangla");
         List<Language> languageList = new ArrayList<Language>();
