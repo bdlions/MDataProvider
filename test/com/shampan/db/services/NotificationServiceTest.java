@@ -33,6 +33,7 @@ public class NotificationServiceTest {
 
     }
 //    @Test
+
     public void addFriendAcceptNotification() {
         notificationModel.addFriendAcceptNotification(userId, friendId);
 
@@ -40,11 +41,11 @@ public class NotificationServiceTest {
 //    @Test
 
     public void getFriendNotifications() {
-        System.out.println( notificationModel.getFriendNotifications(userId));
+        System.out.println(notificationModel.getFriendNotifications(userId));
 
     }
 
-    @Test
+//    @Test
     public void getGeneralNotifications() {
         int offset = 0;
         int limit = 10;
@@ -74,18 +75,18 @@ public class NotificationServiceTest {
 //    @Test
     public void addGeneralNotificationStatusLike() {
         UserInfo userInfo = new UserInfo();
-        userInfo.setUserId("u3");
+        userInfo.setUserId("u2");
         userInfo.setFirstName("Rashida");
         userInfo.setLastName("Sultana");
-
-        notificationModel.addGeneralNotificationStatusLike("u1", referenceId, userInfo.toString());
+        String typeId = PropertyProvider.get("NOTIFICATION_TYPE_POST_LIKE");
+        notificationModel.addGeneralNotificationStatusLikeOrShare("u5", referenceId, typeId, userInfo.toString());
 
     }
 
-//    @Test
+    @Test
     public void addGeneralNotificationStatusComment() {
         UserInfo userInfo = new UserInfo();
-        userInfo.setUserId("u1");
+        userInfo.setUserId("u5");
         userInfo.setFirstName("Rashida");
         userInfo.setLastName("Sultana");
         UserInfo refuserInfo = new UserInfo();
@@ -95,9 +96,8 @@ public class NotificationServiceTest {
         notificationModel.addGeneralNotificationStatusComment(refuserInfo.toString(), referenceId, userInfo.toString());
 
     }
-    
-//    @Test
 
+//    @Test
     public void updateStatusFriendNotifications() {
         notificationModel.updateStatusFriendNotifications(userId);
     }

@@ -9,6 +9,7 @@ import com.shampan.db.DBConnection;
 import com.shampan.db.collections.MessageDAO;
 import com.shampan.db.collections.MessageDetailsDAO;
 import com.shampan.db.collections.NotificationDAO;
+import com.shampan.db.collections.UserDAO;
 import com.shampan.db.collections.builder.MessageDAOBuilder;
 import com.shampan.db.collections.builder.MessageDetailsDAOBuilder;
 import com.shampan.db.collections.fragment.common.UserInfo;
@@ -27,6 +28,7 @@ import org.json.JSONArray;
 public class MessageModel {
 
     private ResultEvent resultEvent = new ResultEvent();
+    UserModel userModel = new UserModel();
 
     public MessageModel() {
 
@@ -60,17 +62,34 @@ public class MessageModel {
 
             JSONArray userIds = new JSONArray(userIdList);
             int userIdsSize = userIds.length();
+            List<UserDAO> userListInfo = userModel.getUserInfoList(userIdList);
+            UserInfo senderUserInfo = new UserInfo();
             if (userIdsSize > 0) {
                 String groupId = "_";
                 List<UserInfo> userList = new ArrayList<>();
                 for (int i = 0; i < userIdsSize; i++) {
                     groupId = groupId + userIds.get(i) + "_";
-                    UserInfo userInfo = new UserInfo();
-                    userInfo.setUserId((String) userIds.get(i));
-                    userList.add(userInfo);
+                    for (int j = 0; j < userListInfo.size(); j++) {
+                        if (userIds.get(i).equals(userListInfo.get(j).getUserId())) {
+                            UserInfo userInfo = new UserInfo();
+                            userInfo.setUserId(userListInfo.get(j).getUserId());
+                            userInfo.setFirstName(userListInfo.get(j).getFirstName());
+                            userInfo.setLastName(userListInfo.get(j).getLastName());
+                            userInfo.setGenderId(userListInfo.get(j).getGender().getGenderId());
+                            userList.add(userInfo);
+                        }
+
+                        if (senderId.equals(userListInfo.get(j).getUserId())) {
+                            senderUserInfo.setUserId(senderId);
+                            senderUserInfo.setFirstName(userListInfo.get(j).getFirstName());
+                            senderUserInfo.setLastName(userListInfo.get(j).getLastName());
+                            senderUserInfo.setGenderId(userListInfo.get(j).getGender().getGenderId());
+
+                        }
+
+                    }
+
                 }
-                UserInfo senderUserInfo = new UserInfo();
-                senderUserInfo.setUserId(senderId);
                 Messages userMessage = new Messages();
                 userMessage.setMessage(message);
                 userMessage.setSenderInfo(senderUserInfo);
@@ -91,6 +110,36 @@ public class MessageModel {
             this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
         }
         return this.resultEvent.toString();
+    }
+
+    public String addMessageByGroupId(String groupId, String senderUserInfo, String message) {
+        try {
+            MongoCollection<MessageDAO> mongoCollection
+                    = DBConnection.getInstance().getConnection().getCollection(Collections.MESSAGES.toString(), MessageDAO.class);
+            UserInfo senderInfo = UserInfo.getUserInformation(senderUserInfo);
+            Messages userMessage = new Messages();
+            userMessage.setMessage(message);
+            userMessage.setSenderInfo(senderInfo);
+            Document selectDocument = new Document();
+            selectDocument.put("groupId", groupId);
+            MessageDAO messageCursor = mongoCollection.find(selectDocument).first();
+            updateMessageSummaryInfo(selectDocument, message);
+            updateItemMessageList(groupId, userMessage);
+            this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
+        } catch (Exception ex) {
+            this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
+        }
+        return this.resultEvent.toString();
+    }
+
+    public String getMessageHistory(String groupId) {
+        MongoCollection<MessageDetailsDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.MESSAGESDETAILS.toString(), MessageDetailsDAO.class);
+
+        Document selectDocument = new Document();
+        selectDocument.put("groupId", groupId);
+        MessageDetailsDAO messageSummery = mongoCollection.find(selectDocument).first();
+        return messageSummery.toString();
     }
 
     /**
@@ -182,11 +231,6 @@ public class MessageModel {
         selectDocument.put("groupId", regexDocument);
         MongoCursor<MessageDAO> messageCursor = mongoCollection.find(selectDocument).skip(offset).limit(limit).iterator();
         List<MessageDAO> messageSummeryList = IteratorUtils.toList(messageCursor);
-        int messageSize = messageSummeryList.size();
-        MessageDAO lastMessage = messageSummeryList.get(messageSize - 1);
-        String groupId = lastMessage.getGroupId();
-//        MessageDetailsDAO lastMessage = getMessageList(groupId, offset, limit);
-//        System.out.println(getMessageList);
         return messageSummeryList;
 
     }

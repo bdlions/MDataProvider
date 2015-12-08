@@ -38,11 +38,11 @@ import static org.junit.Assert.*;
 public class StatusServiceTest {
 
     StatusModel statusObject = new StatusModel();
-    String userId = "iEcqEO1ehRIlKwC";
-    String mappingId = "mqQ06eko9TqYYul";
+    String userId = "SbFZCNsXxuyVgYi";
+    String mappingId = "SbFZCNsXxuyVgYi";
     String friendId = "9nSEiMgzieo1O4K";
-    String statusId = "IQoc6iX3ldy7Eq9";
-    String commentId = "mz1BYKnlTMmjAL9";
+    String statusId = "1";
+    String commentId = "1";
 
 //    @Test
     public void addStatus() {
@@ -63,14 +63,12 @@ public class StatusServiceTest {
         refInfo.setUserInfo(userInfo);
         refInfo.setImages(imageList);
         StatusDAO satusInfo = new StatusDAOBuilder()
-                .setStatusId(statusId)
-                .setUserId(userId)
+                .setStatusId("2")
+                .setUserId("u1")
                 .setUserInfo(userInfo)
-                .setMappingId(userId)
+                .setMappingId("u1")
                 .setDescription("hi hi ha ha ha")
                 .setStatusTypeId("1")
-                .setReferenceList(refList)
-                .setReferenceInfo(refInfo)
                 //                .setImages(imageList)
                 .build();
 //        System.out.println(satusInfo.toString());
@@ -85,18 +83,15 @@ public class StatusServiceTest {
 //    @Test
     public void addStatusComment() {
         UserInfo rUserInfo = new UserInfo();
-        rUserInfo.setFirstName("Nazmul");
-        rUserInfo.setLastName("Hasan");
-        rUserInfo.setUserId("u1");
+        rUserInfo.setUserId("u5");
         UserInfo rUserInfo1 = new UserInfo();
-        rUserInfo1.setFirstName("Nazmul");
-        rUserInfo1.setLastName ("Hasan");
         rUserInfo1.setUserId("u1");
         Comment statusCommentInfo = new Comment();
+        statusCommentInfo.setCommentId(commentId);
         statusCommentInfo.setDescription("Thank you !!");
         statusCommentInfo.setUserInfo(rUserInfo);
         System.out.println(statusCommentInfo.toString());
-        System.out.println(statusObject.addStatusComment(rUserInfo1.toString(), statusId, statusCommentInfo.toString()));
+        System.out.println(statusObject.addStatusComment(rUserInfo1.toString(), "2", statusCommentInfo.toString()));
 
     }
 
@@ -133,11 +128,11 @@ public class StatusServiceTest {
         UserInfo rUserInfo = new UserInfo();
         rUserInfo.setFirstName("Nazmul");
         rUserInfo.setLastName("Hasan");
-        rUserInfo.setUserId("1");
+        rUserInfo.setUserId("u5");
         Like statusLikeInfo = new Like();
         statusLikeInfo.setUserInfo(rUserInfo);
         System.out.println(statusLikeInfo.toString());
-        System.out.println(statusObject.addStatusLike(userId, statusId, statusLikeInfo.toString()));
+        System.out.println(statusObject.addStatusLike("u1", "2", statusLikeInfo.toString()));
 
     }
 

@@ -22,30 +22,39 @@ import org.junit.Test;
 public class MessageTest {
 
     MessageModel messageModel = new MessageModel();
-    String userId1 = "55Lj6k4iZReT4ck";
-    String userId2 = "mqQ06eko9TqYYul";
+    String userId1 = "SOnp1v8uK0nRKEA";
+    String userId2 = "Rmy6luSAFvM1EoP";
     String userId3 = "9nSEiMgzieo1O4K";
-    String groupId = "_"+userId1+"_"+userId2+"_" ;
+    String groupId = "_55Lj6k4iZReT4ck_9nSEiMgzieo1O4K_";
 
-//    @Test
+    @Test
     public void addMessage() {
-
+//        UserInfo userInfo = new UserInfo();
+//        userInfo.setFirstName("Rashida");
+//        userInfo.setLastName("sultana");
+//        userInfo.setUserId(userId1);
         List<String> userIdList = new ArrayList<>();
         userIdList.add(userId1);
-        userIdList.add(userId3);
+        userIdList.add(userId2);
         userIdList.sort(null);
-        System.out.println( messageModel.addMessage(userIdList.toString(), userId1, "hi"));
+        
+        System.out.println(messageModel.addMessage(userIdList.toString(), userId1, "hi"));
 
     }
 
+//    @Test
+//    public void getMessageInitailization() {
+//        System.out.println( messageModel.getMessageInitailization(groupId));
+//        
+//    }
 //    @Test
     public void getMessageSummaryList() {
         int offset = 0;
         int limit = 5;
-        System.out.println(  messageModel.getMessageSummaryList(userId1, offset, limit));
-        
+        System.out.println(messageModel.getMessageSummaryList(userId1, offset, limit));
+
     }
-    
+
 //    @Test
     public void getMessageList() {
         int offset = 1;

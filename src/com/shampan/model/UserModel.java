@@ -32,6 +32,7 @@ public class UserModel {
     private ResultEvent resultEvent = new ResultEvent();
     Utility utility = new Utility();
 
+
     public UserModel() {
         PropertyProvider.add("com.shampan.properties/response");
         PropertyProvider.add("com.shampan.properties/attributes");

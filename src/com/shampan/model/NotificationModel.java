@@ -601,19 +601,34 @@ public class NotificationModel {
                     projectionQuery.put(attrGeneralNotifications, new Document("$elemMatch", projectionSelectionDocument));
 
                     NotificationDAO generalNotificationCursor = mongoCollection.find(selectionDocument).projection(projectionQuery).first();
-                    System.out.println(generalNotificationCursor.toString());
                     //If  has a notification for this status and type
                     if (generalNotificationCursor != null) {
-                        GeneralNotification generalNotification = new GeneralNotification();
-                        List<UserInfo> userList = generalNotificationCursor.getGeneralNotifications().get(0).getUserList();
-                        userList.add(userInfo);
-                        Document updateDocument = new Document();
-                        if (!userId.equals(userInfo.getUserId())) {
-                            updateDocument.put(attrGeneralNotifications + ".$." + attrStatusId, unReadStatusId);
+                        if (generalNotificationCursor.getGeneralNotifications() != null) {
+                            GeneralNotification generalNotification = new GeneralNotification();
+                            List<UserInfo> userList = generalNotificationCursor.getGeneralNotifications().get(0).getUserList();
+                            userList.add(userInfo);
+                            Document updateDocument = new Document();
+                            if (!userId.equals(userInfo.getUserId())) {
+                                generalNotification.setStatusId(unReadStatusId);
+                            }
+                            generalNotification.setModifiedOn(utility.getCurrentTime());
+                            generalNotification.setUserList(userList);
+                            mongoCollection.findOneAndUpdate(selectionDocument, new Document("$set", new Document("generalNotifications.$", JSON.parse(generalNotification.toString()))));
+
+                        } else {
+
+                            List<UserInfo> userList = new ArrayList<>();
+                            userList.add(userInfo);
+                            GeneralNotification generalNotification = new GeneralNotification();
+                            if (!userId.equals(userInfo.getUserId())) {
+                                generalNotification.setStatusId(unReadStatusId);
+                            }
+                            generalNotification.setTypeId(typeId);
+                            generalNotification.setReferenceId(referenceId);
+                            generalNotification.setUserList(userList);
+                            generalNotification.setModifiedOn(utility.getCurrentTime());
+                            mongoCollection.findOneAndUpdate(userSelectionDocument, new Document("$push", new Document("generalNotifications", JSON.parse(generalNotification.toString()))));
                         }
-                        updateDocument.put(attrGeneralNotifications + ".$." + "modifiedOn", (utility.getCurrentTime()));
-                        updateDocument.put(attrGeneralNotifications + ".$." + attrUserList, JSON.parse(userList.toString()));
-                        mongoCollection.findOneAndUpdate(selectionDocument, new Document("$set", updateDocument));
 
                     } else {
                         //First entry for this status and type
@@ -725,7 +740,7 @@ public class NotificationModel {
                         resultedNotifications.put("notification", generalNotificationCursor.getGeneralNotifications().get(i));
                         resultedNotifications.put("genderId", userModel.getUserGenderInfo(tempUserId));
                         generalNotificationList.add(resultedNotifications);
-                        generalNotificationSize-- ;
+                        generalNotificationSize--;
                     }
                 }
 

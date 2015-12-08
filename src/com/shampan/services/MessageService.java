@@ -22,6 +22,9 @@ public class MessageService {
     public static String addMessage(String userIdList, String senderId, String message) {
         return messageModel.addMessage(userIdList, senderId, message).toString();
     }
+    public static String addMessageByGroupId(String groupId, String senderInfo, String message) {
+        return messageModel.addMessageByGroupId(groupId, senderInfo, message).toString();
+    }
 
     /**
      * This method will return message summary list of a user
@@ -34,6 +37,7 @@ public class MessageService {
     public static String getMessageSummaryList(String userId, int offset, int limit) {
         return messageModel.getMessageSummaryList(userId, offset, limit).toString();
     }
+
 
     /**
      * This method will return message list of a group
