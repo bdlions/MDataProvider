@@ -29,7 +29,10 @@ import com.shampan.db.collections.fragment.profile.WorkPlace;
 import com.shampan.util.LogWriter;
 import com.shampan.util.PropertyProvider;
 import java.util.ArrayList;
+import java.util.List;
+import org.apache.commons.collections4.IteratorUtils;
 import org.bson.Document;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -65,6 +68,34 @@ public class BasicProfileModel {
     }
 
     //--------------------------------- About -> Works and Education ------------------------------------//
+    public List<BasicProfileDAO> getRecentUserInfo(String userIdList) {
+        MongoCollection<BasicProfileDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
+
+        JSONArray userIds = new JSONArray(userIdList);
+        int userIdsSize = userIds.length();
+        String attrUserId = PropertyProvider.get("USER_ID");
+        List<Document> orSelectionDocument = new ArrayList<Document>();
+        List<BasicProfileDAO> userList = null;
+        if (userIdsSize > 0) {
+            for (int i = 0; i < userIdsSize; i++) {
+                Document userSelectionDocument = new Document();
+                userSelectionDocument.put(attrUserId, userIds.get(i));
+                orSelectionDocument.add(userSelectionDocument);
+            }
+            Document selectDocument = new Document();
+            selectDocument.put("$or", orSelectionDocument);
+            Document pQueryDocument = new Document();
+            pQueryDocument.put(attrUserId, "$all");
+            pQueryDocument.put("pSkills", "$all");
+            pQueryDocument.put("basicInfo.birthDate", "$all");
+            MongoCursor<BasicProfileDAO> userInfoList = mongoCollection.find(selectDocument).projection(pQueryDocument).iterator();
+            userList = IteratorUtils.toList(userInfoList);
+        }
+
+        return userList;
+    }
+
     /**
      * This method will return list of work places , professional skills,
      * universities, colleges and schools of a user
@@ -652,8 +683,7 @@ public class BasicProfileModel {
         }
         return this.resultEvent;
     }
-    
-    
+
     public ResultEvent deleteRelationshipStatus(String userId) {
         try {
             MongoCollection<BasicProfileDAO> mongoCollection
@@ -838,16 +868,15 @@ public class BasicProfileModel {
         }
         return this.resultEvent;
     }
-    
-    
-     public ResultEvent editEmail(String userId, String emailId, String emailInfo) {
+
+    public ResultEvent editEmail(String userId, String emailId, String emailInfo) {
         try {
             MongoCollection<BasicProfileDAO> mongoCollection
                     = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
             Document selectQuery = new Document();
             selectQuery.put("userId", userId);
             selectQuery.put("basicInfo.emails.id", emailId);
-              Email email = Email.getEmail(emailInfo);
+            Email email = Email.getEmail(emailInfo);
             if (email != null) {
                 BasicProfileDAO result1 = mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("basicInfo.emails.$", JSON.parse(email.toString()))));
             }

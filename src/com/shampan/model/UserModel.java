@@ -12,16 +12,21 @@ import com.mongodb.client.MongoCursor;
 import com.sampan.response.ResultEvent;
 import com.shampan.db.Collections;
 import com.shampan.db.DBConnection;
+import com.shampan.db.collections.BasicProfileDAO;
 import com.shampan.db.collections.StatusDAO;
 import com.shampan.db.collections.UserDAO;
 import com.shampan.db.collections.builder.UserDAOBuilder;
+import com.shampan.db.collections.fragment.profile.BirthDate;
 import com.shampan.util.PropertyProvider;
 import com.shampan.util.Utility;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import org.apache.commons.collections4.IteratorUtils;
+import org.apache.commons.collections4.list.LazyList;
 import org.bson.Document;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -31,7 +36,7 @@ public class UserModel {
 
     private ResultEvent resultEvent = new ResultEvent();
     Utility utility = new Utility();
-
+    BasicProfileModel basicProfileModel = new BasicProfileModel();
 
     public UserModel() {
         PropertyProvider.add("com.shampan.properties/response");
@@ -139,7 +144,7 @@ public class UserModel {
         return userGenderId;
     }
 
-    public List<UserDAO> getRecentUser() {
+    public List<JSONObject> getRecentUser() {
         int offset = 0;
         int limit = 10;
         MongoCollection<UserDAO> mongoCollection
@@ -150,9 +155,57 @@ public class UserModel {
         projectionDocument.put("userId", "$all");
         projectionDocument.put("gender", "$all");
         projectionDocument.put("country", "$all");
+        List<JSONObject> requestList = new ArrayList<JSONObject>();
+        List<UserDAO> userInfoList = new ArrayList<>();
         MongoCursor<UserDAO> userList = mongoCollection.find().sort(new Document("modifiedOn", -1)).skip(offset).limit(limit).projection(projectionDocument).iterator();
-        List<UserDAO> userListInfo = IteratorUtils.toList(userList);
-        return userListInfo;
+        List<String> userIds = new ArrayList<>();
+        while (userList.hasNext()) {
+            UserDAO user = userList.next();
+            userIds.add(user.getUserId());
+            userInfoList.add(user);
 
+        }
+
+        List<BasicProfileDAO> userBasicInfoList = basicProfileModel.getRecentUserInfo(userIds.toString());
+        int userSize = userBasicInfoList.size();
+        for (int j = 0; j < userSize; j++) {
+            if (userInfoList.get(j) != null && userInfoList.get(j).getUserId().equals(userBasicInfoList.get(j).getUserId())) {
+                JSONObject userJson = new JSONObject();
+                userJson.put("userId", userInfoList.get(j).getUserId());
+                userJson.put("firstName", userInfoList.get(j).getFirstName());
+                userJson.put("lastName", userInfoList.get(j).getLastName());
+                userJson.put("gender", userInfoList.get(j).getGender());
+                userJson.put("country", userInfoList.get(j).getCountry());
+                userJson.put("pSkill", userBasicInfoList.get(j).getpSkills());
+                BirthDate birthDay = userBasicInfoList.get(j).getBasicInfo().getBirthDate();
+                int age = getAge(birthDay);
+                userJson.put("age", age);
+                System.out.println(userJson);
+                requestList.add(userJson);
+            }
+        }
+
+        return requestList;
+    }
+
+    public int getAge(BirthDate birthDay) {
+        String year = birthDay.getBirthYear();
+        String month = birthDay.getBirthMonth();
+        String day = birthDay.getBirthDay();
+        //set up date of birth
+        Calendar calDOB = Calendar.getInstance();
+        calDOB.set(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
+        //setup calNow as today.
+        Calendar calNow = Calendar.getInstance();
+        calNow.setTime(new java.util.Date());
+        //calculate age in years.
+        int ageYr = (calNow.get(Calendar.YEAR) - calDOB.get(Calendar.YEAR));
+        // calculate additional age in months, possibly adjust years.
+        int ageMo = (calNow.get(Calendar.MONTH) - calDOB.get(Calendar.MONTH));
+        if (ageMo < 0) {
+            //adjust years by subtracting one
+            ageYr--;
+        }
+        return ageYr;
     }
 }
