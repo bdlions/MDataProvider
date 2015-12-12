@@ -168,20 +168,25 @@ public class UserModel {
 
         List<BasicProfileDAO> userBasicInfoList = basicProfileModel.getRecentUserInfo(userIds.toString());
         int userSize = userBasicInfoList.size();
+        int userListSize = userInfoList.size();
         for (int j = 0; j < userSize; j++) {
-            if (userInfoList.get(j) != null && userInfoList.get(j).getUserId().equals(userBasicInfoList.get(j).getUserId())) {
-                JSONObject userJson = new JSONObject();
-                userJson.put("userId", userInfoList.get(j).getUserId());
-                userJson.put("firstName", userInfoList.get(j).getFirstName());
-                userJson.put("lastName", userInfoList.get(j).getLastName());
-                userJson.put("gender", userInfoList.get(j).getGender());
-                userJson.put("country", userInfoList.get(j).getCountry());
-                userJson.put("pSkill", userBasicInfoList.get(j).getpSkills());
-                BirthDate birthDay = userBasicInfoList.get(j).getBasicInfo().getBirthDate();
-                int age = getAge(birthDay);
-                userJson.put("age", age);
-                System.out.println(userJson);
-                requestList.add(userJson);
+            for (int i = 0; i < userListSize; i++) {
+                if (userInfoList.get(i).getUserId().equals(userBasicInfoList.get(j).getUserId())) {
+                    BirthDate birthDay = userBasicInfoList.get(j).getBasicInfo().getBirthDate();
+                    JSONObject userJson = new JSONObject();
+                    int age = getAge(birthDay);
+                    userJson.put("age", age);
+                    userJson.put("userId", userInfoList.get(i).getUserId());
+                    userJson.put("firstName", userInfoList.get(i).getFirstName());
+                    userJson.put("lastName", userInfoList.get(i).getLastName());
+                    userJson.put("gender", userInfoList.get(i).getGender());
+                    userJson.put("country", userInfoList.get(i).getCountry());
+                    if (userBasicInfoList.get(j).getpSkills() != null) {
+                       int pSkillSize= userBasicInfoList.get(j).getpSkills().size();
+                        userJson.put("pSkill", userBasicInfoList.get(j).getpSkills().get(pSkillSize-1).getpSkill());
+                    }
+                    requestList.add(userJson);
+                }
             }
         }
 

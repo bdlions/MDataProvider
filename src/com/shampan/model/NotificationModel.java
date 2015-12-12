@@ -105,7 +105,7 @@ public class NotificationModel {
         JSONObject resultedNotifications = new JSONObject();
         JSONObject userInitiation = new JSONObject();
         userInitiation.put("friend", friendCounter);
-        userInitiation.put("message", "5");
+        userInitiation.put("message", "");
         userInitiation.put("general", generalCounter);
         userInitiation.put("userCurrentTimeStamp", utility.getCurrentTime());
         userInitiation.put("genderId", userModel.getUserGenderInfo(userId));
