@@ -20,6 +20,7 @@ import java.util.List;
 import org.apache.commons.collections4.IteratorUtils;
 import org.bson.Document;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -222,7 +223,7 @@ public class MessageModel {
      * @param offset, offset
      * @param limit, limit
      */
-    public List<MessageDAO> getMessageSummaryList(String userId, int offset, int limit) {
+    public JSONObject getMessageSummaryList(String userId, int offset, int limit) {
         MongoCollection<MessageDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.MESSAGES.toString(), MessageDAO.class);
         Document regexDocument = new Document();
@@ -231,7 +232,11 @@ public class MessageModel {
         selectDocument.put("groupId", regexDocument);
         MongoCursor<MessageDAO> messageCursor = mongoCollection.find(selectDocument).skip(offset).limit(limit).iterator();
         List<MessageDAO> messageSummeryList = IteratorUtils.toList(messageCursor);
-        return messageSummeryList;
+        MessageDetailsDAO recentMessageInfo = getMessageList(messageSummeryList.get(0).getGroupId(), offset, limit);
+        JSONObject messageInfo = new JSONObject();
+        messageInfo.put("messageSummeryList", messageSummeryList);
+        messageInfo.put("recentMessageInfo",recentMessageInfo);
+        return messageInfo;
 
     }
 

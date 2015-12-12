@@ -22,12 +22,12 @@ import org.junit.Test;
 public class MessageTest {
 
     MessageModel messageModel = new MessageModel();
-    String userId1 = "SOnp1v8uK0nRKEA";
+    String userId1 = "FdJptWkGvsRNAIW";
     String userId2 = "Rmy6luSAFvM1EoP";
     String userId3 = "9nSEiMgzieo1O4K";
     String groupId = "_55Lj6k4iZReT4ck_9nSEiMgzieo1O4K_";
 
-    @Test
+//    @Test
     public void addMessage() {
 //        UserInfo userInfo = new UserInfo();
 //        userInfo.setFirstName("Rashida");
@@ -47,7 +47,7 @@ public class MessageTest {
 //        System.out.println( messageModel.getMessageInitailization(groupId));
 //        
 //    }
-//    @Test
+    @Test
     public void getMessageSummaryList() {
         int offset = 0;
         int limit = 5;
