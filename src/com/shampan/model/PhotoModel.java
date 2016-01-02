@@ -146,8 +146,11 @@ public class PhotoModel {
     public String getAlbum(String userId, String albumId) {
         MongoCollection<AlbumDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.USERALBUMS.toString(), AlbumDAO.class);
-        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("albumId").is(albumId).get();
-        AlbumDAO albumInfo = mongoCollection.find(selectQuery).first();
+       Document selectDocument = new Document();
+       selectDocument.put("userId", userId);
+       selectDocument.put("albumId", albumId);
+//        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("albumId").is(albumId).get();
+        AlbumDAO albumInfo = mongoCollection.find(selectDocument).first();
         JSONObject albumInfoJson = new JSONObject();
         try {
             albumInfoJson.put("albumId", albumInfo.getAlbumId());

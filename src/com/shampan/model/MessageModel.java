@@ -124,8 +124,12 @@ public class MessageModel {
             Document selectDocument = new Document();
             selectDocument.put("groupId", groupId);
             MessageDAO messageCursor = mongoCollection.find(selectDocument).first();
-            updateMessageSummaryInfo(selectDocument, message);
-            updateItemMessageList(groupId, userMessage);
+            if (messageCursor != null) {
+                updateMessageSummaryInfo(selectDocument, message);
+                updateItemMessageList(groupId, userMessage);
+            } else {
+                this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
+            }
             this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
         } catch (Exception ex) {
             this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
@@ -235,7 +239,7 @@ public class MessageModel {
         MessageDetailsDAO recentMessageInfo = getMessageList(messageSummeryList.get(0).getGroupId(), offset, limit);
         JSONObject messageInfo = new JSONObject();
         messageInfo.put("messageSummeryList", messageSummeryList);
-        messageInfo.put("recentMessageInfo",recentMessageInfo);
+        messageInfo.put("recentMessageInfo", recentMessageInfo);
         return messageInfo;
 
     }
@@ -255,7 +259,11 @@ public class MessageModel {
         Document sortDocument = new Document();
         Document projectionDocument = new Document();
         projectionDocument.put("messages", "$all");
+        MessageDetailsDAO messageDetails = new MessageDetailsDAO();
         MessageDetailsDAO messageDetailsCursor = mongoCollection.find(selectDocument).first();
-        return messageDetailsCursor;
+        if (messageDetailsCursor != null) {
+            messageDetails = messageDetailsCursor;
+        }
+        return messageDetails;
     }
 }

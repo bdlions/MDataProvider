@@ -347,14 +347,16 @@ public class RelationModel {
             }
             if (userIdList != null) {
                 List<UserDAO> userInfoList = userModel.getUserInfoList(userIdList.toString());
-                int userListSize = userInfoList.size();
-                int requestListSize = requestList.size();
-                for (int j = 0; j < requestListSize; j++) {
-                    if (userInfoList.get(j) != null) {
-                        requestList.get(j).setUserId(userInfoList.get(j).getUserId());
-                        requestList.get(j).setFirstName(userInfoList.get(j).getFirstName());
-                        requestList.get(j).setLastName(userInfoList.get(j).getLastName());
-                        requestList.get(j).setGenderId(userInfoList.get(j).getGender().getGenderId());
+                if (userInfoList != null) {
+                    int userListSize = userInfoList.size();
+                    int requestListSize = requestList.size();
+                    for (int j = 0; j < requestListSize; j++) {
+                        if (userInfoList.get(j) != null) {
+                            requestList.get(j).setUserId(userInfoList.get(j).getUserId());
+                            requestList.get(j).setFirstName(userInfoList.get(j).getFirstName());
+                            requestList.get(j).setLastName(userInfoList.get(j).getLastName());
+                            requestList.get(j).setGenderId(userInfoList.get(j).getGender().getGenderId());
+                        }
                     }
                 }
             }

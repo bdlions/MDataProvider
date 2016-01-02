@@ -45,6 +45,9 @@ public class ServerExecutor extends AbstractVerticle {
         HttpServer server = vertx.createHttpServer();
         Router router = Router.router(vertx);
 
+        router.route("/message/addMessageByGroupId*").handler(BodyHandler.create());
+        router.post("/message/addMessageByGroupId").handler(MessageController::addMessageByGroupId);
+        
         router.route("/").handler((RoutingContext routingContext) -> {
             HttpServerResponse response = routingContext.response();
             response.end("Muslimand DB service.");
@@ -53,6 +56,12 @@ public class ServerExecutor extends AbstractVerticle {
          LandingPageController
          */
         router.get("/landingpage/getLandingPageInfo").handler(LandingPageController::getLandingPageInfo);
+        /*
+         /*
+         SearchController
+         */
+        router.route("/search/getUsers*").handler(BodyHandler.create());
+        router.post("/search/getUsers").handler(SearchController::getUsers);
         /*
          StatusController
          */
@@ -182,10 +191,10 @@ public class ServerExecutor extends AbstractVerticle {
         /*
          RelationController
          */
-        router.route("/friend/addFriend*").handler(BodyHandler.create());
-        router.post("/friend/addFriend").handler(RelationController::addFriend);
-        router.route("/friend/blockNonFriend*").handler(BodyHandler.create());
-        router.post("/friend/blockNonFriend").handler(RelationController::blockNonFriend);
+        router.route("/relation/addFriend*").handler(BodyHandler.create());
+        router.post("/relation/addFriend").handler(RelationController::addFriend);
+        router.route("/relation/blockNonFriend*").handler(BodyHandler.create());
+        router.post("/relation/blockNonFriend").handler(RelationController::blockNonFriend);
         router.route("/relation/blockFriend*").handler(BodyHandler.create());
         router.post("/relation/blockFriend").handler(RelationController::blockFriend);
         router.route("/relation/approveFriend*").handler(BodyHandler.create());
@@ -202,6 +211,17 @@ public class ServerExecutor extends AbstractVerticle {
         router.post("/relation/getRelationInfo").handler(RelationController::getRelationInfo);
         router.route("/relation/getUserGenderInfo*").handler(BodyHandler.create());
         router.post("/relation/getUserGenderInfo").handler(RelationController::getUserGenderInfo);
+        /*
+         MessageController
+         */
+        router.route("/message/addMessage*").handler(BodyHandler.create());
+        router.post("/message/addMessage").handler(MessageController::addMessage);
+        
+        router.route("/message/getMessageSummaryList*").handler(BodyHandler.create());
+        router.post("/message/getMessageSummaryList").handler(MessageController::getMessageSummaryList);
+        router.route("/message/getMessageList*").handler(BodyHandler.create());
+        router.post("/message/getMessageList").handler(MessageController::getMessageList);
+        
         /*
          NotificationController
          */

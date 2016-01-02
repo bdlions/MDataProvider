@@ -33,7 +33,7 @@ public class StatusController {
         /**
          * Default offset is 0 Default limit is 10 User id is mandatory
          */
-        int offset = 0, limit = 10;
+        int offset = 0 , limit = 0;
 
         userId = routingContext.request().getParam("userId");
         if (Strings.isNullOrEmpty(userId)) {
@@ -69,8 +69,28 @@ public class StatusController {
     public static void getUserProfileStatuses(RoutingContext routingContext) {
         String userId = routingContext.request().getParam("userId");
         String mappingId = routingContext.request().getParam("mappingId");
-        int offset = 0;
-        int limit = 10;
+         /*
+         If offset is incorrect then offset will be used as default
+         */
+        int offset = 0 , limit = 0;
+        if (!Strings.isNullOrEmpty(routingContext.request().getParam("offset"))) {
+            try {
+                offset = Integer.parseInt(routingContext.request().getParam("offset"));
+            } catch (NumberFormatException nfe) {
+                logger.debug(nfe.getMessage());
+            }
+        }
+
+        /*
+         If limit is incorrect then limit will be used as default
+         */
+        if (!Strings.isNullOrEmpty(routingContext.request().getParam("limit"))) {
+            try {
+                limit = Integer.parseInt(routingContext.request().getParam("limit"));
+            } catch (NumberFormatException nfe) {
+                logger.debug(nfe.getMessage());
+            }
+        }
         routingContext.response()
                 .putHeader("content-type", "application/json; charset=utf-8")
                 .end(StatusService.getUserProfileStatuses(userId, mappingId, offset, limit));

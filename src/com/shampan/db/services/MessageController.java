@@ -21,10 +21,10 @@ public class MessageController {
         String message = routingContext.request().getParam("message");
         routingContext.response()
                 .putHeader("content-type", "application/json; charset=utf-8")
-                .end(MessageService.addMessage(userIdList, senderId, message));
+                .end(MessageService.addMessage(userIdList, senderId, message));        
     }
 
-    public static void addMessageByGroupId(RoutingContext routingContext) {
+    public static void addMessageByGroupId(RoutingContext routingContext) { 
         String groupId = routingContext.request().getParam("groupId");
         String senderInfo = routingContext.request().getParam("senderInfo");
         String message = routingContext.request().getParam("message");
@@ -32,7 +32,7 @@ public class MessageController {
                 .putHeader("content-type", "application/json; charset=utf-8")
                 .end(MessageService.addMessageByGroupId(groupId, senderInfo, message));
     }
-
+    
     public static void getMessageSummaryList(RoutingContext routingContext) {
         int offset = 0;
         int limit = 10;

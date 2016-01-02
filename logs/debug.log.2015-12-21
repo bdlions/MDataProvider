@@ -1,0 +1,768 @@
+2015-12-21 13:47:54,974 [Slf4JLogger.java:main:71] - Using SLF4J as the default logging framework
+2015-12-21 13:47:55,055 [Slf4JLogger.java:main:81] - -Dio.netty.leakDetection.level: simple
+2015-12-21 13:47:55,063 [Slf4JLogger.java:main:81] - -Dio.netty.leakDetection.maxRecords: 4
+2015-12-21 13:47:55,113 [Slf4JLogger.java:main:76] - -Dio.netty.eventLoopThreads: 8
+2015-12-21 13:47:55,138 [Slf4JLogger.java:main:76] - java.nio.Buffer.address: available
+2015-12-21 13:47:55,138 [Slf4JLogger.java:main:76] - sun.misc.Unsafe.theUnsafe: available
+2015-12-21 13:47:55,138 [Slf4JLogger.java:main:71] - sun.misc.Unsafe.copyMemory: available
+2015-12-21 13:47:55,139 [Slf4JLogger.java:main:76] - java.nio.Bits.unaligned: true
+2015-12-21 13:47:55,139 [Slf4JLogger.java:main:71] - Platform: Windows
+2015-12-21 13:47:55,155 [Slf4JLogger.java:main:76] - Java version: 8
+2015-12-21 13:47:55,155 [Slf4JLogger.java:main:76] - -Dio.netty.noUnsafe: false
+2015-12-21 13:47:55,155 [Slf4JLogger.java:main:76] - sun.misc.Unsafe: available
+2015-12-21 13:47:55,156 [Slf4JLogger.java:main:76] - -Dio.netty.noJavassist: false
+2015-12-21 13:47:55,157 [Slf4JLogger.java:main:71] - Javassist: unavailable
+2015-12-21 13:47:55,157 [Slf4JLogger.java:main:71] - You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+2015-12-21 13:47:55,157 [Slf4JLogger.java:main:76] - -Dio.netty.tmpdir: C:\Users\SAMPAN~1\AppData\Local\Temp (java.io.tmpdir)
+2015-12-21 13:47:55,159 [Slf4JLogger.java:main:76] - -Dio.netty.bitMode: 64 (sun.arch.data.model)
+2015-12-21 13:47:55,160 [Slf4JLogger.java:main:76] - -Dio.netty.noPreferDirect: false
+2015-12-21 13:47:55,179 [Slf4JLogger.java:main:76] - -Dio.netty.noKeySetOptimization: false
+2015-12-21 13:47:55,179 [Slf4JLogger.java:main:76] - -Dio.netty.selectorAutoRebuildThreshold: 512
+2015-12-21 13:47:55,243 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@725bef66
+2015-12-21 13:47:55,244 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@6e3c1e69
+2015-12-21 13:47:55,245 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@35851384
+2015-12-21 13:47:55,246 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@6adca536
+2015-12-21 13:47:55,247 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@28f67ac7
+2015-12-21 13:47:55,248 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@2a18f23c
+2015-12-21 13:47:55,249 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@16c0663d
+2015-12-21 13:47:55,249 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@4ec6a292
+2015-12-21 13:47:55,251 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@45c8e616
+2015-12-21 13:47:55,658 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.numHeapArenas: 8
+2015-12-21 13:47:55,659 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.numDirectArenas: 8
+2015-12-21 13:47:55,659 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.pageSize: 8192
+2015-12-21 13:47:55,659 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.maxOrder: 11
+2015-12-21 13:47:55,659 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.chunkSize: 16777216
+2015-12-21 13:47:55,659 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.tinyCacheSize: 512
+2015-12-21 13:47:55,660 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.smallCacheSize: 256
+2015-12-21 13:47:55,660 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.normalCacheSize: 64
+2015-12-21 13:47:55,660 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+2015-12-21 13:47:55,672 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.cacheTrimInterval: 8192
+2015-12-21 13:47:55,715 [Slf4JLogger.java:vert.x-eventloop-thread-2:71] - -Dio.netty.initialSeedUniquifier: 0xbecad178ed8c8259 (took 0 ms)
+2015-12-21 13:47:55,734 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.type: unpooled
+2015-12-21 13:47:55,734 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.threadLocalDirectBufferSize: 65536
+2015-12-21 13:47:55,752 [Slf4JLogger.java:vert.x-eventloop-thread-2:86] - Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+2015-12-21 13:47:55,752 [Slf4JLogger.java:vert.x-eventloop-thread-2:81] - \proc\sys\net\core\somaxconn: 200 (non-existent)
+2015-12-21 13:48:36,283 [Slf4JLogger.java:main:71] - Using SLF4J as the default logging framework
+2015-12-21 13:48:36,288 [Slf4JLogger.java:main:81] - -Dio.netty.leakDetection.level: simple
+2015-12-21 13:48:36,290 [Slf4JLogger.java:main:81] - -Dio.netty.leakDetection.maxRecords: 4
+2015-12-21 13:48:36,301 [Slf4JLogger.java:main:76] - -Dio.netty.eventLoopThreads: 8
+2015-12-21 13:48:36,311 [Slf4JLogger.java:main:76] - java.nio.Buffer.address: available
+2015-12-21 13:48:36,312 [Slf4JLogger.java:main:76] - sun.misc.Unsafe.theUnsafe: available
+2015-12-21 13:48:36,312 [Slf4JLogger.java:main:71] - sun.misc.Unsafe.copyMemory: available
+2015-12-21 13:48:36,312 [Slf4JLogger.java:main:76] - java.nio.Bits.unaligned: true
+2015-12-21 13:48:36,312 [Slf4JLogger.java:main:71] - Platform: Windows
+2015-12-21 13:48:36,313 [Slf4JLogger.java:main:76] - Java version: 8
+2015-12-21 13:48:36,313 [Slf4JLogger.java:main:76] - -Dio.netty.noUnsafe: false
+2015-12-21 13:48:36,313 [Slf4JLogger.java:main:76] - sun.misc.Unsafe: available
+2015-12-21 13:48:36,313 [Slf4JLogger.java:main:76] - -Dio.netty.noJavassist: false
+2015-12-21 13:48:36,314 [Slf4JLogger.java:main:71] - Javassist: unavailable
+2015-12-21 13:48:36,314 [Slf4JLogger.java:main:71] - You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+2015-12-21 13:48:36,315 [Slf4JLogger.java:main:76] - -Dio.netty.tmpdir: C:\Users\SAMPAN~1\AppData\Local\Temp (java.io.tmpdir)
+2015-12-21 13:48:36,318 [Slf4JLogger.java:main:76] - -Dio.netty.bitMode: 64 (sun.arch.data.model)
+2015-12-21 13:48:36,319 [Slf4JLogger.java:main:76] - -Dio.netty.noPreferDirect: false
+2015-12-21 13:48:36,340 [Slf4JLogger.java:main:76] - -Dio.netty.noKeySetOptimization: false
+2015-12-21 13:48:36,341 [Slf4JLogger.java:main:76] - -Dio.netty.selectorAutoRebuildThreshold: 512
+2015-12-21 13:48:36,397 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@725bef66
+2015-12-21 13:48:36,398 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@6e3c1e69
+2015-12-21 13:48:36,399 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@35851384
+2015-12-21 13:48:36,400 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@6adca536
+2015-12-21 13:48:36,400 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@28f67ac7
+2015-12-21 13:48:36,401 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@2a18f23c
+2015-12-21 13:48:36,401 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@16c0663d
+2015-12-21 13:48:36,402 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@4ec6a292
+2015-12-21 13:48:36,403 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@45c8e616
+2015-12-21 13:48:36,587 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.numHeapArenas: 8
+2015-12-21 13:48:36,587 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.numDirectArenas: 8
+2015-12-21 13:48:36,587 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.pageSize: 8192
+2015-12-21 13:48:36,588 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.maxOrder: 11
+2015-12-21 13:48:36,588 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.chunkSize: 16777216
+2015-12-21 13:48:36,588 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.tinyCacheSize: 512
+2015-12-21 13:48:36,588 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.smallCacheSize: 256
+2015-12-21 13:48:36,588 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.normalCacheSize: 64
+2015-12-21 13:48:36,589 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+2015-12-21 13:48:36,589 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.cacheTrimInterval: 8192
+2015-12-21 13:48:36,605 [Slf4JLogger.java:vert.x-eventloop-thread-2:71] - -Dio.netty.initialSeedUniquifier: 0x8b99926c7e580da2 (took 1 ms)
+2015-12-21 13:48:36,624 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.type: unpooled
+2015-12-21 13:48:36,624 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.threadLocalDirectBufferSize: 65536
+2015-12-21 13:48:36,643 [Slf4JLogger.java:vert.x-eventloop-thread-2:86] - Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+2015-12-21 13:48:36,644 [Slf4JLogger.java:vert.x-eventloop-thread-2:81] - \proc\sys\net\core\somaxconn: 200 (non-existent)
+2015-12-21 13:50:03,120 [Slf4JLogger.java:main:71] - Using SLF4J as the default logging framework
+2015-12-21 13:50:03,126 [Slf4JLogger.java:main:81] - -Dio.netty.leakDetection.level: simple
+2015-12-21 13:50:03,127 [Slf4JLogger.java:main:81] - -Dio.netty.leakDetection.maxRecords: 4
+2015-12-21 13:50:03,146 [Slf4JLogger.java:main:76] - -Dio.netty.eventLoopThreads: 8
+2015-12-21 13:50:03,153 [Slf4JLogger.java:main:76] - java.nio.Buffer.address: available
+2015-12-21 13:50:03,154 [Slf4JLogger.java:main:76] - sun.misc.Unsafe.theUnsafe: available
+2015-12-21 13:50:03,157 [Slf4JLogger.java:main:71] - sun.misc.Unsafe.copyMemory: available
+2015-12-21 13:50:03,157 [Slf4JLogger.java:main:76] - java.nio.Bits.unaligned: true
+2015-12-21 13:50:03,158 [Slf4JLogger.java:main:71] - Platform: Windows
+2015-12-21 13:50:03,159 [Slf4JLogger.java:main:76] - Java version: 8
+2015-12-21 13:50:03,159 [Slf4JLogger.java:main:76] - -Dio.netty.noUnsafe: false
+2015-12-21 13:50:03,160 [Slf4JLogger.java:main:76] - sun.misc.Unsafe: available
+2015-12-21 13:50:03,161 [Slf4JLogger.java:main:76] - -Dio.netty.noJavassist: false
+2015-12-21 13:50:03,162 [Slf4JLogger.java:main:71] - Javassist: unavailable
+2015-12-21 13:50:03,163 [Slf4JLogger.java:main:71] - You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+2015-12-21 13:50:03,163 [Slf4JLogger.java:main:76] - -Dio.netty.tmpdir: C:\Users\SAMPAN~1\AppData\Local\Temp (java.io.tmpdir)
+2015-12-21 13:50:03,165 [Slf4JLogger.java:main:76] - -Dio.netty.bitMode: 64 (sun.arch.data.model)
+2015-12-21 13:50:03,166 [Slf4JLogger.java:main:76] - -Dio.netty.noPreferDirect: false
+2015-12-21 13:50:03,182 [Slf4JLogger.java:main:76] - -Dio.netty.noKeySetOptimization: false
+2015-12-21 13:50:03,182 [Slf4JLogger.java:main:76] - -Dio.netty.selectorAutoRebuildThreshold: 512
+2015-12-21 13:50:03,232 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@725bef66
+2015-12-21 13:50:03,232 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@6e3c1e69
+2015-12-21 13:50:03,233 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@35851384
+2015-12-21 13:50:03,234 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@6adca536
+2015-12-21 13:50:03,234 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@28f67ac7
+2015-12-21 13:50:03,235 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@2a18f23c
+2015-12-21 13:50:03,235 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@16c0663d
+2015-12-21 13:50:03,236 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@4ec6a292
+2015-12-21 13:50:03,237 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@45c8e616
+2015-12-21 13:50:03,400 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.numHeapArenas: 8
+2015-12-21 13:50:03,400 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.numDirectArenas: 8
+2015-12-21 13:50:03,401 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.pageSize: 8192
+2015-12-21 13:50:03,401 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.maxOrder: 11
+2015-12-21 13:50:03,401 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.chunkSize: 16777216
+2015-12-21 13:50:03,401 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.tinyCacheSize: 512
+2015-12-21 13:50:03,401 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.smallCacheSize: 256
+2015-12-21 13:50:03,401 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.normalCacheSize: 64
+2015-12-21 13:50:03,401 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+2015-12-21 13:50:03,401 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.cacheTrimInterval: 8192
+2015-12-21 13:50:03,415 [Slf4JLogger.java:vert.x-eventloop-thread-2:71] - -Dio.netty.initialSeedUniquifier: 0x86efe1811e2d3aad (took 0 ms)
+2015-12-21 13:50:03,434 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.type: unpooled
+2015-12-21 13:50:03,434 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.threadLocalDirectBufferSize: 65536
+2015-12-21 13:50:03,452 [Slf4JLogger.java:vert.x-eventloop-thread-2:86] - Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+2015-12-21 13:50:03,453 [Slf4JLogger.java:vert.x-eventloop-thread-2:81] - \proc\sys\net\core\somaxconn: 200 (non-existent)
+2015-12-21 13:50:12,769 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.recycler.maxCapacity.default: 262144
+2015-12-21 13:50:13,593 [SLF4JLogger.java:vert.x-eventloop-thread-2:71] - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2015-12-21 13:50:13,839 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Updating cluster description to  {type=UNKNOWN, servers=[{address=127.0.0.1:27017, type=UNKNOWN, state=CONNECTING}]
+2015-12-21 13:50:13,901 [SLF4JLogger.java:vert.x-eventloop-thread-2:71] - No server chosen by ReadPreferenceServerSelector{readPreference=primary} from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, all=[ServerDescription{address=127.0.0.1:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+2015-12-21 13:50:13,993 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:71] - Opened connection [connectionId{localValue:1, serverValue:3}] to 127.0.0.1:27017
+2015-12-21 13:50:13,994 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:50:13,996 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:71] - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 6]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=1635901}
+2015-12-21 13:50:14,011 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.6 ms, state=CONNECTED}]
+2015-12-21 13:50:14,014 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2}] to server 127.0.0.1:27017
+2015-12-21 13:50:14,023 [SLF4JLogger.java:vert.x-eventloop-thread-2:71] - Opened connection [connectionId{localValue:2, serverValue:4}] to 127.0.0.1:27017
+2015-12-21 13:50:14,029 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.countries on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:14,352 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:14,353 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:14,382 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:14,383 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.religions on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:14,387 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:14,387 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:14,398 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:14,399 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:14,632 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:14,633 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:3}] to server 127.0.0.1:27017
+2015-12-21 13:50:14,636 [SLF4JLogger.java:vert.x-eventloop-thread-2:71] - Opened connection [connectionId{localValue:3, serverValue:5}] to 127.0.0.1:27017
+2015-12-21 13:50:14,637 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Killing cursors [105044641107] on connection [connectionId{localValue:3, serverValue:5}] to server 127.0.0.1:27017
+2015-12-21 13:50:14,637 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:3, serverValue:5}] to server 127.0.0.1:27017
+2015-12-21 13:50:14,638 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:14,702 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:14,703 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.user_profiles on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:15,012 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:15,012 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:24,013 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:50:24,085 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.6 ms, state=CONNECTED}]
+2015-12-21 13:50:34,086 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:50:34,089 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.5 ms, state=CONNECTED}]
+2015-12-21 13:50:44,090 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:50:44,092 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.4 ms, state=CONNECTED}]
+2015-12-21 13:50:53,751 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:53,751 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.countries on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:53,754 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:53,755 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:53,755 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:53,755 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.religions on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:53,757 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:53,759 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:53,759 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:53,759 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:53,805 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:53,805 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:3, serverValue:5}] to server 127.0.0.1:27017
+2015-12-21 13:50:53,806 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Killing cursors [104384971631] on connection [connectionId{localValue:3, serverValue:5}] to server 127.0.0.1:27017
+2015-12-21 13:50:53,806 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:3, serverValue:5}] to server 127.0.0.1:27017
+2015-12-21 13:50:53,806 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:53,807 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:53,807 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.user_profiles on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:53,861 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:53,865 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,094 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:50:54,095 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.2 ms, state=CONNECTED}]
+2015-12-21 13:50:54,331 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,332 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.relations on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,348 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:54,349 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,349 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,349 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.statuses on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,474 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:54,475 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:3, serverValue:5}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,476 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Killing cursors [91220578392] on connection [connectionId{localValue:3, serverValue:5}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,478 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:3, serverValue:5}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,479 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,499 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,499 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,508 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:54,508 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,509 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,509 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,512 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:54,513 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,514 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,517 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,519 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:54,520 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,520 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,521 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,523 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:54,524 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,524 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,525 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,528 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:54,528 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,529 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,530 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,532 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:54,533 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,533 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,535 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,536 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:54,537 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,580 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,580 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:54,582 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:54,582 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,844 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,845 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.notifications on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,887 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:56,887 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,888 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,888 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,891 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:56,891 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,894 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,895 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.relations on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,897 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:56,897 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,897 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,898 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.statuses on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,907 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:56,908 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,922 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,922 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,925 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:56,925 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,927 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,927 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,933 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:56,934 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,950 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,952 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,958 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:56,959 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,961 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,962 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,963 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:56,964 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,993 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,994 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.relations on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,996 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:56,996 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,996 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:56,997 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:57,001 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:57,002 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:57,006 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:57,006 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:50:57,008 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 13:50:57,008 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:4}] to server 127.0.0.1:27017
+2015-12-21 13:51:04,096 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:51:04,098 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.2 ms, state=CONNECTED}]
+2015-12-21 13:51:14,099 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:51:14,101 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.1 ms, state=CONNECTED}]
+2015-12-21 13:51:24,102 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:51:24,104 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.1 ms, state=CONNECTED}]
+2015-12-21 13:51:34,106 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:51:34,107 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.1 ms, state=CONNECTED}]
+2015-12-21 13:51:44,109 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:51:44,110 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.0 ms, state=CONNECTED}]
+2015-12-21 13:51:54,112 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:51:54,114 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.0 ms, state=CONNECTED}]
+2015-12-21 13:52:04,115 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:52:04,117 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.0 ms, state=CONNECTED}]
+2015-12-21 13:52:14,118 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:52:14,120 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.0 ms, state=CONNECTED}]
+2015-12-21 13:52:24,121 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:52:24,123 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.0 ms, state=CONNECTED}]
+2015-12-21 13:52:34,125 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:52:34,127 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.0 ms, state=CONNECTED}]
+2015-12-21 13:52:44,128 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:52:44,130 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.0 ms, state=CONNECTED}]
+2015-12-21 13:52:54,130 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:52:54,132 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.0 ms, state=CONNECTED}]
+2015-12-21 13:53:04,133 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:53:04,133 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.9 ms, state=CONNECTED}]
+2015-12-21 13:53:14,134 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:53:14,135 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 13:53:24,137 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:53:24,139 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.9 ms, state=CONNECTED}]
+2015-12-21 13:53:34,140 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:53:34,142 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.9 ms, state=CONNECTED}]
+2015-12-21 13:53:44,143 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:53:44,145 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.9 ms, state=CONNECTED}]
+2015-12-21 13:53:54,146 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:53:54,148 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.9 ms, state=CONNECTED}]
+2015-12-21 13:54:04,149 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:54:04,150 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.9 ms, state=CONNECTED}]
+2015-12-21 13:54:14,152 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:54:14,153 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.9 ms, state=CONNECTED}]
+2015-12-21 13:54:24,156 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:54:24,158 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.9 ms, state=CONNECTED}]
+2015-12-21 13:54:34,159 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:54:34,160 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 13:54:44,161 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:54:44,162 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 13:54:54,163 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:54:54,164 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 13:55:04,165 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:55:04,166 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 13:55:14,168 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:55:14,170 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 13:55:24,171 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:55:24,172 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 13:55:34,173 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:55:34,175 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 13:55:44,176 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:55:44,178 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 13:55:54,179 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:55:54,181 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 13:56:04,182 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:56:04,183 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 13:56:14,187 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:56:14,189 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 13:56:24,190 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:56:24,192 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 13:56:34,193 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:56:34,195 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 13:56:44,196 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:56:44,198 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.9 ms, state=CONNECTED}]
+2015-12-21 13:56:54,199 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:56:54,201 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 13:57:04,202 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:57:04,202 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 13:57:14,204 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:57:14,207 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.9 ms, state=CONNECTED}]
+2015-12-21 13:57:24,209 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:57:24,211 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.9 ms, state=CONNECTED}]
+2015-12-21 13:57:34,212 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:57:34,213 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.0 ms, state=CONNECTED}]
+2015-12-21 13:57:44,216 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:57:44,216 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.9 ms, state=CONNECTED}]
+2015-12-21 13:57:54,217 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:57:54,218 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.9 ms, state=CONNECTED}]
+2015-12-21 13:58:04,220 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:58:04,221 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 13:58:14,222 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:58:14,222 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 13:58:24,224 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:58:24,224 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 13:58:34,225 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:58:34,226 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 13:58:44,226 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:58:44,227 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 13:58:54,229 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:58:54,230 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 13:59:04,232 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:59:04,234 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 13:59:14,235 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:59:14,236 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 13:59:24,238 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:59:24,239 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 13:59:34,240 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:59:34,241 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.6 ms, state=CONNECTED}]
+2015-12-21 13:59:44,242 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:59:44,243 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.6 ms, state=CONNECTED}]
+2015-12-21 13:59:54,245 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 13:59:54,246 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.6 ms, state=CONNECTED}]
+2015-12-21 14:00:04,247 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:00:04,248 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.6 ms, state=CONNECTED}]
+2015-12-21 14:00:14,249 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:00:14,250 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.5 ms, state=CONNECTED}]
+2015-12-21 14:00:24,252 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:00:24,254 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:00:34,255 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:00:34,256 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:00:44,257 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:00:44,257 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.6 ms, state=CONNECTED}]
+2015-12-21 14:00:54,258 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:00:54,260 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:01:04,261 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:01:04,262 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:01:14,264 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:01:14,265 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.6 ms, state=CONNECTED}]
+2015-12-21 14:01:24,265 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:01:24,266 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.6 ms, state=CONNECTED}]
+2015-12-21 14:01:34,266 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:01:34,267 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.6 ms, state=CONNECTED}]
+2015-12-21 14:01:44,268 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:01:44,270 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:01:54,272 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:01:54,273 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:02:04,275 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:02:04,276 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:02:14,278 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:02:14,279 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:02:24,280 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:02:24,281 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:02:34,283 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:02:34,284 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:02:44,286 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:02:44,287 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:02:54,289 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:02:54,290 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:03:04,292 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:03:04,293 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:03:14,295 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:03:14,297 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:03:24,298 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:03:24,300 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:03:34,301 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:03:34,302 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:03:44,303 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:03:44,304 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:03:54,304 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:03:54,306 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:04:04,307 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:04:04,309 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:04:14,310 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:04:14,311 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:04:24,312 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:04:24,313 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:04:34,314 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:04:34,316 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:04:44,317 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:04:44,317 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:04:54,319 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:04:54,321 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:05:04,322 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:05:04,323 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:05:14,324 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:05:14,326 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:05:24,328 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:05:24,328 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:05:34,330 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:05:34,331 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:05:44,333 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:05:44,334 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:05:54,336 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:05:54,337 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:06:04,338 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:06:04,338 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:06:14,340 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:06:14,341 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:06:24,342 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:06:24,343 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:06:34,345 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:06:34,346 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:06:44,348 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:06:44,350 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:06:54,350 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:06:54,351 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:07:04,353 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:07:04,353 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:07:14,356 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:07:14,357 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:07:24,359 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:07:24,363 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.9 ms, state=CONNECTED}]
+2015-12-21 14:07:34,364 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:07:34,365 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:07:44,367 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:07:44,368 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:07:54,369 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:07:54,369 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:08:04,370 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:08:04,370 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.6 ms, state=CONNECTED}]
+2015-12-21 14:08:14,372 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:08:14,373 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:08:24,374 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:08:24,376 [SLF4JLogger.java:cluster-ClusterId{value='5677af35a3110c1028063fa8', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:20:05,356 [Slf4JLogger.java:main:71] - Using SLF4J as the default logging framework
+2015-12-21 14:20:05,362 [Slf4JLogger.java:main:81] - -Dio.netty.leakDetection.level: simple
+2015-12-21 14:20:05,364 [Slf4JLogger.java:main:81] - -Dio.netty.leakDetection.maxRecords: 4
+2015-12-21 14:20:05,388 [Slf4JLogger.java:main:76] - -Dio.netty.eventLoopThreads: 8
+2015-12-21 14:20:05,405 [Slf4JLogger.java:main:76] - java.nio.Buffer.address: available
+2015-12-21 14:20:05,406 [Slf4JLogger.java:main:76] - sun.misc.Unsafe.theUnsafe: available
+2015-12-21 14:20:05,406 [Slf4JLogger.java:main:71] - sun.misc.Unsafe.copyMemory: available
+2015-12-21 14:20:05,406 [Slf4JLogger.java:main:76] - java.nio.Bits.unaligned: true
+2015-12-21 14:20:05,407 [Slf4JLogger.java:main:71] - Platform: Windows
+2015-12-21 14:20:05,407 [Slf4JLogger.java:main:76] - Java version: 8
+2015-12-21 14:20:05,407 [Slf4JLogger.java:main:76] - -Dio.netty.noUnsafe: false
+2015-12-21 14:20:05,407 [Slf4JLogger.java:main:76] - sun.misc.Unsafe: available
+2015-12-21 14:20:05,408 [Slf4JLogger.java:main:76] - -Dio.netty.noJavassist: false
+2015-12-21 14:20:05,409 [Slf4JLogger.java:main:71] - Javassist: unavailable
+2015-12-21 14:20:05,409 [Slf4JLogger.java:main:71] - You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+2015-12-21 14:20:05,410 [Slf4JLogger.java:main:76] - -Dio.netty.tmpdir: C:\Users\SAMPAN~1\AppData\Local\Temp (java.io.tmpdir)
+2015-12-21 14:20:05,411 [Slf4JLogger.java:main:76] - -Dio.netty.bitMode: 64 (sun.arch.data.model)
+2015-12-21 14:20:05,412 [Slf4JLogger.java:main:76] - -Dio.netty.noPreferDirect: false
+2015-12-21 14:20:05,428 [Slf4JLogger.java:main:76] - -Dio.netty.noKeySetOptimization: false
+2015-12-21 14:20:05,428 [Slf4JLogger.java:main:76] - -Dio.netty.selectorAutoRebuildThreshold: 512
+2015-12-21 14:20:05,487 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@725bef66
+2015-12-21 14:20:05,488 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@6e3c1e69
+2015-12-21 14:20:05,489 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@35851384
+2015-12-21 14:20:05,489 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@6adca536
+2015-12-21 14:20:05,490 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@28f67ac7
+2015-12-21 14:20:05,491 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@2a18f23c
+2015-12-21 14:20:05,491 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@16c0663d
+2015-12-21 14:20:05,492 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@4ec6a292
+2015-12-21 14:20:05,494 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@45c8e616
+2015-12-21 14:20:05,659 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.numHeapArenas: 8
+2015-12-21 14:20:05,660 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.numDirectArenas: 8
+2015-12-21 14:20:05,660 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.pageSize: 8192
+2015-12-21 14:20:05,660 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.maxOrder: 11
+2015-12-21 14:20:05,660 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.chunkSize: 16777216
+2015-12-21 14:20:05,661 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.tinyCacheSize: 512
+2015-12-21 14:20:05,661 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.smallCacheSize: 256
+2015-12-21 14:20:05,662 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.normalCacheSize: 64
+2015-12-21 14:20:05,662 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+2015-12-21 14:20:05,662 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.cacheTrimInterval: 8192
+2015-12-21 14:20:05,679 [Slf4JLogger.java:vert.x-eventloop-thread-2:71] - -Dio.netty.initialSeedUniquifier: 0xe0f4a029b975c459 (took 0 ms)
+2015-12-21 14:20:05,699 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.type: unpooled
+2015-12-21 14:20:05,699 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.threadLocalDirectBufferSize: 65536
+2015-12-21 14:20:05,718 [Slf4JLogger.java:vert.x-eventloop-thread-2:86] - Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+2015-12-21 14:20:05,719 [Slf4JLogger.java:vert.x-eventloop-thread-2:81] - \proc\sys\net\core\somaxconn: 200 (non-existent)
+2015-12-21 14:20:20,132 [Slf4JLogger.java:main:71] - Using SLF4J as the default logging framework
+2015-12-21 14:20:20,150 [Slf4JLogger.java:main:81] - -Dio.netty.leakDetection.level: simple
+2015-12-21 14:20:20,154 [Slf4JLogger.java:main:81] - -Dio.netty.leakDetection.maxRecords: 4
+2015-12-21 14:20:20,189 [Slf4JLogger.java:main:76] - -Dio.netty.eventLoopThreads: 8
+2015-12-21 14:20:20,199 [Slf4JLogger.java:main:76] - java.nio.Buffer.address: available
+2015-12-21 14:20:20,200 [Slf4JLogger.java:main:76] - sun.misc.Unsafe.theUnsafe: available
+2015-12-21 14:20:20,200 [Slf4JLogger.java:main:71] - sun.misc.Unsafe.copyMemory: available
+2015-12-21 14:20:20,201 [Slf4JLogger.java:main:76] - java.nio.Bits.unaligned: true
+2015-12-21 14:20:20,201 [Slf4JLogger.java:main:71] - Platform: Windows
+2015-12-21 14:20:20,202 [Slf4JLogger.java:main:76] - Java version: 8
+2015-12-21 14:20:20,202 [Slf4JLogger.java:main:76] - -Dio.netty.noUnsafe: false
+2015-12-21 14:20:20,202 [Slf4JLogger.java:main:76] - sun.misc.Unsafe: available
+2015-12-21 14:20:20,203 [Slf4JLogger.java:main:76] - -Dio.netty.noJavassist: false
+2015-12-21 14:20:20,203 [Slf4JLogger.java:main:71] - Javassist: unavailable
+2015-12-21 14:20:20,204 [Slf4JLogger.java:main:71] - You don't have Javassist in your class path or you don't have enough permission to load dynamically generated classes.  Please check the configuration for better performance.
+2015-12-21 14:20:20,204 [Slf4JLogger.java:main:76] - -Dio.netty.tmpdir: C:\Users\SAMPAN~1\AppData\Local\Temp (java.io.tmpdir)
+2015-12-21 14:20:20,207 [Slf4JLogger.java:main:76] - -Dio.netty.bitMode: 64 (sun.arch.data.model)
+2015-12-21 14:20:20,207 [Slf4JLogger.java:main:76] - -Dio.netty.noPreferDirect: false
+2015-12-21 14:20:20,228 [Slf4JLogger.java:main:76] - -Dio.netty.noKeySetOptimization: false
+2015-12-21 14:20:20,228 [Slf4JLogger.java:main:76] - -Dio.netty.selectorAutoRebuildThreshold: 512
+2015-12-21 14:20:20,298 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@725bef66
+2015-12-21 14:20:20,299 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@6e3c1e69
+2015-12-21 14:20:20,299 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@35851384
+2015-12-21 14:20:20,300 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@6adca536
+2015-12-21 14:20:20,301 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@28f67ac7
+2015-12-21 14:20:20,302 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@2a18f23c
+2015-12-21 14:20:20,303 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@16c0663d
+2015-12-21 14:20:20,304 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@4ec6a292
+2015-12-21 14:20:20,305 [Slf4JLogger.java:main:46] - Instrumented an optimized java.util.Set into: sun.nio.ch.WindowsSelectorImpl@45c8e616
+2015-12-21 14:20:20,491 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.numHeapArenas: 8
+2015-12-21 14:20:20,492 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.numDirectArenas: 8
+2015-12-21 14:20:20,492 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.pageSize: 8192
+2015-12-21 14:20:20,492 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.maxOrder: 11
+2015-12-21 14:20:20,492 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.chunkSize: 16777216
+2015-12-21 14:20:20,492 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.tinyCacheSize: 512
+2015-12-21 14:20:20,493 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.smallCacheSize: 256
+2015-12-21 14:20:20,493 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.normalCacheSize: 64
+2015-12-21 14:20:20,493 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+2015-12-21 14:20:20,493 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.cacheTrimInterval: 8192
+2015-12-21 14:20:20,511 [Slf4JLogger.java:vert.x-eventloop-thread-2:71] - -Dio.netty.initialSeedUniquifier: 0xea61faa6cf51d7b7 (took 0 ms)
+2015-12-21 14:20:20,532 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.allocator.type: unpooled
+2015-12-21 14:20:20,532 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.threadLocalDirectBufferSize: 65536
+2015-12-21 14:20:20,551 [Slf4JLogger.java:vert.x-eventloop-thread-2:86] - Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+2015-12-21 14:20:20,552 [Slf4JLogger.java:vert.x-eventloop-thread-2:81] - \proc\sys\net\core\somaxconn: 200 (non-existent)
+2015-12-21 14:20:49,854 [Slf4JLogger.java:vert.x-eventloop-thread-2:76] - -Dio.netty.recycler.maxCapacity.default: 262144
+2015-12-21 14:20:50,031 [SLF4JLogger.java:vert.x-eventloop-thread-2:71] - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2015-12-21 14:20:50,113 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Updating cluster description to  {type=UNKNOWN, servers=[{address=127.0.0.1:27017, type=UNKNOWN, state=CONNECTING}]
+2015-12-21 14:20:50,134 [SLF4JLogger.java:vert.x-eventloop-thread-2:71] - No server chosen by ReadPreferenceServerSelector{readPreference=primary} from cluster description ClusterDescription{type=UNKNOWN, connectionMode=SINGLE, all=[ServerDescription{address=127.0.0.1:27017, type=UNKNOWN, state=CONNECTING}]}. Waiting for 30000 ms before timing out
+2015-12-21 14:20:50,146 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:71] - Opened connection [connectionId{localValue:1, serverValue:9}] to 127.0.0.1:27017
+2015-12-21 14:20:50,146 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:20:50,147 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:71] - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 6]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=489678}
+2015-12-21 14:20:50,149 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.5 ms, state=CONNECTED}]
+2015-12-21 14:20:50,153 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2}] to server 127.0.0.1:27017
+2015-12-21 14:20:50,157 [SLF4JLogger.java:vert.x-eventloop-thread-2:71] - Opened connection [connectionId{localValue:2, serverValue:10}] to 127.0.0.1:27017
+2015-12-21 14:20:50,160 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.countries on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:50,317 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:50,318 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:50,323 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:50,323 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.religions on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:50,328 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:50,328 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:50,329 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:50,330 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:50,374 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:50,375 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:3}] to server 127.0.0.1:27017
+2015-12-21 14:20:50,378 [SLF4JLogger.java:vert.x-eventloop-thread-2:71] - Opened connection [connectionId{localValue:3, serverValue:11}] to 127.0.0.1:27017
+2015-12-21 14:20:50,379 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Killing cursors [104095618803] on connection [connectionId{localValue:3, serverValue:11}] to server 127.0.0.1:27017
+2015-12-21 14:20:50,379 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:3, serverValue:11}] to server 127.0.0.1:27017
+2015-12-21 14:20:50,380 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:50,382 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:50,382 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.user_profiles on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:50,476 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:50,476 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,556 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,556 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.countries on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,560 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:55,561 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,561 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,562 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.religions on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,564 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:55,565 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,565 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,566 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,597 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:55,598 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:3, serverValue:11}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,598 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Killing cursors [104975583961] on connection [connectionId{localValue:3, serverValue:11}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,599 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:3, serverValue:11}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,599 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,599 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,600 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.user_profiles on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,674 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:55,675 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,883 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,883 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.relations on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,886 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:55,886 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,887 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,887 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.statuses on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,910 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:55,911 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:3, serverValue:11}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,912 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Killing cursors [90292477797] on connection [connectionId{localValue:3, serverValue:11}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,913 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:3, serverValue:11}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,913 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,916 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,917 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,923 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:55,924 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,924 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,924 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,926 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:55,926 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,927 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,927 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,929 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:55,929 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,930 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,930 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,935 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:55,935 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,938 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,939 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,946 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:55,946 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,947 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,947 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,949 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:55,949 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,949 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,950 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,951 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:55,952 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,956 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,956 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:55,958 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:55,959 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,829 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,830 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.notifications on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,834 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:57,834 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,835 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,835 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,837 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:57,838 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,860 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,861 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.relations on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,862 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:57,863 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,864 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,865 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,878 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:57,878 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,893 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,896 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,898 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:57,898 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,913 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,914 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.relations on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,923 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:57,924 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,924 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,925 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.statuses on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,940 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:57,941 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,948 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,949 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,952 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:57,952 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,955 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,956 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,958 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:57,958 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,963 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,963 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,965 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:57,965 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,968 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked out connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,968 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Sending query of namespace muslimand_db.users on connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:20:57,969 [SLF4JLogger.java:vert.x-eventloop-thread-2:56] - Query completed
+2015-12-21 14:20:57,970 [SLF4JLogger.java:vert.x-eventloop-thread-2:41] - Checked in connection [connectionId{localValue:2, serverValue:10}] to server 127.0.0.1:27017
+2015-12-21 14:21:00,150 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:21:00,154 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.5 ms, state=CONNECTED}]
+2015-12-21 14:21:10,156 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:21:10,158 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.6 ms, state=CONNECTED}]
+2015-12-21 14:21:20,159 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:21:20,160 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.6 ms, state=CONNECTED}]
+2015-12-21 14:21:30,160 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:21:30,162 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:21:40,164 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:21:40,166 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:21:50,167 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:21:50,168 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:22:00,168 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:22:00,169 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.6 ms, state=CONNECTED}]
+2015-12-21 14:22:10,171 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:22:10,172 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.6 ms, state=CONNECTED}]
+2015-12-21 14:22:20,173 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:22:20,174 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:22:30,175 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:22:30,177 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.7 ms, state=CONNECTED}]
+2015-12-21 14:22:40,178 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:22:40,180 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:22:50,182 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:22:50,184 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.8 ms, state=CONNECTED}]
+2015-12-21 14:23:00,185 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:23:00,189 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.3 ms, state=CONNECTED}]
+2015-12-21 14:23:10,192 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:23:10,194 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.2 ms, state=CONNECTED}]
+2015-12-21 14:23:20,196 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:23:20,198 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.1 ms, state=CONNECTED}]
+2015-12-21 14:23:30,201 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:23:30,203 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.2 ms, state=CONNECTED}]
+2015-12-21 14:23:40,207 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:23:40,209 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.1 ms, state=CONNECTED}]
+2015-12-21 14:23:50,210 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:23:50,212 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.1 ms, state=CONNECTED}]
+2015-12-21 14:24:00,213 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:24:00,216 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.2 ms, state=CONNECTED}]
+2015-12-21 14:24:10,217 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:24:10,218 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.1 ms, state=CONNECTED}]
+2015-12-21 14:24:20,220 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:24:20,221 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.1 ms, state=CONNECTED}]
+2015-12-21 14:24:30,223 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:24:30,225 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.0 ms, state=CONNECTED}]
+2015-12-21 14:24:40,226 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:24:40,227 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.0 ms, state=CONNECTED}]
+2015-12-21 14:24:50,229 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:24:50,231 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=1.0 ms, state=CONNECTED}]
+2015-12-21 14:25:00,232 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:25:00,234 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.9 ms, state=CONNECTED}]
+2015-12-21 14:25:10,235 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:25:10,237 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.9 ms, state=CONNECTED}]
+2015-12-21 14:25:20,238 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:25:20,240 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.9 ms, state=CONNECTED}]
+2015-12-21 14:25:30,241 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:25:30,243 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.9 ms, state=CONNECTED}]
+2015-12-21 14:25:40,246 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:25:40,248 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.9 ms, state=CONNECTED}]
+2015-12-21 14:25:50,248 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Checking status of 127.0.0.1:27017
+2015-12-21 14:25:50,250 [SLF4JLogger.java:cluster-ClusterId{value='5677b662a3110c10a4ffccf7', description='null'}-127.0.0.1:27017:56] - Updating cluster description to  {type=STANDALONE, servers=[{address=127.0.0.1:27017, type=STANDALONE, roundTripTime=0.9 ms, state=CONNECTED}]

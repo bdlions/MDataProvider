@@ -25,7 +25,7 @@ public class MessageTest {
     String userId1 = "FdJptWkGvsRNAIW";
     String userId2 = "Rmy6luSAFvM1EoP";
     String userId3 = "9nSEiMgzieo1O4K";
-    String groupId = "_55Lj6k4iZReT4ck_9nSEiMgzieo1O4K_";
+    String groupId = "_FdJptWkGvsRNAIW_shdT5pVLdELcsL31_";
 
 //    @Test
     public void addMessage() {
@@ -37,7 +37,7 @@ public class MessageTest {
         userIdList.add(userId1);
         userIdList.add(userId2);
         userIdList.sort(null);
-        
+
         System.out.println(messageModel.addMessage(userIdList.toString(), userId1, "hi"));
 
     }
@@ -47,7 +47,16 @@ public class MessageTest {
 //        System.out.println( messageModel.getMessageInitailization(groupId));
 //        
 //    }
+//    @Test
+    public void addMessageByGroupId() {
+        int offset = 0;
+        int limit = 5;
+        UserInfo userInfo = new UserInfo();
+        System.out.println(messageModel.addMessageByGroupId(groupId, userInfo.toString(), "fdsgf"));
+
+    }
     @Test
+
     public void getMessageSummaryList() {
         int offset = 0;
         int limit = 5;
