@@ -26,7 +26,7 @@ public class MessageDAOBuilder {
     private String groupTitle;
     private List<UserInfo> userList;
     private String latestMessage;
-    private String messageTime;
+    private int messageTime;
 
     public MessageDAOBuilder setMessage(MessageDAO message) {
         this.message = message;
@@ -59,7 +59,7 @@ public class MessageDAOBuilder {
         return this;
     }
 
-    public MessageDAOBuilder setMessageTime(String messageTime) {
+    public MessageDAOBuilder setMessageTime(int messageTime) {
         this.messageTime = messageTime;
         return this;
     }

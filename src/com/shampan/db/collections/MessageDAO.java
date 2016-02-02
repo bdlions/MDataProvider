@@ -24,7 +24,7 @@ public class MessageDAO implements Bson {
     private String groupTitle;
     private List<UserInfo> userList;
     private String latestMessage;
-    private String messageTime;
+    private int messageTime;
 
     public String get_id() {
         return _id;
@@ -66,11 +66,11 @@ public class MessageDAO implements Bson {
         this.latestMessage = latestMessage;
     }
 
-    public String getMessageTime() {
+    public int getMessageTime() {
         return messageTime;
     }
 
-    public void setMessageTime(String messageTime) {
+    public void setMessageTime(int messageTime) {
         this.messageTime = messageTime;
     }
 

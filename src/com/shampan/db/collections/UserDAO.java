@@ -26,13 +26,43 @@ public class UserDAO implements Bson {
     private String userName;
     private String password;
     private String email;
+    private String salt;
     private String ipAddress;
     private int createdOn;
-    private String last_login;
+    private int lastLogin;
     private String accountStatusId;
     private Country country;
     private Gender gender;
+    private int active;
+    private String activationCode;
+    private String rememberCode;
+    private String forgottenPasswordCode;
+    private int forgottenPasswordTime;
     private List<Group> groups;
+
+    public String getRememberCode() {
+        return rememberCode;
+    }
+
+    public void setRememberCode(String rememberCode) {
+        this.rememberCode = rememberCode;
+    }
+
+    public String getForgottenPasswordCode() {
+        return forgottenPasswordCode;
+    }
+
+    public void setForgottenPasswordCode(String forgottenPasswordCode) {
+        this.forgottenPasswordCode = forgottenPasswordCode;
+    }
+
+    public int getForgottenPasswordTime() {
+        return forgottenPasswordTime;
+    }
+
+    public void setForgottenPasswordTime(int forgottenPasswordTime) {
+        this.forgottenPasswordTime = forgottenPasswordTime;
+    }
 
     public String get_id() {
         return _id;
@@ -106,12 +136,39 @@ public class UserDAO implements Bson {
         this.createdOn = createdOn;
     }
 
-    public String getLast_login() {
-        return last_login;
+    public int getLastLogin() {
+        return lastLogin;
     }
 
-    public void setLast_login(String last_login) {
-        this.last_login = last_login;
+    public void setLastLogin(int lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+    
+
+  
+
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
+    }
+
+    public String getActivationCode() {
+        return activationCode;
+    }
+
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
     }
 
     public String getAccountStatusId() {
@@ -145,8 +202,6 @@ public class UserDAO implements Bson {
     public void setGender(Gender gender) {
         this.gender = gender;
     }
-    
-    
 
     @Override
     public String toString() {

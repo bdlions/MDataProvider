@@ -15,6 +15,7 @@ import com.shampan.db.collections.builder.MessageDetailsDAOBuilder;
 import com.shampan.db.collections.fragment.common.UserInfo;
 import com.shampan.db.collections.fragment.message.Messages;
 import com.shampan.util.PropertyProvider;
+import com.shampan.util.Utility;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.collections4.IteratorUtils;
@@ -30,6 +31,7 @@ public class MessageModel {
 
     private ResultEvent resultEvent = new ResultEvent();
     UserModel userModel = new UserModel();
+    Utility utility = new Utility();
 
     public MessageModel() {
 
@@ -94,7 +96,7 @@ public class MessageModel {
                 Messages userMessage = new Messages();
                 userMessage.setMessage(message);
                 userMessage.setSenderInfo(senderUserInfo);
-
+                userMessage.setSentTime(utility.getCurrentTime());
                 Document selectDocument = new Document();
                 selectDocument.put("groupId", groupId);
                 MessageDAO messageCursor = mongoCollection.find(selectDocument).first();
@@ -121,6 +123,7 @@ public class MessageModel {
             Messages userMessage = new Messages();
             userMessage.setMessage(message);
             userMessage.setSenderInfo(senderInfo);
+            userMessage.setSentTime(utility.getCurrentTime());
             Document selectDocument = new Document();
             selectDocument.put("groupId", groupId);
             MessageDAO messageCursor = mongoCollection.find(selectDocument).first();
@@ -158,6 +161,7 @@ public class MessageModel {
                     .setGroupId(groupId)
                     .setUserList(userList)
                     .setLatestMessage(message)
+                    .setMessageTime(utility.getCurrentTime())
                     .build();
             mongoCollection.insertOne(messageInfo);
             this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
@@ -236,10 +240,15 @@ public class MessageModel {
         selectDocument.put("groupId", regexDocument);
         MongoCursor<MessageDAO> messageCursor = mongoCollection.find(selectDocument).skip(offset).limit(limit).iterator();
         List<MessageDAO> messageSummeryList = IteratorUtils.toList(messageCursor);
-        MessageDetailsDAO recentMessageInfo = getMessageList(messageSummeryList.get(0).getGroupId(), offset, limit);
         JSONObject messageInfo = new JSONObject();
+        if (messageSummeryList != null) {
+            if (messageSummeryList.size() > 0) {
+                MessageDetailsDAO recentMessageInfo = getMessageList(messageSummeryList.get(0).getGroupId(), offset, limit);
+                messageInfo.put("recentMessageInfo", recentMessageInfo);
+            }
+        }
         messageInfo.put("messageSummeryList", messageSummeryList);
-        messageInfo.put("recentMessageInfo", recentMessageInfo);
+        messageInfo.put("currentTime", utility.getCurrentTime());
         return messageInfo;
 
     }

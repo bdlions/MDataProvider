@@ -23,8 +23,8 @@ public class SearchService {
      * @param requestPatten, request String
      * @return users
      */
-    public static String getUsers(String searchValue) {
-        return searchModel.getUsers(searchValue).toString();
+    public static String getUsers(String searchValue, int offset, int limit) {
+        return searchModel.getUsers(searchValue, offset, limit).toString();
     }
 
 }

@@ -15,7 +15,7 @@ import com.shampan.db.collections.fragment.common.UserInfo;
 public class Messages {
 
     private String message;
-    private String sentTime;
+    private int sentTime;
     private String receiveTime;
     private String status;
     private UserInfo senderInfo;
@@ -28,13 +28,14 @@ public class Messages {
         this.message = message;
     }
 
-    public String getSentTime() {
+    public int getSentTime() {
         return sentTime;
     }
 
-    public void setSentTime(String sentTime) {
+    public void setSentTime(int sentTime) {
         this.sentTime = sentTime;
     }
+
 
     public String getReceiveTime() {
         return receiveTime;

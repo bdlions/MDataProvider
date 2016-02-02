@@ -19,7 +19,7 @@ public class SearchServiceTest {
     @Test
     public void getUsers() {
 
-        System.out.println(searchObj.getUsers("N"));
+//        System.out.println(searchObj.getUsers("N"));
 
     }
 

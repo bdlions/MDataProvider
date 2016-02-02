@@ -46,8 +46,8 @@ public class NotificationService {
      * @return String, friend notification list
      */
     public static String updateStatusGetFriendNotifications(String userId, String offset, String limit) {
-        String notification = notificationModel.getFriendNotifications(userId).toString();
         notificationModel.updateStatusFriendNotifications(userId);
+        String notification = notificationModel.getFriendNotifications(userId).toString();
         return notification;
     }
 

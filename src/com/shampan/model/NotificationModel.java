@@ -85,9 +85,14 @@ public class NotificationModel {
                 int generalNotificationSize = notificationCursor.getGeneralNotifications().size();
                 if (generalNotificationSize > 0) {
                     for (int i = 0; i < generalNotificationSize; i++) {
-                        if (notificationCursor.getGeneralNotifications().get(i).getStatusId().equals(statusId)) {
-                            generalCounter++;
+                        if (notificationCursor.getGeneralNotifications().get(i).getStatusId() != null) {
+                            if (notificationCursor.getGeneralNotifications().get(i) != null) {
+                                if (notificationCursor.getGeneralNotifications().get(i).getStatusId().equals(statusId)) {
+                                    generalCounter++;
+                                }
+                            }
                         }
+
                     }
                 }
             }
@@ -95,9 +100,14 @@ public class NotificationModel {
                 int friendNotificationCounter = notificationCursor.getFriendNotifications().size();
                 if (friendNotificationCounter > 0) {
                     for (int j = 0; j < friendNotificationCounter; j++) {
-                        if (notificationCursor.getFriendNotifications().get(j).getStatusId().equals(statusId)) {
-                            friendCounter++;
+                        if (notificationCursor.getFriendNotifications().get(j) != null) {
+                            if (notificationCursor.getFriendNotifications().get(j).getStatusId() != null) {
+                                if (notificationCursor.getFriendNotifications().get(j).getStatusId().equals(statusId)) {
+                                    friendCounter++;
+                                }
+                            }
                         }
+
                     }
                 }
             }
@@ -215,14 +225,12 @@ public class NotificationModel {
             if (friendNotification.getFriendNotifications() != null) {
                 int pendingfriendSize = friendNotification.getFriendNotifications().size();
                 for (int i = 0; i < pendingfriendSize; i++) {
+                    FriendNotification notification = new FriendNotification();
                     if (friendNotification.getFriendNotifications().get(i).getStatusId().equals(unReadStatusId)) {
                         friendNotification.getFriendNotifications().get(i).setStatusId(readStatusId);
-                        if (!friendNotification.getFriendNotifications().get(i).getTypeId().equals(typeId)) {
-                            FriendNotification notification = new FriendNotification();
-                            notification = friendNotification.getFriendNotifications().get(i);
-                            friendNotifications.add(notification);
-                        }
                     }
+                    notification = friendNotification.getFriendNotifications().get(i);
+                    friendNotifications.add(notification);
                 }
             }
             mongoCollection.findOneAndUpdate(selectionDocument, new Document("$set", new Document(attrFriendNotifications, JSON.parse(friendNotifications.toString()))));
@@ -309,17 +317,19 @@ public class NotificationModel {
             orSelectionDocument.add(selectionDocumentForFriend);
             Document selectDocument = new Document();
             selectDocument.put("$or", orSelectionDocument);
-
-            Document removedDocumentForUser = new Document();
-            removedDocumentForUser.put(attrUserInfo + "." + attrUserId, friendId);
             Document removedDocumentForFriend = new Document();
             removedDocumentForFriend.put(attrUserInfo + "." + attrUserId, userId);
+            Document removedDocumentForUser = new Document();
+            removedDocumentForUser.put(attrUserInfo + "." + attrUserId, friendId);
+
             List<Document> orRemoveDocument = new ArrayList<Document>();
             orRemoveDocument.add(removedDocumentForUser);
             orRemoveDocument.add(removedDocumentForFriend);
             Document removedDocument = new Document();
             removedDocument.put("$or", orRemoveDocument);
-            mongoCollection.findOneAndUpdate(selectDocument, new Document("$pull", new Document(attrFriendNotifications, removedDocument)));
+            mongoCollection.findOneAndUpdate(selectionDocumentForUser, new Document("$pull", new Document(attrFriendNotifications, removedDocumentForUser)));
+//            mongoCollection.findOneAndUpdate(selectionDocumentForFriend, new Document("$pull", new Document(attrFriendNotifications, removedDocumentForFriend)));
+//            mongoCollection.findOneAndUpdate(selectDocument, new Document("$pull", new Document(attrFriendNotifications, removedDocument)));
             this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
         } catch (Exception ex) {
             this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
@@ -627,6 +637,7 @@ public class NotificationModel {
                             generalNotification.setReferenceId(referenceId);
                             generalNotification.setUserList(userList);
                             generalNotification.setModifiedOn(utility.getCurrentTime());
+                            generalNotification.setCreatedOn(utility.getCurrentTime());
                             mongoCollection.findOneAndUpdate(userSelectionDocument, new Document("$push", new Document("generalNotifications", JSON.parse(generalNotification.toString()))));
                         }
 
@@ -642,6 +653,7 @@ public class NotificationModel {
                         generalNotification.setReferenceId(referenceId);
                         generalNotification.setUserList(userList);
                         generalNotification.setModifiedOn(utility.getCurrentTime());
+                        generalNotification.setCreatedOn(utility.getCurrentTime());
                         mongoCollection.findOneAndUpdate(userSelectionDocument, new Document("$push", new Document("generalNotifications", JSON.parse(generalNotification.toString()))));
                     }
 

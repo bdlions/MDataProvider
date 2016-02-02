@@ -102,8 +102,8 @@ public class RelationModel {
      */
     public ResultEvent approveFriend(String fromUserId, String toUserId) {
         updateRelation(fromUserId, toUserId, PropertyProvider.get("RELATION_TYPE_FRIEND_ID"));
-        notificationModel.addFriendAcceptNotification(fromUserId, toUserId);
         notificationModel.deleteFriendNotification(fromUserId, toUserId);
+        notificationModel.addFriendAcceptNotification(fromUserId, toUserId);
         return this.resultEvent;
     }
 

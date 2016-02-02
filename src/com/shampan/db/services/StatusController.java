@@ -199,11 +199,11 @@ public class StatusController {
     }
 
     public static void deleteStatusComment(RoutingContext routingContext) {
-        String userId = routingContext.request().getParam("userId");
+        String statusId = routingContext.request().getParam("statusId");
         String commentId = routingContext.request().getParam("commentId");
         routingContext.response()
                 .putHeader("content-type", "application/json; charset=utf-8")
-                .end(StatusService.deleteStatusComment(userId, commentId));
+                .end(StatusService.deleteStatusComment(statusId, commentId));
 
     }
 

@@ -21,7 +21,7 @@ import org.junit.Test;
 public class UserServicesTest {
 
     UserModel userModel = new UserModel();
-    String userId1 = "dRmgLnlhu8OTSbY";
+    String userId1 = "olYWzdinSllwTtu";
     String userId2 = "mCQntzqOGFQrOTE";
     String userId3 = "g59uk60UraL3Guf";
 
@@ -47,14 +47,34 @@ public class UserServicesTest {
         System.out.println(userModel.getUserGenderInfo(userId1));
 
     }
-    
-    
+//       @Test 
+
+    public void emailAndUserNameCheck() {
+
+        System.out.println(userModel.emailAndUserNameCheck("keya@gmail1.com", "rashida sultana"));
+
+    }
        @Test 
+
+    public void getUSerInfoByEmail() {
+
+        System.out.println(userModel.getUSerInfoByEmail("salma@gmail.com"));
+
+    }
+    
+    
+//       @Test 
 
     public void getRecentUser() {
         int offset = 0;
         int limit = 10;
         System.out.println(userModel.getRecentUser());
+
+    }
+//    @Test 
+    public void getUserInfoByUserId() {
+       
+        System.out.println(userModel.getUserInfoByUserId(userId1));
 
     }
 

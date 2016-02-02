@@ -54,7 +54,7 @@ public class SearchModel {
      * @param requestPatten, request String
      * @return users
      */
-    public List<UserDAO> getUsers(String searchValue) {
+    public List<UserDAO> getUsers(String searchValue, int offset, int limit) {
         MongoCollection<UserDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.USERS.toString(), UserDAO.class);
         String attrUserId = PropertyProvider.get("USER_ID");
@@ -75,7 +75,7 @@ public class SearchModel {
         projectionDocument.put(attrLastName, "$all");
         projectionDocument.put("gender", "$all");
 
-        MongoCursor<UserDAO> userList = mongoCollection.find(sDocument).projection(projectionDocument).iterator();
+        MongoCursor<UserDAO> userList = mongoCollection.find(sDocument).projection(projectionDocument).skip(offset).limit(limit).iterator();
         List<UserDAO> userInfoList = IteratorUtils.toList(userList);
         return userInfoList;
     }

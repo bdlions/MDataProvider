@@ -11,6 +11,7 @@ import com.sampan.response.ResultEvent;
 import com.shampan.db.Collections;
 import com.shampan.db.DBConnection;
 import com.shampan.db.collections.BasicProfileDAO;
+import com.shampan.db.collections.builder.BasicProfileDAOBuilder;
 import com.shampan.db.collections.fragment.profile.About;
 import com.shampan.db.collections.fragment.profile.Address;
 import com.shampan.db.collections.fragment.profile.BirthDate;
@@ -67,6 +68,23 @@ public class BasicProfileModel {
         this.resultEvent = resultEvent;
     }
 
+    public ResultEvent addUserBasicProfileInfo(String userBasicInfo) {
+        try {
+            MongoCollection<BasicProfileDAO> mongoCollection
+                    = DBConnection.getInstance().getConnection().getCollection(Collections.USERPROFILES.toString(), BasicProfileDAO.class);
+            BasicProfileDAO basicInfo = new BasicProfileDAOBuilder().build(userBasicInfo);
+            if (basicInfo != null) {
+                mongoCollection.insertOne(basicInfo);
+                this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
+            } else {
+                this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
+            }
+        } catch (Exception ex) {
+            this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
+        }
+        return this.resultEvent;
+    }
+
     //--------------------------------- About -> Works and Education ------------------------------------//
     public List<BasicProfileDAO> getRecentUserInfo(String userIdList) {
         MongoCollection<BasicProfileDAO> mongoCollection
@@ -88,7 +106,8 @@ public class BasicProfileModel {
             Document pQueryDocument = new Document();
             pQueryDocument.put(attrUserId, "$all");
             pQueryDocument.put("pSkills", "$all");
-            pQueryDocument.put("basicInfo.birthDate", "$all");
+            pQueryDocument.put("basicInfo.city", "$all");
+//            pQueryDocument.put("basicInfo.birthDate", "$all");
             MongoCursor<BasicProfileDAO> userInfoList = mongoCollection.find(selectDocument).projection(pQueryDocument).iterator();
             userList = IteratorUtils.toList(userInfoList);
         }

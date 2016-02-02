@@ -24,15 +24,37 @@ public class UserDAOBuilder {
     private String firstName;
     private String lastName;
     private String userName;
+    private Gender gender;
     private String password;
     private String email;
     private String ipAddress;
     private int createdOn;
-    private String last_login;
+    private int lastLogin;
     private String accountStatusId;
     private Country country;
-    private Gender gender;
     private List<Group> groups;
+    private int active;
+    private String activationCode;
+    private String rememberCode;
+    private String forgottenPasswordCode;
+    private int forgottenPasswordTime;
+    private String salt;
+    
+
+    public UserDAOBuilder setRememberCode(String rememberCode) {
+        this.rememberCode = rememberCode;
+        return this;
+    }
+
+    public UserDAOBuilder setForgottenPasswordCode(String forgottenPasswordCode) {
+        this.forgottenPasswordCode = forgottenPasswordCode;
+        return this;
+    }
+
+    public UserDAOBuilder setForgottenPasswordTime(int forgottenPasswordTime) {
+        this.forgottenPasswordTime = forgottenPasswordTime;
+        return this;
+    }
 
     public UserDAOBuilder setUserId(String userId) {
         this.userId = userId;
@@ -78,8 +100,8 @@ public class UserDAOBuilder {
         this.createdOn = createdOn;
     }
 
-    public UserDAOBuilder setLast_login(String last_login) {
-        this.last_login = last_login;
+    public UserDAOBuilder setLastLogin(int lastLogin) {
+        this.lastLogin = lastLogin;
         return this;
     }
 
@@ -98,18 +120,47 @@ public class UserDAOBuilder {
         return this;
     }
 
+    public UserDAOBuilder setActive(int active) {
+        this.active = active;
+        return this;
+    }
+
+    public UserDAOBuilder setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
+        return this;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public UserDAOBuilder setSalt(String salt) {
+        this.salt = salt;
+        return this;
+    }
+    
+
     public UserDAO build() {
         user.set_id(id);
         user.setUserId(userId);
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setUserName(userName);
+        user.setGender(gender);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setIpAddress(ipAddress);
+        user.setCreatedOn(createdOn);
+        user.setLastLogin(lastLogin);
         user.setAccountStatusId(accountStatusId);
         user.setCountry(country);
-        user.setCreatedOn(createdOn);
-        user.setEmail(email);
         user.setGroups(groups);
-        user.setGender(gender);
+        user.setActive(active);
+        user.setActivationCode(activationCode);
+        user.setRememberCode(rememberCode);
+        user.setForgottenPasswordCode(forgottenPasswordCode);
+        user.setForgottenPasswordTime(forgottenPasswordTime);
+        user.setSalt(salt);
         return user;
     }
 
