@@ -12,6 +12,7 @@ import com.shampan.db.codec.AlbumCodec;
 import com.shampan.db.codec.BasicProfileCodec;
 import com.shampan.db.codec.CharacterCodec;
 import com.shampan.db.codec.CountriesCodec;
+import com.shampan.db.codec.LoginAttemptCodec;
 import com.shampan.db.codec.MessageCodec;
 import com.shampan.db.codec.MessageDetailsCodec;
 import com.shampan.db.codec.NotificationCodec;
@@ -19,6 +20,7 @@ import com.shampan.db.codec.PhotoCategoryCodec;
 import com.shampan.db.codec.PhotoCodec;
 import com.shampan.db.codec.RelationsCodec;
 import com.shampan.db.codec.ReligionsCodec;
+import com.shampan.db.codec.SocialNetworkingCodec;
 import com.shampan.db.codec.StatusCodec;
 import com.shampan.db.codec.UserCodec;
 import com.shampan.db.codec.VideoCategoryCodec;
@@ -74,6 +76,8 @@ public class DBConnection {
             MessageCodec messageCodec = new MessageCodec();
             MessageDetailsCodec messageDetailsCodec = new MessageDetailsCodec();
             CharacterCodec characterCodec = new CharacterCodec();
+            SocialNetworkingCodec socialNetworkingCodec = new SocialNetworkingCodec();
+            LoginAttemptCodec loginAttemptCodec = new LoginAttemptCodec();
             CodecRegistry codecRegistry = CodecRegistries.fromRegistries(
                     MongoClient.getDefaultCodecRegistry(),
                     CodecRegistries.fromCodecs(userCodec),
@@ -90,7 +94,9 @@ public class DBConnection {
                     CodecRegistries.fromCodecs(notificationCodec),
                     CodecRegistries.fromCodecs(messageCodec),
                     CodecRegistries.fromCodecs(messageDetailsCodec),
-                    CodecRegistries.fromCodecs(characterCodec)
+                    CodecRegistries.fromCodecs(loginAttemptCodec),
+                    CodecRegistries.fromCodecs(characterCodec),
+                    CodecRegistries.fromCodecs(socialNetworkingCodec)
             );
 
             MongoClientOptions options = MongoClientOptions.builder().codecRegistry(codecRegistry).build();

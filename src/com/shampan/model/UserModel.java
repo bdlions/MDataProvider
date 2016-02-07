@@ -22,6 +22,7 @@ import com.shampan.db.collections.fragment.profile.BirthDate;
 import com.shampan.db.collections.fragment.profile.City;
 import com.shampan.util.PropertyProvider;
 import com.shampan.util.Utility;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -71,37 +72,40 @@ public class UserModel {
      *@param userBasicInfo user BasicInfo Info  add to user_profile collection
      */
     public ResultEvent userRegistration(String registrationInfo, String userBasicInfo) {
-        UserDAO userInfo = new UserDAOBuilder().build(registrationInfo);
-        ResultEvent result = null;
-        if (userInfo != null) {
-            String email = userInfo.getEmail();
-            String userName = userInfo.getUserName();
-            ResultEvent validationResult = emailAndUserNameCheck(email, userName);
-            if (validationResult.getResponseCode().equals(PropertyProvider.get("USER_ALLOW_FOR_REGISTRATION"))) {
-                ResultEvent resultEvent = registration(userInfo.toString());
-                if (resultEvent.getResponseCode() != PropertyProvider.get("ERROR_EXCEPTION")) {
-                    result = basicProfileModel.addUserBasicProfileInfo(userBasicInfo);
+        try {
+            UserDAO userInfo = new UserDAOBuilder().build(registrationInfo);
+            if (userInfo != null) {
+                String email = userInfo.getEmail();
+                String userName = userInfo.getUserName();
+                ResultEvent validationResult = emailAndUserNameCheck(email, userName);
+                if (validationResult.getResponseCode().equals(PropertyProvider.get("USER_ALLOW_FOR_REGISTRATION"))) {
+                    ResultEvent resultEvent = registration(userInfo);
+                    if (resultEvent.getResponseCode() != PropertyProvider.get("ERROR_EXCEPTION")) {
+                        ResultEvent returnResult = basicProfileModel.addUserBasicProfileInfo(userBasicInfo);
+                        this.getResultEvent().setResponseCode(returnResult.getResponseCode());
+                    }
+                } else {
+                    this.getResultEvent().setResponseCode(validationResult.getResponseCode());
                 }
-            } else {
-                result = validationResult;
-            }
 
-        } else {
-            result.setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
+            } else {
+                this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
+            }
+        } catch (Exception ex) {
+            this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
         }
 
-        return result;
+        return this.resultEvent;
     }
 
     /*
      * This method will add registration of a user
      *@param registrationInfo registration Info  add to users collection
      */
-    public ResultEvent registration(String registrationInfo) {
+    public ResultEvent registration(UserDAO userInfo) {
         try {
             MongoCollection<UserDAO> mongoCollection
                     = DBConnection.getInstance().getConnection().getCollection(Collections.USERS.toString(), UserDAO.class);
-            UserDAO userInfo = new UserDAOBuilder().build(registrationInfo);
             if (userInfo != null) {
                 userInfo.setCreatedOn(utility.getCurrentTime());
                 userInfo.setLastLogin(utility.getCurrentTime());
