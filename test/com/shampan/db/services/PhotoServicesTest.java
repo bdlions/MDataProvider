@@ -5,7 +5,7 @@ import com.shampan.db.collections.AlbumDAO;
 import com.shampan.db.collections.PhotoCategoryDAO;
 import com.shampan.db.collections.PhotoDAO;
 import com.shampan.db.collections.builder.AlbumDAOBuilder;
-import com.shampan.db.collections.builder.PhotoCategoryBuilder;
+import com.shampan.db.collections.builder.PhotoCategoryDAOBuilder;
 import com.shampan.db.collections.builder.PhotoDAOBuilder;
 import com.shampan.db.collections.fragment.common.Comment;
 import com.shampan.db.collections.fragment.common.Like;
@@ -34,7 +34,7 @@ public class PhotoServicesTest {
 
 //    @Test
     public void addCategory() {
-        PhotoCategoryDAO category = new PhotoCategoryBuilder()
+        PhotoCategoryDAO category = new PhotoCategoryDAOBuilder()
                 .setCategoryId("3")
                 .setTitle("Art")
                 .build();

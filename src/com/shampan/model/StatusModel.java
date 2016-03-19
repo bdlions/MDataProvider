@@ -343,8 +343,8 @@ public class StatusModel {
                 mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document(attrlike, JSON.parse(statusLikeInfo.toString()))));
                 UserInfo userInfo = statusLikeInfo.getUserInfo();
                 notificationModel.addGeneralNotificationStatusLike(userId, statusId, userInfo.toString());
+                this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
             }
-            this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
         } catch (Exception ex) {
             this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
         }

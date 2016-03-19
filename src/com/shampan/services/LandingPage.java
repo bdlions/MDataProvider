@@ -29,8 +29,8 @@ public class LandingPage {
         return json.toString();
     }
 
-    public static String userRegistration(String registrationInfo, String userBasicInfo) {
-        String resultEvent = userModel.userRegistration(registrationInfo, userBasicInfo).toString();
+    public static String userRegistration(String usersInfo, String userBasicInfo) {
+        String resultEvent = userModel.userRegistration(usersInfo, userBasicInfo).toString();
         return resultEvent;
     }
 

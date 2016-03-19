@@ -4,13 +4,17 @@ import com.mongodb.client.MongoCollection;
 import com.shampan.db.Collections;
 import com.shampan.db.DBConnection;
 import com.shampan.db.collections.CountriesDAO;
+import com.shampan.db.collections.PageCategoryDAO;
+import com.shampan.db.collections.PageSubCategoryDAO;
 import com.shampan.db.collections.PhotoCategoryDAO;
 import com.shampan.db.collections.ReligionsDAO;
 import com.shampan.db.collections.UserDAO;
 import com.shampan.db.collections.VideoCategoryDAO;
 import com.shampan.db.collections.builder.ReligionsDAOBuilder;
 import com.shampan.db.collections.builder.CountriesDAOBuilder;
-import com.shampan.db.collections.builder.PhotoCategoryBuilder;
+import com.shampan.db.collections.builder.PageCategoryDAOBuilder;
+import com.shampan.db.collections.builder.PageSubCategoryDAOBuilder;
+import com.shampan.db.collections.builder.PhotoCategoryDAOBuilder;
 import com.shampan.db.collections.builder.UserDAOBuilder;
 import com.shampan.db.collections.builder.VideoCategoryDAOBuilder;
 import com.shampan.db.collections.fragment.common.UserInfo;
@@ -66,7 +70,6 @@ public class LandingPageServiceTest {
     }
 
 //    @Test
-
     public void storeCountries() {
         DBConnection.getInstance().getConnection();
         MongoCollection<CountriesDAO> mongoCollection
@@ -1538,71 +1541,71 @@ public class LandingPageServiceTest {
 
     }
 
-    @Test
+//    @Test
     public void photoCategories() {
         MongoCollection<PhotoCategoryDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.PHOTOCATEGORIES.toString(), PhotoCategoryDAO.class);
-        PhotoCategoryDAO category1 = new PhotoCategoryBuilder()
+        PhotoCategoryDAO category1 = new PhotoCategoryDAOBuilder()
                 .setCategoryId("1")
                 .setTitle("Artisan Crafts")
                 .build();
-        PhotoCategoryDAO category2 = new PhotoCategoryBuilder()
+        PhotoCategoryDAO category2 = new PhotoCategoryDAOBuilder()
                 .setCategoryId("3")
                 .setTitle("Cartoons & Comics")
                 .build();
-        PhotoCategoryDAO category3 = new PhotoCategoryBuilder()
+        PhotoCategoryDAO category3 = new PhotoCategoryDAOBuilder()
                 .setCategoryId("3")
                 .setTitle("Comedy")
                 .build();
-        PhotoCategoryDAO category4 = new PhotoCategoryBuilder()
+        PhotoCategoryDAO category4 = new PhotoCategoryDAOBuilder()
                 .setCategoryId("4")
                 .setTitle("Contests")
                 .build();
-        PhotoCategoryDAO category5 = new PhotoCategoryBuilder()
+        PhotoCategoryDAO category5 = new PhotoCategoryDAOBuilder()
                 .setCategoryId("5")
                 .setTitle("Designs & Interfaces")
                 .build();
 
-        PhotoCategoryDAO category6 = new PhotoCategoryBuilder()
+        PhotoCategoryDAO category6 = new PhotoCategoryDAOBuilder()
                 .setCategoryId("6")
                 .setTitle("Digital Art")
                 .build();
-        PhotoCategoryDAO category7 = new PhotoCategoryBuilder()
+        PhotoCategoryDAO category7 = new PhotoCategoryDAOBuilder()
                 .setCategoryId("7")
                 .setTitle("Fan Art")
                 .build();
 
-        PhotoCategoryDAO category8 = new PhotoCategoryBuilder()
+        PhotoCategoryDAO category8 = new PhotoCategoryDAOBuilder()
                 .setCategoryId("8")
                 .setTitle("Film & Animation")
                 .build();
-        PhotoCategoryDAO category9 = new PhotoCategoryBuilder()
+        PhotoCategoryDAO category9 = new PhotoCategoryDAOBuilder()
                 .setCategoryId("9")
                 .setTitle("Fractal Art")
                 .build();
-        PhotoCategoryDAO category10 = new PhotoCategoryBuilder()
+        PhotoCategoryDAO category10 = new PhotoCategoryDAOBuilder()
                 .setCategoryId("10")
                 .setTitle("Game Development Art")
                 .build();
-        PhotoCategoryDAO category11 = new PhotoCategoryBuilder()
+        PhotoCategoryDAO category11 = new PhotoCategoryDAOBuilder()
                 .setCategoryId("11")
                 .setTitle("Literature")
                 .build();
-        PhotoCategoryDAO category12 = new PhotoCategoryBuilder()
+        PhotoCategoryDAO category12 = new PhotoCategoryDAOBuilder()
                 .setCategoryId("12")
                 .setTitle("People")
                 .build();
 
-        PhotoCategoryDAO category13 = new PhotoCategoryBuilder()
+        PhotoCategoryDAO category13 = new PhotoCategoryDAOBuilder()
                 .setCategoryId("13")
                 .setTitle("Pets & Animals")
                 .build();
-        PhotoCategoryDAO category14 = new PhotoCategoryBuilder()
+        PhotoCategoryDAO category14 = new PhotoCategoryDAOBuilder()
                 .setCategoryId("14")
                 .setTitle("Sports")
                 .build();
 
-        PhotoCategoryDAO category15 = new PhotoCategoryBuilder()
+        PhotoCategoryDAO category15 = new PhotoCategoryDAOBuilder()
                 .setCategoryId("15")
                 .setTitle("Traditional Art")
                 .build();
@@ -1626,7 +1629,7 @@ public class LandingPageServiceTest {
         mongoCollection.insertMany(photoCategories);
     }
 
-    @Test
+//    @Test
     public void videoCategories() {
         MongoCollection<VideoCategoryDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.VIDEOCATEGORIES.toString(), VideoCategoryDAO.class);
@@ -1767,7 +1770,7 @@ public class LandingPageServiceTest {
         mongoCollection.insertMany(users);
     }
 
-    @Test
+//    @Test
     public void storeTestCountries() {
         DBConnection.getInstance().getConnection();
         MongoCollection<CountriesDAO> mongoCollection
@@ -1797,4 +1800,138 @@ public class LandingPageServiceTest {
         countries.add(countryDAO3);
         mongoCollection.insertMany(countries);
     }
+
+        @Test
+    public void storeTestPageCategory() {
+        DBConnection.getInstance().getConnection();
+        MongoCollection<PageCategoryDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.PAGECATEGORIES.toString(), PageCategoryDAO.class);
+
+        PageCategoryDAO categoryDAO1 = new PageCategoryDAOBuilder()
+                .setCategoryId("1")
+                .setTitle("Brand")
+                .build();
+        PageCategoryDAO categoryDAO2 = new PageCategoryDAOBuilder()
+                .setCategoryId("2")
+                .setTitle("Community")
+                .build();
+        PageCategoryDAO categoryDAO3 = new PageCategoryDAOBuilder()
+                .setCategoryId("3")
+                .setTitle("Business")
+                .build();
+        PageCategoryDAO categoryDAO4 = new PageCategoryDAOBuilder()
+                .setCategoryId("4")
+                .setTitle("Place")
+                .build();
+        PageCategoryDAO categoryDAO5 = new PageCategoryDAOBuilder()
+                .setCategoryId("5")
+                .setTitle("Entertainment")
+                .build();
+        PageCategoryDAO categoryDAO6 = new PageCategoryDAOBuilder()
+                .setCategoryId("6")
+                .setTitle("Commpany")
+                .build();
+        PageCategoryDAO categoryDAO7 = new PageCategoryDAOBuilder()
+                .setCategoryId("7")
+                .setTitle("Organization")
+                .build();
+
+        List<PageCategoryDAO> categoryList = new ArrayList<>();
+        categoryList.add(categoryDAO1);
+        categoryList.add(categoryDAO2);
+        categoryList.add(categoryDAO3);
+        categoryList.add(categoryDAO4);
+        categoryList.add(categoryDAO5);
+        categoryList.add(categoryDAO6);
+        categoryList.add(categoryDAO7);
+        mongoCollection.insertMany(categoryList);
+    }
+        @Test
+    public void storeTestPageSubCategory() {
+        DBConnection.getInstance().getConnection();
+        MongoCollection<PageSubCategoryDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.PAGESUBCATEGORIES.toString(), PageSubCategoryDAO.class);
+
+        PageSubCategoryDAO subCategoryDAO1 = new PageSubCategoryDAOBuilder()
+                .setCategoryId("1")
+                .setSubCategoryId("1")
+                .setTitle("car")
+                .build();
+        PageSubCategoryDAO subCategoryDAO2 = new PageSubCategoryDAOBuilder()
+                .setCategoryId("1")
+                .setSubCategoryId("2")
+                .setTitle("Colthing")
+                .build();
+        PageSubCategoryDAO subCategoryDAO3 = new PageSubCategoryDAOBuilder()
+                .setCategoryId("2")
+                .setSubCategoryId("1")
+                .setTitle("Community1")
+                .build();
+        PageSubCategoryDAO subCategoryDAO4 = new PageSubCategoryDAOBuilder()
+                .setCategoryId("2")
+                .setSubCategoryId("2")
+                .setTitle("Community2")
+                .build();
+        PageSubCategoryDAO subCategoryDAO5 = new PageSubCategoryDAOBuilder()
+                .setCategoryId("3")
+                .setSubCategoryId("1")
+                .setTitle("Business1")
+                .build();
+        PageSubCategoryDAO subCategoryDAO6 = new PageSubCategoryDAOBuilder()
+                .setCategoryId("3")
+                .setSubCategoryId("2")
+                .setTitle("Business2")
+                .build();
+        PageSubCategoryDAO subCategoryDAO7 = new PageSubCategoryDAOBuilder()
+                .setCategoryId("4")
+                .setSubCategoryId("1")
+                .setTitle("Place1")
+                .build();
+        PageSubCategoryDAO subCategoryDAO8 = new PageSubCategoryDAOBuilder()
+                .setCategoryId("4")
+                .setSubCategoryId("2")
+                .setTitle("Place2")
+                .build();
+        PageSubCategoryDAO subCategoryDAO9 = new PageSubCategoryDAOBuilder()
+                .setCategoryId("5")
+                .setSubCategoryId("1")
+                .setTitle("Entertainment1")
+                .build();
+        PageSubCategoryDAO subCategoryDAO10 = new PageSubCategoryDAOBuilder()
+                .setCategoryId("5")
+                .setSubCategoryId("2")
+                .setTitle("Entertainment2")
+                .build();
+        PageSubCategoryDAO subCategoryDAO11 = new PageSubCategoryDAOBuilder()
+                .setCategoryId("6")
+                .setSubCategoryId("1")
+                .setTitle("Commpany1")
+                .build();
+        PageSubCategoryDAO subCategoryDAO12 = new PageSubCategoryDAOBuilder()
+                .setCategoryId("6")
+                .setSubCategoryId("2")
+                .setTitle("Commpany2")
+                .build();
+        PageSubCategoryDAO subCategoryDAO13 = new PageSubCategoryDAOBuilder()
+                .setCategoryId("7")
+                .setSubCategoryId("1")
+                .setTitle("organization1")
+                .build();
+        PageSubCategoryDAO subCategoryDAO14 = new PageSubCategoryDAOBuilder()
+                .setCategoryId("7")
+                .setSubCategoryId("2")
+                .setTitle("organization2")
+                .build();
+
+        List<PageSubCategoryDAO> categoryList = new ArrayList<>();
+        categoryList.add(subCategoryDAO1);
+        categoryList.add(subCategoryDAO2);
+        categoryList.add(subCategoryDAO3);
+        categoryList.add(subCategoryDAO4);
+        categoryList.add(subCategoryDAO5);
+        categoryList.add(subCategoryDAO6);
+        categoryList.add(subCategoryDAO7);
+        mongoCollection.insertMany(categoryList);
+    }
+
 }

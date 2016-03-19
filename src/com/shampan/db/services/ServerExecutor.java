@@ -347,6 +347,21 @@ public class ServerExecutor extends AbstractVerticle {
         router.post("/video/getVideoComments").handler(VideoController::getVideoComments);
         router.route("/video/editVideoComment").handler(BodyHandler.create());
         router.post("/video/editVideoComment").handler(VideoController::editVideoComment);
+        
+        
+        /*
+         pageController
+         */
+        router.get("/page/getCategorySubCategory").handler(PageController::getCategorySubCategory);
+        router.route("/page/addPage").handler(BodyHandler.create());
+        router.post("/page/addPage").handler(PageController::addPage);
+        router.route("/page/UpdatePage").handler(BodyHandler.create());
+        router.post("/page/UpdatePage").handler(PageController::updatePage);
+        router.route("/page/getPageInfo").handler(BodyHandler.create());
+        router.post("/page/getPageInfo").handler(PageController::getPageInfo);
+        router.route("/page/addPageLike").handler(BodyHandler.create());
+        router.post("/page/addPageLike").handler(PageController::addPageLike);
+        
         server.requestHandler(router::accept).listen(8080);
     }
 }

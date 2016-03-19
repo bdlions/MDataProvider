@@ -71,9 +71,9 @@ public class UserModel {
      *@param registrationInfo registration Info  add to users collection
      *@param userBasicInfo user BasicInfo Info  add to user_profile collection
      */
-    public ResultEvent userRegistration(String registrationInfo, String userBasicInfo) {
+    public ResultEvent userRegistration(String usersInfo, String userBasicInfo) {
         try {
-            UserDAO userInfo = new UserDAOBuilder().build(registrationInfo);
+            UserDAO userInfo = new UserDAOBuilder().build(usersInfo);
             if (userInfo != null) {
                 String email = userInfo.getEmail();
                 String userName = userInfo.getUserName();
@@ -519,6 +519,7 @@ public class UserModel {
         pQueryDocument.put(attrUserId, "$all");
         pQueryDocument.put(attrFirstName, "$all");
         pQueryDocument.put(attrLastName, "$all");
+        pQueryDocument.put("gender", "$all");
         UserDAO userInfo = mongoCollection.find(selectQuery).projection(pQueryDocument).first();
         return userInfo;
     }

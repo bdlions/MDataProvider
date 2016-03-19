@@ -16,6 +16,10 @@ import com.shampan.db.codec.LoginAttemptCodec;
 import com.shampan.db.codec.MessageCodec;
 import com.shampan.db.codec.MessageDetailsCodec;
 import com.shampan.db.codec.NotificationCodec;
+import com.shampan.db.codec.PageCategoryCodec;
+import com.shampan.db.codec.PageCodec;
+import com.shampan.db.codec.PageMemeberCodec;
+import com.shampan.db.codec.PageSubCategoryCodec;
 import com.shampan.db.codec.PhotoCategoryCodec;
 import com.shampan.db.codec.PhotoCodec;
 import com.shampan.db.codec.RelationsCodec;
@@ -78,6 +82,10 @@ public class DBConnection {
             CharacterCodec characterCodec = new CharacterCodec();
             SocialNetworkingCodec socialNetworkingCodec = new SocialNetworkingCodec();
             LoginAttemptCodec loginAttemptCodec = new LoginAttemptCodec();
+            PageCategoryCodec pageCategoryCodec = new PageCategoryCodec();
+            PageSubCategoryCodec pageSubCategoryCodec = new PageSubCategoryCodec();
+            PageCodec pageCodec = new PageCodec();
+            PageMemeberCodec pageMemeberCodec = new PageMemeberCodec();
             CodecRegistry codecRegistry = CodecRegistries.fromRegistries(
                     MongoClient.getDefaultCodecRegistry(),
                     CodecRegistries.fromCodecs(userCodec),
@@ -96,7 +104,12 @@ public class DBConnection {
                     CodecRegistries.fromCodecs(messageDetailsCodec),
                     CodecRegistries.fromCodecs(loginAttemptCodec),
                     CodecRegistries.fromCodecs(characterCodec),
-                    CodecRegistries.fromCodecs(socialNetworkingCodec)
+                    CodecRegistries.fromCodecs(socialNetworkingCodec),
+                    CodecRegistries.fromCodecs(pageCategoryCodec),
+                    CodecRegistries.fromCodecs(pageSubCategoryCodec),
+                    CodecRegistries.fromCodecs(pageCodec),
+                    CodecRegistries.fromCodecs(pageMemeberCodec)
+                    
             );
 
             MongoClientOptions options = MongoClientOptions.builder().codecRegistry(codecRegistry).build();

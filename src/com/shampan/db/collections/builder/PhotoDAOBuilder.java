@@ -40,6 +40,7 @@ public class PhotoDAOBuilder {
     private List<Like> like;
     private List<Comment> comment;
     private List<Share> share;
+    private String referenceId;
 
     public PhotoDAOBuilder setUserId(String userId) {
         this.userId = userId;
@@ -89,6 +90,12 @@ public class PhotoDAOBuilder {
         return this;
     }
 
+    public PhotoDAOBuilder setReferenceId(String referenceId) {
+        this.referenceId = referenceId;
+        return this;
+    }
+    
+
     public PhotoDAOBuilder setCommentPrivacy(Privacy commentPrivacy) {
         this.commentPrivacy = commentPrivacy;
         return this;
@@ -122,6 +129,7 @@ public class PhotoDAOBuilder {
         photoInfo.setPrivacy(privacy);
         photoInfo.setShare(share);
         photoInfo.setUserId(userId);
+        photoInfo.setReferenceId(referenceId);
         return photoInfo;
     }
 

@@ -12,28 +12,28 @@ import com.shampan.db.collections.PhotoCategoryDAO;
  *
  * @author Sampan-IT
  */
-public class PhotoCategoryBuilder {
+public class PhotoCategoryDAOBuilder {
 
     private PhotoCategoryDAO photoCategory;
 
-    public PhotoCategoryBuilder() {
+    public PhotoCategoryDAOBuilder() {
         photoCategory = new PhotoCategoryDAO();
     }
     private String _id;
     private String categoryId;
     private String title;
 
-    public PhotoCategoryBuilder setId(String _id) {
+    public PhotoCategoryDAOBuilder setId(String _id) {
         this._id = _id;
         return this;
     }
 
-    public PhotoCategoryBuilder setCategoryId(String categoryId) {
+    public PhotoCategoryDAOBuilder setCategoryId(String categoryId) {
         this.categoryId = categoryId;
         return this;
     }
 
-    public PhotoCategoryBuilder setTitle(String title) {
+    public PhotoCategoryDAOBuilder setTitle(String title) {
         this.title = title;
         return this;
     }

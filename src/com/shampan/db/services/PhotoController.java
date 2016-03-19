@@ -241,11 +241,13 @@ public class PhotoController {
                 .end(PhotoService.deletePhoto(userId, albumId, photoId));
     }
     public static void addPhotoLike(RoutingContext routingContext) {
+        String userId = routingContext.request().getParam("userId");
         String photoId = routingContext.request().getParam("photoId");
+        String referenceId = routingContext.request().getParam("referenceId");
         String likeInfo = routingContext.request().getParam("likeInfo");
         routingContext.response()
                 .putHeader("content-type", "application/json; charset=utf-8")
-                .end(PhotoService.addPhotoLike(photoId, likeInfo));
+                .end(PhotoService.addPhotoLike(userId, photoId, referenceId, likeInfo));
     }
     public static void deletePhotoLike(RoutingContext routingContext) {
         String photoId = routingContext.request().getParam("photoId");
@@ -262,10 +264,12 @@ public class PhotoController {
     }
     public static void addPhotoComment(RoutingContext routingContext) {
         String photoId = routingContext.request().getParam("photoId");
+        String referenceId = routingContext.request().getParam("referenceId");
         String commentInfo = routingContext.request().getParam("commentInfo");
+        String referenceInfo = routingContext.request().getParam("referenceInfo");
         routingContext.response()
                 .putHeader("content-type", "application/json; charset=utf-8")
-                .end(PhotoService.addPhotoComment(photoId, commentInfo));
+                .end(PhotoService.addPhotoComment(photoId, referenceId, commentInfo,referenceInfo));
     }
     public static void editPhotoComment(RoutingContext routingContext) {
         String photoId = routingContext.request().getParam("photoId");

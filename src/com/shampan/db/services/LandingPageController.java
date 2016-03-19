@@ -17,11 +17,11 @@ public class LandingPageController {
     }
 
     public static void userRegistration(RoutingContext routingContext) {
-        String registrationInfo = routingContext.request().getParam("registrationInfo");
         String userBasicInfo = routingContext.request().getParam("userBasicInfo");
+        String usersInfo = routingContext.request().getParam("usersInfo");
         routingContext.response()
                 .putHeader("content-type", "application/json; charset=utf-8")
-                .end(LandingPage.userRegistration(registrationInfo, userBasicInfo));
+                .end(LandingPage.userRegistration(usersInfo, userBasicInfo));
     }
     public static void getUSerInfoByEmail(RoutingContext routingContext) {
         String email = routingContext.request().getParam("email");

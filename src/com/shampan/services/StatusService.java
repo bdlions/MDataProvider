@@ -5,7 +5,9 @@
  */
 package com.shampan.services;
 
+import com.shampan.model.PhotoModel;
 import com.shampan.model.StatusModel;
+import com.shampan.util.PropertyProvider;
 import org.json.JSONObject;
 
 /**
@@ -24,11 +26,13 @@ public class StatusService {
     public static String getStatuses(String userId, int offset, int limit) {
         return obj.getStatuses(userId, offset, limit);
     }
-    public static String getUserProfileStatuses(String userId,String mappingId, int offset, int limit) {
+
+    public static String getUserProfileStatuses(String userId, String mappingId, int offset, int limit) {
         return obj.getUserProfileStatuses(userId, mappingId, offset, limit);
     }
-    public static String getStatusDetails(String userId,String statusId) {
-        return obj.getStatusDetails(userId,statusId);
+
+    public static String getStatusDetails(String userId, String statusId) {
+        return obj.getStatusDetails(userId, statusId);
     }
 
     public static String deleteStatus(String statusId) {
@@ -41,11 +45,20 @@ public class StatusService {
         return response;
     }
 
-    public static String addStatusLike(String userId,String statusId, String likeInfo) {
-        String response = obj.addStatusLike(userId,statusId, likeInfo).toString();
+    public static String addStatusLike(String userId, String statusId, String likeInfo, String statusTypeId) {
+        PropertyProvider.add("com.shampan.properties/status");
+        PhotoModel photoObj = new PhotoModel();
+        String abc = PropertyProvider.get("STATUS_TYPE_ID_CHANGE_PROFILE_PICTURE");
+        if (statusTypeId.endsWith(PropertyProvider.get("STATUS_TYPE_ID_CHANGE_PROFILE_PICTURE"))|| statusTypeId .endsWith(PropertyProvider.get("STATUS_TYPE_ID_CHANGE_COVER_PICTURE")) || statusTypeId.endsWith(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_USER_AT_HIS_PROFILE_WITH_PHOTO")) || statusTypeId .endsWith(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_USER_AT_FRIEND_PROFILE_WITH_PHOTO"))) {
+            photoObj.addPhotoLikeByReferenceId(statusId, likeInfo).toString();
+        } else if (statusTypeId.endsWith(PropertyProvider.get("STATUS_TYPE_ID_ADD_ALBUM_PHOTOS"))) {
+            photoObj.addAlbumLikeByReferenceId(statusId, likeInfo);
+        }
+        String response = obj.addStatusLike(userId, statusId, likeInfo).toString();
         return response;
 
     }
+
     public static String addStatusCommentLike(String statusId, String commentId, String likeInfo) {
         String response = obj.addStatusCommentLike(statusId, commentId, likeInfo).toString();
         return response;
@@ -63,39 +76,45 @@ public class StatusService {
         return response;
 
     }
+
     public static String getStatusLikeList(String statusId) {
         String response = obj.getStatusLikeList(statusId).toString();
         return response;
 
     }
+
     public static String getStatusShareList(String statusId) {
         String response = obj.getStatusShareList(statusId).toString();
         return response;
 
     }
+
     public static String getStatusComments(String userId, String statusId) {
         String response = obj.getStatusComments(userId, statusId).toString();
         return response;
 
     }
-    public static String updateStatusComment(String statusId,String commentId, String description) {
+
+    public static String updateStatusComment(String statusId, String commentId, String description) {
         String response = obj.updateStatusComment(statusId, commentId, description).toString();
         return response;
 
     }
-    
-    public static String deleteStatusComment(String statusId,String commentId) {
-        String response = obj.deleteStatusComment(statusId, commentId ).toString();
+
+    public static String deleteStatusComment(String statusId, String commentId) {
+        String response = obj.deleteStatusComment(statusId, commentId).toString();
         return response;
 
     }
-    public static String getStatusCommentLikeList(String statusId,String commentId) {
-        String response = obj.getStatusCommentLikeList(statusId, commentId ).toString();
+
+    public static String getStatusCommentLikeList(String statusId, String commentId) {
+        String response = obj.getStatusCommentLikeList(statusId, commentId).toString();
         return response;
 
     }
+
     public static String getRecentActivities(String userId, int offset, int limit) {
-        String response = obj.getRecentActivities(userId, offset, limit ).toString();
+        String response = obj.getRecentActivities(userId, offset, limit).toString();
         return response;
 
     }

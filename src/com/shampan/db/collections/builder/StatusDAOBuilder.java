@@ -7,6 +7,7 @@ package com.shampan.db.collections.builder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shampan.db.collections.StatusDAO;
+import com.shampan.db.collections.fragment.page.PageInfo;
 import com.shampan.db.collections.fragment.status.Comment;
 import com.shampan.db.collections.fragment.status.Image;
 import com.shampan.db.collections.fragment.status.Like;
@@ -38,6 +39,7 @@ public class StatusDAOBuilder {
     private int createdOn;
     private int modifiedOn;
     private UserInfo userInfo;
+    private PageInfo pageInfo;
     private List<Image> images;
     private ReferenceInfo referenceInfo;
     private List<ReferenceList> referenceList;
@@ -94,6 +96,12 @@ public class StatusDAOBuilder {
         this.modifiedOn = modifiedOn;
         return this;
     }
+
+    public StatusDAOBuilder setPageInfo(PageInfo pageInfo) {
+        this.pageInfo = pageInfo;
+        return this;
+    }
+
     public StatusDAOBuilder setUserInfo(UserInfo userInfo) {
         this.userInfo = userInfo;
         return this;
@@ -155,6 +163,7 @@ public class StatusDAOBuilder {
         status.setComment(comment);
         status.setShare(share);
         status.setImages(images);
+        status.setPageInfo(pageInfo);
         return status;
     }
 

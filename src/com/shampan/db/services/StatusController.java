@@ -127,9 +127,10 @@ public class StatusController {
         String statusId = routingContext.request().getParam("statusId");
         String userId = routingContext.request().getParam("userId");
         String likeInfo = routingContext.request().getParam("likeInfo");
+        String statusTypeId = routingContext.request().getParam("statusTypeId");
         routingContext.response()
                 .putHeader("content-type", "application/json; charset=utf-8")
-                .end(StatusService.addStatusLike(userId, statusId, likeInfo));
+                .end(StatusService.addStatusLike(userId, statusId, likeInfo, statusTypeId));
     }
 
     public static void addStatusCommentLike(RoutingContext routingContext) {

@@ -9,6 +9,7 @@ import com.shampan.db.collections.UserDAO;
 import com.shampan.model.UserModel;
 import com.shampan.util.Utility;
 import java.awt.BorderLayout;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,13 @@ public class UserServicesTest {
         System.out.println(userModel.getUserGenderInfo(userId1));
 
     }
+       @Test 
+
+    public void userRegistration() throws SQLException {
+
+        System.out.println(userModel.userRegistration(userId1, userId2));
+
+    }
 //       @Test 
 
     public void emailAndUserNameCheck() {
@@ -54,7 +62,7 @@ public class UserServicesTest {
         System.out.println(userModel.emailAndUserNameCheck("keya@gmail1.com", "rashida sultana"));
 
     }
-       @Test 
+//       @Test 
 
     public void getUSerInfoByEmail() {
 

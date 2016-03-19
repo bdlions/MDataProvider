@@ -20,7 +20,11 @@ public enum Collections {
     VIDEOS("videos"),
     NOTIFICATIONS("notifications"),
     MESSAGES("messages"),
-    MESSAGESDETAILS("messages_details");
+    MESSAGESDETAILS("messages_details"),
+    PAGECATEGORIES("page_categories"),
+    PAGESUBCATEGORIES("page_sub_categories"),
+    PAGES("pages"),
+    PAGEMEMBERS("pageMembers");
 
     private String name;
 

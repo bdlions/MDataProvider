@@ -42,6 +42,7 @@ public class AlbumDAO implements Bson {
     private List<Like> like;
     private List<Comment> comment;
     private List<Share> share;
+    private String referenceId;
 
     public String get_id() {
         return _id;
@@ -179,6 +180,14 @@ public class AlbumDAO implements Bson {
 
     public void setShare(List<Share> share) {
         this.share = share;
+    }
+
+    public String getReferenceId() {
+        return referenceId;
+    }
+
+    public void setReferenceId(String referenceId) {
+        this.referenceId = referenceId;
     }
 
      @Override

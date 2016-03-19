@@ -41,6 +41,7 @@ public class AlbumDAOBuilder {
     private List like;
     private List comment;
     private List share;
+    private String referenceId;
 
     public AlbumDAOBuilder setId(String _id) {
         this._id = _id;
@@ -116,6 +117,11 @@ public class AlbumDAOBuilder {
         return this;
     }
 
+    public AlbumDAOBuilder setReferenceId(String referenceId) {
+        this.referenceId = referenceId;
+        return this;
+    }
+
     public AlbumDAOBuilder setShare(List<Share> share) {
         this.share = share;
         return this;
@@ -137,6 +143,7 @@ public class AlbumDAOBuilder {
         userAlbum.setShare(share);
         userAlbum.setCreatedOn(createdOn);
         userAlbum.setModifiedOn(modifiedOn);
+        userAlbum.setReferenceId(referenceId);
 
         return userAlbum;
     }

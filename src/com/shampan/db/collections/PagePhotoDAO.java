@@ -5,36 +5,27 @@
  */
 package com.shampan.db.collections;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shampan.db.collections.fragment.common.Comment;
 import com.shampan.db.collections.fragment.common.Like;
 import com.shampan.db.collections.fragment.common.Privacy;
 import com.shampan.db.collections.fragment.common.Share;
 import java.util.List;
-import org.bson.BsonDocument;
-import org.bson.BsonDocumentWrapper;
-import org.bson.codecs.configuration.CodecRegistry;
-import org.bson.conversions.Bson;
 
 /**
  *
- * @author Sampan-IT
+ * @author Sampan IT
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class PhotoDAO implements Bson {
-
+public class PagePhotoDAO {
+    
     private String _id;
     private String photoId;
     private String albumId;
-    private String userId;
+    private String pageId;
     private String image;
     private String description;
     private String categoryId;
     private int createdOn;
     private int modifiedOn;
-    private Privacy privacy;
-    private Privacy commentPrivacy;
     private List<Like> like;
     private List<Comment> comment;
     private List<Share> share;
@@ -46,22 +37,6 @@ public class PhotoDAO implements Bson {
 
     public void set_id(String _id) {
         this._id = _id;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getPhotoId() {
@@ -80,12 +55,28 @@ public class PhotoDAO implements Bson {
         this.albumId = albumId;
     }
 
+    public String getPageId() {
+        return pageId;
+    }
+
+    public void setPageId(String pageId) {
+        this.pageId = pageId;
+    }
+
     public String getImage() {
         return image;
     }
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCategoryId() {
@@ -110,22 +101,6 @@ public class PhotoDAO implements Bson {
 
     public void setModifiedOn(int modifiedOn) {
         this.modifiedOn = modifiedOn;
-    }
-
-    public Privacy getPrivacy() {
-        return privacy;
-    }
-
-    public void setPrivacy(Privacy privacy) {
-        this.privacy = privacy;
-    }
-
-    public Privacy getCommentPrivacy() {
-        return commentPrivacy;
-    }
-
-    public void setCommentPrivacy(Privacy commentPrivacy) {
-        this.commentPrivacy = commentPrivacy;
     }
 
     public List<Like> getLike() {
@@ -160,22 +135,5 @@ public class PhotoDAO implements Bson {
         this.referenceId = referenceId;
     }
     
-
-    @Override
-    public String toString() {
-        ObjectMapper mapper = new ObjectMapper();
-        String json = "";
-        try {
-            json = mapper.writeValueAsString(this);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return json;
-    }
-
-    @Override
-    public <C> BsonDocument toBsonDocument(final Class<C> documentClass, final CodecRegistry codecRegistry) {
-        return new BsonDocumentWrapper<PhotoDAO>(this, codecRegistry.get(PhotoDAO.class));
-    }
-
+    
 }

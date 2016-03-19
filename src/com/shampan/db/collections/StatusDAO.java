@@ -7,6 +7,7 @@ package com.shampan.db.collections;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.shampan.db.collections.fragment.page.PageInfo;
 import com.shampan.db.collections.fragment.status.Comment;
 import com.shampan.db.collections.fragment.status.Image;
 import com.shampan.db.collections.fragment.status.Like;
@@ -37,6 +38,15 @@ public class StatusDAO implements Bson {
     private int createdOn;
     private int modifiedOn;
     private UserInfo userInfo;
+    private PageInfo pageInfo;
+
+    public PageInfo getPageInfo() {
+        return pageInfo;
+    }
+
+    public void setPageInfo(PageInfo pageInfo) {
+        this.pageInfo = pageInfo;
+    }
     private List<Image> images;
     private ReferenceInfo referenceInfo;
     private List<ReferenceList> referenceList;
