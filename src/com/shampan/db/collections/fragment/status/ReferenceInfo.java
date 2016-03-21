@@ -7,6 +7,7 @@ package com.shampan.db.collections.fragment.status;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.shampan.db.collections.fragment.page.PageInfo;
 import java.util.List;
 
 /**
@@ -18,6 +19,7 @@ public class ReferenceInfo {
     private String description;
     private List<Image> images;
     private UserInfo userInfo;
+    private PageInfo pageInfo;
 
     public String getDescription() {
         return description;
@@ -33,6 +35,14 @@ public class ReferenceInfo {
 
     public void setImages(List<Image> images) {
         this.images = images;
+    }
+
+    public PageInfo getPageInfo() {
+        return pageInfo;
+    }
+
+    public void setPageInfo(PageInfo pageInfo) {
+        this.pageInfo = pageInfo;
     }
 
 

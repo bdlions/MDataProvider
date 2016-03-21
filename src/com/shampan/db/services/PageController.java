@@ -54,5 +54,13 @@ public class PageController {
                 .putHeader("content-type", "application/json; charset=utf-8")
                 .end(PageService.addPageLike(pageId, memberInfo));
     }
+       public static void addPhotos(RoutingContext routingContext) {
+        String pageId = routingContext.request().getParam("pageId");
+        String albumId = routingContext.request().getParam("albumId");
+        String photoList = routingContext.request().getParam("photoList");
+        routingContext.response()
+                .putHeader("content-type", "application/json; charset=utf-8")
+                .end(PageService.addPhotos(pageId, albumId, photoList));
+    }
 
 }

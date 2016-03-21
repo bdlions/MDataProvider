@@ -78,8 +78,10 @@ public class StatusModel {
                 statusInfoObj.setCreatedOn(utility.getCurrentTime());
                 statusInfoObj.setModifiedOn(utility.getCurrentTime());
                 mongoCollection.insertOne(statusInfoObj);
+                this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
+            } else {
+                this.getResultEvent().setResponseCode(PropertyProvider.get("NULL_POINTER_EXCEPTION"));
             }
-            this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
         } catch (Exception ex) {
             this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
         }

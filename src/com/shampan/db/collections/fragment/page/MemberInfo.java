@@ -67,7 +67,7 @@ public class MemberInfo {
     public void setCreatedOn(long createdOn) {
         this.createdOn = createdOn;
     }
-    
+
     public static MemberInfo getMemberInfo(String jsonContent) {
         MemberInfo memberInfo = null;
         try {
@@ -78,4 +78,17 @@ public class MemberInfo {
         }
         return memberInfo;
     }
+
+    @Override
+    public String toString() {
+        ObjectMapper mapper = new ObjectMapper();
+        String json = "";
+        try {
+            json = mapper.writeValueAsString(this);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return json;
+    }
+
 }

@@ -5,11 +5,14 @@
  */
 package com.shampan.db.collections.fragment.page;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
  *
  * @author Sampan IT
  */
 public class SubCategory {
+
     private String subCategoryId;
     private String subCategoryTitle;
 
@@ -28,6 +31,17 @@ public class SubCategory {
     public void setSubCategoryTitle(String subCategoryTitle) {
         this.subCategoryTitle = subCategoryTitle;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        ObjectMapper mapper = new ObjectMapper();
+        String json = "";
+        try {
+            json = mapper.writeValueAsString(this);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return json;
+    }
+
 }

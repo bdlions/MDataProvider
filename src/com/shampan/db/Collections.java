@@ -24,7 +24,9 @@ public enum Collections {
     PAGECATEGORIES("page_categories"),
     PAGESUBCATEGORIES("page_sub_categories"),
     PAGES("pages"),
-    PAGEMEMBERS("pageMembers");
+    PAGEMEMBERS("page_members"),
+    PAGEALBUMS("page_albums"),
+    PAGEPHOTOS("page_photos"),;
 
     private String name;
 

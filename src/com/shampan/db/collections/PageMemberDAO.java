@@ -5,6 +5,7 @@
  */
 package com.shampan.db.collections;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.shampan.db.collections.fragment.page.MemberInfo;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
  *
  * @author Sampan IT
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PageMemberDAO {
 
     private String _id;

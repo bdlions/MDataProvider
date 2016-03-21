@@ -64,6 +64,10 @@ public class PageService {
         String response = pageObject.addPageLike(pageId, memberInfo).toString();
         return response;
     }
+    public static String addPhotos(String pageId, String albumId, String photoList) {
+        String response = pageObject.addPhotos(pageId, albumId, photoList).toString();
+        return response;
+    }
 
     public static String getPageInfo(String pageId) {
         JSONObject json = new JSONObject();

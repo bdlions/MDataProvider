@@ -5,6 +5,7 @@
  */
 package com.shampan.db.collections.builder;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shampan.db.collections.PagePhotoDAO;
 import com.shampan.db.collections.fragment.common.Comment;
 import com.shampan.db.collections.fragment.common.Like;
@@ -120,6 +121,16 @@ public class PagePhotoDAOBuilder {
         photoInfo.setShare(share);
         photoInfo.setPageId(pageId);
         photoInfo.setReferenceId(referenceId);
+        return photoInfo;
+    }
+
+    public PagePhotoDAO build(String daoContent) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            photoInfo = mapper.readValue(daoContent, PagePhotoDAO.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         return photoInfo;
     }
 

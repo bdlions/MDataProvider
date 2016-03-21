@@ -244,19 +244,21 @@ public class PhotoModel {
      * @param albumInfo,user album information
      * @author created by Rashida on 21th September 2015
      */
-    public String createAlbum(String albumInfo) {
-        MongoCollection<AlbumDAO> mongoCollection
-                = DBConnection.getInstance().getConnection().getCollection(Collections.USERALBUMS.toString(), AlbumDAO.class);
-        AlbumDAO albumInfoObj = new AlbumDAOBuilder().build(albumInfo);
-        if (albumInfoObj != null) {
-            mongoCollection.insertOne(albumInfoObj);
-            resultEvent.setResponseCode(PropertyProvider.get("Created"));
-            return resultEvent.toString();
-        } else {
-            resultEvent.setResponseCode(PropertyProvider.get("BadRequest"));
-            return resultEvent.toString();
-
+    public ResultEvent createAlbum(String albumInfo) {
+        try {
+            MongoCollection<AlbumDAO> mongoCollection
+                    = DBConnection.getInstance().getConnection().getCollection(Collections.USERALBUMS.toString(), AlbumDAO.class);
+            AlbumDAO albumInfoObj = new AlbumDAOBuilder().build(albumInfo);
+            if (albumInfoObj != null) {
+                mongoCollection.insertOne(albumInfoObj);
+                this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
+            } else {
+                this.getResultEvent().setResponseCode(PropertyProvider.get("NULL_POINTER_EXCEPTION"));
+            }
+        } catch (Exception ex) {
+            this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
         }
+        return this.resultEvent;
 
     }
 

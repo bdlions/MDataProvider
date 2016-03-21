@@ -70,7 +70,7 @@ public class PhotoService {
     }
 
     public static String createAlbum(String albumInfo) {
-        String response = photoObject.createAlbum(albumInfo);
+        String response = photoObject.createAlbum(albumInfo).toString();
         return response;
     }
 

@@ -16,9 +16,11 @@ import com.shampan.db.codec.LoginAttemptCodec;
 import com.shampan.db.codec.MessageCodec;
 import com.shampan.db.codec.MessageDetailsCodec;
 import com.shampan.db.codec.NotificationCodec;
+import com.shampan.db.codec.PageAlbumCodec;
 import com.shampan.db.codec.PageCategoryCodec;
 import com.shampan.db.codec.PageCodec;
 import com.shampan.db.codec.PageMemeberCodec;
+import com.shampan.db.codec.PagePhotoCodec;
 import com.shampan.db.codec.PageSubCategoryCodec;
 import com.shampan.db.codec.PhotoCategoryCodec;
 import com.shampan.db.codec.PhotoCodec;
@@ -85,6 +87,8 @@ public class DBConnection {
             PageCategoryCodec pageCategoryCodec = new PageCategoryCodec();
             PageSubCategoryCodec pageSubCategoryCodec = new PageSubCategoryCodec();
             PageCodec pageCodec = new PageCodec();
+            PageAlbumCodec pageAlbumCodec = new PageAlbumCodec();
+            PagePhotoCodec pagePhotoCodec = new PagePhotoCodec();
             PageMemeberCodec pageMemeberCodec = new PageMemeberCodec();
             CodecRegistry codecRegistry = CodecRegistries.fromRegistries(
                     MongoClient.getDefaultCodecRegistry(),
@@ -108,7 +112,9 @@ public class DBConnection {
                     CodecRegistries.fromCodecs(pageCategoryCodec),
                     CodecRegistries.fromCodecs(pageSubCategoryCodec),
                     CodecRegistries.fromCodecs(pageCodec),
-                    CodecRegistries.fromCodecs(pageMemeberCodec)
+                    CodecRegistries.fromCodecs(pageMemeberCodec),
+                    CodecRegistries.fromCodecs(pageAlbumCodec),
+                    CodecRegistries.fromCodecs(pagePhotoCodec)
                     
             );
 

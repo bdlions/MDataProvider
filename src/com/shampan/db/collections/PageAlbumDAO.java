@@ -11,25 +11,33 @@ import com.shampan.db.collections.fragment.common.Comment;
 import com.shampan.db.collections.fragment.common.Like;
 import com.shampan.db.collections.fragment.common.Privacy;
 import com.shampan.db.collections.fragment.common.Share;
+import com.shampan.db.collections.fragment.common.UserInfo;
+import com.shampan.db.collections.fragment.page.PageInfo;
+import com.shampan.db.collections.fragment.photo.Image;
 import java.util.List;
+import org.bson.BsonDocument;
+import org.bson.BsonDocumentWrapper;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.conversions.Bson;
 
 /**
  *
- * @author Sampan IT
+ * @author Sampan-IT
  */
-
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PagePhotoDAO {
+public class PageAlbumDAO implements Bson {
 
     private String _id;
-    private String photoId;
     private String albumId;
     private String pageId;
-    private String image;
+    private String title;
     private String description;
-    private String categoryId;
     private int createdOn;
     private int modifiedOn;
+    private String photoId;
+    private String defaultImg;
+    private int totalImg;
+    private PageInfo pageInfo;
     private List<Like> like;
     private List<Comment> comment;
     private List<Share> share;
@@ -43,14 +51,6 @@ public class PagePhotoDAO {
         this._id = _id;
     }
 
-    public String getPhotoId() {
-        return photoId;
-    }
-
-    public void setPhotoId(String photoId) {
-        this.photoId = photoId;
-    }
-
     public String getAlbumId() {
         return albumId;
     }
@@ -59,20 +59,20 @@ public class PagePhotoDAO {
         this.albumId = albumId;
     }
 
-    public String getPageId() {
-        return pageId;
+    public String getPhotoId() {
+        return photoId;
     }
 
-    public void setPageId(String pageId) {
-        this.pageId = pageId;
+    public void setPhotoId(String photoId) {
+        this.photoId = photoId;
     }
 
-    public String getImage() {
-        return image;
+    public String getTitle() {
+        return title;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -83,12 +83,12 @@ public class PagePhotoDAO {
         this.description = description;
     }
 
-    public String getCategoryId() {
-        return categoryId;
+    public String getId() {
+        return _id;
     }
 
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+    public void setId(String _id) {
+        this._id = _id;
     }
 
     public int getCreatedOn() {
@@ -107,6 +107,30 @@ public class PagePhotoDAO {
         this.modifiedOn = modifiedOn;
     }
 
+    public String getDefaultImg() {
+        return defaultImg;
+    }
+
+    public void setDefaultImg(String defaultImg) {
+        this.defaultImg = defaultImg;
+    }
+
+    public String getPageId() {
+        return pageId;
+    }
+
+    public void setPageId(String pageId) {
+        this.pageId = pageId;
+    }
+
+    public PageInfo getPageInfo() {
+        return pageInfo;
+    }
+
+    public void setPageInfo(PageInfo pageInfo) {
+        this.pageInfo = pageInfo;
+    }
+
     public List<Like> getLike() {
         return like;
     }
@@ -121,6 +145,14 @@ public class PagePhotoDAO {
 
     public void setComment(List<Comment> comment) {
         this.comment = comment;
+    }
+
+    public int getTotalImg() {
+        return totalImg;
+    }
+
+    public void setTotalImg(int totalImg) {
+        this.totalImg = totalImg;
     }
 
     public List<Share> getShare() {
@@ -151,4 +183,8 @@ public class PagePhotoDAO {
         return json;
     }
 
+    @Override
+    public <C> BsonDocument toBsonDocument(final Class<C> documentClass, final CodecRegistry codecRegistry) {
+        return new BsonDocumentWrapper<PageAlbumDAO>(this, codecRegistry.get(PageAlbumDAO.class));
+    }
 }
