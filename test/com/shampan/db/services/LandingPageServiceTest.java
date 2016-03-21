@@ -1801,7 +1801,7 @@ public class LandingPageServiceTest {
         mongoCollection.insertMany(countries);
     }
 
-        @Test
+      @Test
     public void storeTestPageCategory() {
         DBConnection.getInstance().getConnection();
         MongoCollection<PageCategoryDAO> mongoCollection
@@ -1813,27 +1813,47 @@ public class LandingPageServiceTest {
                 .build();
         PageCategoryDAO categoryDAO2 = new PageCategoryDAOBuilder()
                 .setCategoryId("2")
-                .setTitle("Community")
+                .setTitle("Product")
                 .build();
         PageCategoryDAO categoryDAO3 = new PageCategoryDAOBuilder()
                 .setCategoryId("3")
-                .setTitle("Business")
+                .setTitle("Group")
                 .build();
         PageCategoryDAO categoryDAO4 = new PageCategoryDAOBuilder()
                 .setCategoryId("4")
-                .setTitle("Place")
+                .setTitle("Community")
                 .build();
         PageCategoryDAO categoryDAO5 = new PageCategoryDAOBuilder()
                 .setCategoryId("5")
-                .setTitle("Entertainment")
+                .setTitle("Business")
                 .build();
         PageCategoryDAO categoryDAO6 = new PageCategoryDAOBuilder()
                 .setCategoryId("6")
-                .setTitle("Commpany")
+                .setTitle("Place")
                 .build();
         PageCategoryDAO categoryDAO7 = new PageCategoryDAOBuilder()
                 .setCategoryId("7")
+                .setTitle("Entertainment")
+                .build();
+        PageCategoryDAO categoryDAO8 = new PageCategoryDAOBuilder()
+                .setCategoryId("8")
+                .setTitle("Commpany")
+                .build();
+        PageCategoryDAO categoryDAO9 = new PageCategoryDAOBuilder()
+                .setCategoryId("9")
                 .setTitle("Organization")
+                .build();
+        PageCategoryDAO categoryDAO10 = new PageCategoryDAOBuilder()
+                .setCategoryId("10")
+                .setTitle("Institution")
+                .build();
+        PageCategoryDAO categoryDAO11 = new PageCategoryDAOBuilder()
+                .setCategoryId("11")
+                .setTitle("Artist or Band")
+                .build();
+        PageCategoryDAO categoryDAO12 = new PageCategoryDAOBuilder()
+                .setCategoryId("12")
+                .setTitle("Public Figure")
                 .build();
 
         List<PageCategoryDAO> categoryList = new ArrayList<>();
@@ -1844,9 +1864,15 @@ public class LandingPageServiceTest {
         categoryList.add(categoryDAO5);
         categoryList.add(categoryDAO6);
         categoryList.add(categoryDAO7);
+        categoryList.add(categoryDAO8);
+        categoryList.add(categoryDAO9);
+        categoryList.add(categoryDAO10);
+        categoryList.add(categoryDAO11);
+        categoryList.add(categoryDAO12);
         mongoCollection.insertMany(categoryList);
     }
-        @Test
+
+    @Test
     public void storeTestPageSubCategory() {
         DBConnection.getInstance().getConnection();
         MongoCollection<PageSubCategoryDAO> mongoCollection
@@ -1865,62 +1891,72 @@ public class LandingPageServiceTest {
         PageSubCategoryDAO subCategoryDAO3 = new PageSubCategoryDAOBuilder()
                 .setCategoryId("2")
                 .setSubCategoryId("1")
-                .setTitle("Community1")
+                .setTitle("Product1")
                 .build();
         PageSubCategoryDAO subCategoryDAO4 = new PageSubCategoryDAOBuilder()
                 .setCategoryId("2")
                 .setSubCategoryId("2")
-                .setTitle("Community2")
+                .setTitle("Product2")
                 .build();
         PageSubCategoryDAO subCategoryDAO5 = new PageSubCategoryDAOBuilder()
-                .setCategoryId("3")
+                .setCategoryId("5")
                 .setSubCategoryId("1")
                 .setTitle("Business1")
                 .build();
         PageSubCategoryDAO subCategoryDAO6 = new PageSubCategoryDAOBuilder()
-                .setCategoryId("3")
+                .setCategoryId("5")
                 .setSubCategoryId("2")
                 .setTitle("Business2")
                 .build();
         PageSubCategoryDAO subCategoryDAO7 = new PageSubCategoryDAOBuilder()
-                .setCategoryId("4")
+                .setCategoryId("6")
                 .setSubCategoryId("1")
                 .setTitle("Place1")
                 .build();
         PageSubCategoryDAO subCategoryDAO8 = new PageSubCategoryDAOBuilder()
-                .setCategoryId("4")
+                .setCategoryId("6")
                 .setSubCategoryId("2")
                 .setTitle("Place2")
                 .build();
         PageSubCategoryDAO subCategoryDAO9 = new PageSubCategoryDAOBuilder()
-                .setCategoryId("5")
+                .setCategoryId("7")
                 .setSubCategoryId("1")
                 .setTitle("Entertainment1")
                 .build();
         PageSubCategoryDAO subCategoryDAO10 = new PageSubCategoryDAOBuilder()
-                .setCategoryId("5")
+                .setCategoryId("7")
                 .setSubCategoryId("2")
                 .setTitle("Entertainment2")
                 .build();
         PageSubCategoryDAO subCategoryDAO11 = new PageSubCategoryDAOBuilder()
-                .setCategoryId("6")
+                .setCategoryId("8")
                 .setSubCategoryId("1")
                 .setTitle("Commpany1")
                 .build();
         PageSubCategoryDAO subCategoryDAO12 = new PageSubCategoryDAOBuilder()
-                .setCategoryId("6")
+                .setCategoryId("8")
                 .setSubCategoryId("2")
                 .setTitle("Commpany2")
                 .build();
         PageSubCategoryDAO subCategoryDAO13 = new PageSubCategoryDAOBuilder()
-                .setCategoryId("7")
+                .setCategoryId("11")
                 .setSubCategoryId("1")
-                .setTitle("organization1")
+                .setTitle("artist")
                 .build();
         PageSubCategoryDAO subCategoryDAO14 = new PageSubCategoryDAOBuilder()
-                .setCategoryId("7")
+                .setCategoryId("11")
                 .setSubCategoryId("2")
-                .setTitle("organization2")
+                .setTitle("band")
+                .build();
+        PageSubCategoryDAO subCategoryDAO15 = new PageSubCategoryDAOBuilder()
+                .setCategoryId("12")
+                .setSubCategoryId("1")
+                .setTitle("public")
+                .build();
+        PageSubCategoryDAO subCategoryDAO16 = new PageSubCategoryDAOBuilder()
+                .setCategoryId("12")
+                .setSubCategoryId("2")
+                .setTitle("figure")
                 .build();
 
         List<PageSubCategoryDAO> categoryList = new ArrayList<>();
@@ -1931,6 +1967,15 @@ public class LandingPageServiceTest {
         categoryList.add(subCategoryDAO5);
         categoryList.add(subCategoryDAO6);
         categoryList.add(subCategoryDAO7);
+        categoryList.add(subCategoryDAO8);
+        categoryList.add(subCategoryDAO9);
+        categoryList.add(subCategoryDAO10);
+        categoryList.add(subCategoryDAO11);
+        categoryList.add(subCategoryDAO12);
+        categoryList.add(subCategoryDAO13);
+        categoryList.add(subCategoryDAO14);
+        categoryList.add(subCategoryDAO15);
+        categoryList.add(subCategoryDAO16);
         mongoCollection.insertMany(categoryList);
     }
 
