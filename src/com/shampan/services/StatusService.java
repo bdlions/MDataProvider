@@ -26,9 +26,12 @@ public class StatusService {
     public static String getStatuses(String userId, int offset, int limit) {
         return obj.getStatuses(userId, offset, limit);
     }
-
+ 
     public static String getUserProfileStatuses(String userId, String mappingId, int offset, int limit) {
         return obj.getUserProfileStatuses(userId, mappingId, offset, limit);
+    }
+    public static String getPageProfileStatuses(String userId, String mappingId, int offset, int limit) {
+        return obj.getPageProfileStatuses(userId, mappingId, offset, limit);
     }
 
     public static String getStatusDetails(String userId, String statusId) {

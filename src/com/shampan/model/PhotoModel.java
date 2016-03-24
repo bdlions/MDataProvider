@@ -940,4 +940,22 @@ public class PhotoModel {
         return resultEvent.toString();
     }
 
+    public ResultEvent getTimelinePhotos(String userId) {
+        try {
+            MongoCollection<PhotoDAO> mongoCollection
+                    = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), PhotoDAO.class);
+            Document selectionDocument = new Document();
+            selectionDocument.put("userId", userId);
+            selectionDocument.put("albumId", PropertyProvider.get("TIMELINE_PHOTOS_ALBUM_ID"));
+            MongoCursor<PhotoDAO> photoList = mongoCollection.find(selectionDocument).iterator();
+            List<PhotoDAO> photoInfoList = IteratorUtils.toList(photoList);
+            this.getResultEvent().setResult(photoInfoList);
+            this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
+        } catch (Exception ex) {
+            this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
+        }
+        return this.resultEvent;
+
+    }
+
 }

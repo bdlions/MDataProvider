@@ -197,5 +197,9 @@ public class PhotoService {
         String response = photoObject.deletePhotoComment(photoId, commentId);
         return response;
     }
+    public static String getTimelinePhotos(String userId) {
+        String response = photoObject.getTimelinePhotos(userId).toString();
+        return response;
+    }
 
 }

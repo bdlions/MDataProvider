@@ -286,5 +286,11 @@ public class PhotoController {
                 .putHeader("content-type", "application/json; charset=utf-8")
                 .end(PhotoService.deletePhotoComment(photoId, commentId));
     }
+    public static void getTimelinePhotos(RoutingContext routingContext) {
+        String userId = routingContext.request().getParam("userId");
+        routingContext.response()
+                .putHeader("content-type", "application/json; charset=utf-8")
+                .end(PhotoService.getTimelinePhotos(userId));
+    }
 
 }

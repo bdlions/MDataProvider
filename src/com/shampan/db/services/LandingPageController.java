@@ -18,7 +18,7 @@ public class LandingPageController {
 
     public static void userRegistration(RoutingContext routingContext) {
         String userBasicInfo = routingContext.request().getParam("userBasicInfo");
-        String usersInfo = routingContext.request().getParam("usersInfo");
+        String usersInfo = routingContext.request().getParam("registrationInfo");
         routingContext.response()
                 .putHeader("content-type", "application/json; charset=utf-8")
                 .end(LandingPage.userRegistration(usersInfo, userBasicInfo));

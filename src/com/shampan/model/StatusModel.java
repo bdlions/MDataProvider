@@ -34,6 +34,7 @@ public class StatusModel {
     NotificationModel notificationModel = new NotificationModel();
     RelationModel relationModel = new RelationModel();
     UserModel userModel = new UserModel();
+    PageModel pageModel = new PageModel();
 
     public StatusModel() {
         PropertyProvider.add("response");
@@ -117,6 +118,15 @@ public class StatusModel {
                 orSelectionDocument.add(userSelectionDocument);
             }
         }
+        List<String> pageIdList = pageModel.getPageIdList(userId);
+        if(pageIdList.size() > 0){
+            for(int j = 0; j < pageIdList.size(); j++){
+                Document pageSelectionDocument = new Document();
+                pageSelectionDocument.put("pageId", pageIdList.get(j));
+                orSelectionDocument.add(pageSelectionDocument);
+            }
+        
+        }
         Document selectDocument = new Document();
         selectDocument.put("$or", orSelectionDocument);
         MongoCursor<StatusDAO> statusList = mongoCollection.find(selectDocument).sort(new Document("modifiedOn", -1)).skip(offset).limit(limit).iterator();
@@ -147,6 +157,28 @@ public class StatusModel {
         userStatusInfo.put("statusInfoList", statusInfoList);
         userStatusInfo.put("userCurrentTime", utility.getCurrentTime());
         userStatusInfo.put("userGenderId", userModel.getUserGenderInfo(mappingId));
+        return userStatusInfo.toString();
+    }
+
+    /**
+     * *
+     * this method will return all status of a page profile
+     *
+     * @param userId, user Id
+     * @param mappingId, page Id
+     * @author created by Rashida on 9th Nov
+     */
+    public String getPageProfileStatuses(String userId, String mappingId, int offset, int limit) {
+        MongoCollection<StatusDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
+        String attrMappingId = PropertyProvider.get("MAPPING_ID");
+        Document selectDocument = new Document();
+        selectDocument.put(attrMappingId, mappingId);
+        MongoCursor<StatusDAO> statusList = mongoCollection.find(selectDocument).sort(new Document("modifiedOn", -1)).skip(offset).limit(limit).iterator();
+        List<JSONObject> statusInfoList = getStatusInfo(userId, statusList);
+        JSONObject userStatusInfo = new JSONObject();
+        userStatusInfo.put("statusInfoList", statusInfoList);
+        userStatusInfo.put("userCurrentTime", utility.getCurrentTime());
         return userStatusInfo.toString();
     }
 
@@ -188,9 +220,12 @@ public class StatusModel {
             JSONObject statusJson = new JSONObject();
             StatusDAO status = (StatusDAO) statusList.next();
             statusJson.put("statusId", status.getStatusId());
-            statusJson.put("userId", status.getUserId());
+            if (status.getUserId() != null) {
+                statusJson.put("userId", status.getUserId());
+            }
             statusJson.put("mappingId", status.getMappingId());
             statusJson.put("userInfo", status.getUserInfo());
+            statusJson.put("pageInfo", status.getPageInfo());
             statusJson.put("description", status.getDescription());
             statusJson.put("statusTypeId", status.getStatusTypeId());
             statusJson.put("createdOn", status.getCreatedOn());
@@ -268,11 +303,16 @@ public class StatusModel {
                 statusJson.put("referenceInfo", status.getReferenceInfo());
             }
             if (status.getMappingId() != null) {
-                if (!status.getUserId().equals(status.getMappingId())) {
-                    statusJson.put("mappingUserInfo", userModel.getUserInfo(status.getMappingId()));
+                if (status.getUserId() != null) {
+                    if (!status.getUserId().equals(status.getMappingId())) {
+                        statusJson.put("mappingUserInfo", userModel.getUserInfo(status.getMappingId()));
+                    }
+                } else if (status.getPageId() != null) {
+                    if (!status.getPageId().equals(status.getMappingId())) {
+                        statusJson.put("mappingUserInfo", userModel.getUserInfo(status.getMappingId()));
+                    }
                 }
             }
-
             statusInfoList.add(statusJson);
         }
         return statusInfoList;

@@ -32,6 +32,7 @@ public class StatusDAOBuilder {
 
     private String _id;
     private String userId;
+    private String pageId;
     private String statusId;
     private String mappingId;
     private String statusTypeId;
@@ -71,6 +72,12 @@ public class StatusDAOBuilder {
         this.userId = userId;
         return this;
     }
+
+    public StatusDAOBuilder setPageId(String pageId) {
+        this.pageId = pageId;
+        return this;
+    }
+    
 
     public StatusDAOBuilder setMappingId(String mappingId) {
         this.mappingId = mappingId;

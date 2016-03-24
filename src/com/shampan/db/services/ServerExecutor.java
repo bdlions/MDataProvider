@@ -51,7 +51,7 @@ public class ServerExecutor extends AbstractVerticle {
          LandingPageController
          */
         router.get("/landingpage/getLandingPageInfo").handler(LandingPageController::getLandingPageInfo);
-        
+
         router.route("/userRegistration").handler(BodyHandler.create());
         router.post("/userRegistration").handler(LandingPageController::userRegistration);
         router.route("/getUSerInfoByEmail").handler(BodyHandler.create());
@@ -66,12 +66,12 @@ public class ServerExecutor extends AbstractVerticle {
         router.post("/updateLastLogin").handler(LandingPageController::updateLastLogin);
         router.route("/hashPasswordDB").handler(BodyHandler.create());
         router.post("/hashPasswordDB").handler(LandingPageController::hashPasswordDB);
-   
+
         router.route("/rememberUser").handler(BodyHandler.create());
         router.post("/rememberUser").handler(LandingPageController::rememberUser);
         router.route("/getAttemptsNum").handler(BodyHandler.create());
         router.post("/getAttemptsNum").handler(LandingPageController::getAttemptsNum);
-       
+
         router.route("/clearLoginAttempts").handler(BodyHandler.create());
         router.post("/clearLoginAttempts").handler(LandingPageController::clearLoginAttempts);
         router.route("/increaseLoginAttempt").handler(BodyHandler.create());
@@ -92,6 +92,8 @@ public class ServerExecutor extends AbstractVerticle {
         router.post("/status/getStatuses").handler(StatusController::getStatuses);
         router.route("/status/getUserProfileStatuses").handler(BodyHandler.create());
         router.post("/status/getUserProfileStatuses").handler(StatusController::getUserProfileStatuses);
+        router.route("/status/getPageProfileStatuses").handler(BodyHandler.create());
+        router.post("/status/getPageProfileStatuses").handler(StatusController::getPageProfileStatuses);
         router.route("/status/getStatusDetails").handler(BodyHandler.create());
         router.post("/status/getStatusDetails").handler(StatusController::getStatusDetails);
         router.route("/status/deleteStatus").handler(BodyHandler.create());
@@ -319,6 +321,8 @@ public class ServerExecutor extends AbstractVerticle {
         router.post("/photo/editPhotoComment").handler(PhotoController::editPhotoComment);
         router.route("/photo/deletePhotoComment").handler(BodyHandler.create());
         router.post("/photo/deletePhotoComment").handler(PhotoController::deletePhotoComment);
+        router.route("/photo/getTimelinePhotos").handler(BodyHandler.create());
+        router.post("/photo/getTimelinePhotos").handler(PhotoController::getTimelinePhotos);
 
 
         /*
@@ -347,8 +351,7 @@ public class ServerExecutor extends AbstractVerticle {
         router.post("/video/getVideoComments").handler(VideoController::getVideoComments);
         router.route("/video/editVideoComment").handler(BodyHandler.create());
         router.post("/video/editVideoComment").handler(VideoController::editVideoComment);
-        
-        
+
         /*
          pageController
          */
@@ -365,7 +368,15 @@ public class ServerExecutor extends AbstractVerticle {
         router.post("/page/addPhotos").handler(PageController::addPhotos);
         router.route("/page/addStatus").handler(BodyHandler.create());
         router.post("/page/addStatus").handler(StatusController::addStatus);
-        
+        router.route("/page/getInviteFriendList").handler(BodyHandler.create());
+        router.post("/page/getInviteFriendList").handler(PageController::getInviteFriendList);
+        router.route("/page/inviteMember").handler(BodyHandler.create());
+        router.post("/page/inviteMember").handler(PageController::inviteMember);
+        router.route("/page/joinPageMamberShip").handler(BodyHandler.create());
+        router.post("/page/joinPageMamberShip").handler(PageController::joinPageMamberShip);
+        router.route("/page/leavePageMemberShip").handler(BodyHandler.create());
+        router.post("/page/leavePageMemberShip").handler(PageController::leavePageMemberShip);
+
         server.requestHandler(router::accept).listen(8080);
     }
 }

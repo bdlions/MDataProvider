@@ -206,10 +206,29 @@ public class PageModel {
         PageDAO pageInfo = mongoCollection.find(selectDocument).first();
         return pageInfo;
     }
-//........................................page members ..........................................................
 
-    public ResultEvent getMemeberCounter(String pageId) {
-        ResultEvent resultEvent1 = new ResultEvent();
+//........................................page members ..........................................................
+    public List<String> getPageIdList(String userId) {
+        MongoCollection<PageMemberDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.PAGEMEMBERS.toString(), PageMemberDAO.class);
+        MongoCursor<PageMemberDAO> pageList = mongoCollection.find().iterator();
+        List<String> pageIdList = new ArrayList<>();
+        while (pageList.hasNext()) {
+            PageMemberDAO pageInfo = pageList.next();
+            if (pageInfo.getMemberList().size() > 0) {
+                for (int i = 0; i < pageInfo.getMemberList().size(); i++) {
+
+                    if (pageInfo.getMemberList().get(i).getUserId().equals(userId)) {
+                        pageIdList.add(pageInfo.getPageId());
+                    }
+                }
+            }
+        }
+        return pageIdList;
+    }
+
+    public JSONObject getMemeberInfo(String pageId, String userId) {
+        JSONObject memberInfo = new JSONObject();
         try {
             MongoCollection<PageMemberDAO> mongoCollection
                     = DBConnection.getInstance().getConnection().getCollection(Collections.PAGEMEMBERS.toString(), PageMemberDAO.class);
@@ -217,44 +236,102 @@ public class PageModel {
             selectDocument.put("pageId", pageId);
             PageMemberDAO pageInfo = mongoCollection.find(selectDocument).first();
             if (pageInfo != null) {
-                int members = pageInfo.getMemberList().size();
-                resultEvent1.setResult(members);
-                resultEvent1.setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
+                String relationTypeId = PropertyProvider.get("PAGE_MEMBER_STATUS_ID_LIKED");
+                List<MemberInfo> memberList = pageInfo.getMemberList();
+                int memberCounter = memberList.size();
+                if (memberCounter > 0) {
+                    int counter = 0;
+                    for (int j = 0; j < memberList.size(); j++) {
+                        if (memberList.get(j).getRelationTypeId().equals(relationTypeId)) {
+                            counter = counter + 1;
+                        }
+                        if (userId.equals(memberList.get(j).getUserId())) {
+                            memberInfo.put("memberShipStatus", memberList.get(j).getRelationTypeId());
+                        }
+                    }
+                    memberInfo.put("counter", counter);
+                }
+                logger.debug(PropertyProvider.get("SUCCESSFUL_OPERATION"));
             } else {
-                resultEvent1.setResponseCode(PropertyProvider.get("NULL_POINTER_EXCEPTION"));
+                logger.debug(PropertyProvider.get("NULL_POINTER_EXCEPTION"));
             }
         } catch (Exception ex) {
-            resultEvent1.setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
+            logger.debug(ex.getMessage());
         }
-        return resultEvent1;
+        return memberInfo;
 
     }
 
-    public ResultEvent getInviteMemberList(String userId, String pageId, int offset, int limit) {
+    public List<JSONObject> getInviteFriendList(String pageId, String userId, int offset, int limit) {
+        List<JSONObject> jsonFriendList = new ArrayList<>();
         try {
             MongoCollection<PageMemberDAO> mongoCollection
                     = DBConnection.getInstance().getConnection().getCollection(Collections.PAGEMEMBERS.toString(), PageMemberDAO.class);
             Document selectDocument = new Document();
             selectDocument.put("pageId", pageId);
             PageMemberDAO pageInfo = mongoCollection.find(selectDocument).first();
+            List<MemberInfo> memberList = new ArrayList<>();
+            if (pageInfo != null) {
+                memberList = pageInfo.getMemberList();
+            }
             RelationModel friends = new RelationModel();
             String relationTypeId = PropertyProvider.get("RELATION_TYPE_FRIEND_ID");
             List<RelationInfo> friendList = friends.getRelationList(userId, relationTypeId, offset, limit);
-            System.out.println(friendList);
+            if (friendList.size() > 0) {
+                for (int i = 0; i < friendList.size(); i++) {
+                    JSONObject jsonFriend = new JSONObject();
+                    jsonFriend.put("friendInfo", friendList.get(i));
+                    if (memberList.size() > 0) {
+                        for (int j = 0; j < memberList.size(); j++) {
+                            if (friendList.get(i).getUserId().equals(memberList.get(j).getUserId())) {
+                                jsonFriend.put("status", memberList.get(j).getRelationTypeId());
+                            }
+                        }
+                    }
+                    jsonFriendList.add(jsonFriend);
+                }
+            }
             this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
+        } catch (Exception ex) {
+            this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
+        }
+        return jsonFriendList;
+    }
+
+    /*
+     * This method will add member invitation , 
+     * @param pageId, pageId
+     * @param memberInfo, memberInfo
+     * @author created by Rashida on 22th march 2016
+     */
+    public ResultEvent inviteMember(String pageId, String memberInfo) {
+        try {
+            MemberInfo mInfo = MemberInfo.getMemberInfo(memberInfo);
+            if (mInfo != null) {
+                mInfo.setRelationTypeId(PropertyProvider.get("PAGE_MEMBER_STATUS_ID_INVITED"));
+                addPageMember(pageId, mInfo.toString());
+            } else {
+                this.getResultEvent().setResponseCode(PropertyProvider.get("NULL_POINTER_EXCEPTION"));
+            }
         } catch (Exception ex) {
             this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
         }
         return this.resultEvent;
 
     }
+    /*
+     * This method will add user to memberList , 
+     * @param pageId, pageId
+     * @param memberInfo, memberInfo
+     * @author created by Rashida on 22th march 2016
+     */
 
-    public ResultEvent inviteMember(String pageId, String memberInfo) {
-        
+    public ResultEvent joinPageMamberShip(String pageId, String memberInfo) {
         try {
-            MemberInfo mInfo = MemberInfo.getMemberInfo(memberInfo);
-            if (mInfo != null) {
-                
+            MemberInfo likedUserInfo = MemberInfo.getMemberInfo(memberInfo);
+            if (memberInfo != null) {
+                likedUserInfo.setRelationTypeId(PropertyProvider.get("PAGE_MEMBER_STATUS_ID_LIKED"));
+                addPageMember(pageId, memberInfo);
             } else {
                 this.getResultEvent().setResponseCode(PropertyProvider.get("NULL_POINTER_EXCEPTION"));
             }
@@ -265,40 +342,12 @@ public class PageModel {
 
     }
 
-    public ResultEvent addPageLike(String pageId, String memberInfo) {
-        try {
-            MongoCollection<PageMemberDAO> mongoCollection
-                    = DBConnection.getInstance().getConnection().getCollection(Collections.PAGEMEMBERS.toString(), PageMemberDAO.class);
-            Document selectDocument = new Document();
-            selectDocument.put("pageId", pageId);
-            MemberInfo likedUserInfo = MemberInfo.getMemberInfo(memberInfo);
-            if (memberInfo != null) {
-                PageMemberDAO pageInfo = mongoCollection.find(selectDocument).first();
-                if (pageInfo != null) {
-
-                } else {
-                }
-            }
-
-            this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
-        } catch (Exception ex) {
-            this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
-        }
-        return this.resultEvent;
-
-    }
-
-    public ResultEvent unLikePage(String userId, String pageId) {
-        try {
-            leaveMember(userId, pageId);
-            this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
-        } catch (Exception ex) {
-            this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
-        }
-        return this.resultEvent;
-
-    }
-
+    /*
+     * This method will add user to memberList , 
+     * @param pageId, pageId
+     * @param memberInfo, memberInfo
+     * @author created by Rashida on 22th march 2016
+     */
     public ResultEvent addPageMember(String pageId, String memberInfo) {
         try {
             MongoCollection<PageMemberDAO> mongoCollection
@@ -308,8 +357,25 @@ public class PageModel {
             MemberInfo mInfo = MemberInfo.getMemberInfo(memberInfo);
             if (mInfo != null) {
                 PageMemberDAO pageInfo = mongoCollection.find(selectDocument).first();
+                boolean userIsExist = false;
                 if (pageInfo != null) {
-                    mongoCollection.findOneAndUpdate(selectDocument, new Document("$push", new Document("memberList", JSON.parse(mInfo.toString()))));
+                    List<MemberInfo> memberList = pageInfo.getMemberList();
+                    List<MemberInfo> tempMemberList = new ArrayList<>();
+                    if (memberList.size() > 0) {
+                        for (int i = 0; i < memberList.size(); i++) {
+                            MemberInfo tempMemberInfo = memberList.get(i);
+                            if (tempMemberInfo.getUserId().equals(mInfo.getUserId())) {
+                                tempMemberInfo.setRelationTypeId(PropertyProvider.get("PAGE_MEMBER_STATUS_ID_LIKED"));
+                                userIsExist = true;
+                            }
+                            tempMemberList.add(tempMemberInfo);
+                        }
+                    }
+                    if (userIsExist != false) {
+                        mongoCollection.findOneAndUpdate(selectDocument, new Document("$set", new Document("memberList", JSON.parse(tempMemberList.toString()))));
+                    } else {
+                        mongoCollection.findOneAndUpdate(selectDocument, new Document("$push", new Document("memberList", JSON.parse(mInfo.toString()))));
+                    }
                 } else {
                     List<MemberInfo> mList = new ArrayList<MemberInfo>();
                     mList.add(mInfo);
@@ -329,31 +395,35 @@ public class PageModel {
 
     }
 
-    public ResultEvent updateMemberStatus(String userId, String PageId, String StatusTypeId) {
+    /*
+     * This method will remove user to memberList , 
+     * @param pageId, pageId
+     * @param userId, userId
+     * @author created by Rashida on 22th march 2016
+     */
+    public ResultEvent leavePageMemberShip(String pageId, String userId) {
         try {
-
+            MongoCollection<PageMemberDAO> mongoCollection
+                    = DBConnection.getInstance().getConnection().getCollection(Collections.PAGEMEMBERS.toString(), PageMemberDAO.class);
+            Document selectionDocument = new Document();
+            selectionDocument.put("pageId", pageId);
+            selectionDocument.put("memberList.userId", userId);
+            Document removedDocument = new Document();
+            removedDocument.put("userId", userId);
+            mongoCollection.findOneAndUpdate(selectionDocument, new Document("$pull", new Document("memberList", removedDocument)));
             this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
         } catch (Exception ex) {
             this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
         }
         return this.resultEvent;
     }
-
-    public ResultEvent leaveMember(String userId, String pageId) {
-        try {
-
-            this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
-        } catch (Exception ex) {
-            this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
-        }
-        return this.resultEvent;
-    }
-
+//.....................................................................photos......................................
     /*
      * This method will add list of photos , 
      * @param photoInfoList, photo list
      * @author created by Rashida on 21th September 2015
      */
+
     public ResultEvent addPhotos(String pageId, String albumId, String photoInfoList) {
         try {
             MongoCollection<PagePhotoDAO> mongoCollection
@@ -530,10 +600,13 @@ public class PageModel {
         memberinfo.setUserId("1");
         memberinfo.setFirstName("Rashida");
         memberinfo.setLastName("sultana");
-        memberinfo.setLastName("2");
         memberinfo.setRelationTypeId(PropertyProvider.get("PAGE_MEMBER_STATUS_ID_INVITED"));
 
-        System.out.println(obj.inviteMember("sKDuYWRygwssTdL", memberinfo.toString()));
-//        System.out.println(obj.getInviteMemberList("7OdqKzxmuakkpRq", "7OdqKzxmuakkpRq", 0, 10));
+//        System.out.println(obj.leavePageMember("sKDuYWRygwssTdL", "1"));
+//        System.out.println(obj.getInviteFriendList("sKDuYWRygwssTdL", "7OdqKzxmuakkpRq", 0, 10));
+    }
+
+    public Object addPageLike(String pageId, String memberInfo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

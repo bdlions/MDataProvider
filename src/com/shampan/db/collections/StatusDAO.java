@@ -32,6 +32,7 @@ public class StatusDAO implements Bson {
     private String _id;
     private String statusId;
     private String userId;
+    private String pageId;
     private String mappingId;
     private String statusTypeId;
     private String description;
@@ -84,6 +85,14 @@ public class StatusDAO implements Bson {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getPageId() {
+        return pageId;
+    }
+
+    public void setPageId(String pageId) {
+        this.pageId = pageId;
     }
 
     public String getMappingId() {
