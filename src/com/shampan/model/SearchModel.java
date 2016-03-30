@@ -10,6 +10,7 @@ import com.mongodb.client.MongoCursor;
 import com.sampan.response.ResultEvent;
 import com.shampan.db.Collections;
 import com.shampan.db.DBConnection;
+import com.shampan.db.collections.PageDAO;
 import com.shampan.db.collections.UserDAO;
 import com.shampan.db.collections.fragment.status.UserInfo;
 import com.shampan.util.PropertyProvider;
@@ -78,6 +79,24 @@ public class SearchModel {
         MongoCursor<UserDAO> userList = mongoCollection.find(sDocument).projection(projectionDocument).skip(offset).limit(limit).iterator();
         List<UserDAO> userInfoList = IteratorUtils.toList(userList);
         return userInfoList;
+    }
+
+    public List<PageDAO> getPages(String searchValue, int offset, int limit) {
+        MongoCollection<PageDAO> mongoCollection
+                = DBConnection.getInstance().getConnection().getCollection(Collections.PAGES.toString(), PageDAO.class);
+        Document selectDocument = new Document();
+        selectDocument.put("$regex", searchValue);
+        selectDocument.put("$options", 'i');
+        List<Document> orDocument = new ArrayList<Document>();
+        orDocument.add(new Document("title", selectDocument));
+        Document sDocument = new Document();
+        sDocument.put("$or", orDocument);
+        Document projectionDocument = new Document();
+        projectionDocument.put("pageId", "$all");
+        projectionDocument.put("title", "$all");
+        MongoCursor<PageDAO> pageList = mongoCollection.find(sDocument).projection(projectionDocument).skip(offset).limit(limit).iterator();
+        List<PageDAO> pageInfoList = IteratorUtils.toList(pageList);
+        return pageInfoList;
     }
 
 }

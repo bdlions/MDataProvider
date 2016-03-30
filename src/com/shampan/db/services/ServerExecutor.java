@@ -80,8 +80,8 @@ public class ServerExecutor extends AbstractVerticle {
          /*
          SearchController
          */
-        router.route("/search/getUsers").handler(BodyHandler.create());
-        router.post("/search/getUsers").handler(SearchController::getUsers);
+        router.route("/search/getSearchResult").handler(BodyHandler.create());
+        router.post("/search/getSearchResult").handler(SearchController::getSearchResult);
         /*
          StatusController
          */

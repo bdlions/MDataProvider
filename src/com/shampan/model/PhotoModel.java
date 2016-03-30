@@ -659,21 +659,25 @@ public class PhotoModel {
                 albumInfo.setPhotoId(photoId);
                 albumInfo.setReferenceId(referenceId);
                 AlbumDAO oldAlbumInfo = getAlbumInfo(userId, albumId);
+                Boolean refernceId = false;
+                Boolean statusUpdate = false;
                 if (oldAlbumInfo != null) {
                     if (oldAlbumInfo.getAlbumId().equals(albumId)) {
                         if (oldAlbumInfo.getPhotoId() != null) {
+                            statusUpdate = true;
                             int totalImg = newTotalImg + oldAlbumInfo.getTotalImg();
-                            if (!albumId.equals(PropertyProvider.get("TIMELINE_PHOTOS_ALBUM_ID")) || !albumId.equals(PropertyProvider.get("PROFILE_PHOTOS_ALBUM_ID")) || !albumId.equals(PropertyProvider.get("COVER_PHOTOS_ALBUM_TITLE"))) {
-                                referenceId = oldAlbumInfo.getReferenceId();
-                                resultEvent.setResult(referenceId);
+                            if (albumId.equals(PropertyProvider.get("TIMELINE_PHOTOS_ALBUM_ID"))) {
+                                refernceId = true;
+                            } else if (albumId.equals(PropertyProvider.get("PROFILE_PHOTOS_ALBUM_ID"))) {
+                                refernceId = true;
+                            } else if (albumId.equals(PropertyProvider.get("COVER_PHOTOS_ALBUM_TITLE"))) {
+                                refernceId = true;
                             }
                             editAlbumTotalImg(userId, albumId, totalImg);
-
                         } else {
                             editAlbum(userId, albumId, albumInfo.toString());
                         }
                     }
-
                 } else {
                     if (albumId.equals(PropertyProvider.get("TIMELINE_PHOTOS_ALBUM_ID"))) {
                         albumInfo.setTitle(PropertyProvider.get("TIMELINE_PHOTOS_ALBUM_TITLE"));
@@ -687,6 +691,7 @@ public class PhotoModel {
                     createAlbum(albumInfo.toString());
 
                 }
+                List<String> images = new ArrayList<>();
                 for (int i = 0; i < newTotalImg; i++) {
                     PhotoDAO photoInfoObj = new PhotoDAOBuilder().build(photoArray.get(i).toString());
                     photoInfoObj.setUserId(userId);
@@ -694,6 +699,17 @@ public class PhotoModel {
                     photoInfoObj.setModifiedOn(utility.getCurrentTime());
                     photoInfoObj.setReferenceId(referenceId);
                     photoList.add(photoInfoObj);
+                    if (refernceId == false && statusUpdate != false) {
+                        images.add(photoInfoObj.getImage());
+                    }
+                }
+                if (refernceId == false && statusUpdate != false) {
+                    referenceId = oldAlbumInfo.getReferenceId();
+                    StatusModel statusModel = new StatusModel();
+                    ResultEvent rEvent = statusModel.updateStatusPhoto(referenceId, images.toString());
+                    if (rEvent.getResponseCode().equals(PropertyProvider.get("SUCCESSFUL_OPERATION"))) {
+                        this.getResultEvent().setResult(referenceId);
+                    }
                 }
 
                 mongoCollection.insertMany(photoList);

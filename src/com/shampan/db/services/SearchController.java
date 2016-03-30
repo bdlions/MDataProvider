@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 public class SearchController {
   private static Logger logger = LoggerFactory.getLogger(StatusController.class);
 
-    public static void getUsers(RoutingContext routingContext) {
+    public static void getSearchResult(RoutingContext routingContext) {
         int offset = 0;
         int limit = 10;
         String searchValue = routingContext.request().getParam("searchValue");
@@ -44,7 +44,7 @@ public class SearchController {
         }
         routingContext.response()
                 .putHeader("content-type", "application/json; charset=utf-8")
-                .end(SearchService.getUsers(searchValue, offset, limit));
+                .end(SearchService.getSearchResult(searchValue, offset, limit));
     }
 
 }

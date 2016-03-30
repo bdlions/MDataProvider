@@ -1,4 +1,3 @@
-package com.shampan.db.services;
 
 import com.mongodb.client.MongoCollection;
 import com.shampan.db.Collections;
@@ -10,28 +9,40 @@ import com.shampan.db.collections.PhotoCategoryDAO;
 import com.shampan.db.collections.ReligionsDAO;
 import com.shampan.db.collections.UserDAO;
 import com.shampan.db.collections.VideoCategoryDAO;
-import com.shampan.db.collections.builder.ReligionsDAOBuilder;
 import com.shampan.db.collections.builder.CountriesDAOBuilder;
 import com.shampan.db.collections.builder.PageCategoryDAOBuilder;
 import com.shampan.db.collections.builder.PageSubCategoryDAOBuilder;
 import com.shampan.db.collections.builder.PhotoCategoryDAOBuilder;
+import com.shampan.db.collections.builder.ReligionsDAOBuilder;
 import com.shampan.db.collections.builder.UserDAOBuilder;
 import com.shampan.db.collections.builder.VideoCategoryDAOBuilder;
-import com.shampan.db.collections.fragment.common.UserInfo;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 /**
  *
- * @author Sampan-IT
+ * @author Sampan IT
  */
-public class LandingPageServiceTest {
-
-//    public static void main(String[] args) {
-//        LandingPageServiceTest.storeCountries();
-//    }
-   @Test
+public class Main {
+    
+    public static void main(String[] args){
+        Main m = new Main();
+        m.videoCategories();
+        m.storeTestPageSubCategory();
+        m.storeTestPageCategory();
+        m.storeTestCountries();
+        m.storeReligions();
+//        m.storeCountries();
+        m.photoCategories();
+    }
+    
     public void storeReligions() {
         DBConnection.getInstance().getConnection();
         MongoCollection<ReligionsDAO> mongoCollection
@@ -69,7 +80,7 @@ public class LandingPageServiceTest {
         mongoCollection.insertMany(religions);
     }
 
-//    @Test
+//    
     public void storeCountries() {
         DBConnection.getInstance().getConnection();
         MongoCollection<CountriesDAO> mongoCollection
@@ -1541,7 +1552,7 @@ public class LandingPageServiceTest {
 
     }
 
-//    @Test
+//    
     public void photoCategories() {
         MongoCollection<PhotoCategoryDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.PHOTOCATEGORIES.toString(), PhotoCategoryDAO.class);
@@ -1629,7 +1640,7 @@ public class LandingPageServiceTest {
         mongoCollection.insertMany(photoCategories);
     }
 
-//    @Test
+//    
     public void videoCategories() {
         MongoCollection<VideoCategoryDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.VIDEOCATEGORIES.toString(), VideoCategoryDAO.class);
@@ -1720,7 +1731,7 @@ public class LandingPageServiceTest {
         mongoCollection.insertMany(videoCategories);
     }
 
-//    @Test
+//    
     public void addUser() {
         MongoCollection<UserDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.USERS.toString(), UserDAO.class);
@@ -1770,7 +1781,7 @@ public class LandingPageServiceTest {
         mongoCollection.insertMany(users);
     }
 
-   @Test
+//    
     public void storeTestCountries() {
         DBConnection.getInstance().getConnection();
         MongoCollection<CountriesDAO> mongoCollection
@@ -1801,7 +1812,7 @@ public class LandingPageServiceTest {
         mongoCollection.insertMany(countries);
     }
 
-     // @Test
+      
     public void storeTestPageCategory() {
         DBConnection.getInstance().getConnection();
         MongoCollection<PageCategoryDAO> mongoCollection
@@ -1872,7 +1883,7 @@ public class LandingPageServiceTest {
         mongoCollection.insertMany(categoryList);
     }
 
-   // @Test
+    
     public void storeTestPageSubCategory() {
         DBConnection.getInstance().getConnection();
         MongoCollection<PageSubCategoryDAO> mongoCollection

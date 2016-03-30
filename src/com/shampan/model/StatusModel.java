@@ -12,6 +12,7 @@ import com.shampan.db.collections.StatusDAO;
 import com.shampan.db.collections.UserDAO;
 import com.shampan.db.collections.builder.StatusDAOBuilder;
 import com.shampan.db.collections.fragment.status.Comment;
+import com.shampan.db.collections.fragment.status.Image;
 import com.shampan.db.collections.fragment.status.Like;
 import com.shampan.db.collections.fragment.status.Share;
 import com.shampan.db.collections.fragment.status.UserInfo;
@@ -21,6 +22,7 @@ import com.shampan.util.Utility;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -119,13 +121,13 @@ public class StatusModel {
             }
         }
         List<String> pageIdList = pageModel.getPageIdList(userId);
-        if(pageIdList.size() > 0){
-            for(int j = 0; j < pageIdList.size(); j++){
+        if (pageIdList.size() > 0) {
+            for (int j = 0; j < pageIdList.size(); j++) {
                 Document pageSelectionDocument = new Document();
                 pageSelectionDocument.put("pageId", pageIdList.get(j));
                 orSelectionDocument.add(pageSelectionDocument);
             }
-        
+
         }
         Document selectDocument = new Document();
         selectDocument.put("$or", orSelectionDocument);
@@ -364,6 +366,47 @@ public class StatusModel {
             this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
         }
         return this.resultEvent;
+    }
+
+    /**
+     *
+     * Update status parameter statusId and Status Description
+     *
+     * @param statusId, status Id
+     * @param statusInfo, status description
+     * @author created by Rashida on 15 October
+     *
+     */
+    public ResultEvent updateStatusPhoto(String statusId, String photoList) {
+        ResultEvent rEvent = new ResultEvent();
+        try {
+            MongoCollection<StatusDAO> mongoCollection
+                    = DBConnection.getInstance().getConnection().getCollection(Collections.STATUSES.toString(), StatusDAO.class);
+            String attrStatusId = PropertyProvider.get("STATUS_ID");
+            BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start(attrStatusId).is(statusId).get();
+            List<Image> images = new ArrayList<>();
+            JSONArray photoArray = new JSONArray(photoList);
+            int newTotalImg = photoArray.length();
+            StatusDAO status = mongoCollection.find(selectQuery).first();
+            if (status != null) {
+                if (status.getImages() != null) {
+                    List<Image> tempImg = status.getImages();
+                    for (int i = 0; i < newTotalImg; i++) {
+                        Image image = new Image();
+                        image.setImage(photoArray.getString(i));
+                        tempImg.add(image);
+                    }
+                    Document modifiedDocument = new Document();
+                    modifiedDocument.put("modifiedOn", utility.getCurrentTime());
+                    modifiedDocument.put("images", JSON.parse(tempImg.toString()));
+                    mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", modifiedDocument));
+                }
+            }
+            rEvent.setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
+        } catch (Exception ex) {
+            rEvent.setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
+        }
+        return rEvent;
     }
 
     /**
