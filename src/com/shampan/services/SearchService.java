@@ -7,6 +7,7 @@ package com.shampan.services;
 
 import com.sampan.response.ResultEvent;
 import com.shampan.model.SearchModel;
+import org.json.JSONObject;
 
 /**
  *
@@ -23,8 +24,11 @@ public class SearchService {
      * @param requestPatten, request String
      * @return users
      */
-    public static String getUsers(String searchValue, int offset, int limit) {
-        return searchModel.getUsers(searchValue, offset, limit).toString();
+    public static String getSearchResult(String searchValue, int offset, int limit) {
+        JSONObject searchResult = new JSONObject();
+        searchResult.put("userList", searchModel.getUsers(searchValue, offset, limit));
+        searchResult.put("pageList", searchModel.getPages(searchValue, offset, limit));
+        return searchResult.toString();
     }
 
 }
