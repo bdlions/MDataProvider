@@ -6,6 +6,7 @@
 package com.shampan.db.collections.fragment.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
 
 /**
  *
@@ -13,19 +14,35 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class Comment {
 
-    private String id;
     private String description;
+    private String commentId;
     private UserInfo userInfo;
+    private List<Like> like;
+    private long createdOn ; 
 
-    public String getId() {
-        return id;
+    public String getCommentId() {
+        return commentId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCommentId(String commentId) {
+        this.commentId = commentId;
     }
 
-  
+    public List<Like> getLike() {
+        return like;
+    }
+
+    public void setLike(List<Like> like) {
+        this.like = like;
+    }
+
+    public long getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(long createdOn) {
+        this.createdOn = createdOn;
+    }
 
     public String getDescription() {
         return description;

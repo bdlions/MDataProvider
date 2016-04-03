@@ -41,6 +41,8 @@ public class PhotoModel {
 
     Utility utility = new Utility();
     ResultEvent resultEvent = new ResultEvent();
+    UserModel userModel = new UserModel();
+    NotificationModel notificationModel = new NotificationModel();
     private final Logger logger = LoggerFactory.getLogger(PhotoModel.class);
 
     public PhotoModel() {
@@ -813,6 +815,26 @@ public class PhotoModel {
         }
         return this.resultEvent;
     }
+
+    public ResultEvent addMPhotoLike(String userId, String photoId, String likeInfo) {
+        try {
+            MongoCollection<PhotoDAO> mongoCollection
+                    = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), PhotoDAO.class
+                    );
+            BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("photoId").is(photoId).get();
+            Like photoLikeInfo = Like.getLikeInfo(likeInfo);
+            if (photoLikeInfo != null) {
+                mongoCollection.findOneAndUpdate(selectQuery, new Document("$set", new Document("modifiedOn", utility.getCurrentTime())));
+                mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("like", JSON.parse(photoLikeInfo.toString()))));
+                UserInfo userInfo = photoLikeInfo.getUserInfo();
+                notificationModel.addGeneralNotificationPhotoLike(userId, photoId, userInfo.toString());
+                this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
+            }
+        } catch (Exception ex) {
+            this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
+        }
+        return this.resultEvent;
+    }
     /*
      * This method will add a photo like , 
      * @param referenceId, reference id
@@ -972,6 +994,118 @@ public class PhotoModel {
         }
         return this.resultEvent;
 
+    }
+
+    public JSONObject getSliderPhotos(String userId, String referenceId) {
+        JSONObject userStatusInfo = new JSONObject();
+        try {
+            MongoCollection<PhotoDAO> mongoCollection
+                    = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), PhotoDAO.class);
+            Document selectionDocument = new Document();
+            selectionDocument.put("referenceId", referenceId);
+            MongoCursor<PhotoDAO> photoList = mongoCollection.find(selectionDocument).iterator();
+            List<JSONObject> photoInfoList = getPhotoInfo(userId, photoList);
+            userStatusInfo.put("statusInfoList", photoInfoList);
+            userStatusInfo.put("userCurrentTime", utility.getCurrentTime());
+            this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
+        } catch (Exception ex) {
+            this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
+        }
+        return userStatusInfo;
+
+    }
+
+    /**
+     * *
+     * this method will return all status needed information
+     *
+     * @param statusList, status List
+     * @author created by Rashida on 9th Nov
+     */
+    public List<JSONObject> getPhotoInfo(String userId, MongoCursor<PhotoDAO> photoList) {
+
+        int commentLimit = Integer.parseInt(PropertyProvider.get("COMMENT_LIMIT"));
+        List<JSONObject> photoInfoList = new ArrayList<JSONObject>();
+
+        while (photoList.hasNext()) {
+            JSONObject photoJson = new JSONObject();
+            PhotoDAO photoInfo = (PhotoDAO) photoList.next();
+            photoJson.put("photoId", photoInfo.getPhotoId());
+            photoJson.put("referenceId", photoInfo.getReferenceId());
+            photoJson.put("userId", photoInfo.getUserId());
+            photoJson.put("userInfo", photoInfo.getUserId());
+            photoJson.put("description", photoInfo.getDescription());
+            photoJson.put("createdOn", photoInfo.getCreatedOn());
+            photoJson.put("image", photoInfo.getImage());
+            if (photoInfo.getLike() != null) {
+                int likeSize = photoInfo.getLike().size();
+                if (likeSize > 0) {
+                    photoJson.put("likeCounter", likeSize);
+                }
+                int i = 0;
+                while (likeSize > 0) {
+                    String tempUserId = photoInfo.getLike().get(i).getUserInfo().getUserId();
+                    if (tempUserId.equals(userId)) {
+                        photoJson.put("likeStatus", PropertyProvider.get("YourLikeStatus"));
+                    }
+                    likeSize--;
+                    i++;
+                }
+
+            }
+            if (photoInfo.getComment() != null) {
+                List<JSONObject> commentList = new ArrayList<JSONObject>();
+                int commentSize = photoInfo.getComment().size();
+                if (commentSize > 0) {
+                    int commentLimitIn = 0;
+//                    List<Comment> commentList = new ArrayList();
+                    for (int j = commentSize; j > 0; j--) {
+                        JSONObject commentJson = new JSONObject();
+                        Comment comment = photoInfo.getComment().get(j - 1);
+                        commentJson.put("commentId", comment.getCommentId());
+                        commentJson.put("description", comment.getDescription());
+                        commentJson.put("userInfo", comment.getUserInfo());
+                        commentJson.put("userGenderId", userModel.getUserGenderInfo(comment.getUserInfo().getUserId()));
+                        if (comment.getLike() != null) {
+                            int commentLikeSize = comment.getLike().size();
+                            if (commentLikeSize > 0) {
+                                commentJson.put("commentlikeCounter", commentLikeSize);
+                            }
+                            int k = 0;
+                            while (commentLikeSize > 0) {
+                                String tempUserId = comment.getLike().get(k).getUserInfo().getUserId();
+                                if (tempUserId.equals(userId)) {
+                                    commentJson.put("CommentlikeStatus", PropertyProvider.get("YourLikeStatus"));
+                                }
+                                commentLikeSize--;
+                                k++;
+                            }
+                        }
+                        commentList.add(commentJson);
+//                        commentList.add(comment);
+                        commentLimitIn = commentLimitIn + 1;
+                        if (commentLimitIn != commentLimit) {
+                            continue;
+                        } else {
+                            break;
+                        }
+                    }
+                    if (commentSize > commentLimit) {
+                        photoJson.put("commentCounter", commentSize - commentLimit);
+                    }
+                    photoJson.put("commentList", commentList);
+                }
+            }
+            if (photoInfo.getShare() != null) {
+                int shareSize = photoInfo.getShare().size();
+                if (shareSize > 0) {
+                    photoJson.put("shareCounter", shareSize);
+                }
+            }
+
+            photoInfoList.add(photoJson);
+        }
+        return photoInfoList;
     }
 
 }

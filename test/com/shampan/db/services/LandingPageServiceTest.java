@@ -1881,17 +1881,17 @@ public class LandingPageServiceTest {
         PageSubCategoryDAO subCategoryDAO1 = new PageSubCategoryDAOBuilder()
                 .setCategoryId("1")
                 .setSubCategoryId("1")
-                .setTitle("car")
+                .setTitle("Appliances")
                 .build();
         PageSubCategoryDAO subCategoryDAO2 = new PageSubCategoryDAOBuilder()
                 .setCategoryId("1")
                 .setSubCategoryId("2")
-                .setTitle("Colthing")
+                .setTitle("Board Game")
                 .build();
         PageSubCategoryDAO subCategoryDAO3 = new PageSubCategoryDAOBuilder()
-                .setCategoryId("2")
-                .setSubCategoryId("1")
-                .setTitle("Product1")
+                .setCategoryId("1")
+                .setSubCategoryId("3")
+                .setTitle("Camera/Photo")
                 .build();
         PageSubCategoryDAO subCategoryDAO4 = new PageSubCategoryDAOBuilder()
                 .setCategoryId("2")

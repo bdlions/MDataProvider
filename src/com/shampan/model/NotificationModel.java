@@ -545,6 +545,21 @@ public class NotificationModel {
      * is added
      * @return void
      */
+    public ResultEvent addGeneralNotificationPhotoLike(String userId, String referenceId, String userInfomation) {
+        String typeId = PropertyProvider.get("NOTIFICATION_TYPE_PHOTO_LIKE");
+        addGeneralNotificationStatusLikeOrShare(userId, referenceId, typeId, userInfomation);
+        return this.resultEvent;
+
+    }
+    /**
+     * This method will add status like notification
+     *
+     * @param userId, user id of a friend relation who initiate status
+     * @param referenceId, reference id is the status id
+     * @param userInfomation, userInfomation of the user for which notification
+     * is added
+     * @return void
+     */
     public ResultEvent addGeneralNotificationStatusLike(String userId, String referenceId, String userInfomation) {
         String typeId = PropertyProvider.get("NOTIFICATION_TYPE_POST_LIKE");
         addGeneralNotificationStatusLikeOrShare(userId, referenceId, typeId, userInfomation);

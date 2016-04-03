@@ -197,8 +197,19 @@ public class PhotoService {
         String response = photoObject.deletePhotoComment(photoId, commentId);
         return response;
     }
+
     public static String getTimelinePhotos(String userId) {
         String response = photoObject.getTimelinePhotos(userId).toString();
+        return response;
+    }
+
+    public static String getSliderPhotos(String userId, String referenceId) {
+        String response = photoObject.getSliderPhotos(userId, referenceId).toString();
+        return response;
+    }
+
+    public static String addMPhotoLike(String userId, String photoId, String likeInfo) {
+        String response = photoObject.addMPhotoLike(userId, photoId, likeInfo).toString();
         return response;
     }
 

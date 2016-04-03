@@ -26,10 +26,11 @@ public class StatusService {
     public static String getStatuses(String userId, int offset, int limit) {
         return obj.getStatuses(userId, offset, limit);
     }
- 
+
     public static String getUserProfileStatuses(String userId, String mappingId, int offset, int limit) {
         return obj.getUserProfileStatuses(userId, mappingId, offset, limit);
     }
+
     public static String getPageProfileStatuses(String userId, String mappingId, int offset, int limit) {
         return obj.getPageProfileStatuses(userId, mappingId, offset, limit);
     }
@@ -51,10 +52,13 @@ public class StatusService {
     public static String addStatusLike(String userId, String statusId, String likeInfo, String statusTypeId) {
         PropertyProvider.add("com.shampan.properties/status");
         PhotoModel photoObj = new PhotoModel();
-        String abc = PropertyProvider.get("STATUS_TYPE_ID_CHANGE_PROFILE_PICTURE");
-        if (statusTypeId.endsWith(PropertyProvider.get("STATUS_TYPE_ID_CHANGE_PROFILE_PICTURE"))|| statusTypeId .endsWith(PropertyProvider.get("STATUS_TYPE_ID_CHANGE_COVER_PICTURE")) || statusTypeId.endsWith(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_USER_AT_HIS_PROFILE_WITH_PHOTO")) || statusTypeId .endsWith(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_USER_AT_FRIEND_PROFILE_WITH_PHOTO"))) {
+        if (statusTypeId.endsWith(PropertyProvider.get("STATUS_TYPE_ID_CHANGE_PROFILE_PICTURE"))
+                || statusTypeId.endsWith(PropertyProvider.get("STATUS_TYPE_ID_PAGE_CHANGE_COVER_PICTURE"))
+                || statusTypeId.endsWith(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_USER_AT_HIS_PROFILE_WITH_PHOTO"))
+                || statusTypeId.endsWith(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_USER_AT_FRIEND_PROFILE_WITH_PHOTO"))
+                || statusTypeId.endsWith(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_USER_AT_FRIEND_PROFILE_WITH_PHOTO"))) {
             photoObj.addPhotoLikeByReferenceId(statusId, likeInfo).toString();
-        } else if (statusTypeId.endsWith(PropertyProvider.get("STATUS_TYPE_ID_ADD_ALBUM_PHOTOS"))) {
+        } else if (statusTypeId.endsWith(PropertyProvider.get("STATUS_TYPE_ID_ADD_ALBUM_PHOTOS"))){
             photoObj.addAlbumLikeByReferenceId(statusId, likeInfo);
         }
         String response = obj.addStatusLike(userId, statusId, likeInfo).toString();

@@ -130,18 +130,18 @@ public class PhotoServicesTest {
     }
 
 //    @Test
-    public void addAlbumComment() {
-        UserInfo refUserInfo = new UserInfo();
-        refUserInfo.setFirstName("Alamgir");
-        refUserInfo.setLastName("Kabir");
-        refUserInfo.setUserId(userId);
-        Comment albumCommentInfo = new Comment();
-        albumCommentInfo.setId(userId);
-        albumCommentInfo.setUserInfo(refUserInfo);
-        albumCommentInfo.setDescription("I like your track !");
-        System.out.println(photoObject.addAlbumComment(albumId, albumCommentInfo.toString()));
-
-    }
+//    public void addAlbumComment() {
+//        UserInfo refUserInfo = new UserInfo();
+//        refUserInfo.setFirstName("Alamgir");
+//        refUserInfo.setLastName("Kabir");
+//        refUserInfo.setUserId(userId);
+//        Comment albumCommentInfo = new Comment();
+//        albumCommentInfo.setId(userId);
+//        albumCommentInfo.setUserInfo(refUserInfo);
+//        albumCommentInfo.setDescription("I like your track !");
+//        System.out.println(photoObject.addAlbumComment(albumId, albumCommentInfo.toString()));
+//
+//    }
 
 //    @Test
     public void editAlbumComment() {
@@ -241,18 +241,18 @@ public class PhotoServicesTest {
     }
 
 //    @Test
-    public void addPhotoComment() {
-        UserInfo refUserInfo = new UserInfo();
-        refUserInfo.setFirstName("Alamgir");
-        refUserInfo.setLastName("Kabir");
-        refUserInfo.setUserId(userId);
-        Comment photoCommentInfo = new Comment();
-        photoCommentInfo.setId(userId);
-        photoCommentInfo.setUserInfo(refUserInfo);
-        photoCommentInfo.setDescription("I like your track !");
-        System.out.println(photoObject.addPhotoComment(photoId, photoCommentInfo.toString()));
-
-    }
+//    public void addPhotoComment() {
+//        UserInfo refUserInfo = new UserInfo();
+//        refUserInfo.setFirstName("Alamgir");
+//        refUserInfo.setLastName("Kabir");
+//        refUserInfo.setUserId(userId);
+//        Comment photoCommentInfo = new Comment();
+//        photoCommentInfo.setId(userId);
+//        photoCommentInfo.setUserInfo(refUserInfo);
+//        photoCommentInfo.setDescription("I like your track !");
+//        System.out.println(photoObject.addPhotoComment(photoId, photoCommentInfo.toString()));
+//
+//    }
 
 //    @Test
     public void editPhotoComment() {

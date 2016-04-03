@@ -114,18 +114,18 @@ public class VideoServicesTest {
     }
 
 //        @Test
-    public void addVideoComment() {
-        UserInfo userInfo = new UserInfo();
-        userInfo.setFirstName("Alamgir");
-        userInfo.setLastName("Kabir");
-        userInfo.setUserId(userId);
-        Comment commentInfo = new Comment();
-        commentInfo.setUserInfo(userInfo);
-        commentInfo.setDescription("i love song");
-        commentInfo.setId(videoId);
-        System.out.println(videoObject.addVideoComment(videoId, commentInfo.toString()));
-
-    }
+//    public void addVideoComment() {
+//        UserInfo userInfo = new UserInfo();
+//        userInfo.setFirstName("Alamgir");
+//        userInfo.setLastName("Kabir");
+//        userInfo.setUserId(userId);
+//        Comment commentInfo = new Comment();
+//        commentInfo.setUserInfo(userInfo);
+//        commentInfo.setDescription("i love song");
+//        commentInfo.setId(videoId);
+//        System.out.println(videoObject.addVideoComment(videoId, commentInfo.toString()));
+//
+//    }
 
 //            @Test
     public void getVideoComments() {
