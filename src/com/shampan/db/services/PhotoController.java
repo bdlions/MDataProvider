@@ -316,5 +316,13 @@ public class PhotoController {
                 .putHeader("content-type", "application/json; charset=utf-8")
                 .end(PhotoService.addMPhotoLike(userId, photoId,  likeInfo));
     }
+    public static void getSliderAlbum(RoutingContext routingContext) {
+        String mappingId = routingContext.request().getParam("mappingId");
+        String albumId = routingContext.request().getParam("albumId");
+        String userId = routingContext.request().getParam("userId");
+        routingContext.response()
+                .putHeader("content-type", "application/json; charset=utf-8")
+                .end(PhotoService.getSliderAlbum(mappingId, albumId, userId));
+    }
 
 }

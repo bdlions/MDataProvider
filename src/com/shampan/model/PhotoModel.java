@@ -497,6 +497,8 @@ public class PhotoModel {
 //        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("albumId").is(albumId).get();
         Document pQurey = new Document();
         pQurey.put("photoId", "$all");
+        pQurey.put("albumId", "$all");
+        pQurey.put("userId", "$all");
         pQurey.put("image", "$all");
         MongoCursor<PhotoDAO> cursorStatusInfoList = mongoCollection.find(selectDocument).projection(pQurey).iterator();
         List<PhotoDAO> photoList = IteratorUtils.toList(cursorStatusInfoList);
@@ -668,11 +670,14 @@ public class PhotoModel {
                         if (oldAlbumInfo.getPhotoId() != null) {
                             statusUpdate = true;
                             int totalImg = newTotalImg + oldAlbumInfo.getTotalImg();
-                            if (albumId.equals(PropertyProvider.get("TIMELINE_PHOTOS_ALBUM_ID"))) {
+                           String coverId =  PropertyProvider.get("COVER_PHOTOS_ALBUM_ID");
+                           String profileId =  PropertyProvider.get("PROFILE_PHOTOS_ALBUM_ID");
+                           String timelineId =  PropertyProvider.get("COVER_PHOTOS_ALBUM_TITLE");
+                            if (albumId.equals(coverId)) {
                                 refernceId = true;
-                            } else if (albumId.equals(PropertyProvider.get("PROFILE_PHOTOS_ALBUM_ID"))) {
+                            } else if (albumId.equals(profileId)) {
                                 refernceId = true;
-                            } else if (albumId.equals(PropertyProvider.get("COVER_PHOTOS_ALBUM_TITLE"))) {
+                            } else if (albumId.equals(timelineId)) {
                                 refernceId = true;
                             }
                             editAlbumTotalImg(userId, albumId, totalImg);
@@ -701,11 +706,11 @@ public class PhotoModel {
                     photoInfoObj.setModifiedOn(utility.getCurrentTime());
                     photoInfoObj.setReferenceId(referenceId);
                     photoList.add(photoInfoObj);
-                    if (refernceId == false && statusUpdate != false) {
+                    if (refernceId != true && statusUpdate != false) {
                         images.add(photoInfoObj.getImage());
                     }
                 }
-                if (refernceId == false && statusUpdate != false) {
+                if (refernceId != true && statusUpdate != false) {
                     referenceId = oldAlbumInfo.getReferenceId();
                     StatusModel statusModel = new StatusModel();
                     ResultEvent rEvent = statusModel.updateStatusPhoto(referenceId, images.toString());
@@ -1005,8 +1010,28 @@ public class PhotoModel {
             selectionDocument.put("referenceId", referenceId);
             MongoCursor<PhotoDAO> photoList = mongoCollection.find(selectionDocument).iterator();
             List<JSONObject> photoInfoList = getPhotoInfo(userId, photoList);
-            userStatusInfo.put("statusInfoList", photoInfoList);
+            userStatusInfo.put("photoList", photoInfoList);
             userStatusInfo.put("userCurrentTime", utility.getCurrentTime());
+            this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
+        } catch (Exception ex) {
+            this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
+        }
+        return userStatusInfo;
+
+    }
+
+    public JSONObject getSliderAlbum(String mappingId, String albumId, String userId) {
+        JSONObject userStatusInfo = new JSONObject();
+        try {
+            MongoCollection<PhotoDAO> mongoCollection
+                    = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), PhotoDAO.class);
+            Document selectionDocument = new Document();
+            selectionDocument.put("albumId", albumId);
+            selectionDocument.put("userId", mappingId);
+            MongoCursor<PhotoDAO> photoList = mongoCollection.find(selectionDocument).iterator();
+            List<JSONObject> photoInfoList = getPhotoInfo(userId, photoList);
+            userStatusInfo.put("photoList", photoInfoList);
+            userStatusInfo.put("userInfo", userModel.getUserInfo(mappingId));
             this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
         } catch (Exception ex) {
             this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));

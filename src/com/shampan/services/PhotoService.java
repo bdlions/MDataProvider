@@ -212,5 +212,9 @@ public class PhotoService {
         String response = photoObject.addMPhotoLike(userId, photoId, likeInfo).toString();
         return response;
     }
+    public static String getSliderAlbum(String mappingId, String albumId, String userId) {
+        String response = photoObject.getSliderAlbum(mappingId, albumId, userId).toString();
+        return response;
+    }
 
 }
