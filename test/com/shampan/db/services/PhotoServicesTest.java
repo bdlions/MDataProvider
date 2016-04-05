@@ -120,7 +120,7 @@ public class PhotoServicesTest {
         refUserInfo.setUserId("2");
         Like likeuserInfo = new Like();
         likeuserInfo.setUserInfo(refUserInfo);
-        System.out.println(photoObject.addAlbumLike(albumId, likeuserInfo.toString()));
+//        System.out.println(photoObject.addAlbumLike(albumId, likeuserInfo.toString()));
 
     }
 //    @Test

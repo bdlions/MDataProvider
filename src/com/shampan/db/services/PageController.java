@@ -116,12 +116,53 @@ public class PageController {
                 .putHeader("content-type", "application/json; charset=utf-8")
                 .end(PageService.joinPageMamberShip(pageId, memberInfo));
     }
+
     public static void leavePageMemberShip(RoutingContext routingContext) {
         String pageId = routingContext.request().getParam("pageId");
         String userId = routingContext.request().getParam("userId");
         routingContext.response()
                 .putHeader("content-type", "application/json; charset=utf-8")
                 .end(PageService.leavePageMemberShip(pageId, userId));
+    }
+
+    public static void getSliderPhotos(RoutingContext routingContext) {
+        String userId = routingContext.request().getParam("userId");
+        String referenceId = routingContext.request().getParam("referenceId");
+        routingContext.response()
+                .putHeader("content-type", "application/json; charset=utf-8")
+                .end(PageService.getSliderPhotos(userId, referenceId));
+    }
+
+    public static void addPhotoLike(RoutingContext routingContext) {
+        String userId = routingContext.request().getParam("userId");
+        String photoId = routingContext.request().getParam("photoId");
+        String referenceId = routingContext.request().getParam("referenceId");
+        String likeInfo = routingContext.request().getParam("likeInfo");
+        routingContext.response()
+                .putHeader("content-type", "application/json; charset=utf-8")
+                .end(PageService.addPhotoLike(userId, photoId, referenceId, likeInfo));
+    }
+
+    public static void addMPhotoLike(RoutingContext routingContext) {
+        String userId = routingContext.request().getParam("userId");
+        String photoId = routingContext.request().getParam("photoId");
+        String likeInfo = routingContext.request().getParam("likeInfo");
+        routingContext.response()
+                .putHeader("content-type", "application/json; charset=utf-8")
+                .end(PageService.addMPhotoLike(userId, photoId, likeInfo));
+    }
+
+    public static void getTimelinePhotos(RoutingContext routingContext) {
+        String pageId = routingContext.request().getParam("pageId");
+        routingContext.response()
+                .putHeader("content-type", "application/json; charset=utf-8")
+                .end(PageService.getTimelinePhotos(pageId));
+    }
+     public static void getAlbums(RoutingContext routingContext) {
+        String pageId = routingContext.request().getParam("pageId");
+        routingContext.response()
+                .putHeader("content-type", "application/json; charset=utf-8")
+                .end(PageService.getAlbums(pageId));
     }
 
 }

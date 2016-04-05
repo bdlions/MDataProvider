@@ -5,6 +5,7 @@
  */
 package com.shampan.services;
 
+import com.shampan.model.PageModel;
 import com.shampan.model.PhotoModel;
 import com.shampan.model.StatusModel;
 import com.shampan.util.PropertyProvider;
@@ -52,14 +53,21 @@ public class StatusService {
     public static String addStatusLike(String userId, String statusId, String likeInfo, String statusTypeId) {
         PropertyProvider.add("com.shampan.properties/status");
         PhotoModel photoObj = new PhotoModel();
-        if (statusTypeId.endsWith(PropertyProvider.get("STATUS_TYPE_ID_CHANGE_PROFILE_PICTURE"))
-                || statusTypeId.endsWith(PropertyProvider.get("STATUS_TYPE_ID_PAGE_CHANGE_COVER_PICTURE"))
-                || statusTypeId.endsWith(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_USER_AT_HIS_PROFILE_WITH_PHOTO"))
-                || statusTypeId.endsWith(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_USER_AT_FRIEND_PROFILE_WITH_PHOTO"))
-                || statusTypeId.endsWith(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_USER_AT_FRIEND_PROFILE_WITH_PHOTO"))) {
+        PageModel pageObj = new PageModel();
+        if (statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_CHANGE_PROFILE_PICTURE"))
+                || statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_CHANGE_COVER_PICTURE"))
+                || statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_USER_AT_HIS_PROFILE_WITH_PHOTO"))
+                || statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_USER_AT_FRIEND_PROFILE_WITH_PHOTO"))) {
             photoObj.addPhotoLikeByReferenceId(statusId, likeInfo).toString();
-        } else if (statusTypeId.endsWith(PropertyProvider.get("STATUS_TYPE_ID_ADD_ALBUM_PHOTOS"))){
+        } else if (statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_PAGE_CHANGE_PROFILE_PICTURE"))
+                || statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_PAGE_CHANGE_COVER_PICTURE"))
+                || statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_ADMIN_AT_PAGE_PROFILE_WITH_S_PHOTO"))
+                || statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_MEMBER_AT_PAGE_PROFILE_WITH_S_PHOTO"))) {
+            pageObj.addPhotoLikeByReferenceId(statusId, likeInfo).toString();
+        } else if (statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_ADD_ALBUM_PHOTOS"))||statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_USER_AT_HIS_PROFILE_WITH_PHOTOS"))|| statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_USER_AT_FRIEND_PROFILE_WITH_PHOTOS"))) {
             photoObj.addAlbumLikeByReferenceId(statusId, likeInfo);
+        } else if (statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_ADMIN_AT_PAGE_PROFILE_WITH_M_PHOTOS"))||statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_MEMBER_AT_PAGE_PROFILE_WITH_M_PHOTOS"))) {
+            pageObj.addAlbumLikeByReferenceId(statusId, likeInfo);
         }
         String response = obj.addStatusLike(userId, statusId, likeInfo).toString();
         return response;

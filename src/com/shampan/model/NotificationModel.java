@@ -551,6 +551,12 @@ public class NotificationModel {
         return this.resultEvent;
 
     }
+    public ResultEvent addGeneralNotificationPagePhotoLike(String userId, String referenceId, String userInfomation) {
+        String typeId = PropertyProvider.get("NOTIFICATION_TYPE_PAGE_PHOTO_LIKE");
+        addGeneralNotificationStatusLikeOrShare(userId, referenceId, typeId, userInfomation);
+        return this.resultEvent;
+
+    }
     /**
      * This method will add status like notification
      *

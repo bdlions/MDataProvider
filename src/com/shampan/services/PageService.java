@@ -82,13 +82,46 @@ public class PageService {
         String response = pageObject.inviteMember(pageId, memberInfo).toString();
         return response;
     }
+
     public static String joinPageMamberShip(String pageId, String memberInfo) {
         String response = pageObject.joinPageMamberShip(pageId, memberInfo).toString();
         return response;
     }
+
     public static String leavePageMemberShip(String pageId, String userId) {
         String response = pageObject.leavePageMemberShip(pageId, userId).toString();
         return response;
+    }
+
+    public static String getSliderPhotos(String userId, String referenceId) {
+        String response = pageObject.getSliderPhotos(userId, referenceId).toString();
+        return response;
+    }
+
+    public static String addPhotoLike(String userId, String photoId, String referenceId, String likeInfo) {
+        StatusModel statusObject = new StatusModel();
+        String response = PropertyProvider.get("ERROR_EXCEPTION");
+        ResultEvent resultEvent = statusObject.addStatusLike(userId, referenceId, likeInfo);
+        if (resultEvent.getResponseCode().equals(PropertyProvider.get("SUCCESSFUL_OPERATION"))) {
+            response = pageObject.addPhotoLike(photoId, likeInfo).toString();
+        }
+        return response;
+    }
+
+    public static String addMPhotoLike(String userId, String photoId, String likeInfo) {
+        String response = pageObject.addMPhotoLike(userId, photoId, likeInfo).toString();
+        return response;
+    }
+
+    public static String getTimelinePhotos(String pageId) {
+        String response = pageObject.getTimelinePhotos(pageId).toString();
+        return response;
+    }
+
+    public static String getAlbums(String pageId) {
+        JSONObject albums = new JSONObject();
+        albums.put("albumList", pageObject.getAlbums(pageId));
+        return albums.toString();
     }
 
     public static String getPageInfo(String pageId, String userId) {

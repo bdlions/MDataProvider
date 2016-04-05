@@ -190,6 +190,7 @@ public class PhotoModel {
         JSONObject albumInfoJson = new JSONObject();
         try {
             albumInfoJson.put("albumId", albumInfo.getAlbumId());
+            albumInfoJson.put("referenceId", albumInfo.getReferenceId());
             albumInfoJson.put("userId", albumInfo.getUserId());
             albumInfoJson.put("title", albumInfo.getTitle());
             albumInfoJson.put("description", albumInfo.getDescription());
@@ -327,13 +328,15 @@ public class PhotoModel {
      * @param likeInfo, like user information
      * @author created by Rashida on 21th September 2015
      */
-    public ResultEvent addAlbumLike(String albumId, String likeInfo) {
+    public ResultEvent addAlbumLike(String mappingId, String albumId, String likeInfo) {
         try {
             MongoCollection<AlbumDAO> mongoCollection
                     = DBConnection.getInstance().getConnection().getCollection(Collections.USERALBUMS.toString(), AlbumDAO.class);
-            BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("albumId").is(albumId).get();
+            Document selectDocument = new Document();
+            selectDocument.put("userId", mappingId);
+            selectDocument.put("albumId", albumId);
             Like albumlikeInfo = Like.getLikeInfo(likeInfo);
-            mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("like", JSON.parse(albumlikeInfo.toString()))));
+            mongoCollection.findOneAndUpdate(selectDocument, new Document("$push", new Document("like", JSON.parse(albumlikeInfo.toString()))));
             this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
         } catch (Exception ex) {
             this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
@@ -643,6 +646,7 @@ public class PhotoModel {
      * @author created by Rashida on 21th September 2015
      */
     public ResultEvent addPhotos(String userId, String albumId, String photoInfoList) {
+        ResultEvent rEvent1 = new ResultEvent();
         try {
             MongoCollection<PhotoDAO> mongoCollection
                     = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), PhotoDAO.class);
@@ -715,19 +719,21 @@ public class PhotoModel {
                     StatusModel statusModel = new StatusModel();
                     ResultEvent rEvent = statusModel.updateStatusPhoto(referenceId, images.toString());
                     if (rEvent.getResponseCode().equals(PropertyProvider.get("SUCCESSFUL_OPERATION"))) {
-                        this.getResultEvent().setResult(referenceId);
+                        rEvent1.setResult(referenceId);
                     }
+                }else{
+                 rEvent1.setResult(PropertyProvider.get("USER_ALLOW_FOR_STATUS"));
                 }
 
                 mongoCollection.insertMany(photoList);
-                this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
+                rEvent1.setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
             } else {
-                this.getResultEvent().setResponseCode(PropertyProvider.get("BadRequest"));
+                rEvent1.setResponseCode(PropertyProvider.get("BadRequest"));
             }
         } catch (Exception ex) {
-            this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
+            rEvent1.setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
         }
-        return this.resultEvent;
+        return rEvent1;
     }
 
     /*
@@ -863,6 +869,7 @@ public class PhotoModel {
         }
         return this.resultEvent;
     }
+   
 
     public String getPhotoLikeList(String photoId) {
         MongoCollection<AlbumDAO> mongoCollection

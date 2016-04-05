@@ -22,6 +22,7 @@ import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
+import org.sampan.model.InitialData;
 
 /**
  *
@@ -44,7 +45,14 @@ public class ServerExecutor extends AbstractVerticle {
         HttpServer server = vertx.createHttpServer();
         Router router = Router.router(vertx);
         router.route("/").handler((RoutingContext routingContext) -> {
+            InitialData initialData = new InitialData();
+            //initialData.storeReligions();
+            initialData.storeCountries();
+//            initialData.storePageCategory();
+            //initialData.storePageSubCategory();
+            //initialData.videoCategories();
             HttpServerResponse response = routingContext.response();
+
             response.end("Muslimand DB service.");
         });
         /*
@@ -382,6 +390,16 @@ public class ServerExecutor extends AbstractVerticle {
         router.post("/page/joinPageMamberShip").handler(PageController::joinPageMamberShip);
         router.route("/page/leavePageMemberShip").handler(BodyHandler.create());
         router.post("/page/leavePageMemberShip").handler(PageController::leavePageMemberShip);
+        router.route("/page/getSliderPhotos").handler(BodyHandler.create());
+        router.post("/page/getSliderPhotos").handler(PageController::getSliderPhotos);
+        router.route("/page/addPhotoLike").handler(BodyHandler.create());
+        router.post("/page/addPhotoLike").handler(PageController::addPhotoLike);
+        router.route("/page/addMPhotoLike").handler(BodyHandler.create());
+        router.post("/page/addMPhotoLike").handler(PageController::addMPhotoLike);
+        router.route("/page/getTimelinePhotos").handler(BodyHandler.create());
+        router.post("/page/getTimelinePhotos").handler(PageController::getTimelinePhotos);
+        router.route("/page/getAlbums").handler(BodyHandler.create());
+        router.post("/page/getAlbums").handler(PhotoController::getAlbums);
 
         server.requestHandler(router::accept).listen(8080);
     }

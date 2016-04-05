@@ -88,11 +88,13 @@ public class PhotoController {
     }
 
     public static void addAlbumLike(RoutingContext routingContext) {
+        String mappingId = routingContext.request().getParam("mappingId");
         String albumId = routingContext.request().getParam("albumId");
+        String referenceId = routingContext.request().getParam("referenceId");
         String likeInfo = routingContext.request().getParam("likeInfo");
         routingContext.response()
                 .putHeader("content-type", "application/json; charset=utf-8")
-                .end(PhotoService.addAlbumLike(albumId, likeInfo));
+                .end(PhotoService.addAlbumLike(mappingId, albumId, referenceId,likeInfo));
     }
 
     public static void getAlbumLikeList(RoutingContext routingContext) {

@@ -89,8 +89,18 @@ public class PhotoService {
         return response;
     }
 
-    public static String addAlbumLike(String albumId, String likeInfo) {
-        String response = photoObject.addAlbumLike(albumId, likeInfo).toString();
+    public static String addAlbumLike(String mappingId, String albumId, String referenceId, String likeInfo) {
+        boolean statusLikeStatus = false;
+        if (albumId.equals(PropertyProvider.get("TIMELINE_PHOTOS_ALBUM_ID"))
+                || albumId.equals(PropertyProvider.get("PROFILE_PHOTOS_ALBUM_ID"))
+                || albumId.equals(PropertyProvider.get("COVER_PHOTOS_ALBUM_ID"))) {
+            statusLikeStatus = true;
+        }
+        if (statusLikeStatus != true) {
+            StatusModel statusModel = new StatusModel();
+            String response = statusModel.addStatusLike(mappingId, referenceId, likeInfo).toString();
+        }
+        String response = photoObject.addAlbumLike(mappingId, albumId, likeInfo).toString();
         return response;
     }
 
@@ -212,6 +222,7 @@ public class PhotoService {
         String response = photoObject.addMPhotoLike(userId, photoId, likeInfo).toString();
         return response;
     }
+
     public static String getSliderAlbum(String mappingId, String albumId, String userId) {
         String response = photoObject.getSliderAlbum(mappingId, albumId, userId).toString();
         return response;
