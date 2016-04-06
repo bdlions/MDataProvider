@@ -368,12 +368,34 @@ public class PhotoModel {
         return this.resultEvent;
     }
 
+    /*
+     * This method will add a photo comment , 
+     * @param photoId, photo id
+     * @param commentInfo, comment info
+     * @author created by Rashida on 21th September 2015
+     */
+    public ResultEvent addAlbumCommentByReferenceId(String referenceId, String commentInfo) {
+        try {
+            MongoCollection<PhotoDAO> mongoCollection
+                    = DBConnection.getInstance().getConnection().getCollection(Collections.USERALBUMS.toString(), PhotoDAO.class);
+            BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("referenceId").is(referenceId).get();
+            Comment albumCommentInfo = Comment.getCommentInfo(commentInfo);
+            if (albumCommentInfo != null) {
+                albumCommentInfo.setCreatedOn(utility.getCurrentTime());
+                mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("comment", JSON.parse(albumCommentInfo.toString()))));
+                this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
+            }
+        } catch (Exception ex) {
+            this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
+        }
+        return this.resultEvent;
+    }
+
     public String getAlbumLikeList(String albumId) {
         MongoCollection<AlbumDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.USERALBUMS.toString(), AlbumDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("albumId").is(albumId).get();
         Document pQuery = new Document();
-
         pQuery.put("like", "$all");
         AlbumDAO albumLikeList = mongoCollection.find(selectQuery).projection(pQuery).first();
 
@@ -386,24 +408,20 @@ public class PhotoModel {
      * @author created by Rashida on 21th September 2015
      */
 
-    public String addAlbumComment(String albumId, String commentInfo) {
-        MongoCollection<AlbumDAO> mongoCollection
-                = DBConnection.getInstance().getConnection().getCollection(Collections.USERALBUMS.toString(), AlbumDAO.class
-                );
-        BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("albumId").is(albumId).get();
-        Comment albumCommentInfo = Comment.getCommentInfo(commentInfo);
-
+    public ResultEvent addAlbumComment(String albumId, String commentInfo) {
         try {
+            MongoCollection<AlbumDAO> mongoCollection
+                    = DBConnection.getInstance().getConnection().getCollection(Collections.USERALBUMS.toString(), AlbumDAO.class);
+            BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("albumId").is(albumId).get();
+            Comment albumCommentInfo = Comment.getCommentInfo(commentInfo);
             if (albumCommentInfo != null) {
+                albumCommentInfo.setCreatedOn(utility.getCurrentTime());
                 mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("comment", JSON.parse(albumCommentInfo.toString()))));
             }
-        } catch (NullPointerException npe) {
-            LogWriter.getErrorLog().error("null value exception");
+        } catch (Exception ex) {
+            this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
         }
-
-        resultEvent.setResponseCode(
-                "100157");
-        return resultEvent.toString();
+        return this.resultEvent;
     }
 
     /*
@@ -413,13 +431,11 @@ public class PhotoModel {
      */
     public String getAlbumComments(String albumId) {
         MongoCollection<AlbumDAO> mongoCollection
-                = DBConnection.getInstance().getConnection().getCollection(Collections.USERALBUMS.toString(), AlbumDAO.class
-                );
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERALBUMS.toString(), AlbumDAO.class);
         BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("albumId").is(albumId).get();
         Document pQuery = new Document();
 
-        pQuery.put(
-                "comment", "$all");
+        pQuery.put("comment", "$all");
         AlbumDAO albumCommentList = mongoCollection.find(selectQuery).projection(pQuery).first();
 
         return albumCommentList.toString();
@@ -434,8 +450,7 @@ public class PhotoModel {
      */
     public String editAlbumComment(String albumId, String commentId, String commentInfo) {
         MongoCollection<AlbumDAO> mongoCollection
-                = DBConnection.getInstance().getConnection().getCollection(Collections.USERALBUMS.toString(), AlbumDAO.class
-                );
+                = DBConnection.getInstance().getConnection().getCollection(Collections.USERALBUMS.toString(), AlbumDAO.class);
         Document selectQuery = new Document();
 
         selectQuery.put(
@@ -612,34 +627,6 @@ public class PhotoModel {
         return photoInfoJson.toString();
     }
 
-    public String getNextPhoto(String photoId) {
-        MongoCollection<PhotoDAO> mongoCollection
-                = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), PhotoDAO.class
-                );
-        Document sortQuery = new Document();
-
-        sortQuery.put("photoId", 1);
-        Document sQuery = new Document();
-
-        sQuery.put("photoId", new Document("$gt", photoId));
-        Document pQuery = new Document();
-
-        pQuery.put(
-                "photoId", "$all");
-        FindIterable<PhotoDAO> photoList = mongoCollection.find(sQuery).projection(pQuery).sort(sortQuery).limit(1);
-        List<PhotoDAO> photos = new ArrayList<>();
-        for (PhotoDAO photo : photoList) {
-            photos.add(photo);
-            System.out.println(photo);
-        }
-
-        System.out.println(photos);
-//        System.out.println(mongoCollection.find(sQuery).projection(pQuery).sort(sortQuery).limit(1).toString());
-//        System.out.println(photoInfo);
-
-        return "";
-    }
-
     /*
      * This method will add list of photos , 
      * @param photoInfoList, photo list
@@ -674,9 +661,9 @@ public class PhotoModel {
                         if (oldAlbumInfo.getPhotoId() != null) {
                             statusUpdate = true;
                             int totalImg = newTotalImg + oldAlbumInfo.getTotalImg();
-                           String coverId =  PropertyProvider.get("COVER_PHOTOS_ALBUM_ID");
-                           String profileId =  PropertyProvider.get("PROFILE_PHOTOS_ALBUM_ID");
-                           String timelineId =  PropertyProvider.get("COVER_PHOTOS_ALBUM_TITLE");
+                            String coverId = PropertyProvider.get("COVER_PHOTOS_ALBUM_ID");
+                            String profileId = PropertyProvider.get("PROFILE_PHOTOS_ALBUM_ID");
+                            String timelineId = PropertyProvider.get("COVER_PHOTOS_ALBUM_TITLE");
                             if (albumId.equals(coverId)) {
                                 refernceId = true;
                             } else if (albumId.equals(profileId)) {
@@ -721,8 +708,8 @@ public class PhotoModel {
                     if (rEvent.getResponseCode().equals(PropertyProvider.get("SUCCESSFUL_OPERATION"))) {
                         rEvent1.setResult(referenceId);
                     }
-                }else{
-                 rEvent1.setResult(PropertyProvider.get("USER_ALLOW_FOR_STATUS"));
+                } else {
+                    rEvent1.setResult(PropertyProvider.get("USER_ALLOW_FOR_STATUS"));
                 }
 
                 mongoCollection.insertMany(photoList);
@@ -742,8 +729,7 @@ public class PhotoModel {
      * @param photoInfo, photo info
      * @author created by Rashida on 21th September 2015
      */
-    public String
-            editPhoto(String photoId, String photoInfo) {
+    public String editPhoto(String photoId, String photoInfo) {
         MongoCollection<PhotoDAO> mongoCollection
                 = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), PhotoDAO.class
                 );
@@ -869,7 +855,6 @@ public class PhotoModel {
         }
         return this.resultEvent;
     }
-   
 
     public String getPhotoLikeList(String photoId) {
         MongoCollection<AlbumDAO> mongoCollection
@@ -931,6 +916,30 @@ public class PhotoModel {
             BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("photoId").is(photoId).get();
             Comment photoCommentInfo = Comment.getCommentInfo(commentInfo);
             if (photoCommentInfo != null) {
+                photoCommentInfo.setCreatedOn(utility.getCurrentTime());
+                mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("comment", JSON.parse(photoCommentInfo.toString()))));
+                this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
+            }
+        } catch (Exception ex) {
+            this.getResultEvent().setResponseCode(PropertyProvider.get("ERROR_EXCEPTION"));
+        }
+        return this.resultEvent;
+    }
+
+    /*
+     * This method will add a photo comment , 
+     * @param photoId, photo id
+     * @param commentInfo, comment info
+     * @author created by Rashida on 21th September 2015
+     */
+    public ResultEvent addPhotoCommentByReferenceId(String referenceId, String commentInfo) {
+        try {
+            MongoCollection<PhotoDAO> mongoCollection
+                    = DBConnection.getInstance().getConnection().getCollection(Collections.ALBUMPHOTOS.toString(), PhotoDAO.class);
+            BasicDBObject selectQuery = (BasicDBObject) QueryBuilder.start("referenceId").is(referenceId).get();
+            Comment photoCommentInfo = Comment.getCommentInfo(commentInfo);
+            if (photoCommentInfo != null) {
+                photoCommentInfo.setCreatedOn(utility.getCurrentTime());
                 mongoCollection.findOneAndUpdate(selectQuery, new Document("$push", new Document("comment", JSON.parse(photoCommentInfo.toString()))));
                 this.getResultEvent().setResponseCode(PropertyProvider.get("SUCCESSFUL_OPERATION"));
             }
@@ -1097,6 +1106,10 @@ public class PhotoModel {
                         commentJson.put("commentId", comment.getCommentId());
                         commentJson.put("description", comment.getDescription());
                         commentJson.put("userInfo", comment.getUserInfo());
+                        commentJson.put("createdOn", comment.getCreatedOn());
+                        if (comment.getLike() != null) {
+                            commentJson.put("likeCounter", comment.getLike().size());
+                        }
                         commentJson.put("userGenderId", userModel.getUserGenderInfo(comment.getUserInfo().getUserId()));
                         if (comment.getLike() != null) {
                             int commentLikeSize = comment.getLike().size();
@@ -1114,7 +1127,6 @@ public class PhotoModel {
                             }
                         }
                         commentList.add(commentJson);
-//                        commentList.add(comment);
                         commentLimitIn = commentLimitIn + 1;
                         if (commentLimitIn != commentLimit) {
                             continue;

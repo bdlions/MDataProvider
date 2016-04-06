@@ -110,7 +110,7 @@ public class PhotoService {
     }
 
     public static String addAlbumComment(String albumId, String commentInfo) {
-        String response = photoObject.addAlbumComment(albumId, commentInfo);
+        String response = photoObject.addAlbumComment(albumId, commentInfo).toString();
         return response;
     }
 
@@ -188,13 +188,16 @@ public class PhotoService {
         return response;
     }
 
-    public static String addPhotoComment(String photoId, String referenceId, String commentInfo, String referenceInfo) {
+    public static String addPhotoComment(String photoId, String referenceId, String commentInfo, String referenceInfo, String statusTypeId) {
+        PropertyProvider.add("com.shampan.properties/status");
         StatusModel statusObject = new StatusModel();
-        String response = PropertyProvider.get("ERROR_EXCEPTION");
-        ResultEvent resultEvent = statusObject.addStatusComment(referenceInfo, referenceId, commentInfo);
-        if (resultEvent.getResponseCode().equals(PropertyProvider.get("SUCCESSFUL_OPERATION"))) {
-            response = photoObject.addPhotoComment(photoId, commentInfo).toString();
+        if (statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_CHANGE_PROFILE_PICTURE"))
+                || statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_CHANGE_COVER_PICTURE"))
+                || statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_ADMIN_AT_PAGE_PROFILE_WITH_S_PHOTO"))
+                || statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_MEMBER_AT_PAGE_PROFILE_WITH_S_PHOTO"))) {
+            statusObject.addStatusComment(referenceInfo, referenceId, commentInfo).toString();
         }
+        String response = photoObject.addPhotoComment(photoId, commentInfo).toString();
         return response;
     }
 

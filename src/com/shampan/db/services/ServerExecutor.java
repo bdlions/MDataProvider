@@ -399,7 +399,13 @@ public class ServerExecutor extends AbstractVerticle {
         router.route("/page/getTimelinePhotos").handler(BodyHandler.create());
         router.post("/page/getTimelinePhotos").handler(PageController::getTimelinePhotos);
         router.route("/page/getAlbums").handler(BodyHandler.create());
-        router.post("/page/getAlbums").handler(PhotoController::getAlbums);
+        router.post("/page/getAlbums").handler(PageController::getAlbums);
+        router.route("/page/getSliderAlbum").handler(BodyHandler.create());
+        router.post("/page/getSliderAlbum").handler(PageController::getSliderAlbum);
+        router.route("/page/getPhotos").handler(BodyHandler.create());
+        router.post("/page/getPhotos").handler(PageController::getPhotos);
+        router.route("/page/addPhotoComment").handler(BodyHandler.create());
+        router.post("/page/addPhotoComment").handler(PageController::addPhotoComment);
 
         server.requestHandler(router::accept).listen(8080);
     }

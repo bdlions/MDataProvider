@@ -80,7 +80,25 @@ public class StatusService {
 
     }
 
-    public static String addStatusComment(String referenceUserInfo, String statusId, String commentInfo) {
+    public static String addStatusComment(String referenceUserInfo, String statusId, String statusTypeId, String commentInfo) {
+        PropertyProvider.add("com.shampan.properties/status");
+        PhotoModel photoObj = new PhotoModel();
+        PageModel pageObj = new PageModel();
+        if (statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_CHANGE_PROFILE_PICTURE"))
+                || statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_CHANGE_COVER_PICTURE"))
+                || statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_USER_AT_HIS_PROFILE_WITH_PHOTO"))
+                || statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_USER_AT_FRIEND_PROFILE_WITH_PHOTO"))) {
+            photoObj.addPhotoCommentByReferenceId(statusId, commentInfo).toString();
+        } else if (statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_PAGE_CHANGE_PROFILE_PICTURE"))
+                || statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_PAGE_CHANGE_COVER_PICTURE"))
+                || statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_ADMIN_AT_PAGE_PROFILE_WITH_S_PHOTO"))
+                || statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_MEMBER_AT_PAGE_PROFILE_WITH_S_PHOTO"))) {
+            pageObj.addPhotoCommentByReferenceId(statusId, commentInfo).toString();
+        } else if (statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_ADD_ALBUM_PHOTOS"))||statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_USER_AT_HIS_PROFILE_WITH_PHOTOS"))|| statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_USER_AT_FRIEND_PROFILE_WITH_PHOTOS"))) {
+            photoObj.addAlbumCommentByReferenceId(statusId, commentInfo);
+        } else if (statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_ADMIN_AT_PAGE_PROFILE_WITH_M_PHOTOS"))||statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_MEMBER_AT_PAGE_PROFILE_WITH_M_PHOTOS"))) {
+            pageObj.addAlbumCommentByReferenceId(statusId, commentInfo);
+        }
         String response = obj.addStatusComment(referenceUserInfo, statusId, commentInfo).toString();
         return response;
 

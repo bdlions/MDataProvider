@@ -176,10 +176,11 @@ public class StatusController {
     public static void addStatusComment(RoutingContext routingContext) {
         String referenceUserInfo = routingContext.request().getParam("referenceUserInfo");
         String statusId = routingContext.request().getParam("statusId");
+        String statusTypeId = routingContext.request().getParam("statusTypeId");
         String commentInfo = routingContext.request().getParam("commentInfo");
         routingContext.response()
                 .putHeader("content-type", "application/json; charset=utf-8")
-                .end(StatusService.addStatusComment(referenceUserInfo, statusId, commentInfo));
+                .end(StatusService.addStatusComment(referenceUserInfo, statusId,statusTypeId, commentInfo));
 
     }
 

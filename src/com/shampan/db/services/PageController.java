@@ -154,15 +154,46 @@ public class PageController {
 
     public static void getTimelinePhotos(RoutingContext routingContext) {
         String pageId = routingContext.request().getParam("pageId");
+        String userId = routingContext.request().getParam("userId");
         routingContext.response()
                 .putHeader("content-type", "application/json; charset=utf-8")
-                .end(PageService.getTimelinePhotos(pageId));
+                .end(PageService.getTimelinePhotos(pageId, userId));
     }
-     public static void getAlbums(RoutingContext routingContext) {
+
+    public static void getAlbums(RoutingContext routingContext) {
         String pageId = routingContext.request().getParam("pageId");
         routingContext.response()
                 .putHeader("content-type", "application/json; charset=utf-8")
                 .end(PageService.getAlbums(pageId));
+    }
+
+    public static void getSliderAlbum(RoutingContext routingContext) {
+        String mappingId = routingContext.request().getParam("mappingId");
+        String albumId = routingContext.request().getParam("albumId");
+        String userId = routingContext.request().getParam("userId");
+        routingContext.response()
+                .putHeader("content-type", "application/json; charset=utf-8")
+                .end(PageService.getSliderAlbum(mappingId, albumId, userId));
+    }
+
+    public static void getPhotos(RoutingContext routingContext) {
+        String userId = routingContext.request().getParam("userId");
+        String mappingId = routingContext.request().getParam("mappingId");
+        String albumId = routingContext.request().getParam("albumId");
+        routingContext.response()
+                .putHeader("content-type", "application/json; charset=utf-8")
+                .end(PageService.getPhotos(userId,mappingId, albumId));
+    }
+    
+       public static void addPhotoComment(RoutingContext routingContext) {
+        String photoId = routingContext.request().getParam("photoId");
+        String referenceId = routingContext.request().getParam("referenceId");
+        String commentInfo = routingContext.request().getParam("commentInfo");
+        String referenceInfo = routingContext.request().getParam("referenceInfo");
+        String statusTypeId = routingContext.request().getParam("statusTypeId");
+        routingContext.response()
+                .putHeader("content-type", "application/json; charset=utf-8")
+                .end(PageService.addPhotoComment(photoId, referenceId, commentInfo, referenceInfo, statusTypeId));
     }
 
 }

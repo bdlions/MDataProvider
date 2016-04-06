@@ -113,15 +113,43 @@ public class PageService {
         return response;
     }
 
-    public static String getTimelinePhotos(String pageId) {
-        String response = pageObject.getTimelinePhotos(pageId).toString();
-        return response;
+    public static String getTimelinePhotos(String pageId, String userId) {
+        JSONObject json = new JSONObject();
+        json.put("pageInfo", pageObject.getPageInfo(pageId));
+        json.put("pageMemberInfo", pageObject.getMemeberInfo(pageId, userId));
+        json.put("photoList", pageObject.getTimelinePhotos(pageId));
+        return json.toString();
     }
 
     public static String getAlbums(String pageId) {
         JSONObject albums = new JSONObject();
         albums.put("albumList", pageObject.getAlbums(pageId));
         return albums.toString();
+    }
+
+    public static String getSliderAlbum(String mappingId, String albumId, String userId) {
+        String response = pageObject.getSliderAlbum(mappingId, albumId, userId).toString();
+        return response;
+    }
+
+    public static String getPhotos(String userId, String mappingId, String albumId) {
+        JSONObject photos = new JSONObject();
+        photos.put("albumInfo", pageObject.getAlbum(userId, mappingId, albumId));
+        photos.put("photoList", pageObject.getPhotos(mappingId, albumId));
+        return photos.toString();
+    }
+
+    public static String addPhotoComment(String photoId, String referenceId, String commentInfo, String referenceInfo, String statusTypeId) {
+        PropertyProvider.add("com.shampan.properties/status");
+        StatusModel statusObject = new StatusModel();
+        if (statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_PAGE_CHANGE_PROFILE_PICTURE"))
+                || statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_PAGE_CHANGE_COVER_PICTURE"))
+                || statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_USER_AT_HIS_PROFILE_WITH_PHOTO"))
+                || statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_USER_AT_FRIEND_PROFILE_WITH_PHOTO"))) {
+            statusObject.addStatusComment(referenceInfo, referenceId, commentInfo).toString();
+        }
+        String response = pageObject.addPhotoComment(photoId, commentInfo).toString();
+        return response;
     }
 
     public static String getPageInfo(String pageId, String userId) {

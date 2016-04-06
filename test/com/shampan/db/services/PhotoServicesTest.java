@@ -194,11 +194,6 @@ public class PhotoServicesTest {
 
     }
     
-//    @Test
-    public void getNextPhoto() {
-        System.out.println(photoObject.getNextPhoto("2"));
-
-    }
 
 //    @Test
     public void deletePhoto() {

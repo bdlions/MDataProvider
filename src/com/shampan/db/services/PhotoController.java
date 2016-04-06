@@ -273,9 +273,10 @@ public class PhotoController {
         String referenceId = routingContext.request().getParam("referenceId");
         String commentInfo = routingContext.request().getParam("commentInfo");
         String referenceInfo = routingContext.request().getParam("referenceInfo");
+        String statusTypeId = routingContext.request().getParam("statusTypeId");
         routingContext.response()
                 .putHeader("content-type", "application/json; charset=utf-8")
-                .end(PhotoService.addPhotoComment(photoId, referenceId, commentInfo, referenceInfo));
+                .end(PhotoService.addPhotoComment(photoId, referenceId, commentInfo, referenceInfo, statusTypeId));
     }
 
     public static void editPhotoComment(RoutingContext routingContext) {
