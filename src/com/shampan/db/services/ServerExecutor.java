@@ -325,6 +325,8 @@ public class ServerExecutor extends AbstractVerticle {
         router.post("/photo/getPhotoLikeList").handler(PhotoController::getPhotoLikeList);
         router.route("/photo/addPhotoComment").handler(BodyHandler.create());
         router.post("/photo/addPhotoComment").handler(PhotoController::addPhotoComment);
+        router.route("/photo/addSliderPhotoComment").handler(BodyHandler.create());
+        router.post("/photo/addSliderPhotoComment").handler(PhotoController::addSliderPhotoComment);
         router.route("/photo/editPhotoComment").handler(BodyHandler.create());
         router.post("/photo/editPhotoComment").handler(PhotoController::editPhotoComment);
         router.route("/photo/deletePhotoComment").handler(BodyHandler.create());

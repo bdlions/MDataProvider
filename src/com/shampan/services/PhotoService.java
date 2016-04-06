@@ -9,6 +9,7 @@ import com.sampan.response.ResultEvent;
 import com.shampan.db.collections.PhotoDAO;
 import com.shampan.model.PhotoModel;
 import com.shampan.model.StatusModel;
+import com.shampan.model.UserModel;
 import com.shampan.util.PropertyProvider;
 import java.util.List;
 import org.json.JSONObject;
@@ -74,8 +75,8 @@ public class PhotoService {
         return response;
     }
 
-    public static String getAlbumComments(String albumId) {
-        String response = photoObject.getAlbumComments(albumId);
+    public static String getAlbumComments(String albumId, String mappingId) {
+        String response = photoObject.getAlbumComments(albumId, mappingId).toString();
         return response;
     }
 
@@ -109,8 +110,20 @@ public class PhotoService {
         return response;
     }
 
-    public static String addAlbumComment(String albumId, String commentInfo) {
-        String response = photoObject.addAlbumComment(albumId, commentInfo).toString();
+    public static String addAlbumComment(String albumId, String mappingId, String referenceId, String commentInfo) {
+        boolean statusLikeStatus = false;
+        if (albumId.equals(PropertyProvider.get("TIMELINE_PHOTOS_ALBUM_ID"))
+                || albumId.equals(PropertyProvider.get("PROFILE_PHOTOS_ALBUM_ID"))
+                || albumId.equals(PropertyProvider.get("COVER_PHOTOS_ALBUM_ID"))) {
+            statusLikeStatus = true;
+        }
+        if (statusLikeStatus != true) {
+            StatusModel statusModel = new StatusModel();
+            UserModel userModel = new UserModel();
+            String referenceUserInfo = userModel.getUserInfo(mappingId).toString();
+            statusModel.addStatusComment(referenceUserInfo, referenceId, commentInfo).toString();
+        }
+        String response = photoObject.addAlbumComment(albumId, mappingId, commentInfo).toString();
         return response;
     }
 
@@ -195,6 +208,17 @@ public class PhotoService {
                 || statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_CHANGE_COVER_PICTURE"))
                 || statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_ADMIN_AT_PAGE_PROFILE_WITH_S_PHOTO"))
                 || statusTypeId.equals(PropertyProvider.get("STATUS_TYPE_ID_POST_STATUS_BY_MEMBER_AT_PAGE_PROFILE_WITH_S_PHOTO"))) {
+            statusObject.addStatusComment(referenceInfo, referenceId, commentInfo).toString();
+        }
+        String response = photoObject.addPhotoComment(photoId, commentInfo).toString();
+        return response;
+    }
+
+    public static String addSliderPhotoComment(String photoId, String referenceId, String commentInfo, String referenceInfo, String albumId) {
+        PropertyProvider.add("com.shampan.properties/status");
+        StatusModel statusObject = new StatusModel();
+        if (albumId.equals(PropertyProvider.get("PROFILE_PHOTOS_ALBUM_ID"))
+                || albumId.equals(PropertyProvider.get("COVER_PHOTOS_ALBUM_ID"))) {
             statusObject.addStatusComment(referenceInfo, referenceId, commentInfo).toString();
         }
         String response = photoObject.addPhotoComment(photoId, commentInfo).toString();

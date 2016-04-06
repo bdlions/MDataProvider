@@ -75,9 +75,10 @@ public class PhotoController {
 
     public static void getAlbumComments(RoutingContext routingContext) {
         String albumId = routingContext.request().getParam("albumId");
+        String mappingId = routingContext.request().getParam("mappingId");
         routingContext.response()
                 .putHeader("content-type", "application/json; charset=utf-8")
-                .end(PhotoService.getAlbumComments(albumId));
+                .end(PhotoService.getAlbumComments(albumId, mappingId));
     }
 
     public static void deleteAlbum(RoutingContext routingContext) {
@@ -94,7 +95,7 @@ public class PhotoController {
         String likeInfo = routingContext.request().getParam("likeInfo");
         routingContext.response()
                 .putHeader("content-type", "application/json; charset=utf-8")
-                .end(PhotoService.addAlbumLike(mappingId, albumId, referenceId,likeInfo));
+                .end(PhotoService.addAlbumLike(mappingId, albumId, referenceId, likeInfo));
     }
 
     public static void getAlbumLikeList(RoutingContext routingContext) {
@@ -106,10 +107,12 @@ public class PhotoController {
 
     public static void addAlbumComment(RoutingContext routingContext) {
         String albumId = routingContext.request().getParam("albumId");
+        String mappingId = routingContext.request().getParam("mappingId");
+        String referenceId = routingContext.request().getParam("referenceId");
         String commentInfo = routingContext.request().getParam("commentInfo");
         routingContext.response()
                 .putHeader("content-type", "application/json; charset=utf-8")
-                .end(PhotoService.addAlbumComment(albumId, commentInfo));
+                .end(PhotoService.addAlbumComment(albumId, mappingId, referenceId, commentInfo));
     }
 
     public static void editAlbumComment(RoutingContext routingContext) {
@@ -279,6 +282,17 @@ public class PhotoController {
                 .end(PhotoService.addPhotoComment(photoId, referenceId, commentInfo, referenceInfo, statusTypeId));
     }
 
+    public static void addSliderPhotoComment(RoutingContext routingContext) {
+        String photoId = routingContext.request().getParam("photoId");
+        String referenceId = routingContext.request().getParam("referenceId");
+        String commentInfo = routingContext.request().getParam("commentInfo");
+        String referenceInfo = routingContext.request().getParam("referenceInfo");
+        String albumId = routingContext.request().getParam("albumId");
+        routingContext.response()
+                .putHeader("content-type", "application/json; charset=utf-8")
+                .end(PhotoService.addSliderPhotoComment(photoId, referenceId, commentInfo, referenceInfo, albumId));
+    }
+
     public static void editPhotoComment(RoutingContext routingContext) {
         String photoId = routingContext.request().getParam("photoId");
         String commentId = routingContext.request().getParam("commentId");
@@ -317,8 +331,9 @@ public class PhotoController {
         String likeInfo = routingContext.request().getParam("likeInfo");
         routingContext.response()
                 .putHeader("content-type", "application/json; charset=utf-8")
-                .end(PhotoService.addMPhotoLike(userId, photoId,  likeInfo));
+                .end(PhotoService.addMPhotoLike(userId, photoId, likeInfo));
     }
+
     public static void getSliderAlbum(RoutingContext routingContext) {
         String mappingId = routingContext.request().getParam("mappingId");
         String albumId = routingContext.request().getParam("albumId");
